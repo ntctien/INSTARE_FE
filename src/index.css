@@ -15,3 +15,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.auth-bg {
+  background: radial-gradient(50% 98.88% at 50% 50%, #96CAF7 0%, #BFB2F3 100%);
+  width: 100vw;
+  height: 100vh;
+  padding: 0px 0px;
+}

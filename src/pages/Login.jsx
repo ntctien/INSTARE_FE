@@ -1,9 +1,13 @@
-import React from 'react'
+import backgroundImg from "../assets/login-bg.png";
+import maskImg from "../assets/login-mask.png";
 
 const Login = () => {
   return (
-    <div>Login</div>
-  )
-}
+    <div className="grid grid-cols-2 h-full">
+      <img src={backgroundImg} alt="Background" className="rounded-[40px] h-full overflow-hidden" />
+      <div className="h-full"></div>
+    </div>
+  );
+};
 
-export default Login
+export default Login;
