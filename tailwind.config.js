@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'input-label':'#676767'
+        'input-label':'#676767',
+        'grey':'#777777'
       },
       borderRadius: {
         5: '5px',
