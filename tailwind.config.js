@@ -5,7 +5,8 @@ module.exports = {
     extend: {
       colors: {
         'input-label':'#676767',
-        'grey':'#777777'
+        'grey':'#777777',
+        'pastel-blue':'#96CAF726'
       },
       borderRadius: {
         5: '5px',

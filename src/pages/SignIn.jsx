@@ -13,7 +13,7 @@ const SignIn = () => {
         subtitle='It’s great to have you here'
         btnTitle='Don’t have an account?'
         btnLabel='Register here'
-        btnPath={'signup'}
+        btnPath={'/signup'}
         btnWidth={140}
       />
       {/* Right Side */}

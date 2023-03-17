@@ -42,7 +42,7 @@ const SignUp = () => {
         subtitle="We invite you to join our community"
         btnTitle="Already have an account?"
         btnLabel="Sign in here"
-        btnPath={"/"}
+        btnPath={"/signin"}
         btnWidth={120}
       />
     </>

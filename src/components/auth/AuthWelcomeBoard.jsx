@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Divider } from "antd";
 import maskImg from "../../assets/login-mask.png";
+import Logo from "../Logo";
 
 const AuthWelcomeBoard = ({
   backgroundImg,
@@ -28,12 +29,7 @@ const AuthWelcomeBoard = ({
       <div className="aspect-[5/7] h-[80%] rounded-15 relative">
         <img src={maskImg} alt="Mask" className="rounded-15 object-cover" />
         <div className="absolute top-0 px-[48px] pt-[63px] h-full">
-          <div className="flex gap-x-[17px] items-end">
-            <div className="w-[50px] h-[50px] bg-[#D9D9D9]"></div>
-            <h2 className="font-medium text-32 leading-[37px] text-white tracking-widest">
-              InStare
-            </h2>
-          </div>
+          <Logo textColor={'white'}/>
           <p className="mt-[17px] font-bold text-4xl text-white opacity-90">
             Share your passion with us!
           </p>
