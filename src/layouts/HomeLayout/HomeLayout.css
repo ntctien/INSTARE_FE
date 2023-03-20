@@ -1,7 +1,27 @@
 .contact-item-read {
-  @apply font-inter font-medium text-13;
+  @apply font-medium text-13;
 }
 
 .contact-item-time {
-  @apply font-inter text-[13px] text-[#00000080];
+  @apply text-[13px] text-black50;
+}
+
+.post-time {
+  @apply text-14 text-black50;
+}
+
+/* .slick-prev {
+  left: 0px !important;
+}
+
+.slick-next{
+  right: 0 !important
+} */
+
+/* .story-container.slick-prev, .slick-next {
+  top: 50px !important
+} */
+
+.slick-slide img {
+  @apply mx-auto;
 }

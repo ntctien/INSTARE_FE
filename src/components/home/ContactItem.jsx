@@ -1,10 +1,10 @@
-import React from 'react'
+import Avatar from "./Avatar";
 
 const ContactItem = () => {
   return (
     <div className='row flex-none'>
         {/* Avatar */}
-        <div className='w-[50px] h-[50px] bg-grey rounded-full'></div>
+        <Avatar/>
         {/* Message */}
         <div className='flex items-end'>
             <div className='ml-[10px]'>

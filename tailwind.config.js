@@ -9,6 +9,8 @@ module.exports = {
         'grey-dark': '#777777',
         'pastel-blue': '#96CAF726',
         'pastel-purple': '#BFB2F326',
+        'black15':'rgba(0, 0, 0, 0.15)',
+        'black50':'rgba(0, 0, 0, 0.5)'
       },
       borderRadius: {
         5: '5px',
@@ -23,12 +25,13 @@ module.exports = {
       },
       fontSize: {
         '13': ['13px', '16px'],
+        '14': ['14px', '17px'],
         '16': ['16px', '18px'],
         '20': ['20px', '23px'],
         '32': ['32px', '37px'],
       },
       fontFamily: {
-        'inter': 'Inter'
+        'ubuntu': 'Ubuntu'
       }
     },
   },

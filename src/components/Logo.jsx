@@ -3,7 +3,7 @@ const Logo = ({ textColor, custom }) => {
     <div className={`flex gap-x-[17px] items-end ${custom}`}>
       <div className="w-[50px] h-[50px] bg-[#D9D9D9]"></div>
       <h2
-        className="font-medium text-32 leading-[37px] tracking-widest"
+        className="font-ubuntu font-medium text-32 leading-[37px] tracking-widest"
         style={{ color: textColor }}
       >
         InStare
