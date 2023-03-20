@@ -1,9 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
 
 body {
   margin: 0;
@@ -17,11 +17,23 @@ body {
 }
 
 .col-center {
-  @apply flex flex-col justify-center
+  @apply flex flex-col justify-center;
 }
 
 .ant-checkbox .ant-checkbox-inner {
   width: 18px;
   height: 18px;
   border: 2px solid #777777;
+}
+
+/* .slick-prev {
+  left: 0px !important;
+}
+
+.slick-next{
+  right: 0 !important
+} */
+
+.slick-prev, .slick-next {
+  top: 50px !important
 }

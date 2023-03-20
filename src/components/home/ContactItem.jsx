@@ -2,7 +2,7 @@ import React from 'react'
 
 const ContactItem = () => {
   return (
-    <div className='row'>
+    <div className='row flex-none'>
         {/* Avatar */}
         <div className='w-[50px] h-[50px] bg-grey rounded-full'></div>
         {/* Message */}
