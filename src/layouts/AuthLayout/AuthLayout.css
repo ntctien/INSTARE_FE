@@ -45,7 +45,7 @@
 .auth-input::placeholder,
 .auth-input input[type="password"]::placeholder,
 .auth-input input[type="text"]::placeholder {
-  @apply text-grey;
+  @apply text-grey-dark;
 }
 
 .auth-input:hover,
