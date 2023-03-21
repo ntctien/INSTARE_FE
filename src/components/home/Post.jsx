@@ -7,12 +7,11 @@ import {
   otherOptionsIcon,
 } from "../../assets/post_icons";
 import tempImg1 from "../../assets/temp1.jpg";
-import tempImg2 from "../../assets/temp2.jpg";
-import { Divider, Input } from "antd";
+import { Divider } from "antd";
 
 const Post = () => {
   return (
-    <div className="w-[800px] bg-[#D9D9D926] rounded-10">
+    <div className="w-[800px] bg-[#D9D9D926] rounded-10 pb-[9px]">
       {/* User */}
       <div className="row justify-between p-[20px]">
         <div className="row">
@@ -28,16 +27,16 @@ const Post = () => {
       {/* Image or video */}
       <Slider className="bg-[#D9D9D933]" dots>
         <div>
-          <img src={tempImg1} />
+          <img src={tempImg1} alt='Post content'/>
         </div>
         <div>
-          <img src={tempImg1} />
+          <img src={tempImg1} alt='Post content'/>
         </div>
         <div>
-          <img src={tempImg1} />
+          <img src={tempImg1} alt='Post content'/>
         </div>
         <div>
-          <img src={tempImg1} />
+          <img src={tempImg1} alt='Post content'/>
         </div>
       </Slider>
       <div className="px-[20px] mt-[10px]">
@@ -62,11 +61,14 @@ const Post = () => {
             "This is the first line. This is the first line. This is the first line. This is the first line. The first line end here. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}
         </p>
         {/* Comments */}
-        <button className="text-14 text-black50 mt-[7px]">View all comments</button>
-        <Divider className="border-black15 mt-[10px] mb-[6px]"/>
+        <button className="text-14 text-black50 mt-[7px]">
+          View all comments
+        </button>
+        <Divider className="border-black15 mt-[10px] mb-[6px]" />
         <div className="row gap-x-[13px]">
           <div className="w-[30px] h-[30px] bg-grey rounded-full"></div>
-          {/* <Input className="bg-transparent border-none p-0"/> */}
+          <input className="w-full bg-transparent hover:border-none focus:outline-none" />
+          <button className="font-bold text-14 text-[#96CAF7]">Post</button>
         </div>
       </div>
     </div>

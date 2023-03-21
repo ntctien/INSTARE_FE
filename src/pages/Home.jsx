@@ -8,15 +8,15 @@ const Home = () => {
     <>
       {/* Left side */}
       <div className="flex-1 px-[40px] pt-[31px] flex flex-col items-center overflow-y-auto">
-        <StoryContainer/>
-        <PostFeed/>
+        <StoryContainer />
+        <PostFeed />
       </div>
       {/* Right side */}
       <div className="w-[300px] bg-pastel-purple flex flex-col">
         {/* User info */}
-        <UserInfo/>
+        <UserInfo />
         {/* Contacts */}
-        <Contacts/>
+        <Contacts />
       </div>
     </>
   );
