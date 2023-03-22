@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <>
       {/* Left side */}
-      <div className="flex-1 px-[40px] pt-[31px] flex flex-col items-center overflow-y-auto">
+      <div className="flex-1 px-[40px] py-[31px] flex flex-col items-center overflow-y-auto">
         <StoryContainer />
         <PostFeed />
       </div>
