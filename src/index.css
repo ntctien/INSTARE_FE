@@ -20,8 +20,24 @@ body {
   @apply flex flex-col justify-center;
 }
 
+/* Antd */
+
 .ant-checkbox .ant-checkbox-inner {
   width: 18px;
   height: 18px;
   border: 2px solid #777777;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }
