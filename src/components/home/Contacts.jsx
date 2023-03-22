@@ -14,6 +14,13 @@ const Contacts = () => {
       <Divider className="mt-[14px] mb-0 bg-[#00000026]" />
       <div className="py-[21px] px-[11px] flex flex-col gap-y-[22px] overflow-y-auto flex-1">
         <ContactItem />
+        <ContactItem />
+        <ContactItem />
+        <ContactItem />
+        <ContactItem />
+        <ContactItem />
+        <ContactItem />
+        <ContactItem />
       </div>
     </div>
   );

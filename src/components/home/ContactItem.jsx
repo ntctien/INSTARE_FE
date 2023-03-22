@@ -9,7 +9,7 @@ const ContactItem = () => {
         <div className='flex items-end'>
             <div className='ml-[10px]'>
                 <h3 className='contact-item-read'>Tên</h3>
-                <p className='contact-item-read mt-[4px]'>Hello, this is a read message</p>
+                <p className='contact-item-read mt-[4px] w-[178px] truncate'>Hello, this is a read messageHello, this is a read messageHello, this is a read messageHello, this is a read message</p>
             </div>
             <p className='mx-[2px] mb-[3px] contact-item-time'>.</p>
             <p className='contact-item-time'>11:59</p>
