@@ -11,7 +11,7 @@ import { Divider } from "antd";
 
 const Post = () => {
   return (
-    <div className="w-[800px] bg-[#D9D9D926] rounded-10 pb-[9px]">
+    <div className="w-[800px] bg-[#D9D9D926] rounded-10 pb-[9px] post">
       {/* User */}
       <div className="row justify-between p-[20px]">
         <div className="row">
