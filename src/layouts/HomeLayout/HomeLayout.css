@@ -51,8 +51,8 @@ textarea:where(.css-dev-only-do-not-override-ph9edi).ant-input.chat-input{
   max-height: 90px;
 }
 
-.ant-input:hover {
-  @apply border-none
+.chat-input.ant-input:hover {
+  @apply border-transparent
 }
 
 .chat-input.ant-input:focus {
