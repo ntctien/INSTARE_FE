@@ -41,3 +41,23 @@
 .divider {
   @apply border-black15 border-t-1 flex-1
 }
+
+.chat-input {
+  @apply bg-grey rounded-lg flex-1 focus:outline-none text-13
+}
+
+textarea:where(.css-dev-only-do-not-override-ph9edi).ant-input.chat-input{
+  min-height: 30px;
+  max-height: 90px;
+}
+
+.ant-input:hover {
+  @apply border-none
+}
+
+.chat-input.ant-input:focus {
+  border:none;
+  box-shadow: none;
+  outline: 0;
+  border-inline-end-width: 0;
+}
