@@ -51,13 +51,25 @@ textarea:where(.css-dev-only-do-not-override-ph9edi).ant-input.chat-input{
   max-height: 90px;
 }
 
-.chat-input.ant-input:hover {
+.ant-input:hover {
   @apply border-transparent
 }
 
-.chat-input.ant-input:focus {
+.ant-input:focus {
   border:none;
   box-shadow: none;
   outline: 0;
   border-inline-end-width: 0;
+}
+
+.ant-upload-wrapper .ant-upload-drag {
+  @apply border-none bg-grey
+}
+
+.ant-upload-wrapper .ant-upload-drag .ant-upload {
+  padding: 0;
+}
+
+.ant-upload-wrapper .ant-upload-drag .ant-upload-btn {
+  height: 330px;
 }

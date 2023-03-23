@@ -24,6 +24,14 @@ body {
   @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
 }
 
+.center {
+  @apply flex items-center justify-center;
+}
+
+.avatar {
+  @apply aspect-square bg-grey rounded-full;
+}
+
 /* Antd */
 
 .ant-checkbox .ant-checkbox-inner {
