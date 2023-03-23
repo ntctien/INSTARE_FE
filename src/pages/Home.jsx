@@ -12,7 +12,7 @@ const Home = () => {
         <PostFeed />
       </div>
       {/* Right side */}
-      <div className="bg-pastel-purple flex flex-col">
+      <div className="bg-pastel-purple flex flex-col w-[300px]">
         {/* User info */}
         <UserInfo />
         {/* Contacts */}

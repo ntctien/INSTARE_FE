@@ -1,7 +1,10 @@
-const Avatar = () => {
+const Avatar = ({ width, custom }) => {
   return (
-    <div className='w-[50px] h-[50px] bg-grey rounded-full'></div>
-  )
-}
+    <div
+      className={`aspect-square bg-grey rounded-full ${custom}`}
+      style={{ width: width ?? 50 }}
+    ></div>
+  );
+};
 
-export default Avatar
+export default Avatar;

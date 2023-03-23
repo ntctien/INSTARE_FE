@@ -16,13 +16,13 @@
 
 .story-container .slick-arrow {
   top: 50px !important;
-  width: 40px;
-  height: 40px;
+  /* width: 40px;
+  height: 40px; */
 }
 
 .story-container .slick-arrow::before {
   opacity: 1;
-  font-size: 40px;
+  /* font-size: 40px; */
 }
 
 .slick-arrow.slick-disabled::before {
@@ -36,4 +36,8 @@
 
 .story-container .slick-next{
   right: 0 !important;
+}
+
+.divider {
+  @apply border-black15 border-t-1 flex-1
 }
