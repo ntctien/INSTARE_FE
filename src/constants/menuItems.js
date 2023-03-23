@@ -17,26 +17,31 @@ import {
 
 const menuItems = [
     {
+        id:'home',
         name: "Home",
         icon: homeIcon,
         selectedIcon: homeSelectedIcon,
     },
     {
+        id:'search',
         name: "Search",
         icon: searchIcon,
         selectedIcon: searchSelectedIcon,
     },
     {
+        id:'notifications',
         name: "Notifications",
         icon: notificationsIcon,
         selectedIcon: notificationsSelectedIcon,
     },
     {
+        id:'messages',
         name: "Messages",
         icon: messagesIcon,
         selectedIcon: messagesSelectedIcon,
     },
     {
+        id:'create',
         name: "Create",
         icon: createIcon,
         selectedIcon: createSelectedIcon,
