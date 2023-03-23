@@ -1,16 +1,18 @@
-const AppMenuItem = ({ item, currItemId, setCurrItemId }) => {
+const AppMenuItem = ({ item, menuItemId, setMenuItemId }) => {
   return (
     <div
-      onClick={() => setCurrItemId(item.id)}
+      onClick={() =>
+        setMenuItemId({ current: item.id, previous: menuItemId.current })
+      }
       className="row gap-x-[26px] py-[15px] pl-[16px] rounded-full cursor-pointer hover:bg-[#96caf728]"
     >
       <img
-        src={currItemId === item.id ? item.selectedIcon : item.icon}
+        src={menuItemId?.current === item.id ? item.selectedIcon : item.icon}
         alt="Icon"
       />
       <h5
         className={`${
-          currItemId === item.id ? "font-medium" : "font-light"
+          menuItemId?.current === item.id ? "font-medium" : "font-light"
         } text-[20px] leading-[23px]`}
       >
         {item.name}

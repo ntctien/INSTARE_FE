@@ -10,6 +10,7 @@ module.exports = {
         'pastel-blue': '#96CAF726',
         'pastel-purple': '#BFB2F326',
         'pastel-purple-dark': '#BFB2F3',
+        'modal-bg':'#F0F6FD',
         'black15':'rgba(0, 0, 0, 0.15)',
         'black50':'rgba(0, 0, 0, 0.5)'
       },
