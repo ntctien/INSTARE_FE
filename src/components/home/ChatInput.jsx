@@ -6,7 +6,7 @@ const { TextArea } = Input;
 const ChatInput = () => {
   return (
     <div className="row gap-x-[5px] px-[8px] py-[10px] min-h-[50px] bg-[#D9D9D926] border-t-1 border-[#00000026]">
-      <button className="w-[20px] h-[20px] bg-grey-dark rounded-full flex items-center justify-center">
+      <button className="w-[20px] h-[20px] bg-pastel-purple-dark rounded-full flex items-center justify-center">
         <img src={plusIcon} alt="Plus" />
       </button>
       <TextArea
@@ -23,11 +23,11 @@ const ChatInput = () => {
         >
           <path
             d="M8.26003 9H3.33336L1.68586 2.44584C1.67531 2.40775 1.66888 2.36863 1.66669 2.32917C1.64836 1.72834 2.31003 1.31167 2.88336 1.58667L18.3334 9L2.88336 16.4133C2.31669 16.6858 1.66336 16.2808 1.66669 15.6908C1.66838 15.6381 1.67764 15.5859 1.69419 15.5358L2.91669 11.5"
-            stroke="#777777"
+            stroke="#BFB2F3"
             strokeWidth={2.5}
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="hover:stroke-[#676767]"
+            className="hover:stroke-[#947df1]"
           />
         </svg>
       </button>
