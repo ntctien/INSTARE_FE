@@ -17,31 +17,31 @@ import {
 
 const menuItems = [
     {
-        id:'home',
+        id: 'home',
         name: "Home",
         icon: homeIcon,
         selectedIcon: homeSelectedIcon,
     },
     {
-        id:'search',
+        id: 'search',
         name: "Search",
         icon: searchIcon,
         selectedIcon: searchSelectedIcon,
     },
     {
-        id:'notifications',
+        id: 'notifications',
         name: "Notifications",
         icon: notificationsIcon,
         selectedIcon: notificationsSelectedIcon,
     },
     {
-        id:'messages',
+        id: 'messages',
         name: "Messages",
         icon: messagesIcon,
         selectedIcon: messagesSelectedIcon,
     },
     {
-        id:'create',
+        id: 'create',
         name: "Create",
         icon: createIcon,
         selectedIcon: createSelectedIcon,
@@ -49,6 +49,7 @@ const menuItems = [
 ];
 
 const moreItem = {
+    id: 'more',
     name: "More",
     icon: moreIcon,
     selectedIcon: moreSelectedIcon,
