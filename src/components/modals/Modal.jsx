@@ -9,7 +9,7 @@ const Modal = ({ children, open, onCancel, title }) => {
           className="w-screen h-screen bg-black50 absolute"
           onClick={onCancel}
         ></div>
-        <div className="w-[54.5%] bg-modal-bg absolute-center z-10 rounded-15">
+        <div className="bg-modal-bg absolute-center z-10 rounded-15">
           {/* Title */}
           <h2 className="text-center mt-[12px] font-ubuntu font-medium text-20">
             {title}

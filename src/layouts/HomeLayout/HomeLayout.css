@@ -71,5 +71,6 @@ textarea:where(.css-dev-only-do-not-override-ph9edi).ant-input.chat-input{
 }
 
 .ant-upload-wrapper .ant-upload-drag .ant-upload-btn {
+  width: 440px;
   height: 330px;
 }
