@@ -12,7 +12,7 @@ const MediaSlider = () => {
   return (
     <div className="relative">
       <Slider
-        className="bg-red-400 w-[800px] h-[600px] media-slider"
+        className="bg-[#D9D9D933] w-[800px] h-[600px] media-slider"
         dots
         arrows={false}
         ref={slider}
