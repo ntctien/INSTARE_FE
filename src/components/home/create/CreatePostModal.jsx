@@ -1,13 +1,14 @@
 import { Upload } from "antd";
 import Modal from "../../Modal";
 import imageIcon from "../../../assets/image.svg";
+// import MediaSlider from "../MediaSlider";
 
 const { Dragger } = Upload;
 
 const CreatePostModal = ({ open, onCancel }) => {
   return (
     <Modal open={open} onCancel={onCancel} title="Create new post">
-      <div className="px-[20px] py-[14px]">
+      <div className="px-[20px] py-[14px] create-post">
         {/* Upload */}
         <Dragger showUploadList={false}>
           <div className="flex flex-col items-center">
@@ -22,6 +23,7 @@ const CreatePostModal = ({ open, onCancel }) => {
             </p>
           </div>
         </Dragger>
+        {/* <MediaSlider/> */}
         {/* User info */}
         <div className="row gap-x-[7px] mt-[13px]">
           <div className="w-[30px] avatar"></div>

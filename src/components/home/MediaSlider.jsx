@@ -16,7 +16,7 @@ const MediaSlider = () => {
       containerClassName='media-slider-container'
     >
       <Slider
-        className="bg-[#D9D9D933] w-[800px] h-[600px] media-slider"
+        className="bg-[#D9D9D933] aspect-[4/3] media-slider"
         dots
         arrows={false}
         ref={slider}
@@ -24,7 +24,7 @@ const MediaSlider = () => {
       >
         {mediaList.map((item, i) => (
           <div key={i} className="media-container">
-            <img src={item} alt="Post content" />
+            <img src={item} alt="Post content" className="object-contain"/>
           </div>
         ))}
       </Slider>

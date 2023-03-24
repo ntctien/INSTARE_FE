@@ -74,7 +74,7 @@
   height: 7px !important;
   font-size: 7px !important;
   line-height: 7px !important;
-  color: #D9D9D9 !important;
+  color: #d9d9d9 !important;
   opacity: 1 !important;
 }
 
@@ -84,6 +84,11 @@
 }
 
 /* Media slider */
+
+.media-container {
+  vertical-align: bottom;
+  aspect-ratio: 4/3;
+}
 
 .media-slider .slick-list {
   @apply h-full;
@@ -97,8 +102,21 @@
   @apply flex items-center justify-center;
 }
 
-.media-container {
-  vertical-align: bottom;
+.post .media-slider {
+  width: 800px;
+}
+
+.create-post .media-slider {
+  height: 46vh;
+}
+
+.create-post .slick-list {
+  height: 46vh;
+  aspect-ratio: 4/3;
+}
+
+.create-post .media-container img {
+  height: 46vh;
 }
 
 /* Divider */
@@ -140,6 +158,6 @@ textarea:where(.css-dev-only-do-not-override-ph9edi).ant-input.chat-input {
 }
 
 .ant-upload-wrapper .ant-upload-drag .ant-upload-btn {
-  width: 440px;
-  height: 330px;
+  height: 46vh;
+  aspect-ratio: 4/3;
 }
