@@ -20,30 +20,38 @@
   display: none;
 }
 
-/* Story */
+/* Custom arrow button for Slick */
 
-.story-container .slick-arrow {
-  top: 50px !important;
-  /* width: 40px;
-  height: 40px; */
+.arrow-btn {
+  @apply absolute w-[40px] h-[40px] bg-white rounded-full;
+  box-shadow: -4px 4px 4px rgba(0, 0, 0, 0.2);
 }
 
-.story-container .slick-arrow::before {
-  opacity: 1;
-  /* font-size: 40px; */
+.arrow-next {
+  @apply pl-[16px]
 }
 
-.story-container .slick-prev {
-  left: 0 !important;
-  z-index: 10;
+.arrow-prev {
+  @apply pl-[13px]
 }
 
-.story-container .slick-next{
-  right: 0 !important;
+.media-slider-container .arrow-next {
+  @apply top-1/2 right-[10px] -translate-y-1/2
+}
+
+.media-slider-container .arrow-prev {
+  @apply top-1/2 left-[10px] -translate-y-1/2
+}
+
+.story-slider-container .arrow-next {
+  @apply top-[30px] right-0
+}
+
+.story-slider-container .arrow-prev {
+  @apply top-[30px] left-0
 }
 
 /* Media slider */
-/* Slider */
 
 .media-slider .slick-list {
   @apply h-full
@@ -59,40 +67,6 @@
 
 .media-container {
   vertical-align: bottom;
-}
-
-/* Arrow */
-
-/* .media-slider .slick-arrow {
-  width: 40px;
-  height: 40px;
-}
-
-.media-slider .slick-arrow::before {
-  opacity: 1;
-  font-size: 40px;
-}
-
-.media-slider .slick-prev {
-  left: 10px !important;
-  z-index: 10;
-}
-
-.media-slider .slick-next{
-  right: 10px !important;
-} */
-
-.arrow-btn {
-  @apply absolute w-[40px] h-[40px] bg-white rounded-full;
-  box-shadow: -4px 4px 4px rgba(0, 0, 0, 0.2);
-}
-
-.arrow-next {
-  @apply top-1/2 right-[10px] -translate-y-1/2 pl-[16px]
-}
-
-.arrow-prev {
-  @apply top-1/2 left-[10px] -translate-y-1/2 pl-[13px]
 }
 
 /* Divider */
