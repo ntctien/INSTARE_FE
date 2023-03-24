@@ -1,13 +1,12 @@
-import Slider from "react-slick";
-import Avatar from "./Avatar";
+import Avatar from "../Avatar";
 import {
   likeIcon,
   commentIcon,
   shareIcon,
   otherOptionsIcon,
-} from "../../assets/post_icons";
-import tempImg1 from "../../assets/temp1.jpg";
+} from "../../../assets/post_icons";
 import { Divider } from "antd";
+import MediaSlider from "../MediaSlider";
 
 const Post = () => {
   return (
@@ -25,20 +24,7 @@ const Post = () => {
         </button>
       </div>
       {/* Image or video */}
-      <Slider className="bg-[#D9D9D933]" dots>
-        <div>
-          <img src={tempImg1} alt='Post content'/>
-        </div>
-        <div>
-          <img src={tempImg1} alt='Post content'/>
-        </div>
-        <div>
-          <img src={tempImg1} alt='Post content'/>
-        </div>
-        <div>
-          <img src={tempImg1} alt='Post content'/>
-        </div>
-      </Slider>
+      <MediaSlider/>
       <div className="px-[20px] mt-[10px]">
         {/* Interact */}
         <div className="row gap-x-[20px]">

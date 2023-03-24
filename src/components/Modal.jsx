@@ -1,5 +1,5 @@
 import { Divider } from "antd";
-import closeIcon from "../../assets/close.svg";
+import closeIcon from "../assets/close.svg";
 
 const Modal = ({ children, open, onCancel, title }) => {
   if (open)

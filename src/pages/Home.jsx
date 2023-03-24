@@ -1,7 +1,7 @@
-import Contacts from "../components/home/Contacts";
-import PostFeed from "../components/home/PostFeed";
-import StoryContainer from "../components/home/StoryContainer";
-import UserInfo from "../components/home/UserInfo";
+import Contacts from "../components/home/contacts/Contacts";
+import PostFeed from "../components/home/post/PostFeed";
+import StoryContainer from "../components/home/story/StoryContainer";
+import UserInfo from "../components/home/user_info/UserInfo";
 
 const Home = () => {
   return (

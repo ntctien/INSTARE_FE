@@ -1,5 +1,5 @@
 import { Input } from "antd";
-import plusIcon from "../../assets/plus.svg";
+import plusIcon from "../../../assets/plus.svg";
 
 const { TextArea } = Input;
 

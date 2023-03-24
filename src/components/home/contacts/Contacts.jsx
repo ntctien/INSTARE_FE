@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Divider } from "antd";
 import ContactItem from "./ContactItem";
-import Avatar from "./Avatar";
-import arrowIcon from "../../assets/arrow-back.svg";
+import Avatar from "../Avatar";
+import arrowIcon from "../../../assets/arrow-back.svg";
 import ChatBox from "./ChatBox";
 
 const contacts = [

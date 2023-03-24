@@ -10,8 +10,20 @@
   @apply text-14 text-black50;
 }
 
-.post .slick-slide img {
-  @apply mx-auto;
+.media-slider .slick-list {
+  @apply h-full
+}
+
+.media-slider .slick-track {
+  @apply h-full
+}
+
+.media-slider.slick-initialized .slick-slide  {
+  @apply flex items-center justify-center
+}
+
+.media-container {
+  vertical-align: bottom;
 }
 
 .story-container .slick-arrow {

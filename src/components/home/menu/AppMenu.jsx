@@ -1,5 +1,5 @@
-import Logo from "../../components/Logo";
-import { menuItems, moreItem } from "../../constants/menuItems";
+import Logo from "../../Logo";
+import { menuItems, moreItem } from "../../../constants/menuItems";
 import AppMenuItem from "./AppMenuItem";
 
 const AppMenu = ({ menuItemId, setMenuItemId }) => {

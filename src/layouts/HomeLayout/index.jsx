@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import "./HomeLayout.css";
-import AppMenu from "../../components/home/AppMenu";
-import CreatePostModal from "../../components/modals/CreatePostModal";
+import AppMenu from "../../components/home/menu/AppMenu";
+import CreatePostModal from "../../components/home/create/CreatePostModal";
 
 const HomeLayout = () => {
   const [menuItemId, setMenuItemId] = useState({

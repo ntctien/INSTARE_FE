@@ -1,6 +1,6 @@
 import { Upload } from "antd";
-import Modal from "./Modal";
-import imageIcon from "../../assets/image.svg";
+import Modal from "../../Modal";
+import imageIcon from "../../../assets/image.svg";
 
 const { Dragger } = Upload;
 
