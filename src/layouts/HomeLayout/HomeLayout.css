@@ -1,3 +1,5 @@
+/* Contact */
+
 .contact-item-read {
   @apply font-medium text-13;
 }
@@ -6,9 +8,42 @@
   @apply text-[13px] text-black50;
 }
 
+/* Post  */
+
 .post-time {
   @apply text-14 text-black50;
 }
+
+/* Slick */
+
+.slick-arrow.slick-disabled::before {
+  display: none;
+}
+
+/* Story */
+
+.story-container .slick-arrow {
+  top: 50px !important;
+  /* width: 40px;
+  height: 40px; */
+}
+
+.story-container .slick-arrow::before {
+  opacity: 1;
+  /* font-size: 40px; */
+}
+
+.story-container .slick-prev {
+  left: 0 !important;
+  z-index: 10;
+}
+
+.story-container .slick-next{
+  right: 0 !important;
+}
+
+/* Media slider */
+/* Slider */
 
 .media-slider .slick-list {
   @apply h-full
@@ -26,33 +61,47 @@
   vertical-align: bottom;
 }
 
-.story-container .slick-arrow {
-  top: 50px !important;
-  /* width: 40px;
-  height: 40px; */
+/* Arrow */
+
+/* .media-slider .slick-arrow {
+  width: 40px;
+  height: 40px;
 }
 
-.story-container .slick-arrow::before {
+.media-slider .slick-arrow::before {
   opacity: 1;
-  /* font-size: 40px; */
+  font-size: 40px;
 }
 
-.slick-arrow.slick-disabled::before {
-  display: none;
-}
-
-.story-container .slick-prev {
-  left: 0 !important;
+.media-slider .slick-prev {
+  left: 10px !important;
   z-index: 10;
 }
 
-.story-container .slick-next{
-  right: 0 !important;
+.media-slider .slick-next{
+  right: 10px !important;
+} */
+
+.arrow-btn {
+  @apply absolute w-[40px] h-[40px] bg-white rounded-full;
+  box-shadow: -4px 4px 4px rgba(0, 0, 0, 0.2);
 }
+
+.arrow-next {
+  @apply top-1/2 right-[10px] -translate-y-1/2 pl-[16px]
+}
+
+.arrow-prev {
+  @apply top-1/2 left-[10px] -translate-y-1/2 pl-[13px]
+}
+
+/* Divider */
 
 .divider {
   @apply border-black15 border-t-1 flex-1
 }
+
+/* Chat */
 
 .chat-input {
   @apply bg-grey rounded-lg flex-1 focus:outline-none text-13
@@ -62,6 +111,8 @@ textarea:where(.css-dev-only-do-not-override-ph9edi).ant-input.chat-input{
   min-height: 30px;
   max-height: 90px;
 }
+
+/* Antd */
 
 .ant-input:hover {
   @apply border-transparent
