@@ -1,29 +1,33 @@
-import { Upload } from "antd";
+import { useEffect, useState } from "react";
 import Modal from "../../Modal";
-import imageIcon from "../../../assets/image.svg";
-// import MediaSlider from "../MediaSlider";
-
-const { Dragger } = Upload;
+import MediaSlider from "../MediaSlider";
+import MediaDragger from "./MediaDragger";
 
 const CreatePostModal = ({ open, onCancel }) => {
+  const [fileList, setFileList] = useState([]);
+
+  const handleDelete = (currentSlide) => {
+    const newFileList = fileList;
+    newFileList.splice(currentSlide,1);
+    setFileList([...newFileList]);
+  };
+  
+  useEffect(()=>{
+    console.log(fileList)
+  },[fileList])
   return (
     <Modal open={open} onCancel={onCancel} title="Create new post">
       <div className="px-[20px] py-[14px] create-post">
         {/* Upload */}
-        <Dragger showUploadList={false}>
-          <div className="flex flex-col items-center">
-            <div className="w-[100px] h-[100px] bg-[#77777740] rounded-full center">
-              <img src={imageIcon} alt="Upload" />
-            </div>
-            <h1 className="font-semibold text-[20px] leading-[24px] text-[#676767] mt-[7px]">
-              Add photos/videos
-            </h1>
-            <p className="text-[12px] leading-[15px] text-[#676767]">
-              Or drag and drop
-            </p>
-          </div>
-        </Dragger>
-        {/* <MediaSlider/> */}
+        {fileList.length < 1 ? (
+          <MediaDragger setFileList={setFileList} />
+        ) : (
+          <MediaSlider
+            mediaList={fileList.map((file) => file?.url)}
+            editMode
+            handleDelete={handleDelete}
+          />
+        )}
         {/* User info */}
         <div className="row gap-x-[7px] mt-[13px]">
           <div className="w-[30px] avatar"></div>

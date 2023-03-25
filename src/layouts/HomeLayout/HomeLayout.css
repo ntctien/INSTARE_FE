@@ -108,6 +108,7 @@
 
 .create-post .media-slider {
   height: 46vh;
+  border-radius: 10px;
 }
 
 .create-post .slick-list {

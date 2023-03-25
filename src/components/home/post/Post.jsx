@@ -7,6 +7,9 @@ import {
 } from "../../../assets/post_icons";
 import { Divider } from "antd";
 import MediaSlider from "../MediaSlider";
+import tempImg1 from "../../../assets/temp1.jpg";
+
+const mediaList = [tempImg1, tempImg1, tempImg1, tempImg1];
 
 const Post = () => {
   return (
@@ -24,7 +27,7 @@ const Post = () => {
         </button>
       </div>
       {/* Image or video */}
-      <MediaSlider/>
+      <MediaSlider mediaList={mediaList}/>
       <div className="px-[20px] mt-[10px]">
         {/* Interact */}
         <div className="row gap-x-[20px]">
