@@ -1,5 +1,5 @@
-import nextIcon from "../../assets/arrow-next.svg";
-import prevIcon from "../../assets/arrow-back.svg";
+import nextIcon from "../../../assets/arrow-next.svg";
+import prevIcon from "../../../assets/arrow-back.svg";
 
 const SliderContainer = ({ children, slider, currentSlide, mediaList, containerClassName }) => {
   return (

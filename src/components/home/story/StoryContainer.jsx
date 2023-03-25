@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Story from "./Story";
-import SliderContainer from "../SliderContainer";
+import SliderContainer from "../media_slider/SliderContainer";
 
 const settings = {
   infinite: false,

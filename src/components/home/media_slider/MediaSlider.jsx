@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import Slider from "react-slick";
 import SliderContainer from "./SliderContainer";
-import deleteIcon from "../../assets/delete.svg";
+import deleteIcon from "../../../assets/delete.svg";
 import Video from "./Video";
 
 const MediaSlider = ({ mediaList, editMode, handleDelete }) => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Modal from "../../Modal";
-import MediaSlider from "../MediaSlider";
+import MediaSlider from "../media_slider/MediaSlider";
 import MediaDragger from "./MediaDragger";
 
 const CreatePostModal = ({ open, onCancel }) => {

@@ -6,7 +6,7 @@ import {
   otherOptionsIcon,
 } from "../../../assets/post_icons";
 import { Divider } from "antd";
-import MediaSlider from "../MediaSlider";
+import MediaSlider from "../media_slider/MediaSlider";
 import tempImg1 from "../../../assets/temp1.jpg";
 
 const mediaList = [
