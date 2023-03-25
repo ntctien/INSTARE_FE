@@ -9,7 +9,12 @@ import { Divider } from "antd";
 import MediaSlider from "../MediaSlider";
 import tempImg1 from "../../../assets/temp1.jpg";
 
-const mediaList = [tempImg1, tempImg1, tempImg1, tempImg1];
+const mediaList = [
+  { url: tempImg1, type: "image" },
+  { url: tempImg1, type: "image" },
+  { url: tempImg1, type: "image" },
+  { url: tempImg1, type: "image" },
+];
 
 const Post = () => {
   return (
@@ -27,7 +32,7 @@ const Post = () => {
         </button>
       </div>
       {/* Image or video */}
-      <MediaSlider mediaList={mediaList}/>
+      <MediaSlider mediaList={mediaList} />
       <div className="px-[20px] mt-[10px]">
         {/* Interact */}
         <div className="row gap-x-[20px]">
@@ -56,7 +61,10 @@ const Post = () => {
         <Divider className="border-black15 mt-[10px] mb-[6px]" />
         <div className="row gap-x-[13px]">
           <div className="w-[30px] h-[30px] bg-grey rounded-full"></div>
-          <input placeholder="Add a comment..." className="w-full bg-transparent hover:border-none focus:outline-none flex-1 text-14 placeholder:text-black50" />
+          <input
+            placeholder="Add a comment..."
+            className="w-full bg-transparent hover:border-none focus:outline-none flex-1 text-14 placeholder:text-black50"
+          />
           <button className="font-bold text-14 text-[#96CAF7]">Post</button>
         </div>
       </div>

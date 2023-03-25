@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import Slider from "react-slick";
 import SliderContainer from "./SliderContainer";
 import deleteIcon from "../../assets/delete.svg";
+import Video from "./Video";
 
 const MediaSlider = ({ mediaList, editMode, handleDelete }) => {
   const slider = useRef(null);
@@ -20,11 +21,22 @@ const MediaSlider = ({ mediaList, editMode, handleDelete }) => {
         ref={slider}
         beforeChange={(current, next) => setCurrentSlide(next)}
       >
-        {mediaList.map((item, i) => (
-          <div key={i} className="media-container">
-            <img src={item} alt="Post content" className="object-contain" />
-          </div>
-        ))}
+        {mediaList.map(
+          (item, i) =>
+            (item.type === "image" || item.type === "video") && (
+              <div key={i} className="media-container">
+                {item.type === "image" ? (
+                  <img
+                    src={item.url}
+                    alt="Post content"
+                    className="object-contain"
+                  />
+                ) : (
+                  <Video src={item.url} play={i === currentSlide} />
+                )}
+              </div>
+            )
+        )}
       </Slider>
       {editMode && (
         <button

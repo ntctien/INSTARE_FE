@@ -8,13 +8,13 @@ const CreatePostModal = ({ open, onCancel }) => {
 
   const handleDelete = (currentSlide) => {
     const newFileList = fileList;
-    newFileList.splice(currentSlide,1);
+    newFileList.splice(currentSlide, 1);
     setFileList([...newFileList]);
   };
-  
-  useEffect(()=>{
-    console.log(fileList)
-  },[fileList])
+
+  useEffect(() => {
+    console.log(fileList);
+  }, [fileList]);
   return (
     <Modal open={open} onCancel={onCancel} title="Create new post">
       <div className="px-[20px] py-[14px] create-post">
@@ -23,7 +23,9 @@ const CreatePostModal = ({ open, onCancel }) => {
           <MediaDragger setFileList={setFileList} />
         ) : (
           <MediaSlider
-            mediaList={fileList.map((file) => file?.url)}
+            mediaList={fileList.map((file) => {
+              return { url: file?.url, type: file?.type.split('/')[0]};
+            })}
             editMode
             handleDelete={handleDelete}
           />
