@@ -1,8 +1,9 @@
 import { useState, useRef } from "react";
 import Slider from "react-slick";
 import SliderContainer from "./SliderContainer";
-import deleteIcon from "../../../assets/delete.svg";
 import Video from "./Video";
+import deleteIcon from "../../../assets/delete.svg";
+import editIcon from "../../../assets/edit.svg";
 
 const MediaSlider = ({ mediaList, editMode, handleDelete }) => {
   const slider = useRef(null);
@@ -39,12 +40,20 @@ const MediaSlider = ({ mediaList, editMode, handleDelete }) => {
         )}
       </Slider>
       {editMode && (
-        <button
-          onClick={() => handleDelete(currentSlide)}
-          className="absolute top-[6.5px] right-[6.5px]"
-        >
-          <img src={deleteIcon} alt="Delete" />
-        </button>
+        <>
+          <button
+            onClick={() => handleDelete(currentSlide)}
+            className="absolute top-[6.5px] right-[6.5px]"
+          >
+            <img src={deleteIcon} alt="Delete" />
+          </button>
+          {mediaList[currentSlide].type !== "video" && (
+            <button className="row gap-x-[6px] py-[6px] pl-[6.5px] pr-[11px] bg-white rounded-5 absolute right-[6px] bottom-[10px]">
+              <img src={editIcon} alt="Edit" />
+              <p className="font-medium text-14">Edit</p>
+            </button>
+          )}
+        </>
       )}
     </SliderContainer>
   );
