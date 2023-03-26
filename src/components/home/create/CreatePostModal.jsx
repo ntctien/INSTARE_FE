@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Modal from "../../Modal";
 import MediaSlider from "../media_slider/MediaSlider";
 import MediaDragger from "./MediaDragger";
@@ -11,20 +11,19 @@ const CreatePostModal = ({ open, onCancel }) => {
     newFileList.splice(currentSlide, 1);
     setFileList([...newFileList]);
   };
-
-  useEffect(() => {
-    console.log(fileList);
-  }, [fileList]);
   return (
     <Modal open={open} onCancel={onCancel} title="Create new post">
       <div className="px-[20px] py-[14px] create-post">
         {/* Upload */}
-        {fileList.length < 1 ? (
-          <MediaDragger setFileList={setFileList} />
-        ) : (
+        {fileList.length < 10 && (
+          <MediaDragger fileList={fileList} setFileList={setFileList} />
+        )}
+        {(fileList.length > 0 && fileList.length < 10) && <div className="w-full h-[10px]"/>}
+        {/* Media slider */}
+        {fileList.length > 0 && (
           <MediaSlider
             mediaList={fileList.map((file) => {
-              return { url: file?.url, type: file?.type.split('/')[0]};
+              return { url: file?.url, type: file?.type.split("/")[0] };
             })}
             editMode
             handleDelete={handleDelete}

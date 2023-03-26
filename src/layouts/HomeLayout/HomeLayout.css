@@ -143,6 +143,12 @@ textarea:where(.css-dev-only-do-not-override-ph9edi).ant-input.chat-input {
   max-height: 90px;
 }
 
+/* Upload */
+/* 
+.create-post .ant-upload {
+  @apply mb-[10px]
+} */
+
 /* Antd */
 
 .ant-input:hover {
@@ -159,12 +165,18 @@ textarea:where(.css-dev-only-do-not-override-ph9edi).ant-input.chat-input {
 .ant-upload-wrapper .ant-upload-drag {
   @apply border-none bg-grey;
 }
-
 .ant-upload-wrapper .ant-upload-drag .ant-upload {
   padding: 0;
 }
 
-.ant-upload-wrapper .ant-upload-drag .ant-upload-btn {
-  height: 46vh;
-  aspect-ratio: 4/3;
+.ant-upload-wrapper .ant-upload-drag {
+  @apply w-fit
+}
+
+.media-upload.ant-upload-wrapper .ant-upload-drag{
+  @apply rounded-5
+}
+
+.media-dragger.ant-upload-wrapper .ant-upload-drag{
+  @apply rounded-10
 }
