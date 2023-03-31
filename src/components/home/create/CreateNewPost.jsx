@@ -2,7 +2,7 @@ import MediaSlider from "../media_slider/MediaSlider";
 import { useState } from "react";
 import MediaDragger from "./MediaDragger";
 
-const CreateNewPost = ({setCurrFeature}) => {
+const CreateNewPost = () => {
   const [fileList, setFileList] = useState([]);
 
   const handleDelete = (currentSlide) => {

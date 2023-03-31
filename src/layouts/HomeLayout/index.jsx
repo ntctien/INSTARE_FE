@@ -3,6 +3,7 @@ import { Outlet } from "react-router-dom";
 import "./HomeLayout.css";
 import AppMenu from "../../components/home/menu/AppMenu";
 import CreatePostModal from "../../components/home/create/CreatePostModal";
+import { FeatureProvider } from "../../contexts/FeatureContext";
 
 const HomeLayout = () => {
   const [menuItemId, setMenuItemId] = useState({
@@ -20,12 +21,14 @@ const HomeLayout = () => {
     >
       <AppMenu menuItemId={menuItemId} setMenuItemId={setMenuItemId} />
       <Outlet />
-      <CreatePostModal
-        open={menuItemId.current === "create"}
-        onCancel={() =>
-          setMenuItemId({ current: menuItemId.previous, previous: "create" })
-        }
-      />
+      <FeatureProvider>
+        <CreatePostModal
+          open={menuItemId.current === "create"}
+          onCancel={() =>
+            setMenuItemId({ current: menuItemId.previous, previous: "create" })
+          }
+        />
+      </FeatureProvider>
     </div>
   );
 };

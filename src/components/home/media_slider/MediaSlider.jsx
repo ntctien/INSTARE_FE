@@ -8,6 +8,8 @@ import editIcon from "../../../assets/edit.svg";
 const MediaSlider = ({ mediaList, editMode, handleDelete }) => {
   const slider = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  const handleEdit = () => {};
   return (
     <SliderContainer
       slider={slider}
@@ -48,7 +50,10 @@ const MediaSlider = ({ mediaList, editMode, handleDelete }) => {
             <img src={deleteIcon} alt="Delete" />
           </button>
           {mediaList[currentSlide].type !== "video" && (
-            <button className="row gap-x-[6px] py-[6px] pl-[6.5px] pr-[11px] bg-white rounded-5 absolute right-[6px] bottom-[10px]">
+            <button
+              onClick={handleEdit}
+              className="row gap-x-[6px] py-[6px] pl-[6.5px] pr-[11px] bg-white rounded-5 absolute right-[6px] bottom-[10px]"
+            >
               <img src={editIcon} alt="Edit" />
               <p className="font-medium text-14">Edit</p>
             </button>
