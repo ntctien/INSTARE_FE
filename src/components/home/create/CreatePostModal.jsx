@@ -1,15 +1,10 @@
-import { useContext } from "react";
 import Modal from "../../Modal";
-import { FeatureContext } from "../../../contexts/FeatureContext";
-import features from "../../../constants/createFeatures";
+import CreateNewPost from "./CreateNewPost";
 
 const CreatePostModal = ({ open, onCancel }) => {
-  const { currFeature } = useContext(FeatureContext);
-  const Feature = features.get(currFeature).component;
-
   return (
-    <Modal open={open} onCancel={onCancel} title={features.get(currFeature).title}>
-      <Feature />
+    <Modal open={open} onCancel={onCancel} title={"Create new post"}>
+      <CreateNewPost />
     </Modal>
   );
 };

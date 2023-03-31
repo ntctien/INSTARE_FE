@@ -2,8 +2,7 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import "./HomeLayout.css";
 import AppMenu from "../../components/home/menu/AppMenu";
-import CreatePostModal from "../../components/home/create/CreatePostModal";
-import { FeatureProvider } from "../../contexts/FeatureContext";
+import CreateContainer from "../../components/home/create/CreateContainer";
 
 const HomeLayout = () => {
   const [menuItemId, setMenuItemId] = useState({
@@ -21,14 +20,7 @@ const HomeLayout = () => {
     >
       <AppMenu menuItemId={menuItemId} setMenuItemId={setMenuItemId} />
       <Outlet />
-      <FeatureProvider>
-        <CreatePostModal
-          open={menuItemId.current === "create"}
-          onCancel={() =>
-            setMenuItemId({ current: menuItemId.previous, previous: "create" })
-          }
-        />
-      </FeatureProvider>
+      {menuItemId.current === "create" && <CreateContainer menuItemId={menuItemId} setMenuItemId={setMenuItemId}/>}
     </div>
   );
 };

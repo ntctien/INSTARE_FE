@@ -43,7 +43,7 @@ const CreateNewPost = () => {
         className="resize-none w-full mt-[13px] bg-transparent focus:outline-none text-14 placeholder:text-black50 h-[100px]"
       />
       {/* Post button */}
-      <button className="post-btn">POST</button>
+      {fileList.length > 0 && <button className="post-btn">POST</button>}
     </div>
   );
 };
