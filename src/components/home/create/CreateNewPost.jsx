@@ -1,9 +1,11 @@
+import { useContext, useState } from "react";
 import MediaSlider from "../media_slider/MediaSlider";
-import { useState } from "react";
 import MediaDragger from "./MediaDragger";
+import { FeatureContext } from "../../../contexts/FeatureContext";
 
 const CreateNewPost = () => {
   const [fileList, setFileList] = useState([]);
+  const { setCurrFeature } = useContext(FeatureContext);
 
   const handleDelete = (currentSlide) => {
     const newFileList = fileList;
@@ -27,6 +29,7 @@ const CreateNewPost = () => {
           })}
           editMode
           handleDelete={handleDelete}
+          setCurrFeature={setCurrFeature}
         />
       )}
       {/* User info */}

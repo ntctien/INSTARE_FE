@@ -5,11 +5,14 @@ import Video from "./Video";
 import deleteIcon from "../../../assets/delete.svg";
 import editIcon from "../../../assets/edit.svg";
 
-const MediaSlider = ({ mediaList, editMode, handleDelete }) => {
+const MediaSlider = ({ mediaList, editMode, handleDelete, setCurrFeature }) => {
   const slider = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const handleEdit = () => {};
+  const handleEdit = () => {
+    setCurrFeature("edit");
+  };
+  
   return (
     <SliderContainer
       slider={slider}
