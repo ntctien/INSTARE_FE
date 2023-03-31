@@ -39,12 +39,10 @@ const EditPhoto = () => {
       {/* Edit features */}
       <div className="w-full h-[100px] bg-white mt-[19px] flex items-center justify-center gap-x-[34px]">
         {editFeatures.map((item, i) => (
-          <div className="flex flex-col items-center">
-            <div className="w-[40px] h-[40px] flex items-center justify-center">
-              <img src={item.icon} alt="Edit icon" />
-            </div>
+          <button className="flex flex-col items-center">
+            <img src={item.icon} alt="Edit icon" />
             <h3 className="font-ubuntu text-20 mt-1">{item.title}</h3>
-          </div>
+          </button>
         ))}
       </div>
     </div>
