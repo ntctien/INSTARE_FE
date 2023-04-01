@@ -36,15 +36,15 @@ const EditPhoto = () => {
     <EditContainer onBack={()=>setCurrFeature("create")}>
       <div className="pt-[13px]">
         {/* Media */}
-        <div className="h-[58vh] aspect-[4/3]">
+        <div className="current-media-container">
           <img
             src={tempImg}
             alt="Edit"
-            className="object-contain w-full h-full"
+            className="current-media"
           />
         </div>
         {/* Edit features */}
-        <div className="w-full h-[100px] bg-white mt-[19px] flex items-center justify-center gap-x-[34px]">
+        <div className="edit-bar mt-[19px]">
           {editFeatures.map((item, i) => (
             <button
               onClick={item.onClick}
