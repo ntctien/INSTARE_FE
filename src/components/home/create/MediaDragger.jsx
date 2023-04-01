@@ -27,6 +27,7 @@ const MediaDragger = ({ fileList, setFileList }) => {
       beforeUpload={() => false}
       onChange={handleChange}
       maxCount={10}
+      accept="image/*,video/*"
       className={fileList.length < 1 ? 'media-dragger' : 'media-upload'}
     >
       {fileList.length < 1 ? (

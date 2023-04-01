@@ -1,5 +1,4 @@
 import { Divider } from "antd";
-import closeIcon from "../assets/close.svg";
 
 const Modal = ({ children, open, onCancel, title }) => {
   if (open)
@@ -17,10 +16,6 @@ const Modal = ({ children, open, onCancel, title }) => {
           <Divider className="mt-[13px] mb-0 border-black15" />
           {/* Content */}
           {children}
-          {/* Close button */}
-          <button onClick={onCancel} className="absolute top-[11.5px] right-[13.5px]">
-            <img src={closeIcon} alt="Close" />
-          </button>
         </div>
       </>
     );

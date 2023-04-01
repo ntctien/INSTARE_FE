@@ -1,10 +1,28 @@
+import { useContext, useState } from "react";
 import Modal from "../../Modal";
-import CreateNewPost from "./CreateNewPost";
+import { FeatureContext } from "../../../contexts/FeatureContext";
+import features from "../../../constants/createFeatures";
 
-const CreatePostModal = ({ open, onCancel }) => {
+const CreatePostModal = ({ setMenuItemId, menuItemId }) => {
+  const { currFeature } = useContext(FeatureContext);
+  const [fileList, setFileList] = useState([]);
+
+  const Feature = features.get(currFeature).component;
+
+  const handleCancel = () => {
+    setMenuItemId({
+      current: menuItemId.previous,
+      previous: "create",
+    });
+  };
+
   return (
-    <Modal open={open} onCancel={onCancel} title={"Create new post"}>
-      <CreateNewPost />
+    <Modal onCancel={handleCancel} open title={features.get(currFeature).title}>
+      <Feature
+        fileList={fileList}
+        setFileList={setFileList}
+        onCancel={handleCancel}
+      />
     </Modal>
   );
 };

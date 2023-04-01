@@ -5,12 +5,18 @@ import {
   textIcon,
 } from "../../../assets/edit_icons";
 import tempImg from "../../../assets/temp1.jpg";
+import { useContext } from "react";
+import { FeatureContext } from "../../../contexts/FeatureContext";
+import EditContainer from "./EditContainer";
 
 const EditPhoto = () => {
+  const { setCurrFeature } = useContext(FeatureContext);
+
   const editFeatures = [
     {
       title: "Crop",
       icon: cropIcon,
+      onClick: ()=>setCurrFeature("crop")
     },
     {
       title: "Adjust",
@@ -27,25 +33,30 @@ const EditPhoto = () => {
   ];
 
   return (
-    <div className="pt-[13px]">
-      {/* Media */}
-      <div className="h-[58vh] aspect-[4/3]">
-        <img
-          src={tempImg}
-          alt="Edit"
-          className="object-contain w-full h-full"
-        />
+    <EditContainer onBack={()=>setCurrFeature("create")}>
+      <div className="pt-[13px]">
+        {/* Media */}
+        <div className="h-[58vh] aspect-[4/3]">
+          <img
+            src={tempImg}
+            alt="Edit"
+            className="object-contain w-full h-full"
+          />
+        </div>
+        {/* Edit features */}
+        <div className="w-full h-[100px] bg-white mt-[19px] flex items-center justify-center gap-x-[34px]">
+          {editFeatures.map((item, i) => (
+            <button
+              onClick={item.onClick}
+              className="flex flex-col items-center"
+            >
+              <img src={item.icon} alt="Edit icon" />
+              <h3 className="font-ubuntu text-20 mt-1">{item.title}</h3>
+            </button>
+          ))}
+        </div>
       </div>
-      {/* Edit features */}
-      <div className="w-full h-[100px] bg-white mt-[19px] flex items-center justify-center gap-x-[34px]">
-        {editFeatures.map((item, i) => (
-          <button className="flex flex-col items-center">
-            <img src={item.icon} alt="Edit icon" />
-            <h3 className="font-ubuntu text-20 mt-1">{item.title}</h3>
-          </button>
-        ))}
-      </div>
-    </div>
+    </EditContainer>
   );
 };
 
