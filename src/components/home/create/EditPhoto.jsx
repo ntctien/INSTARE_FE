@@ -14,11 +14,12 @@ const EditPhoto = () => {
 
   const editFeatures = [
     {
+      id: "crop",
       title: "Crop",
       icon: cropIcon,
-      onClick: ()=>setCurrFeature("crop")
     },
     {
+      id: "adjustment",
       title: "Adjust",
       icon: adjustIcon,
     },
@@ -33,21 +34,17 @@ const EditPhoto = () => {
   ];
 
   return (
-    <EditContainer onBack={()=>setCurrFeature("create")}>
+    <EditContainer onBack={() => setCurrFeature("create")}>
       <div className="pt-[13px]">
         {/* Media */}
         <div className="current-media-container">
-          <img
-            src={tempImg}
-            alt="Edit"
-            className="current-media"
-          />
+          <img src={tempImg} alt="Edit" className="current-media" />
         </div>
         {/* Edit features */}
         <div className="edit-bar mt-[19px]">
           {editFeatures.map((item, i) => (
             <button
-              onClick={item.onClick}
+              onClick={() => setCurrFeature(item.id)}
               className="flex flex-col items-center"
             >
               <img src={item.icon} alt="Edit icon" />
