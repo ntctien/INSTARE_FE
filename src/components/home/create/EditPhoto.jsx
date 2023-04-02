@@ -44,6 +44,7 @@ const EditPhoto = () => {
         <div className="edit-bar mt-[19px]">
           {editFeatures.map((item, i) => (
             <button
+              key={i}
               onClick={() => setCurrFeature(item.id)}
               className="flex flex-col items-center"
             >
