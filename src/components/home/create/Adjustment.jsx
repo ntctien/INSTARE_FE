@@ -5,11 +5,6 @@ import tempImg from "../../../assets/temp1.jpg";
 
 const Adjustment = () => {
   const { setCurrFeature } = useContext(FeatureContext);
-  const brightnessRef = useRef(null);
-  const contrastRef = useRef(null);
-  const saturationRef = useRef(null);
-  const temperatureRef = useRef(null);
-  const tintRef = useRef(null);
   const [adjustments, setAdjustments] = useState({
     brightness: 0,
     contrast: 0,
@@ -19,41 +14,35 @@ const Adjustment = () => {
   });
 
   const adjustmentItems = [
-    { title: "Brightness", name: "brightness", ref: brightnessRef },
-    { title: "Contrast", name: "contrast", ref: contrastRef },
-    { title: "Saturation", name: "saturation", ref: saturationRef },
-    { title: "Temperature", name: "temperature", ref: temperatureRef },
-    { title: "Tint", name: "tint", ref: tintRef },
+    { title: "Brightness", name: "brightness" },
+    { title: "Contrast", name: "contrast" },
+    { title: "Saturation", name: "saturation"},
+    { title: "Temperature", name: "temperature"},
+    { title: "Tint", name: "tint" },
   ];
 
-  const updateSliderStyle = (ref, value) => {
-    const slider = ref.current;
-    if (!slider) return;
+  const getSliderStyle = (value) => {
     if (value >= 0) {
-      slider.style.backgroundImage = `linear-gradient(to right, #D9D9D9 0%, #D9D9D9 50%, #BFB2F3 50%, #BFB2F3 ${
+      return `linear-gradient(to right, #D9D9D9 0%, #D9D9D9 50%, #BFB2F3 50%, #BFB2F3 ${
         (value / 200 + 0.5) * 100
       }%, #D9D9D9 ${(value / 200 + 0.5) * 100}%, #D9D9D9 100%)`;
-    } else {
-      slider.style.backgroundImage = `linear-gradient(to right, #D9D9D9 0%, #D9D9D9 ${
-        (value / 200 + 0.5) * 100
-      }%, #BFB2F3 ${
-        (value / 200 + 0.5) * 100
-      }%, #BFB2F3 50%, #D9D9D9 50%, #D9D9D9 100%)`;
     }
+    return `linear-gradient(to right, #D9D9D9 0%, #D9D9D9 ${
+      (value / 200 + 0.5) * 100
+    }%, #BFB2F3 ${
+      (value / 200 + 0.5) * 100
+    }%, #BFB2F3 50%, #D9D9D9 50%, #D9D9D9 100%)`;
   };
 
-  const handleOnChange = (e, ref) => {
-    const value = parseInt(e.target.value);
+  const handleOnChange = (e) => {
     setAdjustments({
       ...adjustments,
-      [e.target.name]: value,
+      [e.target.name]: parseInt(e.target.value),
     });
-    updateSliderStyle(ref, value);
   };
 
-  const handleReset = (e, ref) => {
+  const handleReset = (e) => {
     setAdjustments({ ...adjustments, [e.target.name]: 0 });
-    updateSliderStyle(ref, 0);
   };
 
   return (
@@ -72,7 +61,7 @@ const Adjustment = () => {
                 {adjustments[item.name] !== 0 && (
                   <button
                     name={item.name}
-                    onClick={(e) => handleReset(e, item.ref)}
+                    onClick={handleReset}
                     className="text-[14px] leading-[16px] text-[#3D93DE]"
                   >
                     Reset
@@ -87,7 +76,8 @@ const Adjustment = () => {
                   max={100}
                   ref={item.ref}
                   value={adjustments[item.name]}
-                  onChange={(e) => handleOnChange(e, item.ref)}
+                  onChange={handleOnChange}
+                  style={{ backgroundImage: getSliderStyle(adjustments[item.name]) }}
                   className="adjustment-slider"
                 />
                 <p className="text-16">{adjustments[item.name]}</p>
