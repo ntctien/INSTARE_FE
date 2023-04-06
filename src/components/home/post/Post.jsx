@@ -1,12 +1,13 @@
+import { useState } from "react";
+import { Divider } from "antd";
 import Avatar from "../Avatar";
+import MediaSlider from "../media_slider/MediaSlider";
 import {
   likeIcon,
   commentIcon,
   shareIcon,
   otherOptionsIcon,
 } from "../../../assets/post_icons";
-import { Divider } from "antd";
-import MediaSlider from "../media_slider/MediaSlider";
 import tempImg1 from "../../../assets/temp1.jpg";
 
 const mediaList = [
@@ -17,6 +18,7 @@ const mediaList = [
 ];
 
 const Post = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
   return (
     <div className="w-[800px] bg-[#D9D9D926] rounded-10 pb-[9px] post">
       {/* User */}
@@ -32,7 +34,11 @@ const Post = () => {
         </button>
       </div>
       {/* Image or video */}
-      <MediaSlider mediaList={mediaList} />
+      <MediaSlider
+        mediaList={mediaList}
+        currentSlide={currentSlide}
+        setCurrentSlide={setCurrentSlide}
+      />
       <div className="px-[20px] mt-[10px]">
         {/* Interact */}
         <div className="row gap-x-[20px]">

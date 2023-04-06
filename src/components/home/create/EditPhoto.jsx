@@ -4,41 +4,46 @@ import {
   filterIcon,
   textIcon,
 } from "../../../assets/edit_icons";
-import tempImg from "../../../assets/temp1.jpg";
 import { useContext } from "react";
 import { FeatureContext } from "../../../contexts/FeatureContext";
 import EditContainer from "./EditContainer";
 
-const EditPhoto = () => {
+const editFeatures = [
+  {
+    id: "crop",
+    title: "Crop",
+    icon: cropIcon,
+  },
+  {
+    id: "adjustment",
+    title: "Adjust",
+    icon: adjustIcon,
+  },
+  {
+    title: "Filter",
+    icon: filterIcon,
+  },
+  {
+    title: "Text",
+    icon: textIcon,
+  },
+];
+
+const EditPhoto = ({ fileList, currentSlide }) => {
   const { setCurrFeature } = useContext(FeatureContext);
 
-  const editFeatures = [
-    {
-      id: "crop",
-      title: "Crop",
-      icon: cropIcon,
-    },
-    {
-      id: "adjustment",
-      title: "Adjust",
-      icon: adjustIcon,
-    },
-    {
-      title: "Filter",
-      icon: filterIcon,
-    },
-    {
-      title: "Text",
-      icon: textIcon,
-    },
-  ];
+  console.log(fileList);
 
   return (
-    <EditContainer onBack={() => setCurrFeature("create")}>
+    <EditContainer onBack={()=>setCurrFeature("create")}>
       <div className="pt-[13px]">
         {/* Media */}
         <div className="current-media-container">
-          <img src={tempImg} alt="Edit" className="current-media" />
+          <img
+            src={fileList[currentSlide].url}
+            alt="Edit"
+            className="current-media"
+          />
         </div>
         {/* Edit features */}
         <div className="edit-bar mt-[19px]">

@@ -4,7 +4,13 @@ import MediaDragger from "./MediaDragger";
 import { FeatureContext } from "../../../contexts/FeatureContext";
 import closeIcon from "../../../assets/close.svg";
 
-const CreateNewPost = ({ onCancel,fileList, setFileList }) => {
+const CreateNewPost = ({
+  onCancel,
+  fileList,
+  setFileList,
+  currentSlide,
+  setCurrentSlide,
+}) => {
   const { setCurrFeature } = useContext(FeatureContext);
 
   const handleDelete = (currentSlide) => {
@@ -31,6 +37,8 @@ const CreateNewPost = ({ onCancel,fileList, setFileList }) => {
             editMode
             handleDelete={handleDelete}
             setCurrFeature={setCurrFeature}
+            currentSlide={currentSlide}
+            setCurrentSlide={setCurrentSlide}
           />
         )}
         {/* User info */}

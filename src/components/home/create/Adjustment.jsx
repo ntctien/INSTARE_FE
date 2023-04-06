@@ -1,25 +1,61 @@
 import { useContext, useRef, useState } from "react";
+import domtoimage from "dom-to-image";
 import EditContainer from "./EditContainer";
 import { FeatureContext } from "../../../contexts/FeatureContext";
-import tempImg from "../../../assets/temp1.jpg";
 
-const Adjustment = () => {
+const adjustmentItems = [
+  {
+    title: "Brightness",
+    name: "brightness",
+    level: 2,
+    min: -100,
+    max: 100,
+    addNumber: 100,
+  },
+  {
+    title: "Contrast",
+    name: "contrast",
+    level: 2,
+    min: -100,
+    max: 100,
+    addNumber: 100,
+  },
+  {
+    title: "Saturation",
+    name: "saturate",
+    level: 1,
+    min: -100,
+    max: 100,
+    addNumber: 100,
+  },
+  {
+    title: "Temperature",
+    name: "temperature",
+    level: 1,
+    min: -100,
+    max: 100,
+    addNumber: 0,
+  },
+  {
+    title: "Grayscale",
+    name: "grayscale",
+    level: 1,
+    min: 0,
+    max: 100,
+    addNumber: 0,
+  },
+];
+
+const Adjustment = ({ fileList, setFileList, currentSlide }) => {
   const { setCurrFeature } = useContext(FeatureContext);
+  const mediaRef = useRef(null);
   const [adjustments, setAdjustments] = useState({
     brightness: 0,
     contrast: 0,
-    saturation: 0,
+    saturate: 0,
     temperature: 0,
-    tint: 0,
+    grayscale: 0,
   });
-
-  const adjustmentItems = [
-    { title: "Brightness", name: "brightness" },
-    { title: "Contrast", name: "contrast" },
-    { title: "Saturation", name: "saturation"},
-    { title: "Temperature", name: "temperature"},
-    { title: "Tint", name: "tint" },
-  ];
 
   const getSliderStyle = (value) => {
     if (value >= 0) {
@@ -34,6 +70,27 @@ const Adjustment = () => {
     }%, #BFB2F3 50%, #D9D9D9 50%, #D9D9D9 100%)`;
   };
 
+  const getMediaBgStyle = (value) => {
+    if (value > 0) {
+      return "rgba(255,255,0," + Math.abs(value / 2) / 400 + ")";
+    }
+    return "rgba(0, 0, 255," + Math.abs(value / 2) / 400 + ")";
+  };
+
+  const getMediaStyle = () => {
+    return {
+      filter: adjustmentItems
+        .map((item) => {
+          if (item.name !== "temperature")
+            return `${item.name}(${
+              adjustments[item.name] / item.level + item.addNumber
+            }%)`;
+          return "";
+        })
+        .join(" "),
+    };
+  };
+
   const handleOnChange = (e) => {
     setAdjustments({
       ...adjustments,
@@ -45,12 +102,40 @@ const Adjustment = () => {
     setAdjustments({ ...adjustments, [e.target.name]: 0 });
   };
 
+  const handleDone = () => {
+    const media = mediaRef.current;
+    if (!media) return;
+    domtoimage
+      .toJpeg(media, { width: media.naturalWidth, height: media.naturalHeight })
+      .then((url) => {
+        let temp = fileList;
+        temp[currentSlide].url = url;
+        setFileList(temp);
+        setCurrFeature("edit");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
-    <EditContainer onBack={() => setCurrFeature("edit")}>
+    <EditContainer onBack={() => setCurrFeature("edit")} onDone={handleDone}>
       <div className="flex items-center font-ubuntu">
         {/* Media */}
         <div className="current-media-container">
-          <img src={tempImg} alt="Edit" className="current-media" />
+          <div className="h-full w-fit object-contain mx-auto relative">
+            <img
+              src={fileList[currentSlide].url}
+              alt="Edit"
+              ref={mediaRef}
+              className="h-full w-fit object-contain"
+              style={getMediaStyle()}
+            />
+            <div
+              className="absolute z-20 w-full h-full top-0 left-0"
+              style={{ background: getMediaBgStyle(adjustments.temperature) }}
+            ></div>
+          </div>
         </div>
         {/* Inputs */}
         <div className="flex flex-col justify-evenly bg-white px-5 h-[63vh] w-[25vw]">
@@ -72,12 +157,13 @@ const Adjustment = () => {
                 <input
                   type="range"
                   name={item.name}
-                  min={-100}
-                  max={100}
-                  ref={item.ref}
+                  min={item.min}
+                  max={item.max}
                   value={adjustments[item.name]}
                   onChange={handleOnChange}
-                  style={{ backgroundImage: getSliderStyle(adjustments[item.name]) }}
+                  style={{
+                    backgroundImage: getSliderStyle(adjustments[item.name]),
+                  }}
                   className="adjustment-slider"
                 />
                 <p className="text-16">{adjustments[item.name]}</p>

@@ -1,18 +1,28 @@
-import { useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Slider from "react-slick";
 import SliderContainer from "./SliderContainer";
 import Video from "./Video";
 import deleteIcon from "../../../assets/delete.svg";
 import editIcon from "../../../assets/edit.svg";
 
-const MediaSlider = ({ mediaList, editMode, handleDelete, setCurrFeature }) => {
+const MediaSlider = ({
+  mediaList,
+  editMode,
+  handleDelete,
+  setCurrFeature,
+  currentSlide,
+  setCurrentSlide,
+}) => {
   const slider = useRef(null);
-  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    slider.current?.slickGoTo(currentSlide,true);
+  }, [currentSlide]);
 
   const handleEdit = () => {
     setCurrFeature("edit");
   };
-  
+
   return (
     <SliderContainer
       slider={slider}
