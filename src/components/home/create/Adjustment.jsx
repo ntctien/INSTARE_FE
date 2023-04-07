@@ -29,14 +29,6 @@ const adjustmentItems = [
     addNumber: 100,
   },
   {
-    title: "Temperature",
-    name: "temperature",
-    level: 1,
-    min: -100,
-    max: 100,
-    addNumber: 0,
-  },
-  {
     title: "Grayscale",
     name: "grayscale",
     level: 1,
@@ -53,7 +45,6 @@ const Adjustment = ({ fileList, setFileList, currentSlide }) => {
     brightness: 0,
     contrast: 0,
     saturate: 0,
-    temperature: 0,
     grayscale: 0,
   });
 
@@ -70,24 +61,22 @@ const Adjustment = ({ fileList, setFileList, currentSlide }) => {
     }%, #BFB2F3 50%, #D9D9D9 50%, #D9D9D9 100%)`;
   };
 
-  const getMediaBgStyle = (value) => {
-    if (value > 0) {
-      return "rgba(255,255,0," + Math.abs(value / 2) / 400 + ")";
-    }
-    return "rgba(0, 0, 255," + Math.abs(value / 2) / 400 + ")";
-  };
-
   const getMediaStyle = () => {
+    const img = new Image();
+    img.src = fileList[currentSlide].url;
+    const realWidth = img.width;
+    const realHeight = img.height;
+
     return {
       filter: adjustmentItems
         .map((item) => {
-          if (item.name !== "temperature")
-            return `${item.name}(${
-              adjustments[item.name] / item.level + item.addNumber
-            }%)`;
-          return "";
+          return `${item.name}(${
+            adjustments[item.name] / item.level + item.addNumber
+          }%)`;
         })
         .join(" "),
+      width: realWidth < realHeight ? "fit-content" : "100%",
+      height: realWidth < realHeight ? "100%" : "fit-content",
     };
   };
 
@@ -122,20 +111,14 @@ const Adjustment = ({ fileList, setFileList, currentSlide }) => {
     <EditContainer onBack={() => setCurrFeature("edit")} onDone={handleDone}>
       <div className="flex items-center font-ubuntu">
         {/* Media */}
-        <div className="current-media-container">
-          <div className="h-full w-fit object-contain mx-auto relative">
-            <img
-              src={fileList[currentSlide].url}
-              alt="Edit"
-              ref={mediaRef}
-              className="h-full w-fit object-contain"
-              style={getMediaStyle()}
-            />
-            <div
-              className="absolute z-20 w-full h-full top-0 left-0"
-              style={{ background: getMediaBgStyle(adjustments.temperature) }}
-            ></div>
-          </div>
+        <div className="current-media-container center">
+          <img
+            src={fileList[currentSlide].url}
+            alt="Edit"
+            ref={mediaRef}
+            className="object-contain"
+            style={getMediaStyle()}
+          />
         </div>
         {/* Inputs */}
         <div className="flex flex-col justify-evenly bg-white px-5 h-[63vh] w-[25vw]">

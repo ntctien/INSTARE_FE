@@ -171,6 +171,17 @@ textarea:where(.css-dev-only-do-not-override-ph9edi).ant-input.chat-input {
   @apply object-contain w-full h-full;
 }
 
+.adjustment-media::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+  z-index: 100;
+}
+
 /* Input */
 .adjustment-slider {
   -webkit-appearance: none;

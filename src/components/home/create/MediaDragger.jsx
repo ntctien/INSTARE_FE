@@ -7,7 +7,8 @@ const { Dragger } = Upload;
 const MediaDragger = ({ fileList, setFileList }) => {
   const handleChange = ({ fileList: newFileList }) => {
     for (let i = 0; i < newFileList.length; i++) {
-      getFileUrl(newFileList[i].originFileObj, i, newFileList);
+      if (!newFileList[i].url)
+        getFileUrl(newFileList[i].originFileObj, i, newFileList);
     }
   };
   const getFileUrl = (file, index, newFileList) => {
@@ -18,6 +19,7 @@ const MediaDragger = ({ fileList, setFileList }) => {
 
     return () => URL.revokeObjectURL(url);
   };
+
   return (
     <Dragger
       name="file"
@@ -29,7 +31,7 @@ const MediaDragger = ({ fileList, setFileList }) => {
       onChange={handleChange}
       maxCount={10}
       accept="image/*,video/*"
-      className={fileList.length < 1 ? 'media-dragger' : 'media-upload'}
+      className={fileList.length < 1 ? "media-dragger" : "media-upload"}
     >
       {fileList.length < 1 ? (
         <div className="flex flex-col items-center justify-center h-[46vh] aspect-[4/3]">
@@ -44,12 +46,12 @@ const MediaDragger = ({ fileList, setFileList }) => {
           </p>
         </div>
       ) : (
-          <div className="row gap-x-[6.5px] p-[6px]">
-            <img src={addMediaIcon} alt="Add photos/videos" />
-            <p className="font-medium text-14">
-              Add photos/videos ({fileList.length}/10)
-            </p>
-          </div>
+        <div className="row gap-x-[6.5px] p-[6px]">
+          <img src={addMediaIcon} alt="Add photos/videos" />
+          <p className="font-medium text-14">
+            Add photos/videos ({fileList.length}/10)
+          </p>
+        </div>
       )}
     </Dragger>
   );

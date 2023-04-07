@@ -32,8 +32,6 @@ const editFeatures = [
 const EditPhoto = ({ fileList, currentSlide }) => {
   const { setCurrFeature } = useContext(FeatureContext);
 
-  console.log(fileList);
-
   return (
     <EditContainer onBack={()=>setCurrFeature("create")}>
       <div className="pt-[13px]">
