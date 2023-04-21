@@ -10,6 +10,7 @@ const AddText = ({ setCurrFeature, fileList, currentSlide }) => {
         <div className="h-[58vh] w-fit max-w-[40vw] mx-auto bg-red-400 relative">
           <img
             src={fileList[currentSlide].url}
+            draggable={false}
             alt="Edit"
             className="current-media"
           />
