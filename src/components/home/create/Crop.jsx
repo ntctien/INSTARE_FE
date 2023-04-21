@@ -1,6 +1,4 @@
-import { useContext } from "react";
 import EditContainer from "./EditContainer";
-import { FeatureContext } from "../../../contexts/FeatureContext";
 import {
   rotateLeftIcon,
   flipHorizontalIcon,
@@ -27,9 +25,7 @@ const cropItems = [
   { title: "2:3", icon: twoThreeIcon },
 ];
 
-const Crop = () => {
-  const { setCurrFeature } = useContext(FeatureContext);
-
+const Crop = ({setCurrFeature}) => {
   return (
     <EditContainer onBack={() => setCurrFeature("edit")}>
       <div className="pt-[13px] font-ubuntu">

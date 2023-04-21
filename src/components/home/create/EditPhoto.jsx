@@ -1,37 +1,7 @@
-import {
-  cropIcon,
-  adjustIcon,
-  filterIcon,
-  textIcon,
-} from "../../../assets/edit_icons";
-import { useContext } from "react";
-import { FeatureContext } from "../../../contexts/FeatureContext";
 import EditContainer from "./EditContainer";
+import { editFeatures } from "../../../constants/createFeatures";
 
-const editFeatures = [
-  {
-    id: "crop",
-    title: "Crop",
-    icon: cropIcon,
-  },
-  {
-    id: "adjustment",
-    title: "Adjust",
-    icon: adjustIcon,
-  },
-  {
-    title: "Filter",
-    icon: filterIcon,
-  },
-  {
-    title: "Text",
-    icon: textIcon,
-  },
-];
-
-const EditPhoto = ({ fileList, currentSlide }) => {
-  const { setCurrFeature } = useContext(FeatureContext);
-
+const EditPhoto = ({ fileList, currentSlide,setCurrFeature }) => {
   return (
     <EditContainer onBack={()=>setCurrFeature("create")}>
       <div className="pt-[13px]">

@@ -1,7 +1,6 @@
-import { useContext, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import domtoimage from "dom-to-image";
 import EditContainer from "./EditContainer";
-import { FeatureContext } from "../../../contexts/FeatureContext";
 
 const adjustmentItems = [
   {
@@ -38,8 +37,12 @@ const adjustmentItems = [
   },
 ];
 
-const Adjustment = ({ fileList, setFileList, currentSlide }) => {
-  const { setCurrFeature } = useContext(FeatureContext);
+const Adjustment = ({
+  fileList,
+  setFileList,
+  currentSlide,
+  setCurrFeature,
+}) => {
   const mediaRef = useRef(null);
   const [adjustments, setAdjustments] = useState({
     brightness: 0,

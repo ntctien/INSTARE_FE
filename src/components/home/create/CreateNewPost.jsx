@@ -1,7 +1,5 @@
-import { useContext } from "react";
 import MediaSlider from "../media_slider/MediaSlider";
 import MediaDragger from "./MediaDragger";
-import { FeatureContext } from "../../../contexts/FeatureContext";
 import closeIcon from "../../../assets/close.svg";
 
 const CreateNewPost = ({
@@ -10,8 +8,8 @@ const CreateNewPost = ({
   setFileList,
   currentSlide,
   setCurrentSlide,
+  setCurrFeature
 }) => {
-  const { setCurrFeature } = useContext(FeatureContext);
 
   const handleDelete = (currentSlide) => {
     const newFileList = fileList;

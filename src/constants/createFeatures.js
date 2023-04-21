@@ -1,13 +1,42 @@
-import CreateNewPost from "../components/home/create/CreateNewPost";
-import EditPhoto from "../components/home/create/EditPhoto";
-import Crop from "../components/home/create/Crop";
-import Adjustment from "../components/home/create/Adjustment";
+import { CreateNewPost, EditPhoto, Crop, Adjustment, Filter, AddText } from '../components/home/create';
+import {
+    cropIcon,
+    adjustIcon,
+    filterIcon,
+    textIcon,
+} from "../assets/edit_icons";
 
-const features = new Map([
+const editFeatures = [
+    {
+        id: "crop",
+        title: "Crop",
+        icon: cropIcon,
+        component: Crop
+    },
+    {
+        id: "adjustment",
+        title: "Adjust",
+        icon: adjustIcon,
+        component: Adjustment
+    },
+    {
+        id: 'filter',
+        title: "Filter",
+        icon: filterIcon,
+        component: Filter
+    },
+    {
+        id: 'text',
+        title: "Add text",
+        icon: textIcon,
+        component: AddText
+    },
+];
+
+const createFeatures = new Map([
     ["create", { component: CreateNewPost, title: "Create new post" }],
     ["edit", { component: EditPhoto, title: "Edit photo" }],
-    ["crop", { component: Crop, title: "Crop" }],
-    ["adjustment", { component: Adjustment, title: "Adjustment" }],
+    ...editFeatures.map(feature => [`${feature.id}`, feature])
 ]);
 
-export default features;
+export { createFeatures, editFeatures };
