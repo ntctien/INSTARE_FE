@@ -1,4 +1,4 @@
-import backIcon from "../../../assets/back.svg";
+import backIcon from "../../../../assets/back.svg";
 
 const EditContainer = ({ children, onBack, onDone }) => {
   return (

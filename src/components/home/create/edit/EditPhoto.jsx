@@ -1,5 +1,5 @@
 import EditContainer from "./EditContainer";
-import { editFeatures } from "../../../constants/createFeatures";
+import { editFeatures } from "../../../../constants/createFeatures";
 
 const EditPhoto = ({ fileList, currentSlide,setCurrFeature }) => {
   return (

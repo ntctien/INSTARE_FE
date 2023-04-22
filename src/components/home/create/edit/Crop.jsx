@@ -8,8 +8,8 @@ import {
   threeTwoIcon,
   oneOneIcon,
   twoThreeIcon,
-} from "../../../assets/crop_icons";
-import tempImg from "../../../assets/temp1.jpg";
+} from "~/assets/crop_icons";
+import tempImg from "~/assets/temp1.jpg";
 
 const transformationItems = [
   { title: "Rotate left", icon: rotateLeftIcon },
