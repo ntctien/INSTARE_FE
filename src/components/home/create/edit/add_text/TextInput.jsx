@@ -32,7 +32,7 @@ const TextInput = ({ handleDeleteText, index }) => {
             value={value}
             onChange={handleChange}
             autoFocus
-            className="text-input"
+            className="bg-transparent w-[2ch] h-[2ch] outline-none font-ubuntu font-bold text-20 text-white text-center resize-none overflow-hidden align-middle"
           />
         </div>
         {/* Delete button */}

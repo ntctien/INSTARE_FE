@@ -40,7 +40,7 @@ const AddText = ({ setCurrFeature, fileList, currentSlide }) => {
     <EditContainer onBack={() => setCurrFeature("edit")}>
       <div className="pt-[13px] w-[600px] relative">
         {/* Media */}
-        <div ref={imageContainerRef} className="h-[58vh] w-fit max-w-[40vw] mx-auto relative overflow-hidden">
+        <div ref={imageContainerRef} className="h-[58vh] w-fit max-w-[40vw] mx-auto relative">
           <img
             src={fileList[currentSlide].url}
             draggable={false}
