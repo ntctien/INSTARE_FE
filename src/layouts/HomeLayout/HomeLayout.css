@@ -192,10 +192,6 @@ textarea:where(.css-dev-only-do-not-override-ph9edi).ant-input.chat-input {
   background: #D9D9D9;
 }
 
-.text-input {
-  @apply bg-transparent w-[2ch] h-[2ch] outline-none font-ubuntu font-bold text-20 text-white text-center resize-none align-middle break-words;
-}
-
 .adjustment-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 20px;
