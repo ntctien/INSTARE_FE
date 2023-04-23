@@ -16,7 +16,7 @@ const FontPicker = () => {
         <div className="bg-grey rounded-5 w-[250px] h-[270px] absolute -top-[253px] -left-[52px] flex flex-col px-[5px]">
           <table className="h-full">
             {fonts.map((font, i) => (
-              <tr style={{fontFamily:font}} className="hover:bg-[#0000000D] cursor-pointer">
+              <tr key={i} style={{fontFamily:font}} className="hover:bg-[#0000000D] cursor-pointer">
                 <td className="text-[30px] p-0 pl-[15px]">Aa</td>
                 <td className="text-[20px] p-0">{font}</td>
               </tr>
