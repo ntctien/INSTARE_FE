@@ -2,29 +2,53 @@ import { useRef, useState } from "react";
 import Draggable from "react-draggable";
 import { deleteIcon, doneIcon } from "~/assets/add_text_icons";
 
-const TextInput = ({ handleDeleteText, index }) => {
+const TextInput = ({ handleDeleteText, index, imageContainerRef }) => {
   const inputRef = useRef(null);
+  const inputContainerRef = useRef(null);
   const [value, setValue] = useState("\u200B");
 
   const getInputWidth = (value) =>
     Math.max(...value.split("\n").map((element) => element.length));
 
+  const exceedImageWidth = (imageContainer, inputContainer) => {
+    if (!imageContainer || !inputContainer) return false;
+
+    if (imageContainer.offsetWidth - inputContainer.offsetWidth > 16)
+      return false;
+    return true;
+  };
+
+  const exceedImageHeight = (imageContainer, inputContainer) => {
+    if (!imageContainer || !inputContainer) return false;
+
+    if (imageContainer.offsetHeight - inputContainer.scrollHeight > 16)
+      return false;
+    return true;
+  };
+
   const handleChange = (e) => {
     const input = inputRef.current;
+    const imageContainer = imageContainerRef.current;
+    const inputContainer = inputContainerRef.current;
     if (!input) return;
+    console.log(input.scrollHeight);
 
     let value = e.target.value;
-    const lines = value.split(/[\r\n]/gm).length;
     if (!value) value = "\u200B";
     setValue(value);
 
-    input.style.width = getInputWidth(value) + 1 + "ch";
-    input.style.height = lines * 23 + "px";
+    if (!exceedImageWidth(imageContainer, inputContainer))
+      input.style.width = getInputWidth(value) + 1 + "ch";
+    if (!exceedImageHeight(imageContainer, inputContainer))
+      input.style.height = input.scrollHeight + "px";
   };
 
   return (
     <Draggable bounds="parent">
-      <div className="absolute top-1/2 left-1/2 select-none">
+      <div
+        ref={inputContainerRef}
+        className="absolute top-1/2 left-1/2 select-none"
+      >
         {/* Input */}
         <div className="outline outline-1 outline-[#3D93DE] cursor-move px-[8px] py-[3px]">
           <textarea
