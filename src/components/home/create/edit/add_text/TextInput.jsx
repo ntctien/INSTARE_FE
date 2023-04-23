@@ -31,7 +31,6 @@ const TextInput = ({ handleDeleteText, index, imageContainerRef }) => {
     const imageContainer = imageContainerRef.current;
     const inputContainer = inputContainerRef.current;
     if (!input) return;
-    console.log(input.scrollHeight);
 
     let value = e.target.value;
     if (!value) value = "\u200B";
