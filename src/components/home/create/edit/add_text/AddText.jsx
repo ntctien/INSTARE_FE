@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import EditContainer from "../EditContainer";
 import TextInput from "./TextInput";
+import FontPicker from "./FontPicker";
 import {
   addIcon,
   fontIcon,
@@ -8,16 +9,22 @@ import {
   colorIcon,
 } from "~/assets/add_text_icons";
 
-const editOptions = [
-  { title: "Font", icon: fontIcon },
-  { title: "Size", icon: sizeIcon },
-  { title: "Color", icon: colorIcon },
-];
-
 const AddText = ({ setCurrFeature, fileList, currentSlide }) => {
   const imageContainerRef = useRef(null);
   const [textInputs, setTextInputs] = useState([]);
   const [editMode, setEditMode] = useState(false);
+  const [currPicker, setCurrPicker] = useState(null);
+
+  const editOptions = [
+    {
+      id: "font",
+      title: "Font",
+      icon: fontIcon,
+      picker: <FontPicker />,
+    },
+    { id: "size", title: "Size", icon: sizeIcon },
+    { id: "color", title: "Color", icon: colorIcon },
+  ];
 
   const handleAddText = () => {
     setTextInputs([
@@ -41,7 +48,10 @@ const AddText = ({ setCurrFeature, fileList, currentSlide }) => {
     <EditContainer onBack={() => setCurrFeature("edit")}>
       <div className="pt-[13px] w-[600px] relative">
         {/* Media */}
-        <div ref={imageContainerRef} className="h-[58vh] w-fit max-w-[40vw] mx-auto relative overflow-clip">
+        <div
+          ref={imageContainerRef}
+          className="h-[58vh] w-fit max-w-[40vw] mx-auto relative overflow-clip"
+        >
           <img
             src={fileList[currentSlide].url}
             draggable={false}
@@ -55,10 +65,19 @@ const AddText = ({ setCurrFeature, fileList, currentSlide }) => {
           {editMode ? (
             <div className="row gap-x-[60px] font-ubuntu">
               {editOptions.map((option, i) => (
-                <button key={i} className="flex flex-col items-center hover:bg-[rgba(0,0,0,0.05)] p-[10px] rounded-10">
-                  <img src={option.icon} alt="Edit text" />
-                  <h3 className="text-20 mt-1">{option.title}</h3>
-                </button>
+                <div
+                  onClick={() => setCurrPicker(option.id)}
+                  className="relative"
+                >
+                  <button
+                    key={i}
+                    className="flex flex-col items-center hover:bg-[rgba(0,0,0,0.05)] p-[10px] rounded-10"
+                  >
+                    <img src={option.icon} alt="Edit text" />
+                    <h3 className="text-20 mt-1">{option.title}</h3>
+                  </button>
+                  {currPicker === option.id && option.picker}
+                </div>
               ))}
             </div>
           ) : (
