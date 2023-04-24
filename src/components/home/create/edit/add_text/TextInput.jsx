@@ -2,7 +2,13 @@ import { useRef, useState } from "react";
 import Draggable from "react-draggable";
 import { deleteIcon, doneIcon } from "~/assets/add_text_icons";
 
-const TextInput = ({ handleDeleteText, index, imageContainerRef }) => {
+const TextInput = ({
+  handleDeleteText,
+  index,
+  imageContainerRef,
+  font,
+  size,
+}) => {
   const inputRef = useRef(null);
   const inputContainerRef = useRef(null);
   const [value, setValue] = useState("\u200B");
@@ -55,7 +61,11 @@ const TextInput = ({ handleDeleteText, index, imageContainerRef }) => {
             value={value}
             onChange={handleChange}
             autoFocus
-            className="bg-transparent w-[2ch] h-[2ch] outline-none font-ubuntu font-bold text-20 text-white text-center resize-none overflow-hidden align-middle"
+            style={{
+              fontFamily: font,
+              fontSize: size+'px',
+            }}
+            className="bg-transparent w-[2ch] h-[2ch] outline-none font-bold text-white text-center resize-none overflow-hidden align-middle"
           />
         </div>
         {/* Delete button */}

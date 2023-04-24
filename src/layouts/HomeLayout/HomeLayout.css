@@ -183,7 +183,7 @@ textarea:where(.css-dev-only-do-not-override-ph9edi).ant-input.chat-input {
 }
 
 /* Input */
-.adjustment-slider {
+.adjustment-range {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
@@ -192,13 +192,35 @@ textarea:where(.css-dev-only-do-not-override-ph9edi).ant-input.chat-input {
   background: #D9D9D9;
 }
 
-.adjustment-slider::-webkit-slider-thumb {
+.adjustment-range::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 20px;
   height: 20px;
   border-radius: 50%;
   background: #96CAF7;
   cursor: pointer;
+}
+
+.size-range {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  outline: none;
+  @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full;
+}
+
+.size-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+}
+
+/* Picker */
+.picker-wrapper {
+  @apply absolute -top-10 left-5
 }
 
 /* Antd */

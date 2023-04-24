@@ -150,7 +150,7 @@ const Adjustment = ({
                   style={{
                     backgroundImage: getSliderStyle(adjustments[item.name]),
                   }}
-                  className="adjustment-slider"
+                  className="adjustment-range"
                 />
                 <p className="text-16">{adjustments[item.name]}</p>
               </div>
