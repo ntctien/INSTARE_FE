@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import domtoimage from "dom-to-image";
 import EditContainer from "../EditContainer";
 import TextInput from "./TextInput";
 import FontPicker from "./FontPicker";
@@ -11,8 +12,10 @@ import {
 import SizePicker from "./SizePicker";
 import ColorPicker from "./ColorPicker";
 
-const AddText = ({ setCurrFeature, fileList, currentSlide }) => {
+const AddText = ({ setCurrFeature, fileList, currentSlide, setFileList }) => {
   const imageContainerRef = useRef(null);
+  const imageRef = useRef(null);
+  const tempRef = useRef(null);
   const [textInputs, setTextInputs] = useState([]);
   const [currPicker, setCurrPicker] = useState(null);
   const [currText, setCurrText] = useState(null);
@@ -79,18 +82,36 @@ const AddText = ({ setCurrFeature, fileList, currentSlide }) => {
     setCurrText(null);
   };
 
+  const handleDone = () => {
+    const media = imageContainerRef.current;
+    if (!media) return;
+    domtoimage
+      .toJpeg(media)
+      .then((url) => {
+        let temp = fileList;
+        temp[currentSlide].url = url;
+        setFileList(temp);
+        setCurrFeature("edit");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   return (
-    <EditContainer onBack={() => setCurrFeature("edit")}>
+    <EditContainer onBack={() => setCurrFeature("edit")} onDone={handleDone}>
       <div
+        ref={tempRef}
         onClick={() => setCurrPicker(null)}
-        className="pt-[13px] w-[600px] relative"
+        className="pt-[13px] w-[600px] relative flex flex-col items-center"
       >
         {/* Media */}
         <div
           ref={imageContainerRef}
-          className="h-[58vh] w-fit max-w-[40vw] mx-auto relative overflow-clip"
+          className="h-[58vh] w-fit max-w-[40vw]  relative overflow-clip"
         >
           <img
+            ref={imageRef}
             src={fileList[currentSlide].url}
             draggable={false}
             alt="Edit"
@@ -102,6 +123,8 @@ const AddText = ({ setCurrFeature, fileList, currentSlide }) => {
               index={i}
               handleDeleteText={handleDeleteText}
               imageContainerRef={imageContainerRef}
+              currText={currText}
+              setCurrText={setCurrText}
               {...textInput}
             />
           ))}
