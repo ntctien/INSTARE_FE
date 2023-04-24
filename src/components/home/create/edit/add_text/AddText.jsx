@@ -9,6 +9,7 @@ import {
   colorIcon,
 } from "~/assets/add_text_icons";
 import SizePicker from "./SizePicker";
+import ColorPicker from "./ColorPicker";
 
 const AddText = ({ setCurrFeature, fileList, currentSlide }) => {
   const imageContainerRef = useRef(null);
@@ -17,15 +18,9 @@ const AddText = ({ setCurrFeature, fileList, currentSlide }) => {
   const [currText, setCurrText] = useState(null);
 
   useEffect(() => {
-    if (currPicker === "font") setCurrPicker(null);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (currPicker === "font" || currPicker === "color") setCurrPicker(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [textInputs]);
-
-  const handleChangeFont = (e) => {
-    let tempArray = [...textInputs];
-    tempArray[currText].font = e.target.innerText;
-    setTextInputs([...tempArray]);
-  };
 
   const editOptions = [
     {
@@ -34,8 +29,10 @@ const AddText = ({ setCurrFeature, fileList, currentSlide }) => {
       icon: fontIcon,
       picker: (
         <FontPicker
-          handleChangeFont={handleChangeFont}
-          setCurrPicker={setCurrPicker}
+          font={textInputs[currText]?.font}
+          setTextInputs={setTextInputs}
+          textInputs={textInputs}
+          currText={currText}
         />
       ),
     },
@@ -52,7 +49,19 @@ const AddText = ({ setCurrFeature, fileList, currentSlide }) => {
         />
       ),
     },
-    { id: "color", title: "Color", icon: colorIcon },
+    {
+      id: "color",
+      title: "Color",
+      icon: colorIcon,
+      picker: (
+        <ColorPicker
+          color={textInputs[currText]?.color}
+          setTextInputs={setTextInputs}
+          textInputs={textInputs}
+          currText={currText}
+        />
+      ),
+    },
   ];
 
   const handleAddText = () => {

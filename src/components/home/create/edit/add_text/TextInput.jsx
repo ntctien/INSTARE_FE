@@ -8,6 +8,7 @@ const TextInput = ({
   imageContainerRef,
   font,
   size,
+  color
 }) => {
   const inputRef = useRef(null);
   const inputContainerRef = useRef(null);
@@ -64,6 +65,7 @@ const TextInput = ({
             style={{
               fontFamily: font,
               fontSize: size+'px',
+              color:color
             }}
             className="bg-transparent w-[2ch] h-[2ch] outline-none font-bold text-white text-center resize-none overflow-hidden align-middle"
           />

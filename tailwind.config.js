@@ -7,12 +7,13 @@ module.exports = {
         'input-label': '#676767',
         'grey': '#D9D9D9',
         'grey-dark': '#777777',
+        'blue': '#96CAF7',
         'pastel-blue': '#96CAF726',
         'pastel-purple': '#BFB2F326',
         'pastel-purple-dark': '#BFB2F3',
-        'modal-bg':'#F0F6FD',
-        'black15':'rgba(0, 0, 0, 0.15)',
-        'black50':'rgba(0, 0, 0, 0.5)'
+        'modal-bg': '#F0F6FD',
+        'black15': 'rgba(0, 0, 0, 0.15)',
+        'black50': 'rgba(0, 0, 0, 0.5)'
       },
       borderRadius: {
         5: '5px',

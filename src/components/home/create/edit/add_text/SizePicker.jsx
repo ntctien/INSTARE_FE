@@ -9,7 +9,7 @@ const SizePicker = ({ size, setTextInputs, textInputs, currText }) => {
   return (
     <div className="picker-wrapper">
       <img src={polygonIcon} alt="Index" />
-      <div className="bg-grey rounded-5 px-[20px] py-[15px] absolute -top-[33px] -left-[124px]">
+      <div className="picker-container -top-[33px] -left-[124px] py-[15px] px-[20px]">
         <div className="relative">
           <svg
             width="225"
