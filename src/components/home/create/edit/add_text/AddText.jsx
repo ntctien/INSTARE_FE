@@ -83,6 +83,7 @@ const AddText = ({ setCurrFeature, fileList, currentSlide, setFileList }) => {
   };
 
   const handleDone = () => {
+    setCurrText(null);
     const media = imageContainerRef.current;
     if (!media) return;
     domtoimage
