@@ -21,6 +21,7 @@ const menuItems = [
         name: "Home",
         icon: homeIcon,
         selectedIcon: homeSelectedIcon,
+        link: '/'
     },
     {
         id: 'search',

@@ -1,6 +1,9 @@
+import { Link } from "react-router-dom";
+
 const AppMenuItem = ({ item, menuItemId, setMenuItemId }) => {
   return (
-    <div
+    <Link
+    to={item.link}
       onClick={() =>
         setMenuItemId({ current: item.id, previous: menuItemId.current })
       }
@@ -17,7 +20,7 @@ const AppMenuItem = ({ item, menuItemId, setMenuItemId }) => {
       >
         {item.name}
       </h5>
-    </div>
+    </Link>
   );
 };
 

@@ -30,7 +30,9 @@ module.exports = {
         '10': ['10px', '12px'],
         '13': ['13px', '16px'],
         '14': ['14px', '17px'],
+        '15': ['15px', '18px'],
         '16': ['16px', '18px'],
+        '18': ['18px', '21px'],
         '20': ['20px', '23px'],
         '24': ['24px', '28px'],
         '32': ['32px', '37px'],
@@ -38,6 +40,9 @@ module.exports = {
       fontFamily: {
         'ubuntu': 'Ubuntu'
       },
+      spacing:{
+        '30':'30px'
+      }
     },
   },
   plugins: [],

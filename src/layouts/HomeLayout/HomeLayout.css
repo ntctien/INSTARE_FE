@@ -227,6 +227,15 @@ textarea:where(.css-dev-only-do-not-override-ph9edi).ant-input.chat-input {
   @apply bg-[#D9D9D9BF] rounded-5 absolute
 }
 
+/* Profile */
+.profile-numbers {
+  @apply flex items-center gap-x-30 font-ubuntu text-16
+}
+
+.profile-numbers span {
+  @apply font-medium
+}
+
 /* Antd */
 
 .ant-input:hover {
