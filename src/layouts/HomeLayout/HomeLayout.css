@@ -1,3 +1,21 @@
+/* Buttons */
+.edit-profile-btn {
+  @apply w-[210px] h-[45px] rounded-10 font-ubuntu font-medium text-18
+}
+
+/* Inputs */
+.edit-profile-input input,.edit-profile-input textarea{
+  @apply w-full rounded-10 border-2 border-grey bg-white px-6 py-4 focus:outline-none text-16 mt-2
+}
+
+.edit-profile-input h3 {
+  @apply mt-[15px] font-ubuntu text-16
+}
+
+.edit-profile-input p {
+  @apply font-ubuntu text-13 text-grey-dark
+}
+
 /* Contact */
 
 .contact-item-read {
@@ -141,19 +159,6 @@
 textarea:where(.css-dev-only-do-not-override-ph9edi).ant-input.chat-input {
   min-height: 30px;
   max-height: 90px;
-}
-
-/* Button */
-
-.post-btn {
-  width: 100%;
-  height: 50px;
-  background: linear-gradient(91.17deg, #96caf7 0%, #bfb2f3 100%);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
-  border-radius: 10px;
-  padding: 11px;
-  margin-top: 10px;
-  @apply font-ubuntu font-bold text-24 text-white;
 }
 
 /* Edit */

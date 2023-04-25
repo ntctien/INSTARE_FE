@@ -1,5 +1,7 @@
-import multipleIcon from '~/assets/multiple.svg';
-import videoIcon from '~/assets/video.svg';
+import { useState } from "react";
+import EditProfileModal from "~/components/profile/EditProfileModal";
+import multipleIcon from "~/assets/multiple.svg";
+import videoIcon from "~/assets/video.svg";
 import tempImg from "~/assets/temp3.png";
 
 const data = [
@@ -66,6 +68,8 @@ const data = [
 ];
 
 const Profile = () => {
+  const [modal, setModal] = useState(null);
+
   return (
     <div className="pt-[50px] pb-[55px] px-[60px]">
       {/* User profile */}
@@ -81,7 +85,10 @@ const Profile = () => {
               </h1>
               <h2 className="text-16 mt-2">@username</h2>
             </div>
-            <button className="p-[12px] border-1 border-black rounded-10 font-medium text-18">
+            <button
+              onClick={() => setModal("edit")}
+              className="p-[12px] border-1 border-black rounded-10 font-medium text-18"
+            >
               Edit profile
             </button>
           </div>
@@ -114,11 +121,25 @@ const Profile = () => {
               alt="Post thumbnail"
               className="rounded-5 w-full h-full object-cover object-center bg-grey"
             />
-            {item.multiple && <img src={multipleIcon} alt='Multiple' className='absolute top-[10px] right-[10px]'/>}
-            {item.video && <img src={videoIcon} alt='Video' className='absolute top-[10px] right-[10px]'/>}
+            {item.multiple && (
+              <img
+                src={multipleIcon}
+                alt="Multiple"
+                className="absolute top-[10px] right-[10px]"
+              />
+            )}
+            {item.video && (
+              <img
+                src={videoIcon}
+                alt="Video"
+                className="absolute top-[10px] right-[10px]"
+              />
+            )}
           </div>
         ))}
       </div>
+      {/* Edit profile modal */}
+      <EditProfileModal open={modal==='edit'} onCancel={()=>setModal(null)}/>
     </div>
   );
 };

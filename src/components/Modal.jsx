@@ -5,7 +5,7 @@ const Modal = ({ children, open, onCancel, title }) => {
     return (
       <>
         <div
-          className="w-screen h-screen bg-black50 absolute"
+          className="w-screen h-screen bg-black50 absolute top-0 left-0"
           onClick={onCancel}
         ></div>
         <div className="bg-modal-bg absolute-center z-10 rounded-15 overflow-hidden">
