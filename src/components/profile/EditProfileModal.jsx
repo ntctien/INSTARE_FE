@@ -1,5 +1,5 @@
 import React from "react";
-import CloseModal from "../CloseModal";
+import CloseModal from "../modal/CloseModal";
 import CountingTextArea from "../CountingTextArea";
 
 const EditProfileModal = ({ open, onCancel }) => {

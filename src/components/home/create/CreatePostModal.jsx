@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Modal from "../../Modal";
+import Modal from "../../modal/Modal";
 import { createFeatures } from "../../../constants/createFeatures";
 
 const CreatePostModal = ({ setMenuItemId, menuItemId }) => {
