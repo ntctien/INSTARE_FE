@@ -5,35 +5,15 @@ import Avatar from "../Avatar";
 import arrowIcon from "../../../assets/arrow-back.svg";
 import ChatBox from "./ChatBox";
 
-const contacts = [
+let contacts = [
   {
     name: "Phạm Thị Thu Trang",
   },
-  {
-    name: "Nguyễn Trần Cẩm Tiên",
-  },
-  {
-    name: "Nguyễn Trần Cẩm Tiên",
-  },
-  {
-    name: "Nguyễn Trần Cẩm Tiên",
-  },
-  {
-    name: "Nguyễn Trần Cẩm Tiên",
-  },
-  {
-    name: "Nguyễn Trần Cẩm Tiên",
-  },
-  {
-    name: "Nguyễn Trần Cẩm Tiên",
-  },
-  {
-    name: "Nguyễn Trần Cẩm Tiên",
-  },
-  {
-    name: "Nguyễn Trần Cẩm Tiên",
-  },
 ];
+
+for (let i = 0; i <= 10; i++) {
+  contacts = [...contacts,{name:'Nguyễn Trần Cẩm Tiên'}]
+}
 
 const Contacts = () => {
   const [currChat, setCurrChat] = useState(null);
@@ -68,7 +48,7 @@ const Contacts = () => {
       ) : (
         <div className="overflow-y-auto flex-1 pt-[8px]">
           {contacts.map((c, i) => (
-            <ContactItem key={i} name={c.name} setCurrChat={setCurrChat} />
+            <ContactItem key={i} name={c.name} setCurrChat={setCurrChat} maxWidth={175}/>
           ))}
         </div>
       )}

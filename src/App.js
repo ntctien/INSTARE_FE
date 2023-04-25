@@ -7,6 +7,8 @@ import SignUp from "./pages/SignUp";
 import Test from "./pages/Test";
 import Profile from "./pages/Profile";
 import Post from "./pages/Post";
+import MenuLayout from "./layouts/MenuLayout";
+import Message from "./pages/Message";
 
 function App() {
   return (
@@ -15,9 +17,12 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
       </Route>
-      <Route element={<HomeLayout />} path='/' >
-        <Route element={<Home />} path='' />
-        <Route element={<Profile />} path="username" />
+      <Route element={<MenuLayout />}>
+        <Route element={<HomeLayout />} path='/' >
+          <Route element={<Home />} path='' />
+          <Route element={<Profile />} path="username" />
+        </Route>
+        <Route element={<Message />} path="message" />
       </Route>
       <Route element={<Post />} path="post" />
       <Route element={<Test />} path="test" />

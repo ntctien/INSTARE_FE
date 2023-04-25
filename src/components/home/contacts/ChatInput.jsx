@@ -5,7 +5,7 @@ const { TextArea } = Input;
 
 const ChatInput = () => {
   return (
-    <div className="row gap-x-[5px] px-[8px] py-[10px] min-h-[50px] bg-[#D9D9D926] border-t-1 border-[#00000026]">
+    <div className="row gap-x-[1.8%] px-[8px] py-[10px] min-h-[50px] bg-[#D9D9D926] border-t-1 border-[#00000026]">
       <button className="w-[20px] h-[20px] bg-pastel-purple-dark rounded-full flex items-center justify-center">
         <img src={plusIcon} alt="Plus" />
       </button>

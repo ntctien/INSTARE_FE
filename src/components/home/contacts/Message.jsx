@@ -10,7 +10,7 @@ const Message = ({ fromSelf, content }) => {
       {/* Message content */}
       <div
         className={`px-[10px] py-[7px] rounded-lg border-1 border-pastel-purple-dark text-13 ${
-          fromSelf ? "bg-pastel-purple-dark" : 'max-w-[72.5%]'
+          fromSelf ? "bg-pastel-purple-dark text-white" : 'max-w-[72.5%] text-black'
         }`}
       >
         {content}

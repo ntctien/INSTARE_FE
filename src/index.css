@@ -17,6 +17,10 @@ body {
   @apply flex items-center;
 }
 
+.between-row {
+  @apply flex items-center justify-between;
+}
+
 .col-center {
   @apply flex flex-col justify-center;
 }
@@ -67,10 +71,10 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: rgba(0,0,0,0.25);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: rgba(0,0,0,0.3);
 }

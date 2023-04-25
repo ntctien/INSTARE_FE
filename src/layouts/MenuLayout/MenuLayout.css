@@ -1,0 +1,21 @@
+/* User option */
+.user-option-default {
+    @apply text-center font-ubuntu font-medium text-15 w-[150px];
+}
+
+.user-option-danger {
+    @apply text-center font-ubuntu text-red text-15 w-[150px];
+}
+
+/* Antd */
+.ant-dropdown .ant-dropdown-menu {
+    @apply p-0
+}
+
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item {
+    @apply px-0 py-[11px]
+}
+
+.ant-dropdown .ant-dropdown-menu .ant-dropdown-menu-item-divider {
+    @apply m-0
+}

@@ -40,6 +40,7 @@ const menuItems = [
         name: "Messages",
         icon: messagesIcon,
         selectedIcon: messagesSelectedIcon,
+        link: '/message'
     },
     {
         id: 'create',
