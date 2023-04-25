@@ -33,6 +33,10 @@ body {
   @apply aspect-square bg-grey rounded-full;
 }
 
+.default-divider {
+  @apply m-0 border-black15;
+}
+
 /* Buttons */
 .primary-btn {
   width: 100%;
@@ -42,6 +46,11 @@ body {
   border-radius: 10px;
   padding: 11px;
   @apply font-ubuntu font-bold text-24 text-white;
+}
+
+/* Hover */
+.hover-default {
+  @apply hover:bg-hover hover:rounded-full;
 }
 
 /* Antd */

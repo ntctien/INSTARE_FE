@@ -1,10 +1,10 @@
-import Post from "./Post";
+import PostItem from "./PostItem";
 
 const PostFeed = () => {
   return (
     <div className="mt-[33px] flex flex-col gap-y-[15px]">
-      <Post />
-      <Post />
+      <PostItem />
+      <PostItem />
     </div>
   );
 };

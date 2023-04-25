@@ -6,6 +6,7 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Test from "./pages/Test";
 import Profile from "./pages/Profile";
+import Post from "./pages/Post";
 
 function App() {
   return (
@@ -15,10 +16,11 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
       </Route>
       <Route element={<HomeLayout />} path='/' >
-        <Route element={<Home/>} path=''/>
-        <Route element={<Profile/>} path="username"/>
+        <Route element={<Home />} path='' />
+        <Route element={<Profile />} path="username" />
       </Route>
-      <Route element={<Test/>} path="/test"/>
+      <Route element={<Post />} path="post" />
+      <Route element={<Test />} path="test" />
     </Routes>
   );
 }

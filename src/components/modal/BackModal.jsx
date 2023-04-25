@@ -13,7 +13,7 @@ const BackModal = ({ children, open, onCancel, title, onBack, onDone }) => {
         Done
       </button>
       {/* Back button */}
-      <button onClick={onBack} className="absolute top-[12.5px] left-[16.5px]">
+      <button onClick={onBack} className="absolute top-[6px] left-[10px]">
         <img src={backIcon} alt="Back" />
       </button>
     </Modal>

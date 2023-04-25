@@ -1,8 +1,7 @@
 import { useState } from "react";
 import EditProfileModal from "~/components/profile/EditProfileModal";
-import multipleIcon from "~/assets/multiple.svg";
-import videoIcon from "~/assets/video.svg";
 import tempImg from "~/assets/temp3.png";
+import PostThumbnail from "~/components/profile/PostThumbnail";
 
 const data = [
   {
@@ -115,31 +114,14 @@ const Profile = () => {
       {/* Posts */}
       <div className="grid grid-cols-3 gap-[0.66%] mt-[60px]">
         {data.map((item, i) => (
-          <div key={i} className="aspect-square relative cursor-pointer">
-            <img
-              src={item.src}
-              alt="Post thumbnail"
-              className="rounded-5 w-full h-full object-cover object-center bg-grey"
-            />
-            {item.multiple && (
-              <img
-                src={multipleIcon}
-                alt="Multiple"
-                className="absolute top-[10px] right-[10px]"
-              />
-            )}
-            {item.video && (
-              <img
-                src={videoIcon}
-                alt="Video"
-                className="absolute top-[10px] right-[10px]"
-              />
-            )}
-          </div>
+          <PostThumbnail key={i} item={item} />
         ))}
       </div>
       {/* Edit profile modal */}
-      <EditProfileModal open={modal==='edit'} onCancel={()=>setModal(null)}/>
+      <EditProfileModal
+        open={modal === "edit"}
+        onCancel={() => setModal(null)}
+      />
     </div>
   );
 };

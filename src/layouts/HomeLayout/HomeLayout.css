@@ -121,7 +121,7 @@
 }
 
 .post .media-slider {
-  width: 800px;
+  width: 100%;
 }
 
 .post .media-container img,
@@ -130,7 +130,7 @@
 }
 
 .create-post .media-slider {
-  height: 46vh;
+  height: 100%;
   border-radius: 10px;
 }
 
@@ -142,6 +142,11 @@
 .create-post .media-container img,
 .create-post .media-container video {
   height: 46vh;
+}
+
+.post-detail .media-container img,
+.post-detail .media-container video {
+  height: 100vh;
 }
 
 /* Divider */

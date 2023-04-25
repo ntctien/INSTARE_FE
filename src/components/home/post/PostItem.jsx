@@ -1,14 +1,10 @@
 import { useState } from "react";
 import { Divider } from "antd";
-import Avatar from "../Avatar";
 import MediaSlider from "../media_slider/MediaSlider";
-import {
-  likeIcon,
-  commentIcon,
-  shareIcon,
-  otherOptionsIcon,
-} from "../../../assets/post_icons";
 import tempImg1 from "../../../assets/temp1.jpg";
+import PostInfo from "~/components/PostInfo";
+import InteractBar from "~/components/InteractBar";
+import CommentInput from "~/components/CommentInput";
 
 const mediaList = [
   { url: tempImg1, type: "image" },
@@ -17,43 +13,21 @@ const mediaList = [
   { url: tempImg1, type: "image" },
 ];
 
-const Post = () => {
+const PostItem = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   return (
     <div className="w-[800px] bg-[#D9D9D926] rounded-10 pb-[9px] post">
       {/* User */}
-      <div className="row justify-between p-[20px]">
-        <div className="row">
-          <Avatar />
-          <h5 className="font-semibold text-14 ml-[18px]">_ptt.chang</h5>
-          <p className="mx-[3px] mb-[3px] post-time">.</p>
-          <p className="post-time">11:59</p>
-        </div>
-        <button>
-          <img src={otherOptionsIcon} alt="Other options" />
-        </button>
-      </div>
+      <PostInfo username={"_ptt.chang"} time={"11:59"} className={"p-[20px]"} />
       {/* Image or video */}
       <MediaSlider
         mediaList={mediaList}
         currentSlide={currentSlide}
         setCurrentSlide={setCurrentSlide}
+        dots
       />
       <div className="px-[20px] mt-[10px]">
-        {/* Interact */}
-        <div className="row gap-x-[20px]">
-          <button>
-            <img src={likeIcon} alt="Like" />
-          </button>
-          <button>
-            <img src={commentIcon} alt="Comment" />
-          </button>
-          <button>
-            <img src={shareIcon} alt="Share" />
-          </button>
-        </div>
-        {/* Like count */}
-        <p className="font-semibold text-14 mt-[10px]">2 likes</p>
+        <InteractBar likeCount={2}/>
         {/* Content */}
         <p className="mt-[7px] text-14">
           <span className="font-semibold">_ptt.chang</span>
@@ -65,17 +39,10 @@ const Post = () => {
           View all comments
         </button>
         <Divider className="border-black15 mt-[10px] mb-[6px]" />
-        <div className="row gap-x-[13px]">
-          <div className="w-[30px] h-[30px] bg-grey rounded-full"></div>
-          <input
-            placeholder="Add a comment..."
-            className="w-full bg-transparent hover:border-none focus:outline-none flex-1 text-14 placeholder:text-black50"
-          />
-          <button className="font-bold text-14 text-[#96CAF7]">Post</button>
-        </div>
+        <CommentInput/>
       </div>
     </div>
   );
 };
 
-export default Post;
+export default PostItem;

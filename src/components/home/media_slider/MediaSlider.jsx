@@ -12,6 +12,7 @@ const MediaSlider = ({
   setCurrFeature,
   currentSlide,
   setCurrentSlide,
+  dots
 }) => {
   const slider = useRef(null);
 
@@ -31,8 +32,8 @@ const MediaSlider = ({
       containerClassName="media-slider-container"
     >
       <Slider
-        className="bg-[#D9D9D933] aspect-[4/3] media-slider"
-        dots
+        className="bg-[#D9D9D933] media-slider"
+        dots={dots}
         arrows={false}
         ref={slider}
         beforeChange={(current, next) => setCurrentSlide(next)}

@@ -37,6 +37,7 @@ const CreateNewPost = ({
             setCurrFeature={setCurrFeature}
             currentSlide={currentSlide}
             setCurrentSlide={setCurrentSlide}
+            dots
           />
         )}
         {/* User info */}

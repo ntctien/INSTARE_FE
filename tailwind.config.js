@@ -13,8 +13,9 @@ module.exports = {
         'pastel-purple-dark': '#BFB2F3',
         'red': '#F24E1E',
         'modal-bg': '#F0F6FD',
+        'hover': 'rgba(0,0,0,0.05)',
         'black15': 'rgba(0, 0, 0, 0.15)',
-        'black50': 'rgba(0, 0, 0, 0.5)'
+        'black50': 'rgba(0, 0, 0, 0.5)',
       },
       borderRadius: {
         5: '5px',
@@ -42,6 +43,7 @@ module.exports = {
         'ubuntu': 'Ubuntu'
       },
       spacing: {
+        '15': '15px',
         '30': '30px'
       }
     },
