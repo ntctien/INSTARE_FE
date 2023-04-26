@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 const AppMenuItem = ({ item, menuItemId, setMenuItemId }) => {
   return (
     <Link
-    to={item.link}
+      to={item.link}
       onClick={() =>
+        setMenuItemId &&
         setMenuItemId({ current: item.id, previous: menuItemId.current })
       }
       className="row gap-x-[26px] py-[15px] pl-[16px] rounded-full cursor-pointer hover:bg-[#96caf728]"

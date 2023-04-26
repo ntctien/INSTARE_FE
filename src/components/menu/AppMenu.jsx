@@ -1,6 +1,7 @@
 import Logo from "../Logo";
-import { menuItems, moreItem } from "../../constants/menuItems";
+import { menuItems } from "../../constants/menuItems";
 import AppMenuItem from "./AppMenuItem";
+import MoreItem from "./MoreItem";
 
 const AppMenu = ({ menuItemId, setMenuItemId }) => {
   return (
@@ -16,7 +17,7 @@ const AppMenu = ({ menuItemId, setMenuItemId }) => {
           />
         ))}
       </div>
-      <AppMenuItem item={moreItem} />
+      <MoreItem/>
     </div>
   );
 };

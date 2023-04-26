@@ -5,10 +5,10 @@ const ModalWrapper = ({ children, open, onCancel }) => {
     return (
       <>
         <div
-          className="w-screen h-screen bg-black50 absolute top-0 left-0"
+          className="w-screen h-screen bg-black50 absolute top-0 left-0 z-10"
           onClick={onCancel}
         ></div>
-        <div className="absolute-center z-10">{children}</div>
+        <div className="absolute-center z-20">{children}</div>
       </>
     );
 };
