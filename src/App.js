@@ -9,6 +9,7 @@ import Profile from "./pages/Profile";
 import Post from "./pages/Post";
 import MenuLayout from "./layouts/MenuLayout";
 import Message from "./pages/Message";
+import ResetPassword from "./pages/ResetPassword";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route element={<AuthLayout />}>
         <Route path="/signin" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path='/reset-password' element={<ResetPassword />} />
       </Route>
       <Route element={<MenuLayout />}>
         <Route element={<HomeLayout />} path='/' >
