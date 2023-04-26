@@ -29,21 +29,20 @@ const AuthWelcomeBoard = ({
       <div className="aspect-[5/7] h-[80%] rounded-15 relative">
         <img src={maskImg} alt="Mask" className="rounded-15 object-cover" />
         <div className="absolute top-0 px-[48px] pt-[63px] h-full">
-          <Logo textColor={'white'}/>
-          <p className="mt-[17px] font-bold text-4xl text-white opacity-90">
+          <Logo shadow textColor={'white'}/>
+          <p className="mt-[17px] font-bold text-4xl md:text-3xl text-white opacity-90">
             Share your passion with us!
           </p>
           <Divider className="w-[100px] min-w-[100px] mt-[9px] mb-0 border-[#D9D9D9]" />
-          <h2 className="font-bold text-32 text-white mt-[52px]">{title}</h2>
-          <p className="text-[18px] tracking-wider text-white mt-[8px]">
+          <h2 className="font-bold text-32 md:text-[24px] text-white mt-[52px]">{title}</h2>
+          <p className="text-[18px] md:text-[14px] tracking-wider text-white mt-[8px]">
             {subtitle}
           </p>
           <div className="bottom-[75px] absolute row gap-x-[12px]">
-            <p className="text-[18px] text-white">{btnTitle}</p>
+            <p className="text-[18px] md:text-[14px] text-white">{btnTitle}</p>
             <button
               onClick={handleOnClick}
-              style={{ width: btnWidth + "px" }}
-              className={`bg-[#FFFFFF1A] border-2 border-[#FFFFFFB2] rounded-5 font-bold text-[18px] text-white h-[30px] p-0 flex items-center justify-center`}
+              className={`bg-[#FFFFFF1A] border-2 border-[#FFFFFFB2] rounded-5 font-bold text-[18px] md:text-[14px] text-white h-[30px] px-[12px] flex items-center justify-center`}
             >
               {btnLabel}
             </button>

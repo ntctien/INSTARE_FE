@@ -6,7 +6,7 @@ const SignUp = () => {
   return (
     <>
       {/* Left Side */}
-      <div className="pl-[69px] pr-[111px] col-center">
+      <div className="pl-[10.8%] pr-[17%] col-center">
         <h1 className="auth-title">Create an account</h1>
         <AuthInput
           label="Email"
@@ -26,7 +26,7 @@ const SignUp = () => {
             password
           />
         </div>
-        <p className="text-16 text-grey-dark mt-7">
+        <p className="text-16 md:text-14 text-grey-dark mt-7">
           By signing up, you agree to our{" "}
           <span className="text-black">Terms and Conditions</span> and{" "}
           <span className="text-black">Privacy Policy</span>
