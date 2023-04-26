@@ -38,6 +38,7 @@ module.exports = {
         '20': ['20px', '23px'],
         '24': ['24px', '28px'],
         '32': ['32px', '37px'],
+        '40': ['40px', '46px'],
       },
       fontFamily: {
         'ubuntu': 'Ubuntu'

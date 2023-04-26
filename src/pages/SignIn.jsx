@@ -2,6 +2,7 @@ import { Checkbox } from "antd";
 import AuthInput from "../components/auth/AuthInput";
 import AuthWelcomeBoard from "../components/auth/AuthWelcomeBoard";
 import backgroundImg from "../assets/login-bg.png";
+import { Link } from "react-router-dom";
 
 const SignIn = () => {
   return (
@@ -35,7 +36,7 @@ const SignIn = () => {
             <Checkbox />
             <p className="text-16 md:text-14 text-input-label">Remember me</p>
           </div>
-          <button className="text-16 md:text-14">Forgot password</button>
+          <Link to={'/reset-password'} className="text-16 md:text-14">Forgot password</Link>
         </div>
         <div className="auth-btn-container mt-[46px]">
           <button className="auth-btn">Sign In</button>
