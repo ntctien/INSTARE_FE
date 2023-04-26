@@ -2,8 +2,8 @@ import { useState } from "react";
 import ContactItem from "~/components/home/contacts/ContactItem";
 import MessageDetail from "~/components/message/MessageDetail";
 import searchIcon from "~/assets/search.svg";
-import closeIcon from "~/assets/close.svg";
-import SearchResultItem from "~/components/SearchResultItem";
+import SearchResultItem from "~/components/search/SearchResultItem";
+import SearchInput from "~/components/search/SearchInput";
 
 let contacts = [
   {
@@ -36,15 +36,7 @@ const Message = () => {
         {/* Search bar */}
         <div className="between-row font-ubuntu h-[70px] border-r-1 border-b-1 border-black15">
           {search ? (
-            <div className="w-full mx-5 relative">
-              <input className="w-full h-[50px] rounded-10 bg-white focus:outline-none text-16 px-[19px]" />
-              <button
-                onClick={() => setSearch(false)}
-                className="absolute top-1/2 -translate-y-1/2 right-[12.25px]"
-              >
-                <img src={closeIcon} alt="Close" className="w-[12.5px]" />
-              </button>
-            </div>
+            <SearchInput handleClick={() => setSearch(false)} className='mx-5'/>
           ) : (
             <>
               <h1 className="font-bold text-20 ml-[23px]">Message</h1>

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
-import './MenuLayout.css';
+import "./MenuLayout.css";
 import AppMenu from "../../components/menu/AppMenu";
 import CreatePostModal from "../../components/home/create/CreatePostModal";
+import ChangePasswordModal from "~/components/modal/ChangePasswordModal";
 
 const MenuLayout = () => {
   const [menuItemId, setMenuItemId] = useState({
@@ -30,6 +31,12 @@ const MenuLayout = () => {
           setMenuItemId={setMenuItemId}
         />
       )}
+      <ChangePasswordModal
+        open={menuItemId.current === "changepw"}
+        onCancel={() =>
+          setMenuItemId({ current: menuItemId.previous, previous: "changepw" })
+        }
+      />
     </div>
   );
 };

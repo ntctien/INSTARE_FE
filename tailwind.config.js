@@ -8,6 +8,7 @@ module.exports = {
         'grey': '#D9D9D9',
         'grey-dark': '#777777',
         'blue': '#96CAF7',
+        'blue-darker': '#3D93DE',
         'pastel-blue': '#96CAF726',
         'pastel-purple': '#BFB2F326',
         'pastel-purple-dark': '#BFB2F3',
@@ -41,7 +42,8 @@ module.exports = {
         '40': ['40px', '46px'],
       },
       fontFamily: {
-        'ubuntu': 'Ubuntu'
+        'ubuntu': 'Ubuntu',
+        'inter': 'Inter',
       },
       spacing: {
         '15': '15px',

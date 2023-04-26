@@ -1,8 +1,6 @@
 import { Dropdown } from "antd";
 import { moreItem } from "~/constants/menuItems";
 import AppMenuItem from "./AppMenuItem";
-import ChangePasswordModal from "../modal/ChangePasswordModal";
-import { useState } from "react";
 
 const moreOptions = [
   {
@@ -18,29 +16,17 @@ const moreOptions = [
   },
 ];
 
-const MoreItem = () => {
-  const [modal, setModal] = useState(null);
-  
+const MoreItem = ({ menuItemId, setMenuItemId }) => {
   const onClick = ({ key }) => {
-    setModal(key);
+    setMenuItemId({ current: key, previous: menuItemId.current });
   };
 
   return (
-    <>
-      <Dropdown
-        placement="topLeft"
-        arrow
-        menu={{ items: moreOptions, onClick }}
-      >
-        <button>
-          <AppMenuItem item={moreItem} />
-        </button>
-      </Dropdown>
-      <ChangePasswordModal
-        open={modal === "changepw"}
-        onCancel={() => setModal(null)}
-      />
-    </>
+    <Dropdown placement="topLeft" arrow menu={{ items: moreOptions, onClick }}>
+      <button>
+        <AppMenuItem item={moreItem} />
+      </button>
+    </Dropdown>
   );
 };
 
