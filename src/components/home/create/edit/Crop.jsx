@@ -1,8 +1,5 @@
 import EditContainer from "./EditContainer";
 import {
-  rotateLeftIcon,
-  flipHorizontalIcon,
-  flipVerticalIcon,
   freeIcon,
   originalIcon,
   threeTwoIcon,
@@ -10,12 +7,7 @@ import {
   twoThreeIcon,
 } from "~/assets/crop_icons";
 import tempImg from "~/assets/temp1.jpg";
-
-const transformationItems = [
-  { title: "Rotate left", icon: rotateLeftIcon },
-  { title: "Flip horizontal", icon: flipHorizontalIcon },
-  { title: "Flip vertical", icon: flipVerticalIcon },
-];
+import PhotoTransformationBar from "./PhotoTransformationBar";
 
 const cropItems = [
   { title: "Free", icon: freeIcon },
@@ -33,15 +25,8 @@ const Crop = ({setCurrFeature}) => {
         <div className="current-media-container">
           <img src={tempImg} alt="Edit" className="current-media" />
         </div>
-        {/* Tranformation items */}
-        <div className="row gap-x-[42px] justify-center my-[10px]">
-          {transformationItems.map((item, i) => (
-            <div className="row gap-x-[12px]">
-              <img src={item.icon} alt="Transformation" />
-              <p className="text-16">{item.title}</p>
-            </div>
-          ))}
-        </div>
+        {/* Tranformation */}
+        <PhotoTransformationBar className={'mx-[39px]'}/>
         {/* Crop items */}
         <div className="edit-bar">
           {cropItems.map((item, i) => (
