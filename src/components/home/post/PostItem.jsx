@@ -38,7 +38,7 @@ const PostItem = () => {
         <button className="text-14 text-black50 mt-[7px]">
           View all comments
         </button>
-        <Divider className="border-black15 mt-[10px] mb-[6px]" />
+        <Divider className="mt-[10px] mb-[6px]" />
         <CommentInput/>
       </div>
     </div>

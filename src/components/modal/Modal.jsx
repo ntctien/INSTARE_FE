@@ -9,7 +9,7 @@ const Modal = ({ children, open, onCancel, title }) => {
         <h2 className="text-center mt-[12px] font-ubuntu font-medium text-20">
           {title}
         </h2>
-        <Divider className="mt-[13px] mb-0 border-black15" />
+        <Divider className="mt-[13px] mb-0" />
         {/* Content */}
         {children}
       </div>

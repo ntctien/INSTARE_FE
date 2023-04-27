@@ -3,8 +3,12 @@ import { menuItems } from "../../constants/menuItems";
 import AppMenuItem from "./AppMenuItem";
 import MoreItem from "./MoreItem";
 import SearchSideBar from "../search/SearchSideBar";
+import NotificationSideBar from "../notification/NotificationSideBar";
 
 const AppMenu = ({ menuItemId, setMenuItemId }) => {
+  const handleCloseSideBar = () => {
+    setMenuItemId({ current: menuItemId.previous, previous: "search" });
+  };
   return (
     <div className="h-full w-[260px] bg-pastel-blue pt-[46px] pb-[15px] px-[16px] flex flex-col font-ubuntu rounded-r-15 relative">
       <Logo custom={"ml-[9px]"} />
@@ -19,8 +23,12 @@ const AppMenu = ({ menuItemId, setMenuItemId }) => {
         ))}
       </div>
       <MoreItem menuItemId={menuItemId} setMenuItemId={setMenuItemId} />
-      {menuItemId.current === "search" && (
-        <SearchSideBar menuItemId={menuItemId} setMenuItemId={setMenuItemId} />
+      {menuItemId.current === "search" ? (
+        <SearchSideBar onClose={handleCloseSideBar} />
+      ) : (
+        menuItemId.current === "notifications" && (
+          <NotificationSideBar onClose={handleCloseSideBar} />
+        )
       )}
     </div>
   );

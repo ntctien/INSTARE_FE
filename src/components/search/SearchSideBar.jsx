@@ -1,9 +1,9 @@
-import SearchInput from "./SearchInput";
-import { Divider } from "antd";
-import SearchResultItem from "./SearchResultItem";
-import useClickOutside from "~/hooks/useClickOutside";
-import WarningModal from "../modal/WarningModal";
 import { useState } from "react";
+import { Divider } from "antd";
+import SearchInput from "./SearchInput";
+import SearchResultItem from "./SearchResultItem";
+import WarningModal from "../modal/WarningModal";
+import SideBar from "../SideBar";
 
 let recents = [];
 
@@ -19,24 +19,17 @@ for (let i = 0; i <= 14; i++) {
 
 const searchResults = [];
 
-const SearchSideBar = ({ setMenuItemId, menuItemId }) => {
+const SearchSideBar = ({ onClose }) => {
   const [warningOpen, setWarningOpen] = useState(false);
-  const { ref } = useClickOutside(() =>
-    setMenuItemId({ current: menuItemId.previous, previous: "search" })
-  );
   return (
-    <div
-      ref={ref}
-      style={{ boxShadow: "4px 0px 4px rgba(0, 0, 0, 0.25)" }}
-      className={`absolute top-0 -right-[360px] w-[360px] h-full bg-[#F0F6FD] z-20 rounded-r-15 flex flex-col`}
-    >
-      <h2 className="font-ubuntu font-bold text-20 mt-[17px] ml-[23px]">
+    <SideBar onClose={onClose}>
+      <h2 className="side-bar-title mt-[17px]">
         Search
       </h2>
       <div className="mx-5 mt-5">
         <SearchInput />
       </div>
-      <Divider className="mt-[14px] mb-0 border-black15" />
+      <Divider className="mt-[14px] mb-0" />
       {searchResults.length > 0 ? (
         <div className="overflow-y-auto font-inter">
           {searchResults.map((result, i) => (
@@ -71,7 +64,7 @@ const SearchSideBar = ({ setMenuItemId, menuItemId }) => {
         open={warningOpen}
         onCancel={() => setWarningOpen(false)}
       />
-    </div>
+    </SideBar>
   );
 };
 

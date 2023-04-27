@@ -1,5 +1,5 @@
 import Avatar from "./home/Avatar";
-import { otherOptionsIcon } from "~/assets/post_icons";
+import { optionIcon } from "~/assets/post_icons";
 
 const PostInfo = ({ username, time, className }) => {
   return (
@@ -11,7 +11,7 @@ const PostInfo = ({ username, time, className }) => {
         <p className="post-time">{time}</p>
       </div>
       <button>
-        <img src={otherOptionsIcon} alt="Other options" />
+        <img src={optionIcon} alt="Other options" />
       </button>
     </div>
   );

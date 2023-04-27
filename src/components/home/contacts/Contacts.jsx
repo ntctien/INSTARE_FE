@@ -42,7 +42,7 @@ const Contacts = () => {
           <h2 className="font-bold text-20 ml-[23px] font-ubuntu">Contacts</h2>
         )}
       </div>
-      <Divider className="my-0 bg-[#00000026]" />
+      <Divider className="my-0" />
       {currChat ? (
         <ChatBox />
       ) : (
