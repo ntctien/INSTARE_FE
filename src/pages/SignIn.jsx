@@ -34,9 +34,9 @@ const SignIn = () => {
         <div className="mt-[15px] row justify-between">
           <div className="row gap-x-[11px]">
             <Checkbox />
-            <p className="text-16 md:text-14 text-input-label">Remember me</p>
+            <p className="2xl:text-16 md:text-14 text-input-label">Remember me</p>
           </div>
-          <Link to={'/reset-password'} className="text-16 md:text-14">Forgot password</Link>
+          <Link to={'/reset-password'} className="2xl:text-16 md:text-14">Forgot password</Link>
         </div>
         <div className="auth-btn-container mt-[46px]">
           <button className="auth-btn">Sign In</button>

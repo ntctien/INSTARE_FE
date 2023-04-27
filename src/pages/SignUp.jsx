@@ -26,7 +26,7 @@ const SignUp = () => {
             password
           />
         </div>
-        <p className="text-16 md:text-14 text-grey-dark mt-7">
+        <p className="2xl:text-16 md:text-14 text-grey-dark mt-7">
           By signing up, you agree to our{" "}
           <span className="text-black">Terms and Conditions</span> and{" "}
           <span className="text-black">Privacy Policy</span>
