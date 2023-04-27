@@ -52,9 +52,25 @@ body {
   @apply font-ubuntu font-bold text-24 text-white;
 }
 
+.warning-btn {
+  @apply w-[200px] h-[50px] rounded-10 font-medium text-20;
+}
+
+.warning-btn.warning-btn-primary {
+  @apply bg-red text-white
+}
+
+.warning-btn.warning-btn-secondary {
+  @apply border-1 border-black
+}
+
 /* Hover */
 .hover-default {
   @apply hover:bg-hover hover:rounded-full;
+}
+
+.hover-btn-primary {
+  @apply hover:brightness-125;
 }
 
 /* Antd */

@@ -1,12 +1,15 @@
 import SearchInput from "./SearchInput";
 import { Divider } from "antd";
 import SearchResultItem from "./SearchResultItem";
+import useClickOutside from "~/hooks/useClickOutside";
+import WarningModal from "../modal/WarningModal";
+import { useState } from "react";
 
-let searchResults = [];
+let recents = [];
 
 for (let i = 0; i <= 14; i++) {
-  searchResults = [
-    ...searchResults,
+  recents = [
+    ...recents,
     {
       username: "username",
       name: "Họ và tên",
@@ -14,9 +17,16 @@ for (let i = 0; i <= 14; i++) {
   ];
 }
 
-const SearchSideBar = () => {
+const searchResults = [];
+
+const SearchSideBar = ({ setMenuItemId, menuItemId }) => {
+  const [warningOpen, setWarningOpen] = useState(false);
+  const { ref } = useClickOutside(() =>
+    setMenuItemId({ current: menuItemId.previous, previous: "search" })
+  );
   return (
     <div
+      ref={ref}
       style={{ boxShadow: "4px 0px 4px rgba(0, 0, 0, 0.25)" }}
       className={`absolute top-0 -right-[360px] w-[360px] h-full bg-[#F0F6FD] z-20 rounded-r-15 flex flex-col`}
     >
@@ -27,17 +37,40 @@ const SearchSideBar = () => {
         <SearchInput />
       </div>
       <Divider className="mt-[14px] mb-0 border-black15" />
-      <div className="p-5">
-        <div className="between-row font-ubuntu text-16">
-          <h3 className="font-medium">Recent</h3>
-          <button className="text-blue-darker">Clear all</button>
+      {searchResults.length > 0 ? (
+        <div className="overflow-y-auto font-inter">
+          {searchResults.map((result, i) => (
+            <SearchResultItem key={i} {...result} />
+          ))}
         </div>
-      </div>
-      <div className="overflow-y-auto font-inter">
-        {searchResults.map((result, i) => (
-          <SearchResultItem key={i} clearable {...result} />
-        ))}
-      </div>
+      ) : (
+        <>
+          <div className="p-5">
+            <div className="between-row font-ubuntu text-16">
+              <h3 className="font-medium">Recent</h3>
+              <button
+                onClick={() => setWarningOpen(true)}
+                className="text-blue-darker hover:text-blue"
+              >
+                Clear all
+              </button>
+            </div>
+          </div>
+          <div className="overflow-y-auto font-inter">
+            {recents.map((recent, i) => (
+              <SearchResultItem key={i} clearable {...recent} />
+            ))}
+          </div>
+        </>
+      )}
+      <WarningModal
+        title={"Clear search history?"}
+        subtitle={"You won’t be able to undo this."}
+        secondaryBtnLabel={"Not now"}
+        primaryBtnLabel={"Clear all"}
+        open={warningOpen}
+        onCancel={() => setWarningOpen(false)}
+      />
     </div>
   );
 };

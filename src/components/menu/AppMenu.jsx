@@ -19,7 +19,9 @@ const AppMenu = ({ menuItemId, setMenuItemId }) => {
         ))}
       </div>
       <MoreItem menuItemId={menuItemId} setMenuItemId={setMenuItemId} />
-      {menuItemId.current === "search" && <SearchSideBar />}
+      {menuItemId.current === "search" && (
+        <SearchSideBar menuItemId={menuItemId} setMenuItemId={setMenuItemId} />
+      )}
     </div>
   );
 };
