@@ -1,4 +1,4 @@
-import closeIcon from "~/assets/close.svg";
+import CloseButton from "../CloseButton";
 
 const SearchInput = ({ handleClick, className }) => {
   return (
@@ -8,12 +8,11 @@ const SearchInput = ({ handleClick, className }) => {
           "w-full h-[50px] rounded-10 bg-white focus:outline-none text-16 px-[19px]"
         }
       />
-      <button
+      <CloseButton
         onClick={handleClick}
+        width="12.5px"
         className="absolute top-1/2 -translate-y-1/2 right-[12.25px]"
-      >
-        <img src={closeIcon} alt="Close" className="w-[12.5px]" />
-      </button>
+      />
     </div>
   );
 };

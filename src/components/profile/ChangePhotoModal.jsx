@@ -6,19 +6,6 @@ import tempImg from "~/assets/temp1.jpg";
 const ChangePhotoModal = ({ open, onCancel }) => {
   const [zoom, setZoom] = useState(0);
 
-  const getSliderStyle = () => {
-    if (zoom >= 0) {
-      return `linear-gradient(to right, #D9D9D9 0%, #D9D9D9 50%, #BFB2F3 50%, #BFB2F3 ${
-        (zoom / 200 + 0.5) * 100
-      }%, #D9D9D9 ${(zoom / 200 + 0.5) * 100}%, #D9D9D9 100%)`;
-    }
-    return `linear-gradient(to right, #D9D9D9 0%, #D9D9D9 ${
-      (zoom / 200 + 0.5) * 100
-    }%, #BFB2F3 ${
-      (zoom / 200 + 0.5) * 100
-    }%, #BFB2F3 50%, #D9D9D9 50%, #D9D9D9 100%)`;
-  };
-
   return (
     <BackModal open={open} onCancel={onCancel} title={"Change profile photo"}>
       <div className="flex flex-col items-center px-[12px] pt-[12px] pb-[33px]">

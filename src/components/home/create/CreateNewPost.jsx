@@ -1,6 +1,6 @@
 import MediaSlider from "../media_slider/MediaSlider";
 import MediaDragger from "./MediaDragger";
-import closeIcon from "../../../assets/close.svg";
+import CloseButton from "~/components/CloseButton";
 
 const CreateNewPost = ({
   onCancel,
@@ -8,9 +8,8 @@ const CreateNewPost = ({
   setFileList,
   currentSlide,
   setCurrentSlide,
-  setCurrFeature
+  setCurrFeature,
 }) => {
-
   const handleDelete = (currentSlide) => {
     const newFileList = fileList;
     newFileList.splice(currentSlide, 1);
@@ -51,15 +50,15 @@ const CreateNewPost = ({
           className="resize-none w-full mt-[13px] bg-transparent focus:outline-none text-14 placeholder:text-black50 h-[100px]"
         />
         {/* Post button */}
-        {fileList.length > 0 && <button className="primary-btn mt-[10px]">POST</button>}
+        {fileList.length > 0 && (
+          <button className="primary-btn mt-[10px]">POST</button>
+        )}
       </div>
       {/* Close button */}
-      <button
+      <CloseButton
         onClick={onCancel}
         className="absolute top-[11.5px] right-[13.5px]"
-      >
-        <img src={closeIcon} alt="Close" />
-      </button>
+      />
     </>
   );
 };

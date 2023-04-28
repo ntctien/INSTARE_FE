@@ -15,6 +15,8 @@ import {
   SignUp,
   Test,
 } from './pages';
+import StoryLayout from "./layouts/StoryLayout";
+import Stories from "./pages/Stories";
 
 function App() {
   return (
@@ -34,6 +36,9 @@ function App() {
           <Route element={<Profile />} path="username" />
         </Route>
         <Route element={<Message />} path="message" />
+      </Route>
+      <Route element={<StoryLayout />}>
+        <Route element={<Stories />} path="stories" />
       </Route>
       <Route element={<Post />} path="post" />
       <Route element={<Test />} path="test" />
