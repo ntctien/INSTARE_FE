@@ -2,8 +2,8 @@ import { useState, useRef } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Story from "./Story";
-import SliderContainer from "../media_slider/SliderContainer";
+import StoryItem from "./StoryItem";
+import SliderContainer from "../home/media_slider/SliderContainer";
 
 const settings = {
   infinite: false,
@@ -51,7 +51,7 @@ const StoryContainer = () => {
         className="w-[800px] story-container"
       >
         {stories.map((story, i) => (
-          <Story key={i} />
+          <StoryItem key={i} />
         ))}
       </Slider>
     </SliderContainer>

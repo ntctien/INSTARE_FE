@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom"
+import './StoryLayout.css';
 import Logo from "~/components/Logo"
 import CloseButton from "~/components/CloseButton"
 

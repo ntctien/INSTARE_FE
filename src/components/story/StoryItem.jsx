@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Story = () => {
+const StoryItem = () => {
   return (
     <div className='flex flex-col items-center mt-[2px]'>
         <div className='w-[100px] h-[100px] bg-grey rounded-full border-3 border-white outline outline-2 outline-grey'></div>
@@ -9,4 +9,4 @@ const Story = () => {
   )
 }
 
-export default Story
+export default StoryItem

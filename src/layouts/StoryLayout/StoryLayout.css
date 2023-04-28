@@ -1,0 +1,7 @@
+.slick-track {
+    @apply flex items-center
+}
+
+.slick-next {
+    display: none !important;
+}

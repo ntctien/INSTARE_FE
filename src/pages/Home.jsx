@@ -1,5 +1,5 @@
 import PostFeed from "../components/home/post/PostFeed";
-import StoryContainer from "../components/home/story/StoryContainer";
+import StoryContainer from "../components/story/StoryContainer";
 
 const Home = () => {
   return (
