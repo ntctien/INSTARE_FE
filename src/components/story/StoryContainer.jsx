@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -36,13 +37,15 @@ const stories = [
 
 const StoryContainer = () => {
   const slider = useRef(null);
+  const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
+
   return (
     <SliderContainer
       slider={slider}
       currentSlide={currentSlide}
       mediaList={stories}
-      containerClassName='story-slider-container'
+      containerClassName="story-slider-container"
     >
       <Slider
         {...settings}
@@ -51,7 +54,7 @@ const StoryContainer = () => {
         className="w-[800px] story-container"
       >
         {stories.map((story, i) => (
-          <StoryItem key={i} />
+          <StoryItem key={i} onClick={() => navigate("/stories")} />
         ))}
       </Slider>
     </SliderContainer>

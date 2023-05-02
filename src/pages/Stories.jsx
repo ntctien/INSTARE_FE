@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import Slider from "react-slick";
+import SliderContainer from "~/components/home/media_slider/SliderContainer";
 import Story from "~/components/story/Story";
 import StoryItem from "~/components/story/StoryItem";
 
@@ -8,10 +9,9 @@ const settings = {
   speed: 500,
   slidesToShow: 5,
   slidesToScroll: 1,
-  arrows: true,
+  arrows: false,
   centerMode: true,
   centerPadding: "0px",
-  focusOnSelect: true,
 };
 
 const stories = [
@@ -47,10 +47,24 @@ const Stories = () => {
         beforeChange={(current, next) => setCurrentSlide(next)}
         className="w-screen"
       >
-        <Story/>
-        {stories.map((story, i) => (
-          <StoryItem key={i} />
-        ))}
+        {stories.map((story, i) =>
+          i === currentSlide ? (
+            <SliderContainer
+              currentSlide={currentSlide}
+              mediaList={stories}
+              prevOnClick={() => slider.current?.slickGoTo(i - 1, true)}
+              nextOnClick={() => slider.current?.slickGoTo(i + 1, true)}
+              containerClassName={"story"}
+            >
+              <Story />
+            </SliderContainer>
+          ) : (
+            <StoryItem
+              key={i}
+              onClick={() => slider.current?.slickGoTo(i, true)}
+            />
+          )
+        )}
       </Slider>
     </div>
   );

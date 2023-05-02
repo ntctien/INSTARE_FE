@@ -1,25 +1,31 @@
-import nextIcon from "../../../assets/arrow-next.svg";
-import prevIcon from "../../../assets/arrow-back.svg";
+import NextButton from "./NextButton";
+import PrevButton from "./PrevButton";
 
-const SliderContainer = ({ children, slider, currentSlide, mediaList, containerClassName }) => {
+const SliderContainer = ({
+  children,
+  slider,
+  currentSlide,
+  mediaList,
+  containerClassName,
+  prevOnClick,
+  nextOnClick,
+}) => {
   return (
     <div className={`relative ${containerClassName}`}>
       {children}
       {currentSlide !== 0 && (
-        <button
-          onClick={() => slider?.current?.slickPrev()}
-          className="arrow-btn arrow-prev"
-        >
-          <img src={prevIcon} alt="Prev" />
-        </button>
+        <PrevButton
+          onClick={() =>
+            prevOnClick != null ? prevOnClick() : slider?.current?.slickPrev()
+          }
+        />
       )}
       {currentSlide !== mediaList.length - 1 && (
-        <button
-          onClick={() => slider?.current?.slickNext()}
-          className="arrow-btn arrow-next"
-        >
-          <img src={nextIcon} alt="Next" />
-        </button>
+        <NextButton
+          onClick={() =>
+            nextOnClick != null ? nextOnClick() : slider?.current?.slickNext()
+          }
+        />
       )}
     </div>
   );
