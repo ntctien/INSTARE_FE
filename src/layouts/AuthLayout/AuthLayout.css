@@ -38,8 +38,8 @@
 
 .auth-input {
   font-family: 'Ubuntu';
-  height: calc(100% - 4px);
-  width: calc(100% - 4px);
+  height: calc(100% - 3px);
+  width: calc(100% - 3px);
   border: none; 
   border-radius: 10px;
   padding: 0px 7%;
