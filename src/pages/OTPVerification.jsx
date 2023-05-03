@@ -13,7 +13,7 @@ const OTPVerification = () => {
       <button onClick={()=>navigate('/new-password')} className="auth-btn mt-[21.3%]">
         Verify
       </button>
-      <p className="2xl:text-16 md:text-14 text-grey-dark mt-2">
+      <p className="text-16 md:text-14 text-grey-dark mt-2">
         Didn’t receive the OTP?{" "}
         <span className="font-medium text-black">RESEND OTP</span>
       </p>
