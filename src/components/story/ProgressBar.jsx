@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const ProgressBar = ({ isRunning, onFilled }) => {
+const ProgressBar = ({ isRunning, onFilled, value }) => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const ProgressBar = ({ isRunning, onFilled }) => {
   return (
     <div className="flex-1 h-[3px] bg-[#D9D9D980] rounded-sm">
       <div
-        style={{ width: `${progress}%` }}
+        style={{ width: `${value !=null ? value : progress}%` }}
         className="h-full bg-grey rounded-sm"
       ></div>
     </div>

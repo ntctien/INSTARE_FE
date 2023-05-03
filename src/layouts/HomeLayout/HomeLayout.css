@@ -77,6 +77,10 @@
   @apply top-1/2 -left-[15px] -translate-x-[100%] -translate-y-1/2;
 }
 
+.story-item {
+  width: 13.194444444vw !important;
+}
+
 /* Custom slick dots */
 
 .slick-dots {

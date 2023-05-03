@@ -4,23 +4,23 @@ import PrevButton from "./PrevButton";
 const SliderContainer = ({
   children,
   slider,
-  currentSlide,
-  mediaList,
   containerClassName,
   prevOnClick,
   nextOnClick,
+  showPrev,
+  showNext
 }) => {
   return (
     <div className={`relative ${containerClassName}`}>
       {children}
-      {currentSlide !== 0 && (
+      {showPrev && (
         <PrevButton
           onClick={() =>
             prevOnClick != null ? prevOnClick() : slider?.current?.slickPrev()
           }
         />
       )}
-      {currentSlide !== mediaList.length - 1 && (
+      {showNext && (
         <NextButton
           onClick={() =>
             nextOnClick != null ? nextOnClick() : slider?.current?.slickNext()

@@ -7,7 +7,7 @@ const StoryLayout = () => {
   const navigate = useNavigate();
   return (
     <div className="bg-blue-dark w-screen h-screen relative">
-      <div className="row gap-x-[22px] absolute top-[17px] left-[24px]">
+      <div className="row gap-x-[22px] absolute top-[17px] left-[24px] z-10">
         <CloseButton
           width={"41.67px"}
           fill={"#FFFFFF"}

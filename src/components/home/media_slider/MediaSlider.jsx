@@ -27,8 +27,8 @@ const MediaSlider = ({
   return (
     <SliderContainer
       slider={slider}
-      currentSlide={currentSlide}
-      mediaList={mediaList}
+      showPrev={currentSlide !== 0}
+      showNext={currentSlide !== mediaList.length - 1}
       containerClassName="media-slider-container"
     >
       <Slider

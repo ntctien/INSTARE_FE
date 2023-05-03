@@ -43,8 +43,8 @@ const StoryContainer = () => {
   return (
     <SliderContainer
       slider={slider}
-      currentSlide={currentSlide}
-      mediaList={stories}
+      showPrev={currentSlide !== 0}
+      showNext={currentSlide !== stories.length - 1}
       containerClassName="story-slider-container"
     >
       <Slider
