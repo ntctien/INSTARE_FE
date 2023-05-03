@@ -8,6 +8,8 @@ const WarningModal = ({
   primaryBtnLabel,
   open,
   onCancel,
+  onPrimaryBtnClick,
+  onSecondaryBtnClick,
 }) => {
   return (
     <ModalWrapper open={open} onCancel={onCancel}>
@@ -15,13 +17,20 @@ const WarningModal = ({
         <h2 className="font-medium text-[28px] leading-8 text-center">
           {title}
         </h2>
-        <p className="text-16 mt-[9px] text-center">{subtitle}</p>
+        <p className="text-16 mt-[9px] text-center">
+          {subtitle ?? "You won’t be able to undo this. "}
+        </p>
         <div className="between-row gap-x-5 mt-[26px]">
-          <button className="warning-btn warning-btn-secondary">
-            {secondaryBtnLabel}
+          <button
+            onClick={
+              onSecondaryBtnClick != null ? onSecondaryBtnClick : onCancel
+            }
+            className="warning-btn warning-btn-secondary"
+          >
+            {secondaryBtnLabel ?? "Not now"}
           </button>
           <button className="warning-btn warning-btn-primary hover-btn-primary">
-            {primaryBtnLabel}
+            {primaryBtnLabel ?? "Yes"}
           </button>
         </div>
       </div>

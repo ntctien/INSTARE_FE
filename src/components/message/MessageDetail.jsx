@@ -1,42 +1,61 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Dropdown } from "antd";
 import Avatar from "../home/Avatar";
 import infoIcon from "~/assets/info.svg";
 import ChatBox from "../home/contacts/ChatBox";
-
-const userOptions = [
-  {
-    key: "profile",
-    label: (
-      <p className="user-option-default">
-        View profile
-      </p>
-    ),
-  },
-  {
-    type: 'divider',
-  },
-  {
-    key: "delete",
-    label: (
-      <p className="user-option-danger">
-        Delete chat
-      </p>
-    ),
-  },
-  {
-    type: 'divider',
-  },
-  {
-    key: "block",
-    label: (
-      <p className="user-option-danger">
-        Block
-      </p>
-    ),
-  },
-];
+import WarningModal from "../modal/WarningModal";
 
 const MessageDetail = () => {
+  const [warning, setWarning] = useState(null);
+
+  const userOptions = [
+    {
+      key: "profile",
+      label: (
+        <Link to={"/username"}>
+          <p className="user-option-default">View profile</p>
+        </Link>
+      ),
+    },
+    {
+      type: "divider",
+    },
+    {
+      key: "delete",
+      label: (
+        <p
+          onClick={() =>
+            setWarning({ title: "You want to delete chat history?" })
+          }
+          className="user-option-danger"
+        >
+          Delete chat
+        </p>
+      ),
+    },
+    {
+      type: "divider",
+    },
+    {
+      key: "block",
+      label: (
+        <p
+          onClick={() =>
+            setWarning({
+              title: "You want to block this user?",
+              subtitle:
+                "This user still can view your profile. You can unblock anytime.",
+            })
+          }
+          className="user-option-danger"
+        >
+          Block
+        </p>
+      ),
+    },
+  ];
+
   return (
     <div className="flex-1 flex flex-col">
       {/* User info */}
@@ -56,6 +75,12 @@ const MessageDetail = () => {
       </div>
       {/* Chat */}
       <ChatBox />
+      {/* Warning modal */}
+      <WarningModal
+        open={warning != null}
+        onCancel={() => setWarning(null)}
+        {...warning}
+      />
     </div>
   );
 };
