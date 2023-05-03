@@ -33,7 +33,7 @@ const AuthWelcomeBoard = ({
           <p className="mt-[17px] font-bold text-4xl md:text-3xl text-white opacity-90">
             Share your passion with us!
           </p>
-          <Divider className="w-[100px] min-w-[100px] mt-[9px] mb-0 border-[#D9D9D9]" />
+          <Divider className="w-[100px] min-w-[100px] mt-[9px] mb-0 border-1 border-grey" />
           <h2 className="font-bold text-32 md:text-[24px] text-white mt-[52px]">{title}</h2>
           <p className="text-[18px] md:text-[14px] tracking-wider text-white mt-[8px]">
             {subtitle}

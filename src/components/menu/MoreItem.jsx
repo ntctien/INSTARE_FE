@@ -1,24 +1,32 @@
+import { useNavigate } from "react-router-dom";
 import { Dropdown } from "antd";
 import { moreItem } from "~/constants/menuItems";
 import AppMenuItem from "./AppMenuItem";
 
-const moreOptions = [
-  {
-    key: "changepw",
-    label: <p className="option-default">Change password</p>,
-  },
-  {
-    type: "divider",
-  },
-  {
-    key: "logout",
-    label: <p className="option-danger">Log out</p>,
-  },
-];
-
 const MoreItem = ({ menuItemId, setMenuItemId }) => {
+  const navigate = useNavigate();
+
+  const moreOptions = [
+    {
+      key: "changepw",
+      label: <p className="option-default">Change password</p>,
+    },
+    {
+      type: "divider",
+    },
+    {
+      key: "logout",
+      label: (
+        <p onClick={() => navigate("/signin")} className="option-danger">
+          Log out
+        </p>
+      ),
+    },
+  ];
+
   const onClick = ({ key }) => {
-    setMenuItemId({ current: key, previous: menuItemId.current });
+    if (key !== "more")
+      setMenuItemId({ current: key, previous: menuItemId.current });
   };
 
   return (

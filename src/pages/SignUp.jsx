@@ -18,12 +18,18 @@ const SignUp = () => {
           placeholder={"Enter your username"}
           custom="mt-[17px]"
         />
-        <div className="row mt-[17px] gap-x-[30px]">
-          <AuthInput label="Password" placeholder={"6+ character"} password />
+        <div className="row mt-[17px] gap-x-[6.5%]">
+          <AuthInput
+            label="Password"
+            placeholder={"6+ character"}
+            password
+            custom={"flex-1"}
+          />
           <AuthInput
             label="Confirm password"
             placeholder={"6+ character"}
             password
+            custom={"flex-1"}
           />
         </div>
         <p className="text-16 md:text-14 text-grey-dark mt-7">

@@ -5,7 +5,7 @@ const AuthInput = ({ label, placeholder, custom, password }) => {
   return (
     <div className={custom}>
       <h5 className={`text-[16px] md:text-14 text-input-label`}>{label}</h5>
-      <div className="auth-input-container">
+      <div className="auth-input-container group">
         {password ? (
           <Input.Password {...props} />
         ) : (
