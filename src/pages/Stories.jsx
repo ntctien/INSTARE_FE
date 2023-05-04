@@ -42,8 +42,8 @@ const Stories = () => {
             <div className="story-item">
               <StoryItem
                 key={i}
+                textColor={'#FFFFFF'}
                 onClick={() => slider.current?.slickGoTo(i, true)}
-                // className={'mx-[45px]'}
               />
             </div>
           )
