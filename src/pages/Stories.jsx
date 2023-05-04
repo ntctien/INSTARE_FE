@@ -19,6 +19,18 @@ const stories = [
   null,
   null,
   null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
 ];
 
 const Stories = () => {
