@@ -17,6 +17,8 @@ import {
 } from './pages';
 import StoryLayout from "./layouts/StoryLayout";
 import Stories from "./pages/Stories";
+import CreateStoryLayout from "./layouts/CreateStoryLayout";
+import CreateStory from "./pages/CreateStory";
 
 function App() {
   return (
@@ -39,6 +41,9 @@ function App() {
       </Route>
       <Route element={<StoryLayout />}>
         <Route element={<Stories />} path="stories" />
+        <Route element={<CreateStoryLayout/>}>
+          <Route element={<CreateStory/>} path="create-story"/>
+        </Route>
       </Route>
       <Route element={<Post />} path="post" />
       <Route element={<Test />} path="test" />
