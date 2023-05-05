@@ -2,7 +2,8 @@ import React from 'react'
 
 const CreateStory = () => {
   return (
-    <div>CreateStory</div>
+    <div>
+    </div>
   )
 }
 
