@@ -53,8 +53,9 @@ const StoryContainer = () => {
         beforeChange={(current, next) => setCurrentSlide(next)}
         className="w-[800px] story-container"
       >
+        <StoryItem self containStories={false}/>
         {stories.map((story, i) => (
-          <StoryItem key={i} onClick={() => navigate("/stories")} />
+          <StoryItem key={i} read={true} onClick={() => navigate("/stories")} />
         ))}
       </Slider>
     </SliderContainer>

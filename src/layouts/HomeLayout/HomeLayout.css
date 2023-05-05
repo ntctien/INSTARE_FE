@@ -62,11 +62,11 @@
 }
 
 .story-slider-container .arrow-next {
-  @apply top-[30px] right-0;
+  @apply top-[33px] right-0;
 }
 
 .story-slider-container .arrow-prev {
-  @apply top-[30px] left-0;
+  @apply top-[33px] left-0;
 }
 
 .story .arrow-next {

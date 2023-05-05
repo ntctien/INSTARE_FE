@@ -30,6 +30,9 @@ module.exports = {
         '2': '2px',
         '3': '3px',
       },
+      outlineWidth: {
+        '3': '3px',
+      },
       fontSize: {
         '10': ['10px', '12px'],
         '12': ['12px', '15px'],

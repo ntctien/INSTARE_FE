@@ -55,6 +55,8 @@ const Stories = () => {
               <StoryItem
                 key={i}
                 textColor={'#FFFFFF'}
+                borderWidth={4}
+                read
                 onClick={() => slider.current?.slickGoTo(i, true)}
               />
             </div>
