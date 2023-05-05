@@ -1,0 +1,7 @@
+.create-story {
+  @apply flex flex-col items-center justify-center h-full aspect-[9/16] rounded-10 cursor-pointer hover:brightness-105;
+}
+
+.create-story p {
+  @apply font-semibold text-16;
+}
