@@ -12,7 +12,7 @@ const StoryLayout = () => {
           width={"41.67px"}
           fill={"#FFFFFF"}
           opacity={"0.5"}
-          onClick={() => navigate(-1)}
+          onClick={() => navigate('/')}
         />
         <Logo textColor={"#FFFFFF"} />
       </div>

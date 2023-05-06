@@ -19,6 +19,7 @@ import StoryLayout from "./layouts/StoryLayout";
 import Stories from "./pages/Stories";
 import CreateStoryLayout from "./layouts/CreateStoryLayout";
 import CreateStory from "./pages/CreateStory";
+import CreateTextStory from "./pages/CreateTextStory";
 
 function App() {
   return (
@@ -39,10 +40,11 @@ function App() {
         </Route>
         <Route element={<Message />} path="message" />
       </Route>
-      <Route element={<StoryLayout />}>
-        <Route element={<Stories />} path="stories" />
-        <Route element={<CreateStoryLayout/>}>
-          <Route element={<CreateStory/>} path="create-story"/>
+      <Route element={<StoryLayout />} path="stories">
+        <Route element={<Stories />} index />
+        <Route element={<CreateStoryLayout />}>
+          <Route element={<CreateStory />} path="create-story"/>
+          <Route element={<CreateTextStory />} path="create-text-story" />
         </Route>
       </Route>
       <Route element={<Post />} path="post" />

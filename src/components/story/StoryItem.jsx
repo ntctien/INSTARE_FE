@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { createIcon } from "~/assets/story_icons";
 
 const StoryItem = ({
@@ -9,6 +10,8 @@ const StoryItem = ({
   self,
   containStories,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <div
       onClick={onClick}
@@ -35,7 +38,10 @@ const StoryItem = ({
             className={`w-[100px] h-[100px] bg-grey rounded-full`}
           ></div>
           {self && (
-            <button className="absolute right-0 -bottom-2 hover:brightness-105">
+            <button
+              onClick={() => navigate("/stories/create-story")}
+              className="absolute right-0 -bottom-2 hover:brightness-105"
+            >
               <img src={createIcon} alt="Create story" />
             </button>
           )}
