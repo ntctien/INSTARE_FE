@@ -3,7 +3,7 @@ import { photoIcon, textIcon } from "~/assets/story_icons";
 
 const CreateStory = () => {
   return (
-    <div className="flex gap-x-[50px] h-[560px]">
+    <div className="flex justify-center gap-x-[50px] h-[70vh] max-w-[60%]">
       {/* Create photo/video story */}
       <div
         style={{
