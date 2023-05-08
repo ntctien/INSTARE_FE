@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import Slider from "react-slick";
+import LogoAndCloseButton from "~/components/story/LogoAndCloseButton";
 import Story from "~/components/story/Story";
 import StoryItem from "~/components/story/StoryItem";
 
@@ -63,6 +64,7 @@ const Stories = () => {
           )
         )}
       </Slider>
+      <LogoAndCloseButton className={"absolute top-[17px] left-[24px]"} />
     </div>
   );
 };
