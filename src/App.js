@@ -42,9 +42,9 @@ function App() {
       </Route>
       <Route element={<StoryLayout />} path="stories">
         <Route element={<Stories />} index />
-        <Route element={<CreateStoryLayout />}>
-          <Route element={<CreateStory />} path="create-story"/>
-          <Route element={<CreateTextStory />} path="create-text-story" />
+        <Route element={<CreateStoryLayout />} path="create">
+          <Route element={<CreateStory />} index />
+          <Route element={<CreateTextStory />} path="text-story" />
         </Route>
       </Route>
       <Route element={<Post />} path="post" />

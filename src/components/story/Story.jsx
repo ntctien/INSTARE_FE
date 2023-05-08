@@ -47,7 +47,7 @@ const Story = ({ className, currentSlide, slider, index, storiesList }) => {
     >
       <div className="w-[27.5vw] h-[90vh] flex items-center justify-center">
         <div
-          className={`h-full object-contain object-center aspect-[9/16] rounded-10 overflow-hidden relative ${className}`}
+          className={`h-full object-contain object-center aspect-story rounded-10 overflow-hidden relative ${className}`}
         >
           {/* Story */}
           <img

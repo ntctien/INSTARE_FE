@@ -39,7 +39,7 @@ const StoryItem = ({
           ></div>
           {self && (
             <button
-              onClick={() => navigate("/stories/create-story")}
+              onClick={() => navigate("/stories/create")}
               className="absolute right-0 -bottom-2 hover:brightness-105"
             >
               <img src={createIcon} alt="Create story" />

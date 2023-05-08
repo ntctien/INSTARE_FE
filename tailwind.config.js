@@ -53,6 +53,9 @@ module.exports = {
       spacing: {
         '15': '15px',
         '30': '30px'
+      },
+      aspectRatio: {
+        'story' : '9/16'
       }
     },
   },

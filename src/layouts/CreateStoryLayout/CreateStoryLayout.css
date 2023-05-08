@@ -1,7 +1,11 @@
 .create-story {
-  @apply flex flex-col items-center justify-center h-full aspect-[9/16] rounded-10 cursor-pointer hover:brightness-105;
+  @apply flex flex-col items-center justify-center h-full aspect-story rounded-10 cursor-pointer hover:brightness-105;
 }
 
 .create-story p {
   @apply font-semibold text-16;
+}
+
+.create-text-menu > :not(.create-text-menu) {
+  @apply bg-[#38444E] rounded-10 border-1 border-white w-full text-20;
 }

@@ -1,7 +1,14 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useOutletContext } from "react-router-dom";
 import { photoIcon, textIcon } from "~/assets/story_icons";
 
 const CreateStory = () => {
+  const { setMenuBar } = useOutletContext();
+
+  useEffect(() => {
+    setMenuBar(null);
+  }, []);
+  
   return (
     <div className="flex justify-center gap-x-[50px] h-[70vh] max-w-[60%]">
       {/* Create photo/video story */}
@@ -16,7 +23,7 @@ const CreateStory = () => {
       </div>
       {/* Create text story */}
       <Link
-        to={"/stories/create-text-story"}
+        to={"text-story"}
         style={{
           background: "linear-gradient(162.44deg, #B73793 0%, #EDA9DE 100%)",
         }}
