@@ -9,3 +9,7 @@
 .create-text-menu > :not(.create-text-menu) {
   @apply bg-[#38444E] rounded-10 border-1 border-white w-full text-20;
 }
+
+.create-text-menu > :not(.create-text-menu,textarea) {
+  @apply h-[50px] flex items-center justify-center cursor-pointer
+}

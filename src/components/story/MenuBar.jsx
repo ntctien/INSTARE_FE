@@ -1,6 +1,6 @@
 import React from "react";
 
-const MenuBar = ({children}) => {
+const MenuBar = ({children, primaryBtnLabel}) => {
   return (
     <div className="flex flex-col h-full">
       <div className="flex-1 flex flex-col justify-center">{children}</div>
@@ -14,7 +14,7 @@ const MenuBar = ({children}) => {
           }}
           className="w-[175px] rounded-10 hover:brightness-95"
         >
-          Save change
+          {primaryBtnLabel ?? 'Save change'}
         </button>
       </div>
     </div>
