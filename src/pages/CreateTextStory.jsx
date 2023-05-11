@@ -118,7 +118,7 @@ const CreateTextStory = () => {
             fontSize: style.fontSize + "px",
             background: background,
           }}
-          className="h-[80vh] w-[calc(80vh*9/16)] rounded-10 center overflow-hidden"
+          className="story center"
         >
           <p className="font-medium text-center max-w-[80%] break-words leading-7">
             {content || "Your content will display here"}

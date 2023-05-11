@@ -39,7 +39,7 @@ const Stories = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   return (
-    <div className="w-full h-full center story">
+    <div className="w-full h-full center stories">
       <Slider
         {...settings}
         ref={slider}

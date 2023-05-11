@@ -13,3 +13,7 @@
 .create-text-menu > :not(.create-text-menu,textarea) {
   @apply h-[50px] flex items-center justify-center cursor-pointer
 }
+
+.story {
+  @apply h-[80vh] w-[calc(80vh*9/16)] rounded-10 overflow-hidden;
+}

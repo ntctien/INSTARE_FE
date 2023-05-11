@@ -20,6 +20,7 @@ import Stories from "./pages/Stories";
 import CreateStoryLayout from "./layouts/CreateStoryLayout";
 import CreateStory from "./pages/CreateStory";
 import CreateTextStory from "./pages/CreateTextStory";
+import CreatePhotoVideoStory from "./pages/CreatePhotoVideoStory";
 
 function App() {
   return (
@@ -44,7 +45,8 @@ function App() {
         <Route element={<Stories />} index />
         <Route element={<CreateStoryLayout />} path="create">
           <Route element={<CreateStory />} index />
-          <Route element={<CreateTextStory />} path="text-story" />
+          <Route element={<CreateTextStory />} path="text" />
+          <Route element={<CreatePhotoVideoStory />} path="photo-or-video" />
         </Route>
       </Route>
       <Route element={<Post />} path="post" />
