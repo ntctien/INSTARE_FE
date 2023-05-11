@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import domtoimage from "dom-to-image";
 import EditContainer from "./EditContainer";
+import getPreserveQualitySettings from "~/utils/getPreserveQualitySettings";
 
 const adjustmentItems = [
   {
@@ -67,7 +68,7 @@ const Adjustment = ({
     if (image && media && image.naturalWidth < image.naturalHeight) {
       media.style.height = "100%";
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageRef.current, mediaRef.current]);
 
   const getSliderStyle = (value) => {
@@ -126,16 +127,8 @@ const Adjustment = ({
     const media = mediaRef.current;
     const image = imageRef.current;
     if (!media || !image) return;
-    const scale = image.naturalWidth / media.clientWidth;
     domtoimage
-      .toJpeg(media, {
-        width: media.clientWidth * scale,
-        height: media.clientHeight * scale,
-        style: {
-          transform: "scale(" + scale + ")",
-          transformOrigin: "top left",
-        },
-      })
+      .toJpeg(media, getPreserveQualitySettings(image, media))
       .then((url) => {
         let temp = fileList;
         temp[currentSlide].url = url;

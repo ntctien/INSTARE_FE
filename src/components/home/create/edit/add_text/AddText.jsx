@@ -11,6 +11,7 @@ import {
 } from "~/assets/add_text_icons";
 import SizePicker from "./SizePicker";
 import ColorPicker from "./ColorPicker";
+import getPreserveQualitySettings from "~/utils/getPreserveQualitySettings";
 
 const AddText = ({ setCurrFeature, fileList, currentSlide, setFileList }) => {
   const imageContainerRef = useRef(null);
@@ -85,9 +86,10 @@ const AddText = ({ setCurrFeature, fileList, currentSlide, setFileList }) => {
   const handleDone = () => {
     setCurrText(null);
     const media = imageContainerRef.current;
-    if (!media) return;
+    const image = imageRef.current;
+    if (!media || !image) return;
     domtoimage
-      .toJpeg(media)
+      .toJpeg(media, getPreserveQualitySettings(image, media))
       .then((url) => {
         let temp = fileList;
         temp[currentSlide].url = url;
