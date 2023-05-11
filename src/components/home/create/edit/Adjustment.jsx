@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import domtoimage from "dom-to-image";
 import EditContainer from "./EditContainer";
 
@@ -52,6 +52,7 @@ const Adjustment = ({
   setCurrFeature,
 }) => {
   const mediaRef = useRef(null);
+  const imageRef = useRef(null);
   const [adjustments, setAdjustments] = useState({
     brightness: 0,
     contrast: 0,
@@ -59,6 +60,15 @@ const Adjustment = ({
     temperature: 0,
     grayscale: 0,
   });
+
+  useEffect(() => {
+    const image = imageRef.current;
+    const media = mediaRef.current;
+    if (image && media && image.naturalWidth < image.naturalHeight) {
+      media.style.height = "100%";
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [imageRef.current, mediaRef.current]);
 
   const getSliderStyle = (value) => {
     if (value >= 0) {
@@ -114,9 +124,18 @@ const Adjustment = ({
 
   const handleDone = () => {
     const media = mediaRef.current;
-    if (!media) return;
+    const image = imageRef.current;
+    if (!media || !image) return;
+    const scale = image.naturalWidth / media.clientWidth;
     domtoimage
-      .toJpeg(media, { width: media.naturalWidth, height: media.naturalHeight })
+      .toJpeg(media, {
+        width: media.clientWidth * scale,
+        height: media.clientHeight * scale,
+        style: {
+          transform: "scale(" + scale + ")",
+          transformOrigin: "top left",
+        },
+      })
       .then((url) => {
         let temp = fileList;
         temp[currentSlide].url = url;
@@ -133,8 +152,9 @@ const Adjustment = ({
       <div className="flex items-center font-ubuntu">
         {/* Media */}
         <div className="current-media-container center">
-          <div ref={mediaRef} className="relative h-full">
+          <div ref={mediaRef} className="relative">
             <img
+              ref={imageRef}
               src={fileList[currentSlide].url}
               alt="Edit"
               className="object-contain"

@@ -109,7 +109,7 @@ const AddText = ({ setCurrFeature, fileList, currentSlide, setFileList }) => {
         {/* Media */}
         <div
           ref={imageContainerRef}
-          className="h-[58vh] w-fit max-w-[40vw]  relative overflow-clip"
+          className="h-[58vh] w-fit max-w-[40vw] relative overflow-clip"
         >
           <img
             ref={imageRef}
