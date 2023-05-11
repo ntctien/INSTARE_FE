@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import domtoimage from "dom-to-image";
 import ColorPalette from "~/components/story/ColorPalette";
 import ContentWrapper from "~/components/story/ContentWrapper";
@@ -13,6 +14,7 @@ import textColors from "~/constants/textColors";
 
 const CreateTextStory = () => {
   const storyRef = useRef(null);
+  const navigate = useNavigate();
   const [content, setContent] = useState("");
   const [style, setStyle] = useState({
     fontFamily: "Inter",
@@ -42,6 +44,7 @@ const CreateTextStory = () => {
         <MenuBar
           primaryBtnLabel={"Add to story"}
           onPrimaryBtnClick={handleAddToStory}
+          onDiscard={() => navigate("/")}
         >
           <div className="mx-5 create-text-menu flex flex-col gap-y-5">
             <textarea
