@@ -2,7 +2,7 @@ import { useState } from "react";
 import selectIcon from "~/assets/select-icon.svg";
 import useClickOutside from "~/hooks/useClickOutside";
 
-const Select = ({ value, valueClassName, prefix, dropDownBox }) => {
+const Select = ({ value, valueStyle, prefix, dropDownBox }) => {
   const [open, setOpen] = useState(false);
   const { ref } = useClickOutside(() => setOpen(false));
 
@@ -13,7 +13,7 @@ const Select = ({ value, valueClassName, prefix, dropDownBox }) => {
       className="row gap-x-[17px] pl-[25px] relative"
     >
       {prefix}
-      <p className={`flex-1 ${valueClassName}`}>{value}</p>
+      <p style={valueStyle} className="flex-1">{value}</p>
       <button>
         <img src={selectIcon} alt="Select" />
       </button>

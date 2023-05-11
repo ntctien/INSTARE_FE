@@ -5,7 +5,7 @@ const storyBackgroundColors = [
     "#D9D9D9",
     "#F24E1E",
     "#3D93DE",
-    "linear-gradient(45deg, #B73793 0%, #EDA9DE 100%)",
+    "linear-gradient(162.44deg, #B73793 0%, #EDA9DE 100%)",
     "linear-gradient(45deg, #96CAF7 0%, #BFB2F3 100%)",
     "linear-gradient(45deg, #F5E875 0%, #FE8F50 100%)",
     "linear-gradient(45deg, #6EEECF 0%, #85EA89 100%)",
