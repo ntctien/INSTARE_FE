@@ -28,6 +28,14 @@ const adjustmentItems = [
     addNumber: 100,
   },
   {
+    title: "Temperature",
+    name: "temperature",
+    level: 1,
+    min: -100,
+    max: 100,
+    addNumber: 100,
+  },
+  {
     title: "Grayscale",
     name: "grayscale",
     level: 1,
@@ -48,6 +56,7 @@ const Adjustment = ({
     brightness: 0,
     contrast: 0,
     saturate: 0,
+    temperature: 0,
     grayscale: 0,
   });
 
@@ -73,14 +82,23 @@ const Adjustment = ({
     return {
       filter: adjustmentItems
         .map((item) => {
-          return `${item.name}(${
-            adjustments[item.name] / item.level + item.addNumber
-          }%)`;
+          return item.name === "temperature"
+            ? ""
+            : `${item.name}(${
+                adjustments[item.name] / item.level + item.addNumber
+              }%)`;
         })
         .join(" "),
       width: realWidth < realHeight ? "fit-content" : "100%",
       height: realWidth < realHeight ? "100%" : "fit-content",
     };
+  };
+
+  const getMediaCoverBackground = () => {
+    if (adjustments.temperature > 0) {
+      return "rgba(255,255,0," + Math.abs(adjustments.temperature) / 400 + ")";
+    }
+    return "rgba(0, 0, 255," + Math.abs(adjustments.temperature) / 400 + ")";
   };
 
   const handleOnChange = (e) => {
@@ -115,13 +133,19 @@ const Adjustment = ({
       <div className="flex items-center font-ubuntu">
         {/* Media */}
         <div className="current-media-container center">
-          <img
-            src={fileList[currentSlide].url}
-            alt="Edit"
-            ref={mediaRef}
-            className="object-contain"
-            style={getMediaStyle()}
-          />
+          <div ref={mediaRef} className="relative h-full">
+            <img
+              src={fileList[currentSlide].url}
+              alt="Edit"
+              className="object-contain"
+              style={getMediaStyle()}
+            />
+            {/* Image cover */}
+            <div
+              style={{ background: getMediaCoverBackground() }}
+              className="absolute w-full h-full top-0 left-0"
+            />
+          </div>
         </div>
         {/* Inputs */}
         <div className="flex flex-col justify-evenly bg-white px-5 h-[63vh] w-[25vw]">
