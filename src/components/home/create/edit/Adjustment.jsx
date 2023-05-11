@@ -144,7 +144,7 @@ const Adjustment = ({
     <EditContainer onBack={() => setCurrFeature("edit")} onDone={handleDone}>
       <div className="flex items-center font-ubuntu">
         {/* Media */}
-        <div className="current-media-container center">
+        <div className="h-[58vh] w-[40vw] center">
           <div ref={mediaRef} className="relative">
             <img
               ref={imageRef}

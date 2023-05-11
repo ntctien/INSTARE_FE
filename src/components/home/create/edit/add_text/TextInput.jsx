@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Draggable from "react-draggable";
 import { deleteIcon, doneIcon } from "~/assets/add_text_icons";
 
@@ -37,6 +37,14 @@ const TextInput = ({
     return true;
   };
 
+  const getUpdatedHeight = (input, value) => {
+    const lineHeight = window
+      .getComputedStyle(input, null)
+      .getPropertyValue("line-height");
+    const lineNumber = value.split(/\r\n|\r|\n/).length;
+    return parseInt(lineHeight.replace("px", "")) * lineNumber + "px";
+  };
+
   const handleChange = (e) => {
     const input = inputRef.current;
     const imageContainer = imageContainerRef.current;
@@ -50,12 +58,21 @@ const TextInput = ({
     if (!exceedImageWidth(imageContainer, inputContainer))
       input.style.width = getInputWidth(value) + 1 + "ch";
     if (!exceedImageHeight(imageContainer, inputContainer))
-      input.style.height = input.scrollHeight + "px";
+      input.style.height = getUpdatedHeight(input, value);
   };
 
   const handleClick = () => {
     setCurrText(index);
   };
+
+  useEffect(() => {
+    const input = inputRef.current;
+    const imageContainer = imageContainerRef.current;
+    const inputContainer = inputContainerRef.current;
+    if (!input) return;
+    if (!exceedImageHeight(imageContainer, inputContainer))
+      input.style.height = getUpdatedHeight(input, value);
+  }, [size]);
 
   return (
     <Draggable disabled={!edit} bounds="parent">

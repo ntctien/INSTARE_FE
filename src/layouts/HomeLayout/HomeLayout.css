@@ -186,11 +186,15 @@ textarea:where(.css-dev-only-do-not-override-ph9edi).ant-input.chat-input {
 
 /* Media */
 .current-media-container {
-  @apply h-[58vh] w-[40vw];
+  @apply h-[58vh] w-fit max-w-[40vw] self-center;
 }
 
 .current-media {
   @apply object-contain w-full h-full;
+}
+
+.edit-feature {
+  @apply pt-[13px] w-[600px] flex flex-col;
 }
 
 .adjustment-media::before {

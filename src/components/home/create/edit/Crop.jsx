@@ -20,7 +20,7 @@ const cropItems = [
 const Crop = ({setCurrFeature}) => {
   return (
     <EditContainer onBack={() => setCurrFeature("edit")}>
-      <div className="pt-[13px] font-ubuntu">
+      <div className="edit-feature font-ubuntu">
         {/* Media */}
         <div className="current-media-container">
           <img src={tempImg} alt="Edit" className="current-media" />
@@ -30,7 +30,7 @@ const Crop = ({setCurrFeature}) => {
         {/* Crop items */}
         <div className="edit-bar">
           {cropItems.map((item, i) => (
-            <div className="flex flex-col gap-y-1 items-center">
+            <div key={i} className="flex flex-col gap-y-1 items-center">
               <img src={item.icon} alt="Crop" />
               <p className="text-20">{item.title}</p>
             </div>

@@ -106,12 +106,12 @@ const AddText = ({ setCurrFeature, fileList, currentSlide, setFileList }) => {
       <div
         ref={tempRef}
         onClick={() => setCurrPicker(null)}
-        className="pt-[13px] w-[600px] relative flex flex-col items-center"
+        className="edit-feature relative"
       >
         {/* Media */}
         <div
           ref={imageContainerRef}
-          className="h-[58vh] w-fit max-w-[40vw] relative overflow-clip"
+          className="current-media-container relative overflow-clip"
         >
           <img
             ref={imageRef}

@@ -17,7 +17,7 @@ const Filter = ({ fileList, currentSlide, setCurrFeature }) => {
 
   return (
     <EditContainer onBack={() => setCurrFeature("edit")}>
-      <div className="pt-[13px]">
+      <div className="edit-feature">
         {/* Media */}
         <div className="current-media-container">
           <img
