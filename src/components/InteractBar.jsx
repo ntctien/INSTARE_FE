@@ -1,18 +1,18 @@
-import { likeIcon, commentIcon, shareIcon } from "~/assets/post_icons";
+import { LikeIcon, CommentIcon, ShareIcon } from './icons';
 
-const InteractBar = ({ likeCount, className }) => {
+const InteractBar = ({ likeCount, className, handleShare }) => {
   return (
     <div className={className}>
       {/* Interact */}
-      <div className="row gap-x-[15px]">
+      <div className="row gap-x-[15px] interact-bar">
         <button>
-          <img src={likeIcon} alt="Like" />
+          <LikeIcon/>
         </button>
         <button>
-          <img src={commentIcon} alt="Comment" />
+          <CommentIcon/>
         </button>
-        <button>
-          <img src={shareIcon} alt="Share" />
+        <button onClick={handleShare}>
+          <ShareIcon/>
         </button>
       </div>
       {/* Like count */}

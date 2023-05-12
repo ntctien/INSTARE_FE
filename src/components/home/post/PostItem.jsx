@@ -13,7 +13,7 @@ const mediaList = [
   { url: tempImg1, type: "image" },
 ];
 
-const PostItem = () => {
+const PostItem = ({handleShare}) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   return (
     <div className="w-[800px] bg-[#D9D9D926] rounded-10 pb-[9px] post">
@@ -27,7 +27,7 @@ const PostItem = () => {
         dots
       />
       <div className="px-[20px] mt-[10px]">
-        <InteractBar likeCount={2}/>
+        <InteractBar likeCount={2} handleShare={handleShare}/>
         {/* Content */}
         <p className="mt-[7px] text-14">
           <span className="font-semibold">_ptt.chang</span>

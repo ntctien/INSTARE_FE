@@ -1,7 +1,7 @@
 import Avatar from "../home/Avatar";
 import clearIcon from "~/assets/close-outline.svg";
 
-const SearchResultItem = ({ username, name, clearable }) => {
+const SearchResultItem = ({ username, name, clearable, suffix }) => {
   return (
     <div className="between-row px-5 py-[10px] cursor-pointer hover:bg-pastel-purple">
       <div className="row gap-x-[18px]">
@@ -11,9 +11,12 @@ const SearchResultItem = ({ username, name, clearable }) => {
           <p className="text-grey-dark mt-[5px]">{name}</p>
         </div>
       </div>
-      {clearable && <button>
-        <img src={clearIcon} alt="Clear" className="hover-default" />
-      </button>}
+      {clearable && (
+        <button>
+          <img src={clearIcon} alt="Clear" className="hover-default" />
+        </button>
+      )}
+      {suffix}
     </div>
   );
 };

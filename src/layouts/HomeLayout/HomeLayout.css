@@ -293,3 +293,11 @@ textarea:where(.css-dev-only-do-not-override-ph9edi).ant-input.chat-input {
 .media-dragger.ant-upload-wrapper .ant-upload-drag {
   @apply rounded-10;
 }
+
+.interact-bar button {
+  @apply hover:opacity-80;
+}
+
+.share-modal h2 {
+  @apply font-ubuntu font-medium text-16;
+}
