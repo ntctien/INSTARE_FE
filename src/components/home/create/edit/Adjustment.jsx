@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import domtoimage from "dom-to-image";
 import EditContainer from "./EditContainer";
-import getPreserveQualitySettings from "~/utils/getPreserveQualitySettings";
+import handleEditDone from "~/utils/handleEditDone";
+import useEditPhoto from "~/hooks/useEditPhoto";
 
 const adjustmentItems = [
   {
@@ -52,8 +52,7 @@ const Adjustment = ({
   currentSlide,
   setCurrFeature,
 }) => {
-  const mediaRef = useRef(null);
-  const imageRef = useRef(null);
+  const { imageRef, mediaRef } = useEditPhoto();
   const [adjustments, setAdjustments] = useState({
     brightness: 0,
     contrast: 0,
@@ -61,15 +60,6 @@ const Adjustment = ({
     temperature: 0,
     grayscale: 0,
   });
-
-  useEffect(() => {
-    const image = imageRef.current;
-    const media = mediaRef.current;
-    if (image && media && image.naturalWidth < image.naturalHeight) {
-      media.style.height = "100%";
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [imageRef.current, mediaRef.current]);
 
   const getSliderStyle = (value) => {
     if (value >= 0) {
@@ -124,20 +114,14 @@ const Adjustment = ({
   };
 
   const handleDone = () => {
-    const media = mediaRef.current;
-    const image = imageRef.current;
-    if (!media || !image) return;
-    domtoimage
-      .toJpeg(media, getPreserveQualitySettings(image, media))
-      .then((url) => {
-        let temp = fileList;
-        temp[currentSlide].url = url;
-        setFileList(temp);
-        setCurrFeature("edit");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    handleEditDone(
+      mediaRef,
+      imageRef,
+      fileList,
+      currentSlide,
+      setFileList,
+      setCurrFeature
+    );
   };
 
   return (

@@ -186,7 +186,7 @@ textarea:where(.css-dev-only-do-not-override-ph9edi).ant-input.chat-input {
 
 /* Media */
 .current-media-container {
-  @apply h-[58vh] w-fit max-w-[40vw] self-center;
+  @apply h-[58vh] w-full flex items-center justify-center;
 }
 
 .current-media {

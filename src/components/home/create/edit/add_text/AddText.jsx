@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import domtoimage from "dom-to-image";
 import EditContainer from "../EditContainer";
 import TextInput from "./TextInput";
 import FontPicker from "./FontPicker";
@@ -11,12 +10,11 @@ import {
 } from "~/assets/add_text_icons";
 import SizePicker from "./SizePicker";
 import ColorPicker from "./ColorPicker";
-import getPreserveQualitySettings from "~/utils/getPreserveQualitySettings";
+import handleEditDone from "~/utils/handleEditDone";
+import useEditPhoto from "~/hooks/useEditPhoto";
 
 const AddText = ({ setCurrFeature, fileList, currentSlide, setFileList }) => {
-  const imageContainerRef = useRef(null);
-  const imageRef = useRef(null);
-  const tempRef = useRef(null);
+  const { imageRef, mediaRef } = useEditPhoto();
   const [textInputs, setTextInputs] = useState([]);
   const [currPicker, setCurrPicker] = useState(null);
   const [currText, setCurrText] = useState(null);
@@ -85,52 +83,44 @@ const AddText = ({ setCurrFeature, fileList, currentSlide, setFileList }) => {
 
   const handleDone = () => {
     setCurrText(null);
-    const media = imageContainerRef.current;
-    const image = imageRef.current;
-    if (!media || !image) return;
-    domtoimage
-      .toJpeg(media, getPreserveQualitySettings(image, media))
-      .then((url) => {
-        let temp = fileList;
-        temp[currentSlide].url = url;
-        setFileList(temp);
-        setCurrFeature("edit");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    handleEditDone(
+      mediaRef,
+      imageRef,
+      fileList,
+      currentSlide,
+      setFileList,
+      setCurrFeature
+    );
   };
 
   return (
     <EditContainer onBack={() => setCurrFeature("edit")} onDone={handleDone}>
       <div
-        ref={tempRef}
         onClick={() => setCurrPicker(null)}
         className="edit-feature relative"
       >
         {/* Media */}
-        <div
-          ref={imageContainerRef}
-          className="current-media-container relative overflow-clip"
-        >
-          <img
-            ref={imageRef}
-            src={fileList[currentSlide].url}
-            draggable={false}
-            alt="Edit"
-            className="current-media"
-          />
-          {textInputs.map((textInput, i) => (
-            <TextInput
-              key={i}
-              index={i}
-              handleDeleteText={handleDeleteText}
-              imageContainerRef={imageContainerRef}
-              currText={currText}
-              setCurrText={setCurrText}
-              {...textInput}
+        <div className="current-media-container">
+          <div ref={mediaRef} className="relative overflow-clip">
+            <img
+              ref={imageRef}
+              src={fileList[currentSlide].url}
+              draggable={false}
+              alt="Edit"
+              className="current-media"
             />
-          ))}
+            {textInputs.map((textInput, i) => (
+              <TextInput
+                key={i}
+                index={i}
+                handleDeleteText={handleDeleteText}
+                imageContainerRef={mediaRef}
+                currText={currText}
+                setCurrText={setCurrText}
+                {...textInput}
+              />
+            ))}
+          </div>
         </div>
         {/* Edit bar */}
         <div className="edit-bar mt-[19px]">
