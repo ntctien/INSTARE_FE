@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "~/styles/filters.css";
-import EditContainer from "./EditContainer";
+import BackModalContainer from "~/components/modal/BackModalContainer";
 import useEditPhoto from "~/hooks/useEditPhoto";
 import handleEditDone from "~/utils/handleEditDone";
 import filters from "~/constants/filters";
@@ -24,7 +24,7 @@ const Filter = ({ fileList, setFileList, currentSlide, setCurrFeature }) => {
   };
 
   return (
-    <EditContainer onDone={handleDone} onBack={() => setCurrFeature("edit")}>
+    <BackModalContainer onDone={handleDone} onBack={() => setCurrFeature("edit")}>
       <div className="edit-feature">
         {/* Media */}
         <div className="current-media-container">
@@ -79,7 +79,7 @@ const Filter = ({ fileList, setFileList, currentSlide, setCurrFeature }) => {
           ))}
         </div>
       </div>
-    </EditContainer>
+    </BackModalContainer>
   );
 };
 

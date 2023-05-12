@@ -1,16 +1,16 @@
 import { useState } from "react";
 import PhotoTransformationBar from "../home/create/edit/PhotoTransformationBar";
 import BackModal from "../modal/BackModal";
-import tempImg from "~/assets/temp1.jpg";
+import tempImg from "~/assets/temp2.jpg";
 
 const ChangePhotoModal = ({ open, onCancel }) => {
   const [zoom, setZoom] = useState(0);
 
   return (
     <BackModal open={open} onCancel={onCancel} title={"Change profile photo"}>
-      <div className="flex flex-col items-center px-[12px] pt-[12px] pb-[33px]">
+      <div className="flex flex-col items-center px-[12px] pt-[12px] pb-[33px] w-[550px]">
         {/* Media */}
-        <div className="h-[50vh] aspect-square">
+        <div className="w-full h-[60vh]">
           <img
             src={tempImg}
             alt="Edit"
@@ -18,7 +18,7 @@ const ChangePhotoModal = ({ open, onCancel }) => {
           />
         </div>
         {/* Photo transformation */}
-        <PhotoTransformationBar type={2} className={"w-[500px] px-[19px]"} />
+        <PhotoTransformationBar type={2} className={"w-full font-ubuntu"} />
         {/* Zoom */}
         <div className="row text-[36px] leading-[43.57px] gap-x-[11px] w-[68%]">
           <button>-</button>

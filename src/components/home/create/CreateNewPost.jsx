@@ -1,6 +1,6 @@
+import CloseModalContainer from "~/components/modal/CloseModalContainer";
 import MediaSlider from "../media_slider/MediaSlider";
 import MediaDragger from "./MediaDragger";
-import CloseButton from "~/components/CloseButton";
 
 const CreateNewPost = ({
   onCancel,
@@ -16,7 +16,7 @@ const CreateNewPost = ({
     setFileList([...newFileList]);
   };
   return (
-    <>
+    <CloseModalContainer onCancel={onCancel}>
       <div className="px-[20px] py-[14px] create-post">
         {/* Upload */}
         {fileList.length < 10 && (
@@ -54,12 +54,7 @@ const CreateNewPost = ({
           <button className="primary-btn mt-[10px]">POST</button>
         )}
       </div>
-      {/* Close button */}
-      <CloseButton
-        onClick={onCancel}
-        className="absolute top-[11.5px] right-[13.5px]"
-      />
-    </>
+    </CloseModalContainer>
   );
 };
 

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import CloseButton from "../CloseButton";
+import CloseButton from "../buttons/CloseButton";
 import Logo from "../Logo";
 
 const LogoAndCloseButton = ({ className }) => {

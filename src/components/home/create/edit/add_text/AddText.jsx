@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import EditContainer from "../EditContainer";
+import BackModalContainer from "~/components/modal/BackModalContainer";
 import TextInput from "./TextInput";
 import FontPicker from "./FontPicker";
 import {
@@ -94,7 +94,7 @@ const AddText = ({ setCurrFeature, fileList, currentSlide, setFileList }) => {
   };
 
   return (
-    <EditContainer onBack={() => setCurrFeature("edit")} onDone={handleDone}>
+    <BackModalContainer onBack={() => setCurrFeature("edit")} onDone={handleDone}>
       <div
         onClick={() => setCurrPicker(null)}
         className="edit-feature relative"
@@ -156,7 +156,7 @@ const AddText = ({ setCurrFeature, fileList, currentSlide, setFileList }) => {
           )}
         </div>
       </div>
-    </EditContainer>
+    </BackModalContainer>
   );
 };
 

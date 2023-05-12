@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import EditContainer from "./EditContainer";
+import { useState } from "react";
+import BackModalContainer from "~/components/modal/BackModalContainer";
 import handleEditDone from "~/utils/handleEditDone";
 import useEditPhoto from "~/hooks/useEditPhoto";
 
@@ -125,7 +125,7 @@ const Adjustment = ({
   };
 
   return (
-    <EditContainer onBack={() => setCurrFeature("edit")} onDone={handleDone}>
+    <BackModalContainer onBack={() => setCurrFeature("edit")} onDone={handleDone}>
       <div className="flex items-center font-ubuntu">
         {/* Media */}
         <div className="h-[58vh] w-[40vw] center">
@@ -179,7 +179,7 @@ const Adjustment = ({
           ))}
         </div>
       </div>
-    </EditContainer>
+    </BackModalContainer>
   );
 };
 

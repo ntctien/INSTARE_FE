@@ -26,10 +26,10 @@ const transformationItems = [
 
 const PhotoTransformationBar = ({ className, type }) => {
   return (
-    <div className={`between-row justify-center my-[10px] ${className}`}>
+    <div className={`row ${className}`}>
       {transformationItems.map((item, i) => (
-        <div key={i} className="row gap-x-[12px]">
-          <img src={type === 2 ? item.icon2 : item.icon} alt="Transformation" />
+        <div key={i} className="row justify-center gap-x-[12px] flex-1 py-[10px] hover:bg-hover cursor-pointer">
+          <img src={type === 2 ? item.icon2 : item.icon} alt="Transformation" className="w-[40px] h-[40px]"/>
           <p className="text-16">{item.title}</p>
         </div>
       ))}

@@ -181,7 +181,11 @@ textarea:where(.css-dev-only-do-not-override-ph9edi).ant-input.chat-input {
 /* Edit */
 
 .edit-bar {
-  @apply w-full h-[100px] bg-white flex items-center justify-center gap-x-[34px];
+  @apply w-full h-[100px] bg-white flex items-center justify-center gap-x-[14px];
+}
+
+.edit-item {
+  @apply px-[10px] py-[5px] rounded-15 hover:bg-black15
 }
 
 /* Media */

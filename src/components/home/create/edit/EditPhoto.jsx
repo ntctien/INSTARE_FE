@@ -1,9 +1,9 @@
-import EditContainer from "./EditContainer";
+import BackModalContainer from "~/components/modal/BackModalContainer";
 import { editFeatures } from "../../../../constants/createFeatures";
 
 const EditPhoto = ({ fileList, currentSlide,setCurrFeature }) => {
   return (
-    <EditContainer onBack={()=>setCurrFeature("create")}>
+    <BackModalContainer onBack={()=>setCurrFeature("create")}>
       <div className="edit-feature">
         {/* Media */}
         <div className="current-media-container">
@@ -19,7 +19,7 @@ const EditPhoto = ({ fileList, currentSlide,setCurrFeature }) => {
             <button
               key={i}
               onClick={() => setCurrFeature(item.id)}
-              className="flex flex-col items-center"
+              className="flex flex-col items-center edit-item"
             >
               <img src={item.icon} alt="Edit icon" />
               <h3 className="font-ubuntu text-20 mt-1">{item.title}</h3>
@@ -27,7 +27,7 @@ const EditPhoto = ({ fileList, currentSlide,setCurrFeature }) => {
           ))}
         </div>
       </div>
-    </EditContainer>
+    </BackModalContainer>
   );
 };
 
