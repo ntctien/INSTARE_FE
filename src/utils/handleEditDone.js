@@ -8,6 +8,7 @@ const handleEditDone = (mediaRef, imageRef, fileList, currentSlide, setFileList,
     domtoimage
         .toJpeg(media, getPreserveQualitySettings(image, media))
         .then((url) => {
+            console.log(url);
             let temp = fileList;
             temp[currentSlide].url = url;
             setFileList(temp);
