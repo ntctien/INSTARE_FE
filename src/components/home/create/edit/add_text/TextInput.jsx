@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import Draggable from "react-draggable";
+import { Rnd } from "react-rnd";
 import { deleteIcon, doneIcon } from "~/assets/add_text_icons";
 
 const TextInput = ({
@@ -15,6 +15,15 @@ const TextInput = ({
   const inputRef = useRef(null);
   const inputContainerRef = useRef(null);
   const [value, setValue] = useState("\u200B");
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const image = imageContainerRef.current;
+    if (!image) return;
+    setPosition({ x: image.clientWidth / 2, y: image.clientHeight / 2 });
+    console.log({ x: image.clientWidth / 2, y: image.clientHeight / 2 });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [imageContainerRef.current]);
 
   const edit = currText === index;
 
@@ -72,14 +81,20 @@ const TextInput = ({
     if (!input) return;
     if (!exceedImageHeight(imageContainer, inputContainer))
       input.style.height = getUpdatedHeight(input, value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [size]);
 
+  console.log(imageContainerRef.current?.clientWidth);
+
   return (
-    <Draggable disabled={!edit} bounds="parent">
-      <div
-        ref={inputContainerRef}
-        className="absolute top-1/2 left-1/2 select-none "
-      >
+    <Rnd
+      disableDragging={!edit}
+      bounds={"parent"}
+      enableResizing={false}
+      position={{ ...position }}
+      onDragStop={(e, d) => setPosition({ x: d.x, y: d.y })}
+    >
+      <div ref={inputContainerRef} className="select-none">
         {/* Input */}
         <div
           onClick={handleClick}
@@ -123,7 +138,7 @@ const TextInput = ({
           </>
         )}
       </div>
-    </Draggable>
+    </Rnd>
   );
 };
 

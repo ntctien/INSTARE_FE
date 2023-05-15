@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import BackModalContainer from "~/components/modal/BackModalContainer";
 import TextInput from "./TextInput";
 import FontPicker from "./FontPicker";
