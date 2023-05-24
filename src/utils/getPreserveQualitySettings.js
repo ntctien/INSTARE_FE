@@ -1,5 +1,5 @@
 const getPreserveQualitySettings = (image, media) => {
-    const scale = image.naturalWidth / media.clientWidth;
+    const scale = image.naturalWidth / image.clientWidth;
     return {
         width: media.clientWidth * scale,
         height: media.clientHeight * scale,

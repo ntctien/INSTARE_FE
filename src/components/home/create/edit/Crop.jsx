@@ -24,7 +24,7 @@ const cropItems = [
 const Crop = ({ setCurrFeature, fileList, currentSlide, setFileList }) => {
   const { imageRef, mediaRef } = useEditPhoto();
   const previewCanvasRef = useRef(null);
-  const [size, setSize] = useState({});
+  const [size, setSize] = useState({ width: 0, height: 0 });
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [ratio, setRatio] = useState(false);
   const [clientSize, setClientSize] = useState();
@@ -39,31 +39,28 @@ const Crop = ({ setCurrFeature, fileList, currentSlide, setFileList }) => {
 
   useEffect(() => {
     if (clientSize) {
-      setSize({ width: clientSize.width });
+      setSize({ width: clientSize.width, height: clientSize.height });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [clientSize]);
 
-  // useEffect(() => {
-  //   const canvas = previewCanvasRef.current;
-  //   if (canvas && size.width) {
-  //     if (ratio === false) {
-  //       if (size.height) canvas.height = size.height;
-  //     }
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [ratio, previewCanvasRef.current]);
+  useEffect(() => {
+    if (!clientSize || ratio === false) return;
+    if (clientSize.width < clientSize.height) {
+      setSize({ width: size.width, height: size.width / getRatioValue() });
+    } else if (clientSize.width > clientSize.height) {
+      setSize({ width: size.height * getRatioValue(), height: size.height });
+    } else {
+      if (ratio < 1)
+        setSize({ width: size.height * getRatioValue(), height: size.height });
+      else setSize({ width: size.width, height: size.width / getRatioValue() });
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ratio]);
 
   const getRatioValue = () => {
-    if (!clientSize) return 1;
-    if (ratio === false || ratio === true)
-      return clientSize.width / clientSize.height;
+    if (ratio === true) return clientSize.width / clientSize.height;
     return ratio;
-  };
-
-  const getCanvasHeight = () => {
-    if (size.height) return size.height;
-    return size.width / getRatioValue();
   };
 
   const canvasPreview = () => {
@@ -76,24 +73,20 @@ const Crop = ({ setCurrFeature, fileList, currentSlide, setFileList }) => {
       throw new Error("No 2d context");
     }
 
-    const width = size.width;
-    const height = getCanvasHeight();
-    const clientWidth = image.clientWidth;
-    const clientHeight = image.clientHeight;
+    const scale = clientSize.width / image.naturalWidth;
 
-    const scaleWidth = clientWidth / image.naturalWidth;
-    const scaleHeight = clientHeight / image.naturalHeight;
-
+    canvas.width = size.width / scale;
+    canvas.height = size.height / scale;
     context.drawImage(
       image,
-      position.x / scaleWidth,
-      position.y / scaleHeight,
-      width / scaleWidth,
-      height / scaleHeight,
+      position.x / scale,
+      position.y / scale,
+      size.width / scale,
+      size.height / scale,
       0,
       0,
-      width,
-      height
+      size.width / scale,
+      size.height / scale
     );
   };
 
@@ -130,7 +123,7 @@ const Crop = ({ setCurrFeature, fileList, currentSlide, setFileList }) => {
             />
             <Rnd
               bounds={"parent"}
-              size={{ width: size?.width, height: getCanvasHeight() }}
+              size={{ width: size.width, height: size.height }}
               onResizeStop={(e, direction, ref, delta, position) => {
                 setSize({ width: ref.clientWidth, height: ref.clientHeight });
                 setPosition({ ...position });
@@ -159,13 +152,10 @@ const Crop = ({ setCurrFeature, fileList, currentSlide, setFileList }) => {
                 />
               </div>
             </Rnd>
+            <div className="absolute top-0 left-0 w-full h-full -z-10 overflow-hidden">
+              <canvas ref={previewCanvasRef} />
+            </div>
           </div>
-          <canvas
-            ref={previewCanvasRef}
-            width={size?.width}
-            height={getCanvasHeight()}
-            className="absolute top-0 left-0 -z-10"
-          />
         </div>
         {/* Tranformation */}
         <PhotoTransformationBar />

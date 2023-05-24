@@ -7,7 +7,12 @@ const useEditPhoto = () => {
   useEffect(() => {
     const image = imageRef.current;
     const media = mediaRef.current;
-    if (image && media && image.naturalWidth < image.naturalHeight) {
+    if (
+      image &&
+      media &&
+      (image.naturalWidth <= image.naturalHeight ||
+        media.clientHeight > (window.innerHeight * 58) / 100)
+    ) {
       media.style.height = "100%";
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

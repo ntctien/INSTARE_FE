@@ -77,8 +77,6 @@ const Adjustment = ({
   const getMediaStyle = () => {
     const img = new Image();
     img.src = fileList[currentSlide].url;
-    const realWidth = img.width;
-    const realHeight = img.height;
 
     return {
       filter: adjustmentItems
@@ -90,8 +88,6 @@ const Adjustment = ({
               }%)`;
         })
         .join(" "),
-      width: realWidth < realHeight ? "fit-content" : "100%",
-      height: realWidth < realHeight ? "100%" : "fit-content",
     };
   };
 
@@ -134,7 +130,7 @@ const Adjustment = ({
               ref={imageRef}
               src={fileList[currentSlide].url}
               alt="Edit"
-              className="object-contain"
+              className="object-contain w-full h-full"
               style={getMediaStyle()}
             />
             {/* Image cover */}
