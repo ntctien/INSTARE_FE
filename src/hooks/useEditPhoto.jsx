@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-const useEditPhoto = () => {
+const useEditPhoto = (containerHeight) => {
   const mediaRef = useRef(null);
   const imageRef = useRef(null);
 
@@ -11,7 +11,7 @@ const useEditPhoto = () => {
       image &&
       media &&
       (image.naturalWidth <= image.naturalHeight ||
-        media.clientHeight > (window.innerHeight * 58) / 100)
+        media.clientHeight > (window.innerHeight * (containerHeight ?? 58)) / 100)
     ) {
       media.style.height = "100%";
     }
