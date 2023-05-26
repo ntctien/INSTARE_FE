@@ -3,8 +3,8 @@ import { Rnd } from "react-rnd";
 import domtoimage from "dom-to-image";
 import PhotoTransformationBar from "../home/create/edit/PhotoTransformationBar";
 import BackModal from "../modal/BackModal";
-import tempImg from "~/assets/temp1.jpg";
 import useEditPhoto from "~/hooks/useEditPhoto";
+import tempImg from "~/assets/temp1.jpg";
 
 const ChangePhotoModal = ({ open, onCancel }) => {
   const { imageRef, mediaRef } = useEditPhoto(60);
@@ -12,16 +12,25 @@ const ChangePhotoModal = ({ open, onCancel }) => {
   const [zoom, setZoom] = useState(50);
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [clientSize, setClientSize] = useState();
 
   useEffect(() => {
-    if (!mediaRef.current) return;
+    if (!clientSize) return;
 
-    const mediaWidth = mediaRef.current.clientWidth;
-    const mediaHeight = mediaRef.current.clientHeight;
+    const mediaWidth = clientSize.width;
+    const mediaHeight = clientSize.height;
     const boundaryValue = mediaWidth < mediaHeight ? mediaWidth : mediaHeight;
     const newSize = (zoom * boundaryValue) / 100;
     setSize({ width: newSize, height: newSize });
-  }, [zoom, mediaRef]);
+  }, [zoom, clientSize]);
+
+  const handleIncreaseZoom = () => {
+    if (zoom < 100) setZoom(zoom + 1);
+  };
+
+  const handleDecreaseZoom = () => {
+    if (zoom > 1) setZoom(zoom - 1);
+  };
 
   const canvasPreview = () => {
     const canvas = previewCanvasRef.current;
@@ -74,11 +83,14 @@ const ChangePhotoModal = ({ open, onCancel }) => {
       <div className="flex flex-col items-center px-[12px] pt-[12px] pb-[33px] w-[550px]">
         {/* Media */}
         <div className="w-full h-[60vh] center">
-          <div
-            ref={mediaRef}
-            className="relative overflow-hidden object-contain"
-          >
+          <div ref={mediaRef} className="relative overflow-hidden">
             <img
+              onLoad={() => {
+                setClientSize({
+                  width: imageRef.current.clientWidth,
+                  height: imageRef.current.clientHeight,
+                });
+              }}
               ref={imageRef}
               src={tempImg}
               alt="Edit"
@@ -98,7 +110,7 @@ const ChangePhotoModal = ({ open, onCancel }) => {
               className="rounded-full"
             />
             <div className="absolute top-0 left-0 w-full h-full -z-10 overflow-hidden">
-              <canvas ref={previewCanvasRef} />
+              <canvas ref={previewCanvasRef} className="rounded-full" />
             </div>
           </div>
         </div>
@@ -106,7 +118,7 @@ const ChangePhotoModal = ({ open, onCancel }) => {
         <PhotoTransformationBar type={2} className={"w-full font-ubuntu"} />
         {/* Zoom */}
         <div className="row text-[36px] leading-[43.57px] gap-x-[11px] w-[68%]">
-          <button>-</button>
+          <button onClick={handleDecreaseZoom}>-</button>
           <input
             type="range"
             min={1}
@@ -118,7 +130,7 @@ const ChangePhotoModal = ({ open, onCancel }) => {
             }}
             className="adjustment-range flex-1"
           />
-          <button>+</button>
+          <button onClick={handleIncreaseZoom}>+</button>
         </div>
       </div>
     </BackModal>
