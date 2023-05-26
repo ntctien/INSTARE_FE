@@ -9,6 +9,7 @@ import {
   textIcon,
 } from "../assets/edit_icons_white";
 import Result from "~/components/story/create_photo_or_video/Result";
+import Filter from "~/components/story/create_photo_or_video/Filter";
 
 const editFeatures = [
   { id: "crop", icon: cropIcon, title: "Crop photo" },
@@ -24,6 +25,8 @@ const CreatePhotoVideoStory = () => {
     switch (component) {
       case "result":
         return Result;
+      case "filter":
+        return Filter;
       default:
         break;
     }
@@ -40,7 +43,9 @@ const CreatePhotoVideoStory = () => {
               <div
                 key={i}
                 onClick={() => setComponent(feature.id)}
-                className="row gap-x-[18px] p-[10px] rounded-full hover:bg-hover"
+                className={`row gap-x-[18px] p-[10px] rounded-full hover:bg-hover ${
+                  (feature.id !== component && component !== 'result') && "opacity-10"
+                }`}
               >
                 <img src={feature.icon} alt="Edit" />
                 <h3 className="font-ubuntu font-bold text-24">
