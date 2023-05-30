@@ -42,10 +42,10 @@ const useAdjustment = () => {
     setAdjustments({ ...adjustments, [e.target.name]: 0 });
   };
 
+  const adjustmentBarProps = { adjustments, handleChange, handleReset };
+
   return {
-    adjustments,
-    handleChange,
-    handleReset,
+    adjustmentBarProps,
     getMediaStyle,
     getMediaCoverBackground,
   };

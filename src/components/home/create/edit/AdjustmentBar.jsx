@@ -1,7 +1,7 @@
 import React from "react";
 import adjustmentItems from "~/constants/adjustmentItems";
 
-const AdjustmentBar = ({ adjustments, handleChange, handleReset }) => {
+const AdjustmentBar = ({ adjustments, handleChange, handleReset, style }) => {
   const getSliderStyle = (value) => {
     if (value >= 0) {
       return `linear-gradient(to right, #D9D9D9 0%, #D9D9D9 50%, #BFB2F3 50%, #BFB2F3 ${
@@ -16,7 +16,10 @@ const AdjustmentBar = ({ adjustments, handleChange, handleReset }) => {
   };
 
   return (
-    <div className="flex flex-col justify-evenly bg-white px-5 h-[63vh] w-[25vw]">
+    <div
+      style={style}
+      className="flex flex-col h-[63vh] w-[25vw] font-ubuntu"
+    >
       {adjustmentItems.map((item, i) => (
         <div key={i}>
           <div className="row justify-between">

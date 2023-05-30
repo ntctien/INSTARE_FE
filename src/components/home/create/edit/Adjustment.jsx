@@ -11,13 +11,8 @@ const Adjustment = ({
   setCurrFeature,
 }) => {
   const { imageRef, mediaRef } = useEditPhoto();
-  const {
-    adjustments,
-    handleChange,
-    handleReset,
-    getMediaStyle,
-    getMediaCoverBackground,
-  } = useAdjustment();
+  const { adjustmentBarProps, getMediaStyle, getMediaCoverBackground } =
+    useAdjustment();
 
   const handleDone = () => {
     handleEditDone(
@@ -55,9 +50,13 @@ const Adjustment = ({
         </div>
         {/* Inputs */}
         <AdjustmentBar
-          adjustments={adjustments}
-          handleChange={handleChange}
-          handleReset={handleReset}
+          {...adjustmentBarProps}
+          style={{
+            background: "white",
+            justifyContent: "space-evenly",
+            paddingLeft: "20px",
+            paddingRight: "20px",
+          }}
         />
       </div>
     </BackModalContainer>

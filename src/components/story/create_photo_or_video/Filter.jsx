@@ -11,7 +11,7 @@ const Filter = ({ setMenuBarProps, setComponent }) => {
   const imageRef = useRef(null);
   const [currFilter, setCurrFilter] = useState("");
 
-  async function handleDone() {
+  const handleDone = () => {
     const media = mediaRef.current;
     const image = imageRef.current;
     if (!media || !image) return;
