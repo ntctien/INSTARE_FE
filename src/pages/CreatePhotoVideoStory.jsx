@@ -11,6 +11,7 @@ import {
 import Result from "~/components/story/create_photo_or_video/Result";
 import Filter from "~/components/story/create_photo_or_video/Filter";
 import { useNavigate } from "react-router-dom";
+import Adjustment from "~/components/story/create_photo_or_video/Adjustment";
 
 const editFeatures = [
   { id: "crop", icon: cropIcon, title: "Crop photo" },
@@ -30,6 +31,8 @@ const CreatePhotoVideoStory = () => {
         return Result;
       case "filter":
         return Filter;
+      case "adjustment":
+        return Adjustment;
       default:
         break;
     }
@@ -41,7 +44,9 @@ const CreatePhotoVideoStory = () => {
     <>
       <LeftBar>
         <MenuBar
-          primaryBtnLabel={component==="result" ? "Add to story" : "Save change"}
+          primaryBtnLabel={
+            component === "result" ? "Add to story" : "Save change"
+          }
           onDiscard={() => {
             if (component === "result") {
               navigate("/stories/create");

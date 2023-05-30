@@ -36,14 +36,14 @@ const Filter = ({ setMenuBarProps, setComponent }) => {
   return (
     <div className="flex gap-x-[100px] h-[70vh]">
       {/* Story */}
-      <div className="rounded-10 overflow-hidden">
+      <div className="create-story-media-container">
         <div ref={mediaRef}>
           <figure className={currFilter}>
             <img
               ref={imageRef}
               src={story}
               alt="Edit"
-              className="h-[70vh] aspect-story object-cover"
+              className="create-story-media"
             />
           </figure>
         </div>

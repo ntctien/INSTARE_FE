@@ -14,6 +14,14 @@
   @apply h-[50px] flex items-center justify-center cursor-pointer
 }
 
+.create-story-media {
+  @apply h-[70vh] aspect-story object-cover;
+}
+
+.create-story-media-container {
+  @apply rounded-10 overflow-hidden;
+}
+
 .story {
   @apply h-[80vh] w-[calc(80vh*9/16)] rounded-10 overflow-hidden;
 }
