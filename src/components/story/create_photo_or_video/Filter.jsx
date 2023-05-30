@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { StoryContext } from "~/contexts/StoryContext";
 import filters from "~/constants/filters";
 import filterSample from "~/assets/filterSample.jpg";
-import tempImg from "~/assets/temp1.jpg";
 
 const Filter = () => {
+  const { story } = useContext(StoryContext);
   const [currFilter, setCurrFilter] = useState("");
 
   return (
@@ -12,7 +13,7 @@ const Filter = () => {
       <div className="rounded-10 overflow-hidden">
         <figure className={currFilter}>
           <img
-            src={tempImg}
+            src={story}
             alt="Edit"
             className="h-[70vh] aspect-story object-cover"
           />
@@ -48,13 +49,15 @@ const Filter = () => {
             </div>
             <p
               style={
-                filter.class === currFilter ? {
-                  background:
-                    "linear-gradient(90deg, #96CAF7 0%, #BFB2F3 100%)",
-                  WebkitBackgroundClip: "text",
-                  backgroundClip: "text",
-                  color: "transparent",
-                } : null
+                filter.class === currFilter
+                  ? {
+                      background:
+                        "linear-gradient(90deg, #96CAF7 0%, #BFB2F3 100%)",
+                      WebkitBackgroundClip: "text",
+                      backgroundClip: "text",
+                      color: "transparent",
+                    }
+                  : null
               }
             >
               {filter.name}

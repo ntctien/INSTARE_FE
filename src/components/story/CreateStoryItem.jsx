@@ -1,9 +1,7 @@
-import { Link } from "react-router-dom";
-
-const CreateStoryItem = ({ path, background, icon, label }) => {
+const CreateStoryItem = ({ onClick, background, icon, label }) => {
   return (
-    <Link
-      to={path}
+    <div
+      onClick={onClick}
       style={{
         background: background,
       }}
@@ -11,7 +9,7 @@ const CreateStoryItem = ({ path, background, icon, label }) => {
     >
       <img src={icon} alt="Media" />
       <p>{label}</p>
-    </Link>
+    </div>
   );
 };
 

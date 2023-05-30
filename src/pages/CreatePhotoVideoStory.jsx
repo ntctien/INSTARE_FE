@@ -20,6 +20,7 @@ const editFeatures = [
 
 const CreatePhotoVideoStory = () => {
   const [component, setComponent] = useState("result");
+  const [menuBarProps,setMenuBarProps] = useState({});
 
   const getComponent = () => {
     switch (component) {
@@ -37,7 +38,7 @@ const CreatePhotoVideoStory = () => {
   return (
     <>
       <LeftBar>
-        <MenuBar primaryBtnLabel={"Add to story"}>
+        <MenuBar primaryBtnLabel={"Add to story"} {...menuBarProps}>
           <div className="flex flex-col gap-y-[25px] mx-[16px] cursor-pointer">
             {editFeatures.map((feature, i) => (
               <div
@@ -57,7 +58,7 @@ const CreatePhotoVideoStory = () => {
         </MenuBar>
       </LeftBar>
       <ContentWrapper>
-        <Component />
+        <Component setMenuBarProps={setMenuBarProps}/>
       </ContentWrapper>
     </>
   );
