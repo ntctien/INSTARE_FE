@@ -10,6 +10,7 @@ import {
 } from "../assets/edit_icons_white";
 import Result from "~/components/story/create_photo_or_video/Result";
 import Filter from "~/components/story/create_photo_or_video/Filter";
+import { useNavigate } from "react-router-dom";
 
 const editFeatures = [
   { id: "crop", icon: cropIcon, title: "Crop photo" },
@@ -19,8 +20,9 @@ const editFeatures = [
 ];
 
 const CreatePhotoVideoStory = () => {
+  const navigate = useNavigate();
   const [component, setComponent] = useState("result");
-  const [menuBarProps,setMenuBarProps] = useState({});
+  const [menuBarProps, setMenuBarProps] = useState({});
 
   const getComponent = () => {
     switch (component) {
@@ -38,14 +40,26 @@ const CreatePhotoVideoStory = () => {
   return (
     <>
       <LeftBar>
-        <MenuBar primaryBtnLabel={"Add to story"} {...menuBarProps}>
+        <MenuBar
+          primaryBtnLabel={component==="result" ? "Add to story" : "Save change"}
+          onDiscard={() => {
+            if (component === "result") {
+              navigate("/stories/create");
+            } else {
+              setComponent("result");
+            }
+          }}
+          {...menuBarProps}
+        >
           <div className="flex flex-col gap-y-[25px] mx-[16px] cursor-pointer">
             {editFeatures.map((feature, i) => (
               <div
                 key={i}
                 onClick={() => setComponent(feature.id)}
                 className={`row gap-x-[18px] p-[10px] rounded-full hover:bg-hover ${
-                  (feature.id !== component && component !== 'result') && "opacity-10"
+                  feature.id !== component &&
+                  component !== "result" &&
+                  "opacity-10"
                 }`}
               >
                 <img src={feature.icon} alt="Edit" />
@@ -58,7 +72,10 @@ const CreatePhotoVideoStory = () => {
         </MenuBar>
       </LeftBar>
       <ContentWrapper>
-        <Component setMenuBarProps={setMenuBarProps}/>
+        <Component
+          setComponent={setComponent}
+          setMenuBarProps={setMenuBarProps}
+        />
       </ContentWrapper>
     </>
   );

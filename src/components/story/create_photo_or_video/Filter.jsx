@@ -1,23 +1,52 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import domtoimage from "dom-to-image";
 import { StoryContext } from "~/contexts/StoryContext";
 import filters from "~/constants/filters";
 import filterSample from "~/assets/filterSample.jpg";
+import getPreserveQualitySettings from "~/utils/getPreserveQualitySettings";
 
-const Filter = () => {
-  const { story } = useContext(StoryContext);
+const Filter = ({ setMenuBarProps, setComponent }) => {
+  const { story, setStory } = useContext(StoryContext);
+  const mediaRef = useRef(null);
+  const imageRef = useRef(null);
   const [currFilter, setCurrFilter] = useState("");
+
+  async function handleDone() {
+    const media = mediaRef.current;
+    const image = imageRef.current;
+    if (!media || !image) return;
+    domtoimage
+      .toJpeg(media, getPreserveQualitySettings(image, media))
+      .then((url) => {
+        setStory(url);
+        setComponent("result");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  useEffect(() => {
+    setMenuBarProps((prev) => {
+      return { ...prev, onPrimaryBtnClick: handleDone };
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="flex gap-x-[100px] h-[70vh]">
       {/* Story */}
       <div className="rounded-10 overflow-hidden">
-        <figure className={currFilter}>
-          <img
-            src={story}
-            alt="Edit"
-            className="h-[70vh] aspect-story object-cover"
-          />
-        </figure>
+        <div ref={mediaRef}>
+          <figure className={currFilter}>
+            <img
+              ref={imageRef}
+              src={story}
+              alt="Edit"
+              className="h-[70vh] aspect-story object-cover"
+            />
+          </figure>
+        </div>
       </div>
       <div className="flex flex-col gap-y-[26px] overflow-y-auto">
         {filters.map((filter, i) => (
