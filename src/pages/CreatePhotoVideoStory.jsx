@@ -16,6 +16,7 @@ import Adjustment from "~/components/story/create_photo_or_video/Adjustment";
 import Text from "~/components/story/create_photo_or_video/Text";
 import { StoryContext } from "~/contexts/StoryContext";
 import getPreserveQualitySettings from "~/utils/getPreserveQualitySettings";
+import Crop from "~/components/story/create_photo_or_video/Crop";
 
 const editFeatures = [
   { id: "crop", icon: cropIcon, title: "Crop photo" },
@@ -40,6 +41,8 @@ const CreatePhotoVideoStory = () => {
         return Adjustment;
       case "text":
         return Text;
+      case "crop":
+        return Crop;
       default:
         break;
     }

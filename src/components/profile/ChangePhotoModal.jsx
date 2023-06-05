@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Rnd } from "react-rnd";
 import domtoimage from "dom-to-image";
-import PhotoTransformationBar from "../home/create/edit/PhotoTransformationBar";
 import BackModal from "../modal/BackModal";
 import useEditPhoto from "~/hooks/useEditPhoto";
 import tempImg from "~/assets/temp1.jpg";
+import CropBar from "./CropBar";
 
 const ChangePhotoModal = ({ open, onCancel }) => {
   const { imageRef, mediaRef } = useEditPhoto(60);
@@ -23,14 +23,6 @@ const ChangePhotoModal = ({ open, onCancel }) => {
     const newSize = (zoom * boundaryValue) / 100;
     setSize({ width: newSize, height: newSize });
   }, [zoom, clientSize]);
-
-  const handleIncreaseZoom = () => {
-    if (zoom < 100) setZoom(zoom + 1);
-  };
-
-  const handleDecreaseZoom = () => {
-    if (zoom > 1) setZoom(zoom - 1);
-  };
 
   const canvasPreview = () => {
     const canvas = previewCanvasRef.current;
@@ -114,24 +106,7 @@ const ChangePhotoModal = ({ open, onCancel }) => {
             </div>
           </div>
         </div>
-        {/* Photo transformation */}
-        <PhotoTransformationBar type={2} className={"w-full font-ubuntu"} />
-        {/* Zoom */}
-        <div className="row text-[36px] leading-[43.57px] gap-x-[11px] w-[68%]">
-          <button onClick={handleDecreaseZoom}>-</button>
-          <input
-            type="range"
-            min={1}
-            max={100}
-            value={zoom}
-            onChange={(e) => setZoom(e.target.value)}
-            style={{
-              backgroundImage: `linear-gradient(90deg, #BFB2F3 ${zoom}%,#777777 ${zoom}%)`,
-            }}
-            className="adjustment-range flex-1"
-          />
-          <button onClick={handleIncreaseZoom}>+</button>
-        </div>
+        <CropBar zoom={zoom} setZoom={setZoom} />
       </div>
     </BackModal>
   );
