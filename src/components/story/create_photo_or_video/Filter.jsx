@@ -1,37 +1,13 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import domtoimage from "dom-to-image";
+import { useContext, useState } from "react";
 import { StoryContext } from "~/contexts/StoryContext";
 import filters from "~/constants/filters";
 import filterSample from "~/assets/filterSample.jpg";
-import getPreserveQualitySettings from "~/utils/getPreserveQualitySettings";
+import useEditStory from "~/hooks/useEditStory";
 
-const Filter = ({ setMenuBarProps, setComponent }) => {
-  const { story, setStory } = useContext(StoryContext);
-  const mediaRef = useRef(null);
-  const imageRef = useRef(null);
+const Filter = ({ updateMenuBar }) => {
+  const { story } = useContext(StoryContext);
+  const { mediaRef, imageRef } = useEditStory(updateMenuBar);
   const [currFilter, setCurrFilter] = useState("");
-
-  const handleDone = () => {
-    const media = mediaRef.current;
-    const image = imageRef.current;
-    if (!media || !image) return;
-    domtoimage
-      .toJpeg(media, getPreserveQualitySettings(image, media))
-      .then((url) => {
-        setStory(url);
-        setComponent("result");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-  useEffect(() => {
-    setMenuBarProps((prev) => {
-      return { ...prev, onPrimaryBtnClick: handleDone };
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <div className="flex gap-x-[100px] h-[70vh]">

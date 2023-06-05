@@ -1,39 +1,14 @@
-import { useContext, useEffect, useRef } from "react";
-import domtoimage from "dom-to-image";
+import { useContext } from "react";
 import AdjustmentBar from "~/components/home/create/edit/AdjustmentBar";
 import { StoryContext } from "~/contexts/StoryContext";
 import useAdjustment from "~/hooks/useAdjustment";
-import getPreserveQualitySettings from "~/utils/getPreserveQualitySettings";
+import useEditStory from "~/hooks/useEditStory";
 
-const Adjustment = ({setMenuBarProps, setComponent}) => {
-  const mediaRef = useRef(null);
-  const imageRef = useRef(null);
-  const { story, setStory } = useContext(StoryContext);
+const Adjustment = ({ updateMenuBar }) => {
+  const { story } = useContext(StoryContext);
+  const { mediaRef, imageRef } = useEditStory(updateMenuBar);
   const { adjustmentBarProps, getMediaStyle, getMediaCoverBackground } =
     useAdjustment();
-
-  const handleDone = () => {
-    const media = mediaRef.current;
-    const image = imageRef.current;
-    if (!media || !image) return;
-    domtoimage
-      .toJpeg(media, getPreserveQualitySettings(image, media))
-      .then((url) => {
-        setStory(url);
-        setComponent("result");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-  useEffect(() => {
-    setMenuBarProps((prev) => {
-      return { ...prev, onPrimaryBtnClick: handleDone };
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
 
   return (
     <div className="flex items-start gap-x-[35px]">

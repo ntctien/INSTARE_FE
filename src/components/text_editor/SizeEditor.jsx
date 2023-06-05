@@ -1,6 +1,6 @@
 import React from "react";
 
-const SizeEditor = ({ handleOnChange, size, selectedColor }) => {
+const SizeEditor = ({ onChange, value, selectedColor }) => {
   return (
     <div className="relative">
       <svg
@@ -13,11 +13,11 @@ const SizeEditor = ({ handleOnChange, size, selectedColor }) => {
         <defs>
           <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop
-              offset={`${size * 2.5}%`}
+              offset={`${value * 2.5}%`}
               style={{ stopColor: selectedColor || "#3C3C3C", stopOpacity: 1 }}
             />
             <stop
-              offset={`${100 - size * 2.5}%`}
+              offset={`${100 - value * 2.5}%`}
               style={{ stopColor: "#777777", stopOpacity: 1 }}
             />
           </linearGradient>
@@ -28,8 +28,8 @@ const SizeEditor = ({ handleOnChange, size, selectedColor }) => {
         type="range"
         min={1}
         max={40}
-        value={size}
-        onChange={handleOnChange}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
         className="size-range"
       />
     </div>

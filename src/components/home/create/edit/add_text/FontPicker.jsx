@@ -1,18 +1,10 @@
 import polygonIcon from "~/assets/polygon1.svg";
 import FontTable from "~/components/text_editor/FontTable";
 
-const FontPicker = ({ font, setTextInputs, textInputs, currText }) => {
-  const handleChangeFont = (value) => {
-    let tempArray = [...textInputs];
-    tempArray[currText].font = value;
-    setTextInputs([...tempArray]);
-  };
+const FontPicker = ({ value, onChange, ref }) => {
   return (
-    <div className="picker-wrapper">
-      <FontTable
-        value={textInputs[currText].font}
-        onChange={handleChangeFont}
-      />
+    <div ref={ref} className="picker-wrapper">
+      <FontTable value={value} onChange={onChange} />
       <img src={polygonIcon} alt="Index" />
     </div>
   );

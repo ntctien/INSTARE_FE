@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
 
 const useClickOutside = (onClickOutside) => {
-  const ref = useRef(null);
+  const clickOutsideRef = useRef(null);
 
   const handleClickOutside = (e) => {
-    if (ref.current && !ref.current.contains(e.target)) {
+    if (clickOutsideRef.current && !clickOutsideRef.current.contains(e.target)) {
       onClickOutside();
     }
   };
@@ -17,7 +17,7 @@ const useClickOutside = (onClickOutside) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return {ref};
+  return {clickOutsideRef};
 };
 
 export default useClickOutside;

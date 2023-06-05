@@ -7,10 +7,10 @@ import LeftBar from "~/components/story/LeftBar";
 import MenuBar from "~/components/story/MenuBar";
 import Select from "~/components/story/Select";
 import SelectCircle from "~/components/story/SelectCircle";
-import FontTable from "~/components/text_editor/FontTable";
 import SizeEditor from "~/components/text_editor/SizeEditor";
 import storyBackgroundColors from "~/constants/storyBackgroundColors";
 import textColors from "~/constants/textColors";
+import SelectFont from "~/components/story/SelectFont";
 
 const CreateTextStory = () => {
   const storyRef = useRef(null);
@@ -52,32 +52,14 @@ const CreateTextStory = () => {
               placeholder="Type your content here..."
               className="h-[27.7vh] focus:outline-none px-[15px] py-5 placeholder:text-white placeholder:opacity-50 resize-none"
             />
-            <Select
+            <SelectFont
               value={style.fontFamily}
-              valueStyle={{ fontFamily: style.fontFamily }}
-              prefix={
-                <p
-                  style={{ fontFamily: style.fontFamily }}
-                  className="text-center w-[30px]"
-                >
-                  Aa
-                </p>
-              }
-              dropDownBox={
-                <FontTable
-                  onChange={(value) =>
-                    setStyle({ ...style, fontFamily: value })
-                  }
-                  value={style.fontFamily}
-                  background={"#38444E"}
-                  position={"top-0 -right-2 translate-x-full"}
-                />
-              }
+              onChange={(value) => setStyle({ ...style, fontFamily: value })}
             />
             <div>
               <SizeEditor
-                size={style.fontSize}
-                handleOnChange={(e) =>
+                value={style.fontSize}
+                onChange={(e) =>
                   setStyle({ ...style, fontSize: e.target.value })
                 }
                 selectedColor={"#D6D6D6"}

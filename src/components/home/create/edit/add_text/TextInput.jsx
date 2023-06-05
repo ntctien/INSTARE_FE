@@ -21,7 +21,6 @@ const TextInput = ({
     const image = imageContainerRef.current;
     if (!image) return;
     setPosition({ x: image.clientWidth / 2, y: image.clientHeight / 2 });
-    console.log({ x: image.clientWidth / 2, y: image.clientHeight / 2 });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageContainerRef.current]);
 

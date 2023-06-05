@@ -4,11 +4,11 @@ import useClickOutside from "~/hooks/useClickOutside";
 
 const Select = ({ value, valueStyle, prefix, dropDownBox }) => {
   const [open, setOpen] = useState(false);
-  const { ref } = useClickOutside(() => setOpen(false));
+  const { clickOutsideRef } = useClickOutside(() => setOpen(false));
 
   return (
     <div
-      ref={ref}
+      ref={clickOutsideRef}
       onClick={() => setOpen((prev) => !prev)}
       className="row gap-x-[17px] pl-[25px] relative"
     >

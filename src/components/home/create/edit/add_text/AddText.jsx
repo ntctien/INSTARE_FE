@@ -2,22 +2,37 @@ import { useEffect, useState } from "react";
 import BackModalContainer from "~/components/modal/BackModalContainer";
 import TextInput from "./TextInput";
 import FontPicker from "./FontPicker";
-import {
-  addIcon,
-  fontIcon,
-  sizeIcon,
-  colorIcon,
-} from "~/assets/add_text_icons";
+import { fontIcon, sizeIcon, colorIcon } from "~/assets/add_text_icons";
 import SizePicker from "./SizePicker";
 import ColorPicker from "./ColorPicker";
 import handleEditDone from "~/utils/handleEditDone";
 import useEditPhoto from "~/hooks/useEditPhoto";
+import AddTextButton from "./AddTextButton";
+import useAddText from "~/hooks/useAddText";
+import useClickOutside from "~/hooks/useClickOutside";
 
 const AddText = ({ setCurrFeature, fileList, currentSlide, setFileList }) => {
   const { imageRef, mediaRef } = useEditPhoto();
-  const [textInputs, setTextInputs] = useState([]);
+  const {
+    handleAddText,
+    handleDeleteText,
+    handleDone,
+    currText,
+    setCurrText,
+    textInputs,
+    getPickerProps,
+  } = useAddText(() =>
+    handleEditDone(
+      mediaRef,
+      imageRef,
+      fileList,
+      currentSlide,
+      setFileList,
+      setCurrFeature
+    )
+  );
+  const { clickOutsideRef } = useClickOutside(() => setCurrPicker(null));
   const [currPicker, setCurrPicker] = useState(null);
-  const [currText, setCurrText] = useState(null);
 
   useEffect(() => {
     if (currPicker === "font" || currPicker === "color") setCurrPicker(null);
@@ -31,10 +46,8 @@ const AddText = ({ setCurrFeature, fileList, currentSlide, setFileList }) => {
       icon: fontIcon,
       picker: (
         <FontPicker
-          font={textInputs[currText]?.font}
-          setTextInputs={setTextInputs}
-          textInputs={textInputs}
-          currText={currText}
+          ref={currPicker === "font" && clickOutsideRef}
+          {...getPickerProps("font")}
         />
       ),
     },
@@ -44,10 +57,8 @@ const AddText = ({ setCurrFeature, fileList, currentSlide, setFileList }) => {
       icon: sizeIcon,
       picker: (
         <SizePicker
-          size={textInputs[currText]?.size}
-          setTextInputs={setTextInputs}
-          textInputs={textInputs}
-          currText={currText}
+          ref={currPicker === "size" && clickOutsideRef}
+          {...getPickerProps("size")}
         />
       ),
     },
@@ -57,48 +68,19 @@ const AddText = ({ setCurrFeature, fileList, currentSlide, setFileList }) => {
       icon: colorIcon,
       picker: (
         <ColorPicker
-          color={textInputs[currText]?.color}
-          setTextInputs={setTextInputs}
-          textInputs={textInputs}
-          currText={currText}
+          ref={currPicker === "color" && clickOutsideRef}
+          {...getPickerProps("color")}
         />
       ),
     },
   ];
 
-  const handleAddText = () => {
-    setTextInputs([
-      ...textInputs,
-      { font: "Ubuntu", size: 20, color: "#FFFFFF" },
-    ]);
-    setCurrText(textInputs.length);
-  };
-
-  const handleDeleteText = (index) => {
-    const newInputs = [...textInputs];
-    newInputs.splice(index, 1);
-    setTextInputs(newInputs);
-    setCurrText(null);
-  };
-
-  const handleDone = () => {
-    setCurrText(null);
-    handleEditDone(
-      mediaRef,
-      imageRef,
-      fileList,
-      currentSlide,
-      setFileList,
-      setCurrFeature
-    );
-  };
-
   return (
-    <BackModalContainer onBack={() => setCurrFeature("edit")} onDone={handleDone}>
-      <div
-        onClick={() => setCurrPicker(null)}
-        className="edit-feature relative"
-      >
+    <BackModalContainer
+      onBack={() => setCurrFeature("edit")}
+      onDone={handleDone}
+    >
+      <div className="edit-feature relative">
         {/* Media */}
         <div className="current-media-container">
           <div ref={mediaRef} className="relative overflow-clip">
@@ -144,15 +126,7 @@ const AddText = ({ setCurrFeature, fileList, currentSlide, setFileList }) => {
               ))}
             </div>
           ) : (
-            <button
-              onClick={handleAddText}
-              className="row gap-x-[5px] bg-grey p-[5px] rounded-5"
-            >
-              <img src={addIcon} alt="Add text" />
-              <h3 className="font-medium text-[20px] leading-6">
-                CLICK TO ADD TEXT
-              </h3>
-            </button>
+            <AddTextButton onClick={handleAddText} />
           )}
         </div>
       </div>

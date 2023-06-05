@@ -15,6 +15,7 @@ module.exports = {
         'pastel-purple-dark': '#BFB2F3',
         'red': '#F24E1E',
         'modal-bg': '#F0F6FD',
+        'story': '#38444E',
         'hover': 'rgba(0,0,0,0.05)',
         'black15': 'rgba(0, 0, 0, 0.15)',
         'black50': 'rgba(0, 0, 0, 0.5)',
@@ -55,7 +56,7 @@ module.exports = {
         '30': '30px'
       },
       aspectRatio: {
-        'story' : '9/16'
+        'story': '9/16'
       }
     },
   },
