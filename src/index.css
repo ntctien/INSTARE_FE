@@ -95,6 +95,11 @@ body {
   line-height: unset;
 }
 
+[class^="ant-spin"] {
+  font-family: unset;
+  font-size: unset;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
