@@ -89,6 +89,12 @@ body {
   border-top: 1px solid rgba(0, 0, 0, 0.15)
 }
 
+.ant-form {
+  font-family: unset;
+  font-size: unset;
+  line-height: unset;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
