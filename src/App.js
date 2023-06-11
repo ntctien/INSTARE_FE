@@ -21,6 +21,7 @@ import CreateStoryLayout from "./layouts/CreateStoryLayout";
 import CreateStory from "./pages/CreateStory";
 import CreateTextStory from "./pages/CreateTextStory";
 import CreatePhotoVideoStory from "./pages/CreatePhotoVideoStory";
+import MainLayout from "./layouts/MainLayout";
 
 function App() {
   return (
@@ -34,24 +35,26 @@ function App() {
           <Route path="new-password" element={<NewPassword />} />
         </Route>
       </Route>
-      <Route element={<MenuLayout />}>
-        <Route element={<HomeLayout />} path='/' >
-          <Route element={<Home />} path='' />
-          <Route element={<Profile />} path="username" />
+      <Route element={<MainLayout/>}>
+        <Route element={<MenuLayout />}>
+          <Route element={<HomeLayout />} path="/">
+            <Route element={<Home />} index />
+            <Route element={<Profile />} path="username" />
+          </Route>
+          <Route element={<Message />} path="message" />
         </Route>
-        <Route element={<Message />} path="message" />
-      </Route>
-      <Route element={<StoryLayout />} path="stories">
-        <Route element={<Stories />} index />
-        <Route element={<CreateStoryLayout />} path="create">
-          <Route element={<CreateStory />} index />
-          <Route element={<CreateTextStory />} path="text" />
-          <Route element={<CreatePhotoVideoStory />} path="photo-or-video" />
+        <Route element={<StoryLayout />} path="stories">
+          <Route element={<Stories />} index />
+          <Route element={<CreateStoryLayout />} path="create">
+            <Route element={<CreateStory />} index />
+            <Route element={<CreateTextStory />} path="text" />
+            <Route element={<CreatePhotoVideoStory />} path="photo-or-video" />
+          </Route>
         </Route>
+        <Route element={<Post />} path="post" />
+        <Route element={<Test />} path="test" />
       </Route>
-      <Route element={<Post />} path="post" />
-      <Route element={<Test />} path="test" />
-    </Routes>
+    </Routes >
   );
 }
 

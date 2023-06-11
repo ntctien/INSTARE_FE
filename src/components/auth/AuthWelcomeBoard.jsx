@@ -42,7 +42,7 @@ const AuthWelcomeBoard = ({
             <p className="text-[18px] md:text-[14px] text-white">{btnTitle}</p>
             <button
               onClick={handleOnClick}
-              className={`bg-[#FFFFFF1A] border-2 border-[#FFFFFFB2] rounded-5 font-bold text-[18px] md:text-[14px] text-white h-[30px] px-[12px] flex items-center justify-center`}
+              className={`bg-[#FFFFFF1A] border-2 border-[#FFFFFFB2] rounded-5 font-bold text-[18px] md:text-[14px] text-white h-[30px] px-[12px] flex items-center justify-center hover:bg-[rgba(255,255,255,0.2)]`}
             >
               {btnLabel}
             </button>

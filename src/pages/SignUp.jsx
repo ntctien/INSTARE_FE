@@ -94,10 +94,15 @@ const SignUp = () => {
           setErrors((prev) => {
             return { ...prev, username: message };
           });
+        else if (message === "Credential taken")
+          setErrors((prev) => {
+            return { ...prev, email: "This email was taken" };
+          });
       });
   };
 
-  const handleSignUpBtnClick = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const { errorObj, valid } = validateForm();
     if (valid) {
       if (inputData.confirmPassword !== inputData.password) {
@@ -122,7 +127,7 @@ const SignUp = () => {
       {/* Left Side */}
       <div className="pl-[10.8%] pr-[17%] col-center">
         <Spin spinning={loading}>
-          <div className="col-center">
+          <form onSubmit={handleSubmit} className="col-center">
             <h1 className="auth-title">Create an account</h1>
             <AuthInput
               name={"email"}
@@ -132,7 +137,7 @@ const SignUp = () => {
               ]}
               label="Email"
               placeholder={"example@email.com"}
-              value={inputData.email.value}
+              value={inputData.email}
               onChange={handleInputChange}
               validator={(value) => {
                 if (value === "") return "Email is required";
@@ -163,7 +168,7 @@ const SignUp = () => {
               ]}
               label="Username"
               placeholder={"Enter your username"}
-              value={inputData.username.value}
+              value={inputData.username}
               onChange={handleInputChange}
               error={errors.username}
               custom="mt-[17px]"
@@ -174,7 +179,7 @@ const SignUp = () => {
                 label="Password"
                 placeholder={"6+ character"}
                 password
-                value={inputData.password.value}
+                value={inputData.password}
                 onChange={handleInputChange}
                 error={errors.password}
                 custom={"flex-1"}
@@ -184,7 +189,7 @@ const SignUp = () => {
                 label="Confirm password"
                 placeholder={"6+ character"}
                 password
-                value={inputData.confirmPassword.value}
+                value={inputData.confirmPassword}
                 onChange={handleInputChange}
                 error={errors.confirmPassword}
                 custom={"flex-1"}
@@ -196,11 +201,11 @@ const SignUp = () => {
               <span className="text-black">Privacy Policy</span>
             </p>
             <div className="auth-btn-container mt-[6px]">
-              <button onClick={handleSignUpBtnClick} className="auth-btn">
+              <button type="submit" className="auth-btn">
                 Sign Up
               </button>
             </div>
-          </div>
+          </form>
         </Spin>
       </div>
       {/* Right Side */}

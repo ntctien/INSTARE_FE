@@ -1,10 +1,10 @@
-import { useNavigate } from "react-router-dom";
 import { Dropdown } from "antd";
 import { moreItem } from "~/constants/menuItems";
 import AppMenuItem from "./AppMenuItem";
+import useLogOut from "~/hooks/useLogOut";
 
 const MoreItem = ({ menuItemId, setMenuItemId }) => {
-  const navigate = useNavigate();
+  const handleLogOut = useLogOut();
 
   const moreOptions = [
     {
@@ -17,7 +17,7 @@ const MoreItem = ({ menuItemId, setMenuItemId }) => {
     {
       key: "logout",
       label: (
-        <p onClick={() => navigate("/signin")} className="option-danger">
+        <p onClick={handleLogOut} className="option-danger">
           Log out
         </p>
       ),
