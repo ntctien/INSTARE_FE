@@ -7,6 +7,7 @@ import thunk from 'redux-thunk'
 import './index.css';
 import App from './App';
 import allReducers from './reducers';
+import '~/fonts/Ubuntu';
 import reportWebVitals from './reportWebVitals';
 
 const middleware = [thunk]
