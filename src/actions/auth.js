@@ -1,7 +1,7 @@
-export const signIn = ({ token, expiry }) => {
+export const signIn = (userInfo) => {
     return {
         type: "SIGN_IN",
-        payload: { token, expiry },
+        payload: userInfo,
     };
 };
 

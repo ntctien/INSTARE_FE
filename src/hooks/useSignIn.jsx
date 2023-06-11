@@ -1,9 +1,6 @@
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { signIn } from "~/actions/auth";
 
 const useSignIn = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSignInSuccess = (token) => {
@@ -14,7 +11,6 @@ const useSignIn = () => {
       token: token,
       expiry: date,
     };
-    dispatch(signIn(tokenInfo));
     localStorage.setItem("user", JSON.stringify(tokenInfo));
 
     navigate("/");
