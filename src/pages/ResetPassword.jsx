@@ -1,44 +1,48 @@
+import { Spin } from "antd";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import verifyEmailForgotPassword from "~/api/services/auth/verifyEmailForgotPassword";
 import AuthInput from "~/components/auth/AuthInput";
+import useForm from "~/hooks/useForm";
 import validateEmail from "~/utils/validateEmail";
 
+const valuesObj = {
+  email: {
+    require: true,
+    validator: (value) => {
+      if (!validateEmail(value)) return "Invalid email address";
+    },
+  },
+};
+
 const ResetPassword = () => {
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState(null);
+  const { values, getInputProps, setFieldError, handleSubmit } =
+    useForm(valuesObj);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
-  const validate = (value) => {
-    if (value === "") {
-      return "This field is required";
-    }
-    if (!validateEmail(value)) return "Invalid email address";
-    return null;
-  };
-
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setEmail(value);
-
-    if (error != null) {
-      setError(validate(value));
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleVerifyEmail = async () => {
+    setLoading(true);
+    await verifyEmailForgotPassword(values.email)
+      .then(() => {
+        navigate("/otp", {
+          state: { inputData: values, purpose: "reset-password" },
+        });
+      })
+      .catch((err) => setFieldError("email", err.response.data.message));
+    setLoading(false);
   };
 
   return (
-    <>
+    <Spin spinning={loading}>
       <h1 className="title">Reset password</h1>
       <p className="subtitle">
         Enter the email you used to sign up to InStare. We will send you a
         verification code to reset your password:
       </p>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(e) => handleSubmit(e, handleVerifyEmail)}>
         <AuthInput
-          value={email}
-          onChange={handleInputChange}
-          error={error}
+          {...getInputProps("email")}
           placeholder={"example@email.com"}
           custom={"mt-[7px]"}
         />
@@ -46,7 +50,7 @@ const ResetPassword = () => {
           Search for account
         </button>
       </form>
-    </>
+    </Spin>
   );
 };
 

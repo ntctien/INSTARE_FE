@@ -1,13 +1,16 @@
 import { Spin, message } from "antd";
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import checkOTPForgotPassword from "~/api/services/auth/checkOTPForgotPassword";
 import signUpAfterVerify from "~/api/services/auth/signUpAfterVerify";
 import verifyEmailForSignUp from "~/api/services/auth/verifyEmailForSignUp";
+import verifyEmailForgotPassword from "~/api/services/auth/verifyEmailForgotPassword";
 import AuthInput from "~/components/auth/AuthInput";
 import useSignIn from "~/hooks/useSignIn";
 
 const OTPVerification = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const handleSignInSuccess = useSignIn();
   const [otp, setOtp] = useState("");
   const [error, setError] = useState(null);
@@ -58,13 +61,41 @@ const OTPVerification = () => {
     setLoading(false);
   };
 
+  const handleCheckOTPForgotPassword = async () => {
+    if (otp === "") {
+      setError("Please enter the OTP");
+      return;
+    }
+    setLoading(true);
+    await checkOTPForgotPassword(inputData.email, parseInt(otp))
+      .then(({ data }) => {
+        navigate("/new-password", {
+          state: inputData.email,
+        });
+      })
+      .catch(() => setError("OTP is incorrect"));
+    setLoading(false);
+  };
+
+  const handleResentForgotPassword = async () => {
+    setLoading(true);
+    await verifyEmailForgotPassword(inputData.email)
+      .then(() => {
+        message.success("OTP resent!");
+      })
+      .catch((err) => console.log(err));
+    setLoading(false);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     switch (purpose) {
       case "sign-up":
         handleSignUp();
         break;
-
+      case "reset-password":
+        handleCheckOTPForgotPassword();
+        break;
       default:
         break;
     }
@@ -75,7 +106,9 @@ const OTPVerification = () => {
       case "sign-up":
         handleResendForSignUp();
         break;
-
+      case "reset-password":
+        handleResentForgotPassword();
+        break;
       default:
         break;
     }

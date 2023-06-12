@@ -100,6 +100,10 @@ body {
   font-size: unset;
 }
 
+.ant-message-notice .ant-message-success>.anticon {
+  color: #BFB2F3;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;

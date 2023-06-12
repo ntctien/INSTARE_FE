@@ -21,7 +21,7 @@
   border: none;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
-  @apply h-[5.86vh] w-full font-medium text-[25px] md:text-[20px] text-white;
+  @apply h-[5.86vh] w-full font-medium text-[25px] md:text-[20px] text-white hover:brightness-105;
 }
 
 .auth-input-container {
