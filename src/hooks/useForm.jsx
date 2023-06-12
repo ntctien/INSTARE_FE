@@ -69,7 +69,18 @@ const useForm = (fieldValues) => {
     });
   };
 
-  return { values, errors, setFieldError, handleSubmit, getInputProps };
+  const clearForm = () => {
+    setValues(objectMap(fieldValues, (v) => ""));
+  };
+
+  return {
+    values,
+    errors,
+    setFieldError,
+    handleSubmit,
+    getInputProps,
+    clearForm,
+  };
 };
 
 export default useForm;

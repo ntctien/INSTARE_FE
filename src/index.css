@@ -47,7 +47,7 @@ body {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
   padding: 11px;
-  @apply font-ubuntu font-bold text-24 text-white;
+  @apply font-ubuntu font-bold text-24 text-white hover:brightness-105;
 }
 
 .warning-btn {
