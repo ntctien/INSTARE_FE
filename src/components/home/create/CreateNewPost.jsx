@@ -1,6 +1,11 @@
 import CloseModalContainer from "~/components/modal/CloseModalContainer";
 import MediaSlider from "../media_slider/MediaSlider";
 import MediaDragger from "./MediaDragger";
+import convertImgUrlToFile from "~/utils/convertImgUrlToFile";
+import { Spin } from "antd";
+import { useState } from "react";
+import createPost from "~/api/services/post/createPost";
+import { useSelector } from "react-redux";
 
 const CreateNewPost = ({
   onCancel,
@@ -10,50 +15,85 @@ const CreateNewPost = ({
   setCurrentSlide,
   setCurrFeature,
 }) => {
+  const { currentUser } = useSelector((state) => state.user);
+  const [caption, setCaption] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const handleDelete = (currentSlide) => {
-    const newFileList = fileList;
-    newFileList.splice(currentSlide, 1);
-    setFileList([...newFileList]);
+    setFileList(fileList.filter((file, i) => i !== currentSlide));
   };
+
+  const handlePost = async () => {
+    setLoading(true);
+    const files = await Promise.all(
+      fileList.map(async (file) => {
+        if (file.type.split("/")[0] === "video") return file.originFileObj;
+        return await convertImgUrlToFile(file.url, file.name);
+      })
+    );
+    await createPost(currentUser.token, files, caption)
+      .then(({ data }) => {
+        console.log(data);
+        onCancel();
+      })
+      .catch((err) => console.log(err));
+    setLoading(false);
+  };
+
   return (
     <CloseModalContainer onCancel={onCancel}>
-      <div className="px-[20px] py-[14px] create-post">
-        {/* Upload */}
-        {fileList.length < 10 && (
-          <MediaDragger fileList={fileList} setFileList={setFileList} />
-        )}
-        {fileList.length > 0 && fileList.length < 10 && (
-          <div className="w-full h-[10px]" />
-        )}
-        {/* Media slider */}
-        {fileList.length > 0 && (
-          <MediaSlider
-            mediaList={fileList.map((file) => {
-              return { url: file?.url, type: file?.type.split("/")[0] };
-            })}
-            editMode
-            handleDelete={handleDelete}
-            setCurrFeature={setCurrFeature}
-            currentSlide={currentSlide}
-            setCurrentSlide={setCurrentSlide}
-            dots
+      <Spin spinning={loading}>
+        <div className="px-[20px] py-[14px] create-post">
+          {/* Upload */}
+          {fileList.length < 10 && (
+            <MediaDragger fileList={fileList} setFileList={setFileList} />
+          )}
+          {fileList.length > 0 && fileList.length < 10 && (
+            <div className="w-full h-[10px]" />
+          )}
+          {/* Media slider */}
+          {fileList.length > 0 && (
+            <MediaSlider
+              mediaList={fileList.map((file) => {
+                return { url: file?.url, type: file?.type?.split("/")[0] };
+              })}
+              editMode
+              handleDelete={handleDelete}
+              setCurrFeature={setCurrFeature}
+              currentSlide={currentSlide}
+              setCurrentSlide={setCurrentSlide}
+              dots
+            />
+          )}
+          {/* User info */}
+          <div className="row gap-x-[7px] mt-[13px]">
+            <div className="w-[30px] avatar overflow-hidden">
+              {currentUser.ava && (
+                <img
+                  src={currentUser.ava}
+                  alt="Avatar"
+                  className="w-full h-full object-cover object-center"
+                />
+              )}
+            </div>
+            <h3 className="font-semibold text-14">{currentUser.username}</h3>
+          </div>
+          {/* Caption */}
+          <textarea
+            placeholder="Write a caption..."
+            maxLength={2200}
+            value={caption}
+            onChange={(e) => setCaption(e.target.value)}
+            className="resize-none w-full mt-[13px] bg-transparent focus:outline-none text-14 placeholder:text-black50 h-[100px]"
           />
-        )}
-        {/* User info */}
-        <div className="row gap-x-[7px] mt-[13px]">
-          <div className="w-[30px] avatar"></div>
-          <h3 className="font-semibold text-14">_ptt.chang</h3>
+          {/* Post button */}
+          {fileList.length > 0 && (
+            <button onClick={handlePost} className="primary-btn mt-[10px]">
+              POST
+            </button>
+          )}
         </div>
-        {/* Caption */}
-        <textarea
-          placeholder="Write a caption..."
-          className="resize-none w-full mt-[13px] bg-transparent focus:outline-none text-14 placeholder:text-black50 h-[100px]"
-        />
-        {/* Post button */}
-        {fileList.length > 0 && (
-          <button className="primary-btn mt-[10px]">POST</button>
-        )}
-      </div>
+      </Spin>
     </CloseModalContainer>
   );
 };
