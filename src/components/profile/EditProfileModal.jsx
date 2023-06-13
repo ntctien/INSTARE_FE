@@ -20,7 +20,7 @@ const EditProfileModal = ({ open, onCancel, setModal }) => {
               >
                 Change profile photo
               </button>
-              <button className="edit-profile-btn border-1 border-red text-red">
+              <button className="edit-profile-btn border-1 border-red text-red hover:border-2">
                 Remove profile photo
               </button>
             </div>

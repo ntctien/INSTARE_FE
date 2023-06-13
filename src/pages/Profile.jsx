@@ -87,7 +87,7 @@ const Profile = () => {
             </div>
             <button
               onClick={() => setModal("edit")}
-              className="p-[12px] border-1 border-black rounded-10 font-medium text-18"
+              className="p-[12px] border-1 border-black rounded-10 font-medium text-18 hover:border-pastel-purple-dark"
             >
               Edit profile
             </button>
