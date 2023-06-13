@@ -9,9 +9,21 @@ const UserInfo = () => {
       to={"/username"}
       className="pt-[23px] pb-[36px] flex flex-col items-center justify-center"
     >
-      <div className="rounded-full bg-grey w-[100px] aspect-square border-1 border-white"></div>
-      <h2 className="mt-[13px] font-bold text-16 font-ubuntu">{currentUser.name}</h2>
-      <p className="mt-[6px] text-16 font-ubuntu">{'@'+currentUser.username}</p>
+      <div className="rounded-full bg-grey w-[100px] aspect-square border-1 border-white">
+        {currentUser.ava && (
+          <img
+            src={currentUser.ava}
+            alt="Avatar"
+            className="w-full h-full object-cover object-center"
+          />
+        )}
+      </div>
+      <h2 className="mt-[13px] font-bold text-16 font-ubuntu">
+        {currentUser.name}
+      </h2>
+      <p className="mt-[6px] text-16 font-ubuntu">
+        {"@" + currentUser.username}
+      </p>
     </Link>
   );
 };

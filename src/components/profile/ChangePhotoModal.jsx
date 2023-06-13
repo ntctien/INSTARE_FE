@@ -3,16 +3,17 @@ import { Rnd } from "react-rnd";
 import domtoimage from "dom-to-image";
 import BackModal from "../modal/BackModal";
 import useEditPhoto from "~/hooks/useEditPhoto";
-import tempImg from "~/assets/temp1.jpg";
 import CropBar from "./CropBar";
+import { Spin } from "antd";
 
-const ChangePhotoModal = ({ open, onCancel }) => {
+const ChangePhotoModal = ({ open, onCancel, tempUrl, setImgUrl }) => {
   const { imageRef, mediaRef } = useEditPhoto(60);
   const previewCanvasRef = useRef(null);
   const [zoom, setZoom] = useState(50);
   const [size, setSize] = useState({ width: 0, height: 0 });
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [clientSize, setClientSize] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!clientSize) return;
@@ -23,6 +24,13 @@ const ChangePhotoModal = ({ open, onCancel }) => {
     const newSize = (zoom * boundaryValue) / 100;
     setSize({ width: newSize, height: newSize });
   }, [zoom, clientSize]);
+
+  useEffect(() => {
+    setPosition({
+      x: (mediaRef.current.offsetWidth - size.width) / 2,
+      y: (mediaRef.current.offsetHeight - size.height) / 2,
+    });
+  }, [mediaRef, size]);
 
   const canvasPreview = () => {
     const canvas = previewCanvasRef.current;
@@ -51,18 +59,21 @@ const ChangePhotoModal = ({ open, onCancel }) => {
     );
   };
 
-  const handleDone = () => {
+  const handleDone = async () => {
     canvasPreview();
     const media = previewCanvasRef.current;
     if (!media) return;
-    domtoimage
+    setLoading(true);
+    await domtoimage
       .toPng(media)
       .then((url) => {
-        console.log(url);
+        onCancel();
+        setImgUrl(url);
       })
       .catch((error) => {
         console.error(error);
       });
+    setLoading(false);
   };
 
   return (
@@ -73,42 +84,44 @@ const ChangePhotoModal = ({ open, onCancel }) => {
       title={"Change profile photo"}
       onDone={handleDone}
     >
-      <div className="flex flex-col items-center px-[12px] pt-[12px] pb-[33px] w-[550px]">
-        {/* Media */}
-        <div className="w-full h-[60vh] center">
-          <div ref={mediaRef} className="relative overflow-hidden">
-            <img
-              onLoad={() => {
-                setClientSize({
-                  width: imageRef.current.clientWidth,
-                  height: imageRef.current.clientHeight,
-                });
-              }}
-              ref={imageRef}
-              src={tempImg}
-              alt="Edit"
-              className="object-contain w-full h-full"
-            />
-            <Rnd
-              bounds={"parent"}
-              size={size}
-              position={{ ...position }}
-              onDragStop={(e, d) => {
-                setPosition({ x: d.x, y: d.y });
-              }}
-              enableResizing={false}
-              style={{
-                boxShadow: "0px 0px 1px 100vmax rgba(255,255,255,0.5)",
-              }}
-              className="rounded-full"
-            />
-            <div className="absolute top-0 left-0 w-full h-full -z-10 overflow-hidden">
-              <canvas ref={previewCanvasRef} className="rounded-full" />
+      <Spin spinning={loading}>
+        <div className="flex flex-col items-center px-[12px] pt-[12px] pb-[33px] w-[550px]">
+          {/* Media */}
+          <div className="w-full h-[60vh] center">
+            <div ref={mediaRef} className="relative overflow-hidden">
+              <img
+                onLoad={() => {
+                  setClientSize({
+                    width: imageRef.current.clientWidth,
+                    height: imageRef.current.clientHeight,
+                  });
+                }}
+                ref={imageRef}
+                src={tempUrl}
+                alt="Edit"
+                className="object-contain w-full h-full"
+              />
+              <Rnd
+                bounds={"parent"}
+                size={size}
+                position={{ ...position }}
+                onDragStop={(e, d) => {
+                  setPosition({ x: d.x, y: d.y });
+                }}
+                enableResizing={false}
+                style={{
+                  boxShadow: "0px 0px 1px 100vmax rgba(255,255,255,0.5)",
+                }}
+                className="rounded-full"
+              />
+              <div className="absolute top-0 left-0 w-full h-full -z-10 overflow-hidden">
+                <canvas ref={previewCanvasRef} className="rounded-full" />
+              </div>
             </div>
           </div>
+          <CropBar zoom={zoom} setZoom={setZoom} />
         </div>
-        <CropBar zoom={zoom} setZoom={setZoom} />
-      </div>
+      </Spin>
     </BackModal>
   );
 };

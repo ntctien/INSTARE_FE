@@ -8,6 +8,9 @@ import updateProfileOnly from "~/api/services/user/updateProfileOnly";
 import useForm from "~/hooks/useForm";
 import usernameRule from "~/constants/usernameRule";
 import { signIn } from "~/actions/auth";
+import convertImgUrlToFile from "~/utils/convertImgUrlToFile";
+import uploadAvaOnly from "~/api/services/user/uploadAvaOnly";
+import updateProfileWithAva from "~/api/services/user/updateProfileWithAva";
 
 const valuesObj = {
   username: usernameRule,
@@ -30,7 +33,6 @@ const EditProfileModal = ({ open, onCancel }) => {
   const fileInputRef = useRef(null);
   const [modal, setModal] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [file, setFile] = useState(null);
   const [imgUrl, setImgUrl] = useState(null);
   const [tempImgUrl, setTempImgUrl] = useState(null);
 
@@ -40,6 +42,7 @@ const EditProfileModal = ({ open, onCancel }) => {
       name: currentUser.name ?? "",
       bio: currentUser.bio ?? "",
     });
+    if (currentUser.ava) setImgUrl(currentUser.ava);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -66,7 +69,6 @@ const EditProfileModal = ({ open, onCancel }) => {
       values.bio
     )
       .then(({ data }) => {
-        console.log(data);
         dispatch(
           signIn({
             ...currentUser,
@@ -91,14 +93,86 @@ const EditProfileModal = ({ open, onCancel }) => {
     setLoading(false);
   };
 
-  const handleSave = (e) => {
+  const handleUploadAvaOnly = async () => {
+    setLoading(true);
+    const file = await convertImgUrlToFile(imgUrl, `ava_${currentUser.id}`);
+    await uploadAvaOnly(currentUser.token, file)
+      .then(({ data }) => {
+        dispatch(
+          signIn({
+            ...currentUser,
+            ava: data,
+          })
+        );
+        onCancel();
+      })
+      .catch((err) => console.log(err));
+    setLoading(false);
+  };
+
+  const handleUploadProfileWithAva = async () => {
+    setLoading(true);
+    const file = await convertImgUrlToFile(imgUrl, `ava_${currentUser.id}`);
+    await updateProfileWithAva(
+      currentUser.token,
+      values.username,
+      values.name,
+      values.bio,
+      file
+    )
+      .then(({ data }) => {
+        if (data.message) {
+          if (
+            data.name !== currentUser.name ||
+            data.bio !== currentUser.bio ||
+            imgUrl !== currentUser.ava
+          ) {
+            message.success("Updated full name/bio/avatar successfully");
+            dispatch(
+              signIn({
+                ...currentUser,
+                name: values.name,
+                bio: values.bio,
+                ava: imgUrl,
+              })
+            );
+          }
+          setFieldValue("username", currentUser.username);
+          setFieldError("username", data.message);
+        } else {
+          onCancel();
+          dispatch(
+            signIn({
+              ...currentUser,
+              username: values.username,
+              name: values.name,
+              bio: values.bio,
+              ava: imgUrl,
+            })
+          );
+        }
+      })
+      .catch((err) => console.log(err));
+    setLoading(false);
+  };
+
+  const valuesChanged = () => {
     if (
       values.username !== currentUser.username ||
       values.name !== (currentUser.name ?? "") ||
       values.bio !== (currentUser.bio ?? "")
     )
-      handleSubmit(e, handleUpdateProfileOnly);
-    else {
+      return true;
+    return false;
+  };
+
+  const handleSave = (e) => {
+    if (valuesChanged() && imgUrl !== currentUser.ava)
+      handleSubmit(e, handleUploadProfileWithAva);
+    else if (valuesChanged()) handleSubmit(e, handleUpdateProfileOnly);
+    else if (imgUrl !== currentUser.ava) {
+      handleUploadAvaOnly();
+    } else {
       onCancel();
     }
   };

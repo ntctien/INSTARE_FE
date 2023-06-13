@@ -1,11 +1,14 @@
 import appApi from "~/api/base";
 
-const uploadAvaOnly = (token, file) => {
+const updateProfileWithAva = (token, username, name, bio, file) => {
     const formData = new FormData();
     formData.append("file", file);
+    formData.append("username", username);
+    formData.append("name", name);
+    formData.append("bio", bio);
     return new Promise((resolve, reject) => {
         appApi
-            .patch('/user/uploadAvaOnly', formData, {
+            .patch('/user/updateProfileWithAva', formData, {
                 headers: {
                     Authorization: "Bearer " + token,
                     "Content-Type": "multipart/form-data"
@@ -16,4 +19,4 @@ const uploadAvaOnly = (token, file) => {
     })
 }
 
-export default uploadAvaOnly;
+export default updateProfileWithAva;
