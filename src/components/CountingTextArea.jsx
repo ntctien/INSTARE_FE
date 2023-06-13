@@ -1,17 +1,20 @@
 import { useState } from "react";
 
-const CountingTextArea = ({ maxLength }) => {
+const CountingTextArea = ({ maxLength, name, value, onChange }) => {
   const [count, setCount] = useState(0);
 
-  const onChange = (value) => {
-    setCount(value.length);
+  const handleChange = (e) => {
+    setCount(e.target.value.length);
+    onChange(e);
   };
 
   return (
     <div>
       <textarea
+        name={name}
         maxLength={maxLength}
-        onChange={(e) => onChange(e.target.value)}
+        value={value}
+        onChange={handleChange}
         className="h-[80px] resize-none"
       />
       <p className="text-right">

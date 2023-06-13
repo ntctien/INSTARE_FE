@@ -1,9 +1,9 @@
 import { Divider } from "antd";
 import ModalWrapper from "./ModalWrapper";
 
-const Modal = ({ children, open, onCancel, title }) => {
+const Modal = ({ children, open, onCancel, title, hidden }) => {
   return (
-    <ModalWrapper open={open} onCancel={onCancel}>
+    <ModalWrapper open={open} onCancel={onCancel} hidden={hidden}>
       <div className="bg-modal-bg rounded-15 overflow-hidden">
         {/* Title */}
         <h2 className="text-center mt-[12px] font-ubuntu font-medium text-20">

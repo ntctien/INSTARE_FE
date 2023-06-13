@@ -69,6 +69,7 @@ const ChangePhotoModal = ({ open, onCancel }) => {
     <BackModal
       open={open}
       onCancel={onCancel}
+      onBack={onCancel}
       title={"Change profile photo"}
       onDone={handleDone}
     >

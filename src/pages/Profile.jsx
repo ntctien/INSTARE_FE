@@ -2,7 +2,6 @@ import { useState } from "react";
 import EditProfileModal from "~/components/profile/EditProfileModal";
 import tempImg from "~/assets/temp3.png";
 import PostThumbnail from "~/components/profile/PostThumbnail";
-import ChangePhotoModal from "~/components/profile/ChangePhotoModal";
 
 const data = [
   {
@@ -124,12 +123,6 @@ const Profile = () => {
           open={modal === "edit"}
           onCancel={() => setModal(null)}
           setModal={setModal}
-        />
-      )}
-      {modal === "change-photo" && (
-        <ChangePhotoModal
-          open={modal === "change-photo"}
-          onCancel={() => setModal(null)}
         />
       )}
     </div>

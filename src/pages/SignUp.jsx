@@ -6,9 +6,9 @@ import AuthInput from "../components/auth/AuthInput";
 import backgroundImg from "../assets/signup-bg.png";
 import verifyEmailForSignUp from "~/api/services/auth/verifyEmailForSignUp";
 import validateEmail from "~/utils/validateEmail";
-import containsUpperCase from "~/utils/containsUpperCase";
 import useForm from "~/hooks/useForm";
 import passwordRule from "~/constants/passwordRule";
+import usernameRule from "~/constants/usernameRule";
 
 const valuesObj = {
   email: {
@@ -17,15 +17,7 @@ const valuesObj = {
       if (!validateEmail(value)) return "Invalid email address";
     },
   },
-  username: {
-    require: true,
-    validator: (value) => {
-      if (containsUpperCase(value))
-        return "Username can't contain uppercase letters";
-      if (!/^[a-zA-Z0-9\-_.]+$/.test(value))
-        return "Only contain letters, numbers, dashes, underscores and periods";
-    },
-  },
+  username: usernameRule,
   password: passwordRule,
   confirmPassword: {
     require: true,

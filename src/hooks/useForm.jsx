@@ -76,6 +76,7 @@ const useForm = (fieldValues) => {
   return {
     values,
     errors,
+    setValues,
     setFieldError,
     handleSubmit,
     getInputProps,
