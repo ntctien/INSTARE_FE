@@ -32,6 +32,7 @@ const useForm = (fieldValues) => {
   };
 
   const validateForm = () => {
+    setErrors(objectMap(fieldValues, (v) => null));
     let errorObj = {};
     let valid = true;
     for (const inputField in values) {
@@ -63,6 +64,12 @@ const useForm = (fieldValues) => {
     };
   };
 
+  const setFieldValue = (name, value) => {
+    setValues((prev) => {
+      return { ...prev, [name]: value };
+    });
+  };
+
   const setFieldError = (name, value) => {
     setErrors((prev) => {
       return { ...prev, [name]: value };
@@ -77,6 +84,7 @@ const useForm = (fieldValues) => {
     values,
     errors,
     setValues,
+    setFieldValue,
     setFieldError,
     handleSubmit,
     getInputProps,

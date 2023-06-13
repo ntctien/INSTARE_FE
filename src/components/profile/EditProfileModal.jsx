@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Spin } from "antd";
+import { Spin, message } from "antd";
 import CloseModal from "../modal/CloseModal";
 import CountingTextArea from "../CountingTextArea";
 import ChangePhotoModal from "./ChangePhotoModal";
@@ -23,6 +23,7 @@ const EditProfileModal = ({ open, onCancel }) => {
     errors,
     getInputProps,
     setValues,
+    setFieldValue,
     setFieldError,
     handleSubmit,
   } = useForm(valuesObj);
@@ -65,7 +66,7 @@ const EditProfileModal = ({ open, onCancel }) => {
       values.bio
     )
       .then(({ data }) => {
-        onCancel();
+        console.log(data);
         dispatch(
           signIn({
             ...currentUser,
@@ -74,6 +75,15 @@ const EditProfileModal = ({ open, onCancel }) => {
             bio: data.bio,
           })
         );
+        if (data.message) {
+          if (data.name !== currentUser.name || data.bio !== currentUser.bio) {
+            message.success("Full Name/Bio updated successfully");
+          }
+          setFieldValue("username", data.username);
+          setFieldError("username", data.message);
+        } else {
+          onCancel();
+        }
       })
       .catch((err) => {
         setFieldError("username", err.response.data.message);
@@ -88,6 +98,9 @@ const EditProfileModal = ({ open, onCancel }) => {
       values.bio !== (currentUser.bio ?? "")
     )
       handleSubmit(e, handleUpdateProfileOnly);
+    else {
+      onCancel();
+    }
   };
 
   return (
@@ -127,10 +140,7 @@ const EditProfileModal = ({ open, onCancel }) => {
               {/* Inputs */}
               <div className="edit-profile-input">
                 <h3>Username</h3>
-                <input
-                  {...getInputProps("username")}
-                  style={{ borderColor: errors["username"] && "#F24E1E" }}
-                />
+                <input {...getInputProps("username")} />
                 <p style={{ color: "#F24E1E" }}>{errors["username"]}</p>
                 <p>
                   In most cases, you'll be able to change your username back to
