@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import EditProfileModal from "~/components/profile/EditProfileModal";
 import tempImg from "~/assets/temp3.png";
 import PostThumbnail from "~/components/profile/PostThumbnail";
+import { useParams } from "react-router-dom";
+import viewUserProfile from "~/api/services/no-auth/viewUserProfile";
+import UserProfileInfo from "~/components/profile/UserProfileInfo";
+import { SplashContext } from "~/contexts/SpashContext";
+import { useSelector } from "react-redux";
 
-const data = [
+const posts = [
   {
-    src: tempImg,
+    id: 0,
+    thumbnail: tempImg,
     multiple: true,
-    video: false,
+    containVideo: false,
   },
   {
     src: tempImg,
@@ -67,55 +73,38 @@ const data = [
 ];
 
 const Profile = () => {
+  const { username } = useParams();
+  const { setSplash } = useContext(SplashContext);
+  const { currentUser } = useSelector((state) => state.user);
   const [modal, setModal] = useState(null);
+  const [data, setData] = useState();
+
+  const handleViewUserProfile = async (username) => {
+    await viewUserProfile(username)
+      .then(({ data }) => {
+        console.log(data);
+        setData(data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    if (currentUser) {
+      setSplash(true);
+      handleViewUserProfile(username);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [username, currentUser]);
 
   return (
     <div className="pt-[50px] pb-[55px] px-[60px]">
       {/* User profile */}
-      <div className="row gap-x-[31px]">
-        {/* Avatar */}
-        <div className="w-[200px] aspect-square rounded-full bg-grey"></div>
-        <div className="flex-1 flex flex-col gap-y-30">
-          {/* Name */}
-          <div className="flex items-start justify-between font-ubuntu w-full">
-            <div>
-              <h1 className="font-bold text-[24px] leading-[27.5px]">
-                Họ Và Tên
-              </h1>
-              <h2 className="text-16 mt-2">@username</h2>
-            </div>
-            <button
-              onClick={() => setModal("edit")}
-              className="p-[12px] border-1 border-black rounded-10 font-medium text-18 hover:border-pastel-purple-dark"
-            >
-              Edit profile
-            </button>
-          </div>
-          {/* Numbers */}
-          <div className="profile-numbers">
-            <p>
-              <span>9</span> posts
-            </p>
-            <p>
-              <span>99,9K</span> followers
-            </p>
-            <p>
-              <span>9,999</span> following
-            </p>
-          </div>
-          {/* Bio */}
-          <p className="text-15 w-[94.5%]">
-            This is a bio. This is a bio. This is a bio. This is a bio. This is
-            a bio. This is a bio. This is a bio. This is a bio. This is a bio.
-            This is a bio.{" "}
-          </p>
-        </div>
-      </div>
+      <UserProfileInfo data={data} setModal={setModal} setSplash={setSplash} />
       {/* Posts */}
       <div className="grid grid-cols-3 gap-[0.66%] mt-[60px]">
-        {data.map((item, i) => (
+        {/* {data.map((item, i) => (
           <PostThumbnail key={i} item={item} />
-        ))}
+        ))} */}
       </div>
       {/* Edit profile modal */}
       {modal === "edit" && (

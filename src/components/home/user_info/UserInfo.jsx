@@ -6,7 +6,7 @@ const UserInfo = () => {
 
   return (
     <Link
-      to={"/username"}
+      to={`/${currentUser.username}`}
       className="pt-[23px] pb-[36px] flex flex-col items-center justify-center"
     >
       <div className="rounded-full bg-grey w-[100px] aspect-square border-1 border-white">

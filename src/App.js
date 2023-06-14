@@ -39,7 +39,7 @@ function App() {
         <Route element={<MenuLayout />}>
           <Route element={<HomeLayout />} path="/">
             <Route element={<Home />} index />
-            <Route element={<Profile />} path="username" />
+            <Route element={<Profile />} path=":username" />
           </Route>
           <Route element={<Message />} path="message" />
         </Route>

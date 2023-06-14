@@ -55,11 +55,15 @@ body {
 }
 
 .warning-btn.warning-btn-primary {
-  @apply bg-red text-white
+  @apply bg-red text-white;
 }
 
 .warning-btn.warning-btn-secondary {
-  @apply border-1 border-black
+  @apply border-1 border-black;
+}
+
+.profile-btn {
+  @apply w-[120px] h-[45px] border-1 border-black rounded-10 font-ubuntu font-medium text-18;
 }
 
 /* Inputs */
@@ -86,7 +90,7 @@ body {
 
 .ant-divider {
   color: transparent;
-  border-top: 1px solid rgba(0, 0, 0, 0.15)
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .ant-form {
@@ -100,8 +104,21 @@ body {
   font-size: unset;
 }
 
-.ant-message-notice .ant-message-success>.anticon {
-  color: #BFB2F3;
+.ant-spin {
+  @apply flex items-center justify-center;
+}
+
+.ant-message-notice .ant-message-success > .anticon {
+  color: #bfb2f3;
+}
+
+.ant-progress .ant-progress-inner {
+  vertical-align: top;
+  border-radius: 0;
+}
+
+.ant-progress .ant-progress-bg {
+  border-radius: 0;
 }
 
 /* Scrollbar */
@@ -110,12 +127,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,0.25);
+  background: rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.3);
 }
 
 /* Horizontal */

@@ -9,6 +9,8 @@ import App from './App';
 import allReducers from './reducers';
 import '~/fonts/Ubuntu';
 import reportWebVitals from './reportWebVitals';
+import { ProgressProvider } from './contexts/ProgressContext';
+import { SplashProvider } from './contexts/SpashContext';
 
 const middleware = [thunk]
 const store = createStore(allReducers, applyMiddleware(...middleware));
@@ -17,9 +19,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
   <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <SplashProvider>
+      <ProgressProvider>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ProgressProvider>
+    </SplashProvider>
   </Provider>
   // </React.StrictMode>
 );
