@@ -81,10 +81,7 @@ const Profile = () => {
 
   const handleViewUserProfile = async (username) => {
     await viewUserProfile(username)
-      .then(({ data }) => {
-        console.log(data);
-        setData(data);
-      })
+      .then(({ data }) => setData(data))
       .catch((err) => console.log(err));
   };
 
