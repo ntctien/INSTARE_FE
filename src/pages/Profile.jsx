@@ -44,6 +44,7 @@ const Profile = () => {
           open={modal === "edit"}
           onCancel={() => setModal(null)}
           setModal={setModal}
+          fetchProfile={handleViewUserProfile}
         />
       )}
     </div>

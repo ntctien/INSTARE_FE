@@ -2,12 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { Rnd } from "react-rnd";
 import domtoimage from "dom-to-image";
 import BackModal from "../modal/BackModal";
-import useEditPhoto from "~/hooks/useEditPhoto";
 import CropBar from "./CropBar";
 import { Spin } from "antd";
 
 const ChangePhotoModal = ({ open, onCancel, tempUrl, setImgUrl }) => {
-  const { imageRef, mediaRef } = useEditPhoto(60);
+  const mediaRef = useRef(null);
+  const imageRef = useRef(null);
   const previewCanvasRef = useRef(null);
   const [zoom, setZoom] = useState(50);
   const [size, setSize] = useState({ width: 0, height: 0 });
@@ -87,8 +87,14 @@ const ChangePhotoModal = ({ open, onCancel, tempUrl, setImgUrl }) => {
       <Spin spinning={loading}>
         <div className="flex flex-col items-center px-[12px] pt-[12px] pb-[33px] w-[550px]">
           {/* Media */}
-          <div className="w-full h-[60vh] center">
-            <div ref={mediaRef} className="relative overflow-hidden">
+          <div className="w-full h-[60vh] aspect-square center">
+            <div
+              ref={mediaRef}
+              style={{
+                height: clientSize?.width < clientSize?.height && "100%",
+              }}
+              className="relative overflow-hidden"
+            >
               <img
                 onLoad={() => {
                   setClientSize({

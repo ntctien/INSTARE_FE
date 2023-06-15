@@ -18,7 +18,7 @@ const valuesObj = {
   bio: {},
 };
 
-const EditProfileModal = ({ open, onCancel }) => {
+const EditProfileModal = ({ open, onCancel, fetchProfile }) => {
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const {
@@ -85,6 +85,7 @@ const EditProfileModal = ({ open, onCancel }) => {
           setFieldError("username", data.message);
         } else {
           onCancel();
+          fetchProfile(currentUser.username);
         }
       })
       .catch((err) => {
@@ -105,6 +106,7 @@ const EditProfileModal = ({ open, onCancel }) => {
           })
         );
         onCancel();
+        fetchProfile(currentUser.username);
       })
       .catch((err) => console.log(err));
     setLoading(false);
@@ -150,6 +152,7 @@ const EditProfileModal = ({ open, onCancel }) => {
               ava: imgUrl,
             })
           );
+          fetchProfile(currentUser.username);
         }
       })
       .catch((err) => console.log(err));
