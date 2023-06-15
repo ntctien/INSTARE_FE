@@ -10,16 +10,22 @@ import logoIcon from "~/assets/logo.png";
 import CommentInput from "~/components/CommentInput";
 import viewPost from "~/api/services/no-auth/viewPost";
 import getDateString from "~/utils/getDateString";
+import comment from "~/api/services/interact/comment";
+import { useSelector } from "react-redux";
 
 const Post = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
+  const { currentUser } = useSelector((state) => state.user);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [data, setData] = useState();
+  const [commentValue, setCommentValue] = useState("");
+  const [commentLoading, setCommentLoading] = useState(false);
 
   const handleViewPost = async (postId) => {
     await viewPost(postId)
       .then(({ data }) => {
+        console.log(data);
         setData({
           ...data,
           mediaList: data.mediaList.map((item) => {
@@ -36,6 +42,30 @@ const Post = () => {
   useEffect(() => {
     handleViewPost(postId);
   }, [postId]);
+
+  const updateComments = (commentValue) => {
+    let temp = data;
+    temp.comments.push({
+      comment: commentValue,
+      user: {
+        ava: currentUser.ava,
+        id: currentUser.id,
+        username: currentUser.username,
+      },
+    });
+    setData(temp);
+  };
+
+  const handleComment = async (e) => {
+    e.preventDefault();
+    setCommentLoading(true);
+    await comment(currentUser.token, postId, commentValue)
+      .then(({ data }) => console.log(data))
+      .catch((err) => console.log(err));
+    setCommentLoading(false);
+    updateComments(commentValue);
+    setCommentValue("");
+  };
 
   return (
     <div
@@ -55,7 +85,10 @@ const Post = () => {
             setCurrentSlide={setCurrentSlide}
           />
         ) : (
-          <Skeleton.Image style={{width:'100%',height:'100%'}} className="bg-[#D9D9D933] animate-pulse"/>
+          <Skeleton.Image
+            style={{ width: "100%", height: "100%" }}
+            className="bg-[#D9D9D933] animate-pulse"
+          />
         )}
         {/* Navigate */}
         <div className="absolute top-[17px] left-[15px] row gap-x-[15px]">
@@ -84,20 +117,31 @@ const Post = () => {
         <InteractBar likeCount={2} className={"p-[17px]"} />
         {/* Comment section */}
         <div className="flex flex-col flex-1 gap-y-5 px-[17px] overflow-y-auto">
-          {data?.comments.map((comment, i) => (
+          {data?.comments.toReversed().map((comment, i) => (
             <div key={i} className="row gap-x-[18px]">
-              <Avatar ava={comment.user.ava} />
+              <Link to={`/${comment.user.username}`}>
+                <Avatar ava={comment.user.ava} />
+              </Link>
               <p className="text-14 flex-1">
-                <span className="font-semibold">{comment.user.username}</span>{" "}
+                <Link to={`/${comment.user.username}`}>
+                  <span className="font-semibold">{comment.user.username}</span>
+                </Link>{" "}
                 {comment.comment}
               </p>
             </div>
           ))}
         </div>
         <Divider className="default-divider" />
-        <div className="px-[17px] pt-[6px] pb-[9px] bg-[#EDF1F8]">
-          <CommentInput />
-        </div>
+        <form
+          onSubmit={handleComment}
+          className="px-[17px] pt-[6px] pb-[9px] bg-[#EDF1F8]"
+        >
+          <CommentInput
+            value={commentValue}
+            onChange={(e) => setCommentValue(e.target.value)}
+            loading={commentLoading}
+          />
+        </form>
       </div>
     </div>
   );

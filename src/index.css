@@ -112,6 +112,14 @@ body {
   @apply w-[50px] h-[50px];
 }
 
+.custom-spin-small.ant-spin .ant-spin-dot {
+  @apply w-[20px] h-[20px];
+}
+
+.ant-spin-nested-loading > div > .custom-spin-small.ant-spin .ant-spin-dot {
+  @apply -translate-y-1/2;
+}
+
 .ant-message-notice .ant-message-success > .anticon {
   color: #bfb2f3;
 }
