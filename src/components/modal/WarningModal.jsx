@@ -25,11 +25,14 @@ const WarningModal = ({
             onClick={
               onSecondaryBtnClick != null ? onSecondaryBtnClick : onCancel
             }
-            className="warning-btn warning-btn-secondary"
+            className="warning-btn warning-btn-secondary hover:border-blue"
           >
             {secondaryBtnLabel ?? "Not now"}
           </button>
-          <button className="warning-btn warning-btn-primary hover-btn-primary">
+          <button
+            onClick={onPrimaryBtnClick}
+            className="warning-btn warning-btn-primary hover-btn-primary"
+          >
             {primaryBtnLabel ?? "Yes"}
           </button>
         </div>

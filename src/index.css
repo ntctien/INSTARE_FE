@@ -108,6 +108,10 @@ body {
   @apply flex items-center justify-center;
 }
 
+.custom-spin.ant-spin .ant-spin-dot {
+  @apply w-[50px] h-[50px]
+}
+
 .ant-message-notice .ant-message-success > .anticon {
   color: #bfb2f3;
 }

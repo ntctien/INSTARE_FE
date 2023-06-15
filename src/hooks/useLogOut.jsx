@@ -7,7 +7,7 @@ const useLogOut = () => {
   const navigate = useNavigate();
 
   const handleLogOut = () => {
-    localStorage.clear();
+    localStorage.removeItem("user");
     dispatch(logOut());
     navigate("/signin");
   };

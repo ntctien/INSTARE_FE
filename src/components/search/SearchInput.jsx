@@ -1,9 +1,9 @@
 import CloseButton from "../buttons/CloseButton";
 
-const SearchInput = ({ handleClick, className }) => {
+const SearchInput = ({ value, onChange, handleClick, className }) => {
   return (
     <div className={`w-full relative ${className}`}>
-      <input className={"search-input"} />
+      <input value={value} onChange={onChange} className={"search-input"} />
       <CloseButton
         onClick={handleClick}
         width="12.5px"
