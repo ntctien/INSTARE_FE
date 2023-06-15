@@ -5,6 +5,7 @@ import { LoadingOutlined } from "@ant-design/icons";
 import checkIfUserFollowed from "~/api/services/interact/checkIfUserFollowed";
 import followUser from "~/api/services/interact/followUser";
 import unfollowUser from "~/api/services/interact/unfollowUser";
+import Avatar from "../home/Avatar";
 
 const UserProfileInfo = ({ data, setModal, setSplash }) => {
   const { currentUser } = useSelector((state) => state.user);
@@ -58,15 +59,7 @@ const UserProfileInfo = ({ data, setModal, setSplash }) => {
   return (
     <div className="row gap-x-[31px]">
       {/* Avatar */}
-      <div className="w-[200px] aspect-square rounded-full bg-grey overflow-hidden">
-        {data?.ava && (
-          <img
-            src={data.ava}
-            alt="Avatar"
-            className="w-full h-full object-cover object-center"
-          />
-        )}
-      </div>
+      <Avatar ava={data?.ava} width={"200px"} />
       <div className="flex-1 flex flex-col gap-y-30">
         {/* Name */}
         <div className="row justify-between font-ubuntu w-full">

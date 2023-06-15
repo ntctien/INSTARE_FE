@@ -99,7 +99,7 @@ const Profile = () => {
       <UserProfileInfo data={data} setModal={setModal} setSplash={setSplash} />
       {/* Posts */}
       <div className="grid grid-cols-3 gap-[0.66%] mt-[60px]">
-        {data?.posts.map((item, i) => (
+        {data?.posts.toReversed().map((item, i) => (
           <PostThumbnail key={i} item={item} />
         ))}
       </div>

@@ -160,6 +160,7 @@ const SearchSideBar = ({ onClose }) => {
                   item={recent}
                   clearable
                   handleClear={() => handleClearRecent(recent)}
+                  onClick={() => handleSearchItemClick(recent)}
                 />
               ))}
             </div>

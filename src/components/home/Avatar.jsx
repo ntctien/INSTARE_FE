@@ -1,8 +1,8 @@
 const Avatar = ({ width, custom, ava }) => {
   return (
     <div
-      className={`aspect-square bg-grey rounded-full ${custom}`}
-      style={{ width: width ?? "50px" }}
+      className={`aspect-square rounded-full overflow-hidden ${custom}`}
+      style={{ width: width ?? "50px", backgroundColor: !ava && "#D9D9D9" }}
     >
       {ava && (
         <img

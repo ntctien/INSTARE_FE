@@ -51,7 +51,7 @@ function App() {
             <Route element={<CreatePhotoVideoStory />} path="photo-or-video" />
           </Route>
         </Route>
-        <Route element={<Post />} path="post" />
+        <Route element={<Post />} path="post/:postId" />
         <Route element={<Test />} path="test" />
       </Route>
     </Routes >
