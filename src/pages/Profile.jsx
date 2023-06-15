@@ -99,9 +99,9 @@ const Profile = () => {
       <UserProfileInfo data={data} setModal={setModal} setSplash={setSplash} />
       {/* Posts */}
       <div className="grid grid-cols-3 gap-[0.66%] mt-[60px]">
-        {/* {data.map((item, i) => (
+        {data?.posts.map((item, i) => (
           <PostThumbnail key={i} item={item} />
-        ))} */}
+        ))}
       </div>
       {/* Edit profile modal */}
       {modal === "edit" && (

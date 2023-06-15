@@ -4,25 +4,26 @@ import videoIcon from "~/assets/video.svg";
 
 const PostThumbnail = ({ item }) => {
   return (
-    <Link to='/post' className="aspect-square relative cursor-pointer">
+    <Link to="/post" className="aspect-square relative cursor-pointer">
       <img
-        src={item.src}
+        src={item.thumbnail}
         alt="Post thumbnail"
         className="rounded-5 w-full h-full object-cover object-center bg-grey"
       />
-      {item.multiple && (
+      {item.multiple ? (
         <img
           src={multipleIcon}
           alt="Multiple"
           className="absolute top-[10px] right-[10px]"
         />
-      )}
-      {item.video && (
-        <img
-          src={videoIcon}
-          alt="Video"
-          className="absolute top-[10px] right-[10px]"
-        />
+      ) : (
+        item.containVideo && (
+          <img
+            src={videoIcon}
+            alt="Video"
+            className="absolute top-[10px] right-[10px]"
+          />
+        )
       )}
     </Link>
   );
