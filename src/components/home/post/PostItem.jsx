@@ -1,45 +1,68 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { Divider } from "antd";
 import MediaSlider from "../media_slider/MediaSlider";
-import tempImg1 from "../../../assets/temp1.jpg";
 import PostInfo from "~/components/PostInfo";
 import InteractBar from "~/components/InteractBar";
 import CommentInput from "~/components/CommentInput";
+import getDateString from "~/utils/getDateString";
+import useComment from "~/hooks/useComment";
 
-const mediaList = [
-  { url: tempImg1, type: "image" },
-  { url: tempImg1, type: "image" },
-  { url: tempImg1, type: "image" },
-  { url: tempImg1, type: "image" },
-];
-
-const PostItem = ({handleShare}) => {
+const PostItem = ({ handleShare, post }) => {
+  const { currentUser } = useSelector((state) => state.user);
+  const { commentInputProps, handleComment } = useComment();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [comments, setCommments] = useState([]);
+
+  const updateComments = (commentValue) => {
+    setCommments((prev) => [...prev, commentValue]);
+  };
+
   return (
     <div className="w-[800px] bg-[#D9D9D926] rounded-10 pb-[9px] post">
       {/* User */}
-      <PostInfo username={"_ptt.chang"} time={"11:59"} className={"p-[20px]"} />
+      <PostInfo
+        username={post?.user.username}
+        time={post?.createdAt && getDateString(post.createdAt)}
+        ava={post?.user.ava}
+        className={"p-[20px]"}
+      />
       {/* Image or video */}
       <MediaSlider
-        mediaList={mediaList}
+        mediaList={post.mediaList}
         currentSlide={currentSlide}
         setCurrentSlide={setCurrentSlide}
         dots
       />
       <div className="px-[20px] mt-[10px]">
-        <InteractBar likeCount={2} handleShare={handleShare}/>
+        <InteractBar likeCount={post._count.likes} handleShare={handleShare} />
         {/* Content */}
         <p className="mt-[7px] text-14">
-          <span className="font-semibold">_ptt.chang</span>
-          {" " +
-            "This is the first line. This is the first line. This is the first line. This is the first line. The first line end here. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."}
+          <Link to={`/${post?.user.username}`}>
+            <span className="font-semibold">{post?.user.username}</span>
+          </Link>
+          {" " + post.caption}
         </p>
         {/* Comments */}
-        <button className="text-14 text-black50 mt-[7px]">
-          View all comments
-        </button>
+        <Link to={`/post/${post.id}`}>
+          <p className="text-14 text-black50 mt-[7px] hover:brightness-125">
+            View all comments
+          </p>
+        </Link>
+        {/* Own comment */}
+        {comments.map((comment, i) => (
+          <p key={i} className="mt-[7px] text-14">
+            <Link to={`/${currentUser.username}`}>
+              <span className="font-semibold">{currentUser.username}</span>
+            </Link>
+            {" " + comment}
+          </p>
+        ))}
         <Divider className="mt-[10px] mb-[6px]" />
-        <CommentInput/>
+        <form onSubmit={(e) => handleComment(e, post.id, updateComments)}>
+          <CommentInput {...commentInputProps} />
+        </form>
       </div>
     </div>
   );

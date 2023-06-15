@@ -1,4 +1,4 @@
-import { LikeIcon, CommentIcon, ShareIcon } from './icons';
+import { LikeIcon, CommentIcon, ShareIcon } from "./icons";
 
 const InteractBar = ({ likeCount, className, handleShare }) => {
   return (
@@ -6,17 +6,19 @@ const InteractBar = ({ likeCount, className, handleShare }) => {
       {/* Interact */}
       <div className="row gap-x-[15px] interact-bar">
         <button>
-          <LikeIcon/>
+          <LikeIcon />
         </button>
         <button>
-          <CommentIcon/>
+          <CommentIcon />
         </button>
         <button onClick={handleShare}>
-          <ShareIcon/>
+          <ShareIcon />
         </button>
       </div>
       {/* Like count */}
-      <p className="font-semibold text-14 mt-[10px]">{likeCount} likes</p>
+      <p className="font-semibold text-14 mt-[10px]">{`${likeCount} like${
+        likeCount > 1 ? "s" : ""
+      }`}</p>
     </div>
   );
 };

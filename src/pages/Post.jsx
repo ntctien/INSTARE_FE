@@ -10,22 +10,20 @@ import logoIcon from "~/assets/logo.png";
 import CommentInput from "~/components/CommentInput";
 import viewPost from "~/api/services/no-auth/viewPost";
 import getDateString from "~/utils/getDateString";
-import comment from "~/api/services/interact/comment";
 import { useSelector } from "react-redux";
+import useComment from "~/hooks/useComment";
 
 const Post = () => {
   const navigate = useNavigate();
   const { postId } = useParams();
   const { currentUser } = useSelector((state) => state.user);
+  const { commentInputProps, handleComment } = useComment();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [data, setData] = useState();
-  const [commentValue, setCommentValue] = useState("");
-  const [commentLoading, setCommentLoading] = useState(false);
 
   const handleViewPost = async (postId) => {
     await viewPost(postId)
       .then(({ data }) => {
-        console.log(data);
         setData({
           ...data,
           mediaList: data.mediaList.map((item) => {
@@ -54,17 +52,6 @@ const Post = () => {
       },
     });
     setData(temp);
-  };
-
-  const handleComment = async (e) => {
-    e.preventDefault();
-    setCommentLoading(true);
-    await comment(currentUser.token, postId, commentValue)
-      .then(({ data }) => console.log(data))
-      .catch((err) => console.log(err));
-    setCommentLoading(false);
-    updateComments(commentValue);
-    setCommentValue("");
   };
 
   return (
@@ -133,14 +120,10 @@ const Post = () => {
         </div>
         <Divider className="default-divider" />
         <form
-          onSubmit={handleComment}
+          onSubmit={(e) => handleComment(e, postId, updateComments)}
           className="px-[17px] pt-[6px] pb-[9px] bg-[#EDF1F8]"
         >
-          <CommentInput
-            value={commentValue}
-            onChange={(e) => setCommentValue(e.target.value)}
-            loading={commentLoading}
-          />
+          <CommentInput {...commentInputProps} />
         </form>
       </div>
     </div>

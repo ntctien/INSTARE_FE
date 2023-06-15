@@ -1,76 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import EditProfileModal from "~/components/profile/EditProfileModal";
-import tempImg from "~/assets/temp3.png";
 import PostThumbnail from "~/components/profile/PostThumbnail";
 import { useParams } from "react-router-dom";
 import viewUserProfile from "~/api/services/no-auth/viewUserProfile";
 import UserProfileInfo from "~/components/profile/UserProfileInfo";
 import { SplashContext } from "~/contexts/SpashContext";
 import { useSelector } from "react-redux";
-
-const posts = [
-  {
-    id: 0,
-    thumbnail: tempImg,
-    multiple: true,
-    containVideo: false,
-  },
-  {
-    src: tempImg,
-    multiple: false,
-    video: true,
-  },
-  {
-    src: tempImg,
-    multiple: false,
-    video: false,
-  },
-  {
-    src: tempImg,
-    multiple: true,
-    video: false,
-  },
-  {
-    src: tempImg,
-    multiple: false,
-    video: false,
-  },
-  {
-    src: tempImg,
-    multiple: false,
-    video: true,
-  },
-  {
-    src: tempImg,
-    multiple: false,
-    video: false,
-  },
-  {
-    src: tempImg,
-    multiple: true,
-    video: false,
-  },
-  {
-    src: tempImg,
-    multiple: false,
-    video: false,
-  },
-  {
-    src: tempImg,
-    multiple: false,
-    video: true,
-  },
-  {
-    src: tempImg,
-    multiple: false,
-    video: false,
-  },
-  {
-    src: tempImg,
-    multiple: true,
-    video: false,
-  },
-];
 
 const Profile = () => {
   const { username } = useParams();
