@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Divider } from "antd";
+import { Divider, Skeleton } from "antd";
 import MediaSlider from "~/components/home/media_slider/MediaSlider";
 import PostInfo from "~/components/PostInfo";
 import InteractBar from "~/components/InteractBar";
@@ -48,11 +48,15 @@ const Post = () => {
       {/* Left side */}
       <div className="w-[66vw] relative">
         {/* Image or video */}
-        <MediaSlider
-          mediaList={data?.mediaList ?? []}
-          currentSlide={currentSlide}
-          setCurrentSlide={setCurrentSlide}
-        />
+        {data?.mediaList ? (
+          <MediaSlider
+            mediaList={data.mediaList}
+            currentSlide={currentSlide}
+            setCurrentSlide={setCurrentSlide}
+          />
+        ) : (
+          <Skeleton.Image style={{width:'100%',height:'100%'}} className="bg-[#D9D9D933] animate-pulse"/>
+        )}
         {/* Navigate */}
         <div className="absolute top-[17px] left-[15px] row gap-x-[15px]">
           <button onClick={() => navigate(-1)} className="hover-default">

@@ -109,7 +109,7 @@ body {
 }
 
 .custom-spin.ant-spin .ant-spin-dot {
-  @apply w-[50px] h-[50px]
+  @apply w-[50px] h-[50px];
 }
 
 .ant-message-notice .ant-message-success > .anticon {
@@ -123,6 +123,11 @@ body {
 
 .ant-progress .ant-progress-bg {
   border-radius: 0;
+}
+
+.ant-skeleton.ant-skeleton-element {
+  height: 100%;
+  width: inherit;
 }
 
 /* Scrollbar */
