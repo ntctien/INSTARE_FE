@@ -7,7 +7,7 @@ import followUser from "~/api/services/interact/followUser";
 import unfollowUser from "~/api/services/interact/unfollowUser";
 import Avatar from "../home/Avatar";
 
-const UserProfileInfo = ({ data, setModal, setSplash }) => {
+const UserProfileInfo = ({ data, setModal, setSplash, fetchProfile }) => {
   const { currentUser } = useSelector((state) => state.user);
   const [self, setSelf] = useState(false);
   const [following, setFollowing] = useState(false);
@@ -41,6 +41,7 @@ const UserProfileInfo = ({ data, setModal, setSplash }) => {
     await followUser(currentUser.token, data.id)
       .then(() => {
         setFollowing(true);
+        fetchProfile();
       })
       .catch((err) => console.log(err));
     setLoading(false);
@@ -51,6 +52,7 @@ const UserProfileInfo = ({ data, setModal, setSplash }) => {
     await unfollowUser(currentUser.token, data.id)
       .then(() => {
         setFollowing(false);
+        fetchProfile();
       })
       .catch((err) => console.log(err));
     setLoading(false);

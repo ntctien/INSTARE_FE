@@ -85,7 +85,7 @@ const EditProfileModal = ({ open, onCancel, fetchProfile }) => {
           setFieldError("username", data.message);
         } else {
           onCancel();
-          fetchProfile(currentUser.username);
+          fetchProfile();
         }
       })
       .catch((err) => {
@@ -106,7 +106,7 @@ const EditProfileModal = ({ open, onCancel, fetchProfile }) => {
           })
         );
         onCancel();
-        fetchProfile(currentUser.username);
+        fetchProfile();
       })
       .catch((err) => console.log(err));
     setLoading(false);
@@ -152,7 +152,7 @@ const EditProfileModal = ({ open, onCancel, fetchProfile }) => {
               ava: imgUrl,
             })
           );
-          fetchProfile(currentUser.username);
+          fetchProfile();
         }
       })
       .catch((err) => console.log(err));

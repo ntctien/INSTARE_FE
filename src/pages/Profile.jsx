@@ -14,7 +14,7 @@ const Profile = () => {
   const [modal, setModal] = useState(null);
   const [data, setData] = useState();
 
-  const handleViewUserProfile = async (username) => {
+  const handleViewUserProfile = async () => {
     await viewUserProfile(username)
       .then(({ data }) => setData(data))
       .catch((err) => console.log(err));
@@ -23,7 +23,7 @@ const Profile = () => {
   useEffect(() => {
     if (currentUser) {
       setSplash(true);
-      handleViewUserProfile(username);
+      handleViewUserProfile();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username, currentUser]);
@@ -31,7 +31,12 @@ const Profile = () => {
   return (
     <div className="pt-[50px] pb-[55px] px-[60px]">
       {/* User profile */}
-      <UserProfileInfo data={data} setModal={setModal} setSplash={setSplash} />
+      <UserProfileInfo
+        data={data}
+        setModal={setModal}
+        setSplash={setSplash}
+        fetchProfile={handleViewUserProfile}
+      />
       {/* Posts */}
       <div className="grid grid-cols-3 gap-[0.66%] mt-[60px]">
         {data?.posts.toReversed().map((item, i) => (
