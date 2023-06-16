@@ -1,3 +1,4 @@
+import { Spin } from "antd";
 import React from "react";
 
 const MenuBar = ({
@@ -5,6 +6,7 @@ const MenuBar = ({
   primaryBtnLabel,
   onPrimaryBtnClick,
   onDiscard,
+  primaryBtnLoading,
 }) => {
   return (
     <div className="flex flex-col h-full">
@@ -17,13 +19,14 @@ const MenuBar = ({
           Discard
         </button>
         <button
+          disabled={primaryBtnLoading}
           onClick={onPrimaryBtnClick}
           style={{
             background: "linear-gradient(91.17deg, #96CAF7 0%, #BFB2F3 100%)",
           }}
           className="w-[175px] rounded-10 hover:brightness-95"
         >
-          {primaryBtnLabel ?? "Save change"}
+          {!primaryBtnLoading ? primaryBtnLabel ?? "Save change" : <Spin />}
         </button>
       </div>
     </div>

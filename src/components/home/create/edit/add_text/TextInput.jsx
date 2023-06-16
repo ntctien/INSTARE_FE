@@ -83,8 +83,6 @@ const TextInput = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [size]);
 
-  console.log(imageContainerRef.current?.clientWidth);
-
   return (
     <Rnd
       disableDragging={!edit}

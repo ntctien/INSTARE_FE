@@ -9,7 +9,7 @@ import { StoryContext } from "~/contexts/StoryContext";
 const CreateStory = () => {
   const navigate = useNavigate();
   const inputRef = useRef(null);
-  const { setStory } = useContext(StoryContext);
+  const { setStory, setFileName } = useContext(StoryContext);
 
   const handleCreatePhotoOrVideoStory = () => {
     inputRef.current.click();
@@ -21,6 +21,7 @@ const CreateStory = () => {
       return;
     }
 
+    setFileName(fileObj.name);
     const url = URL.createObjectURL(fileObj);
     setStory(url);
 

@@ -11,8 +11,12 @@ import SizeEditor from "~/components/text_editor/SizeEditor";
 import storyBackgroundColors from "~/constants/storyBackgroundColors";
 import textColors from "~/constants/textColors";
 import SelectFont from "~/components/story/SelectFont";
+import convertImgUrlToFile from "~/utils/convertImgUrlToFile";
+import { useSelector } from "react-redux";
+import createStory from "~/api/story/createStory";
 
 const CreateTextStory = () => {
+  const { currentUser } = useSelector((state) => state.user);
   const storyRef = useRef(null);
   const navigate = useNavigate();
   const [content, setContent] = useState("");
@@ -24,14 +28,23 @@ const CreateTextStory = () => {
   const [background, setBackground] = useState(
     "linear-gradient(162.44deg, #B73793 0%, #EDA9DE 100%)"
   );
+  const [loading, setLoading] = useState(false);
 
   const handleAddToStory = () => {
     const story = storyRef.current;
     if (!story) return;
     domtoimage
       .toJpeg(story, { width: story.naturalWidth, height: story.naturalHeight })
-      .then((url) => {
-        console.log(url);
+      .then(async (url) => {
+        setLoading(true);
+        const file = await convertImgUrlToFile(url, `story_${currentUser.id}`);
+        await createStory(currentUser.token, file)
+          .then(({ data }) => {
+            console.log(data);
+            navigate("/");
+          })
+          .catch((err) => console.log(err));
+        setLoading(false);
       })
       .catch((error) => {
         console.error(error);
@@ -45,6 +58,7 @@ const CreateTextStory = () => {
           primaryBtnLabel={"Add to story"}
           onPrimaryBtnClick={handleAddToStory}
           onDiscard={() => navigate("/")}
+          primaryBtnLoading={loading}
         >
           <div className="mx-5 create-text-menu flex flex-col gap-y-5">
             <textarea
@@ -59,9 +73,9 @@ const CreateTextStory = () => {
             <div>
               <SizeEditor
                 value={style.fontSize}
-                onChange={(e) =>
-                  setStyle({ ...style, fontSize: e.target.value })
-                }
+                onChange={(value) => {
+                  setStyle({ ...style, fontSize: value });
+                }}
                 selectedColor={"#D6D6D6"}
               />
             </div>
@@ -93,18 +107,20 @@ const CreateTextStory = () => {
         </MenuBar>
       </LeftBar>
       <ContentWrapper>
-        <div
-          ref={storyRef}
-          style={{
-            ...style,
-            fontSize: style.fontSize + "px",
-            background: background,
-          }}
-          className="story center"
-        >
-          <p className="font-medium text-center max-w-[80%] break-words leading-7">
-            {content || "Your content will display here"}
-          </p>
+        <div className="rounded-10 overflow-hidden">
+          <div
+            ref={storyRef}
+            style={{
+              ...style,
+              fontSize: style.fontSize + "px",
+              background: background,
+            }}
+            className="h-[80vh] w-[calc(80vh*9/16)] overflow-hidden center"
+          >
+            <p className="font-medium text-center max-w-[80%] break-words leading-7">
+              {content || "Your content will display here"}
+            </p>
+          </div>
         </div>
       </ContentWrapper>
     </>

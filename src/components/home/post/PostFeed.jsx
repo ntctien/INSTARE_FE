@@ -13,7 +13,6 @@ const PostFeed = () => {
     const handleGetAllPosts = async () => {
       await getAllPosts(currentUser.token)
         .then(({ data }) => {
-          console.log(data)
           setData([
             ...data.map((d) => {
               return {
