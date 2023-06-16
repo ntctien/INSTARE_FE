@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { Divider, Skeleton } from "antd";
 import MediaSlider from "~/components/home/media_slider/MediaSlider";
 import PostInfo from "~/components/PostInfo";
@@ -10,7 +11,6 @@ import logoIcon from "~/assets/logo.png";
 import CommentInput from "~/components/CommentInput";
 import viewPost from "~/api/services/no-auth/viewPost";
 import getDateString from "~/utils/getDateString";
-import { useSelector } from "react-redux";
 import useComment from "~/hooks/useComment";
 
 const Post = () => {
@@ -18,6 +18,7 @@ const Post = () => {
   const { postId } = useParams();
   const { currentUser } = useSelector((state) => state.user);
   const { commentInputProps, handleComment } = useComment();
+  const commentInputRef = useRef(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [data, setData] = useState();
 
@@ -101,7 +102,11 @@ const Post = () => {
           </p>
         </div>
         <Divider className="default-divider" />
-        <InteractBar likeCount={2} className={"p-[17px]"} />
+        <InteractBar
+          likeCount={2}
+          onCommentClick={() => commentInputRef.current?.focus()}
+          className={"p-[17px]"}
+        />
         {/* Comment section */}
         <div className="flex flex-col flex-1 gap-y-5 px-[17px] overflow-y-auto">
           {data?.comments.toReversed().map((comment, i) => (
@@ -123,7 +128,7 @@ const Post = () => {
           onSubmit={(e) => handleComment(e, postId, updateComments)}
           className="px-[17px] pt-[6px] pb-[9px] bg-[#EDF1F8]"
         >
-          <CommentInput {...commentInputProps} />
+          <CommentInput inputRef={commentInputRef} {...commentInputProps} />
         </form>
       </div>
     </div>

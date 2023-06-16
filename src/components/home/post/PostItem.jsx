@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Divider } from "antd";
 import MediaSlider from "../media_slider/MediaSlider";
@@ -11,6 +11,7 @@ import useComment from "~/hooks/useComment";
 
 const PostItem = ({ handleShare, post }) => {
   const { currentUser } = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const { commentInputProps, handleComment } = useComment();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [comments, setCommments] = useState([]);
@@ -36,7 +37,11 @@ const PostItem = ({ handleShare, post }) => {
         dots
       />
       <div className="px-[20px] mt-[10px]">
-        <InteractBar likeCount={post._count.likes} handleShare={handleShare} />
+        <InteractBar
+          likeCount={post._count.likes}
+          handleShare={handleShare}
+          onCommentClick={() => navigate(`/post/${post.id}`)}
+        />
         {/* Content */}
         <p className="mt-[7px] text-14">
           <Link to={`/${post?.user.username}`}>

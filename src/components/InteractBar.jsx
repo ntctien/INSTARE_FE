@@ -1,6 +1,6 @@
 import { LikeIcon, CommentIcon, ShareIcon } from "./icons";
 
-const InteractBar = ({ likeCount, className, handleShare }) => {
+const InteractBar = ({ likeCount, className, handleShare, onCommentClick }) => {
   return (
     <div className={className}>
       {/* Interact */}
@@ -8,7 +8,7 @@ const InteractBar = ({ likeCount, className, handleShare }) => {
         <button>
           <LikeIcon />
         </button>
-        <button>
+        <button onClick={onCommentClick}>
           <CommentIcon />
         </button>
         <button onClick={handleShare}>

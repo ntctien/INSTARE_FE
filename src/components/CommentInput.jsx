@@ -3,7 +3,7 @@ import { Spin } from "antd";
 import Avatar from "./home/Avatar";
 import { ReactComponent as LoadingIcon } from "~/assets/loading.svg";
 
-const CommentInput = ({ value, onChange, loading }) => {
+const CommentInput = ({ value, onChange, loading, inputRef }) => {
   const { currentUser } = useSelector((state) => state.user);
 
   return (
@@ -15,6 +15,7 @@ const CommentInput = ({ value, onChange, loading }) => {
       <div className="row gap-x-[13px]">
         <Avatar width={"30px"} ava={currentUser.ava} />
         <input
+          ref={inputRef}
           placeholder="Add a comment..."
           maxLength={250}
           value={value}
