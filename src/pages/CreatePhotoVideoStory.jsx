@@ -17,7 +17,7 @@ import Text from "~/components/story/create_photo_or_video/Text";
 import { StoryContext } from "~/contexts/StoryContext";
 import getPreserveQualitySettings from "~/utils/getPreserveQualitySettings";
 import Crop from "~/components/story/create_photo_or_video/Crop";
-import createStory from "~/api/story/createStory";
+import createStory from "~/api/services/story/createStory";
 import { useSelector } from "react-redux";
 import convertImgUrlToFile from "~/utils/convertImgUrlToFile";
 

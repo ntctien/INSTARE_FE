@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import createStory from "~/api/story/createStory";
+import createStory from "~/api/services/story/createStory";
 import { StoryContext } from "~/contexts/StoryContext";
 import convertImgUrlToFile from "~/utils/convertImgUrlToFile";
 

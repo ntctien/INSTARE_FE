@@ -8,11 +8,17 @@ import InteractBar from "~/components/InteractBar";
 import CommentInput from "~/components/CommentInput";
 import getDateString from "~/utils/getDateString";
 import useComment from "~/hooks/useComment";
+import useLike from "~/hooks/useLike";
+import PostLikeWrapper from "./PostLikeWrapper";
 
 const PostItem = ({ handleShare, post }) => {
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const { commentInputProps, handleComment } = useComment();
+  const { liked, likes, likeOpacity, handleLikeClick } = useLike(
+    post.liked,
+    post._count.likes
+  );
   const [currentSlide, setCurrentSlide] = useState(0);
   const [comments, setCommments] = useState([]);
 
@@ -30,17 +36,24 @@ const PostItem = ({ handleShare, post }) => {
         className={"p-[20px]"}
       />
       {/* Image or video */}
-      <MediaSlider
-        mediaList={post.mediaList}
-        currentSlide={currentSlide}
-        setCurrentSlide={setCurrentSlide}
-        dots
-      />
+      <PostLikeWrapper
+        likeOpacity={likeOpacity}
+        handleLikeClick={() => handleLikeClick(post.id)}
+      >
+        <MediaSlider
+          mediaList={post.mediaList}
+          currentSlide={currentSlide}
+          setCurrentSlide={setCurrentSlide}
+          dots
+        />
+      </PostLikeWrapper>
       <div className="px-[20px] mt-[10px]">
         <InteractBar
-          likeCount={post._count.likes}
+          likeCount={likes}
           handleShare={handleShare}
           onCommentClick={() => navigate(`/post/${post.id}`)}
+          liked={liked}
+          onLikeClick={() => handleLikeClick(post.id)}
         />
         {/* Content */}
         <p className="mt-[7px] text-14">

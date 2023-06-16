@@ -13,7 +13,7 @@ import textColors from "~/constants/textColors";
 import SelectFont from "~/components/story/SelectFont";
 import convertImgUrlToFile from "~/utils/convertImgUrlToFile";
 import { useSelector } from "react-redux";
-import createStory from "~/api/story/createStory";
+import createStory from "~/api/services/story/createStory";
 
 const CreateTextStory = () => {
   const { currentUser } = useSelector((state) => state.user);

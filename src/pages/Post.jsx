@@ -12,15 +12,29 @@ import CommentInput from "~/components/CommentInput";
 import viewPost from "~/api/services/no-auth/viewPost";
 import getDateString from "~/utils/getDateString";
 import useComment from "~/hooks/useComment";
+import useLike from "~/hooks/useLike";
+import checkIfUserLikePost from "~/api/services/post/checkIfUserLikePost";
+import PostLikeWrapper from "~/components/home/post/PostLikeWrapper";
 
 const Post = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [data, setData] = useState();
+  const [userLiked, setUserLiked] = useState(false);
   const navigate = useNavigate();
   const { postId } = useParams();
   const { currentUser } = useSelector((state) => state.user);
   const { commentInputProps, handleComment } = useComment();
+  const { liked, likes, likeOpacity, handleLikeClick } = useLike(
+    userLiked,
+    data?._count.likes
+  );
   const commentInputRef = useRef(null);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [data, setData] = useState();
+
+  const handleCheckIfUserLikedPost = async (postId) => {
+    await checkIfUserLikePost(currentUser.token, postId)
+      .then(({ data }) => setUserLiked(data))
+      .catch((err) => console.log(err));
+  };
 
   const handleViewPost = async (postId) => {
     await viewPost(postId)
@@ -39,7 +53,9 @@ const Post = () => {
   };
 
   useEffect(() => {
+    handleCheckIfUserLikedPost(postId);
     handleViewPost(postId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [postId]);
 
   const updateComments = (commentValue) => {
@@ -67,11 +83,16 @@ const Post = () => {
       <div className="w-[66vw] relative">
         {/* Image or video */}
         {data?.mediaList ? (
-          <MediaSlider
-            mediaList={data.mediaList}
-            currentSlide={currentSlide}
-            setCurrentSlide={setCurrentSlide}
-          />
+          <PostLikeWrapper
+            likeOpacity={likeOpacity}
+            handleLikeClick={() => handleLikeClick(postId)}
+          >
+            <MediaSlider
+              mediaList={data.mediaList}
+              currentSlide={currentSlide}
+              setCurrentSlide={setCurrentSlide}
+            />
+          </PostLikeWrapper>
         ) : (
           <Skeleton.Image
             style={{ width: "100%", height: "100%" }}
@@ -103,8 +124,10 @@ const Post = () => {
         </div>
         <Divider className="default-divider" />
         <InteractBar
-          likeCount={2}
+          liked={liked}
+          likeCount={likes}
           onCommentClick={() => commentInputRef.current?.focus()}
+          onLikeClick={() => handleLikeClick(postId)}
           className={"p-[17px]"}
         />
         {/* Comment section */}
