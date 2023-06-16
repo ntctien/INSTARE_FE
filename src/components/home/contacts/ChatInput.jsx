@@ -3,17 +3,22 @@ import plusIcon from "../../../assets/plus.svg";
 
 const { TextArea } = Input;
 
-const ChatInput = () => {
+const ChatInput = ({ value, onChange }) => {
   return (
     <div className="row gap-x-[1.8%] px-[8px] py-[10px] min-h-[50px] bg-[#D9D9D926] border-t-1 border-[#00000026]">
       <button className="w-[20px] h-[20px] bg-pastel-purple-dark rounded-full flex items-center justify-center">
         <img src={plusIcon} alt="Plus" />
       </button>
       <TextArea
-        className="chat-input"
         autoSize
+        value={value}
+        onChange={onChange}
+        onKeyDown={(e) => {
+          if (e.code === "Enter") e.preventDefault();
+        }}
+        className="chat-input"
       />
-      <button>
+      <button type="submit">
         <svg
           width="20"
           height="18"

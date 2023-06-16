@@ -11,6 +11,7 @@ import '~/fonts/Ubuntu';
 import reportWebVitals from './reportWebVitals';
 import { ProgressProvider } from './contexts/ProgressContext';
 import { SplashProvider } from './contexts/SpashContext';
+import { WebsocketProvider } from './contexts/WebsocketContext';
 
 const middleware = [thunk]
 const store = createStore(allReducers, applyMiddleware(...middleware));
@@ -21,9 +22,11 @@ root.render(
   <Provider store={store}>
     <SplashProvider>
       <ProgressProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <WebsocketProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </WebsocketProvider>
       </ProgressProvider>
     </SplashProvider>
   </Provider>

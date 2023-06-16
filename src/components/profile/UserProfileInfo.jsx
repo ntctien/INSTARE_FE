@@ -6,9 +6,11 @@ import checkIfUserFollowed from "~/api/services/interact/checkIfUserFollowed";
 import followUser from "~/api/services/interact/followUser";
 import unfollowUser from "~/api/services/interact/unfollowUser";
 import Avatar from "../home/Avatar";
+import { useNavigate } from "react-router-dom";
 
 const UserProfileInfo = ({ data, setModal, setSplash, fetchProfile }) => {
   const { currentUser } = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const [self, setSelf] = useState(false);
   const [following, setFollowing] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -78,7 +80,10 @@ const UserProfileInfo = ({ data, setModal, setSplash, fetchProfile }) => {
           {!self ? (
             following ? (
               <div className="flex gap-x-[5px]">
-                <button className="profile-btn hover:bg-pastel-purple-dark hover:text-white hover:border-none">
+                <button
+                  onClick={() => navigate(`/message/${data.id}`)}
+                  className="profile-btn hover:bg-pastel-purple-dark hover:text-white hover:border-none"
+                >
                   Message
                 </button>
                 <Tooltip

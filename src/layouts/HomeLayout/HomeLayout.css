@@ -164,7 +164,7 @@
 /* Divider */
 
 .divider {
-  @apply border-black15 border-t-1 flex-1;
+  @apply border-black15 border-t-1 w-[10%];
 }
 
 /* Chat */

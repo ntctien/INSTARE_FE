@@ -6,7 +6,7 @@ import infoIcon from "~/assets/info.svg";
 import ChatBox from "../home/contacts/ChatBox";
 import WarningModal from "../modal/WarningModal";
 
-const MessageDetail = () => {
+const MessageDetail = ({ currChat }) => {
   const [warning, setWarning] = useState(null);
 
   const userOptions = [
@@ -61,10 +61,10 @@ const MessageDetail = () => {
       {/* User info */}
       <div className="bg-[#F9F7FE] w-full h-[70px] between-row pl-[25px] pr-[15px] border-b-1 border-black15">
         <div className="row gap-x-5">
-          <Avatar />
+          <Avatar ava={currChat.user.ava}/>
           <div>
-            <h2 className="font-bold text-16">Họ Và Tên</h2>
-            <h3 className="text-13 mt-[5px]">username</h3>
+            <h2 className="font-bold text-16">{currChat.user.name}</h2>
+            <h3 className="text-13 mt-[5px]">{currChat.user.username}</h3>
           </div>
         </div>
         <Dropdown arrow menu={{ items: userOptions }}>
@@ -74,7 +74,7 @@ const MessageDetail = () => {
         </Dropdown>
       </div>
       {/* Chat */}
-      <ChatBox />
+      <ChatBox currChat={currChat}/>
       {/* Warning modal */}
       <WarningModal
         open={warning != null}

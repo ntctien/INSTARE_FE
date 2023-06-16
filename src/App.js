@@ -35,13 +35,14 @@ function App() {
           <Route path="new-password" element={<NewPassword />} />
         </Route>
       </Route>
-      <Route element={<MainLayout/>}>
+      <Route element={<MainLayout />}>
         <Route element={<MenuLayout />}>
           <Route element={<HomeLayout />} path="/">
             <Route element={<Home />} index />
             <Route element={<Profile />} path=":username" />
           </Route>
           <Route element={<Message />} path="message" />
+          <Route element={<Message />} path="message/:userId" />
         </Route>
         <Route element={<StoryLayout />} path="stories">
           <Route element={<Stories />} index />
