@@ -1,73 +1,70 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Divider } from "antd";
 import SideBar from "../SideBar";
 import { optionIcon } from "~/assets/post_icons";
 import NotificationItem from "./NotificationItem";
+import getUserNotification from "~/api/services/interact/getUserNotification";
+import readNoti from "~/api/services/interact/readNoti";
 
 const tabs = [
   { key: 0, title: "All" },
   { key: 1, title: "Unread" },
 ];
 
-const notifications = [
-  {
-    username: "_ptt.chang",
-    content: "commented on your post.",
-    time: "Friday 11:59 AM",
-    read: false
-  },
-  {
-    username: "_ptt.chang",
-    content: "liked your post.",
-    time: "Friday 11:59 AM",
-    read: false
-  },
-  {
-    username: "_ptt.chang",
-    content: "started following you.",
-    time: "Friday 11:59 AM",
-    read: false
-  },
-  {
-    username: "_ptt.chang",
-    content: "commented on your post.",
-    time: "Friday 11:59 AM",
-    read: true
-  },
-  {
-    username: "_ptt.chang",
-    content: "liked your post.",
-    time: "Friday 11:59 AM",
-    read: true
-  },
-  {
-    username: "_ptt.chang",
-    content: "started following you.",
-    time: "Friday 11:59 AM",
-    read: true
-  },
-  {
-    username: "_ptt.chang",
-    content: "commented on your post.",
-    time: "Friday 11:59 AM",
-    read: true
-  },
-  {
-    username: "_ptt.chang",
-    content: "liked your post.",
-    time: "Friday 11:59 AM",
-    read: true
-  },
-  {
-    username: "_ptt.chang",
-    content: "started following you.",
-    time: "Friday 11:59 AM",
-    read: true
-  },
-];
-
 const NotificationSideBar = ({ onClose }) => {
+  const { currentUser } = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const [currTab, setCurrTab] = useState(0);
+  const [notifications, setNotifications] = useState([]);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (!currentUser) return;
+    const handleGetUserNotification = async () => {
+      setLoading(true);
+      await getUserNotification(currentUser.token)
+        .then(({ data }) => setNotifications([...data]))
+        .catch((err) => console.log(err));
+      setLoading(false);
+    };
+    handleGetUserNotification();
+  }, [currentUser]);
+
+  useEffect(() => {
+    if (currTab === 1) {
+      setData(notifications.filter((item) => item.read === false));
+    } else setData([...notifications]);
+  }, [currTab, notifications]);
+
+  const handleReadNoti = async (id) => {
+    await readNoti(currentUser.token, id)
+      .then(() => {})
+      .catch((err) => console.log(err));
+  };
+
+  const handleItemClick = (item) => {
+    setData((prev) =>
+      prev.map((d) => (d.id === item.id ? { ...d, read: true } : d))
+    );
+    handleReadNoti(item.id);
+    if (item.postId) {
+      navigate(`/post/${item.postId}`);
+      onClose();
+    }
+  };
+
+  const handleUserClick = (e, item) => {
+    e.stopPropagation();
+    setData((prev) =>
+      prev.map((d) => (d.id === item.id ? { ...d, read: true } : d))
+    );
+    handleReadNoti(item.id);
+    navigate(`/${item.interacted.username}`);
+    onClose();
+  };
 
   return (
     <SideBar onClose={onClose}>
@@ -94,9 +91,18 @@ const NotificationSideBar = ({ onClose }) => {
       </div>
       {/* Notifications */}
       <div className="flex-1 overflow-y-auto mt-[17px]">
-        {notifications.map((item, i) => (
-          <NotificationItem key={i} {...item} />
-        ))}
+        {!loading ? (
+          data.map((item, i) => (
+            <NotificationItem
+              key={i}
+              item={item}
+              onClick={() => handleItemClick(item)}
+              onUserClick={(e) => handleUserClick(e, item)}
+            />
+          ))
+        ) : (
+          <NotificationItem loading={true} />
+        )}
       </div>
     </SideBar>
   );

@@ -1,8 +1,11 @@
-const Avatar = ({ width, custom, ava }) => {
+const Avatar = ({ width, custom, ava, onClick, loading }) => {
   return (
     <div
-      className={`aspect-square rounded-full overflow-hidden ${custom}`}
+      onClick={onClick}
       style={{ width: width ?? "50px", backgroundColor: !ava && "#D9D9D9" }}
+      className={`aspect-square rounded-full overflow-hidden ${
+        loading && "loading-animation"
+      } ${custom}`}
     >
       {ava && (
         <img

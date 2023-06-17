@@ -1,14 +1,17 @@
+import { useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Logo from "../Logo";
 import { menuItems } from "../../constants/menuItems";
 import AppMenuItem from "./AppMenuItem";
 import MoreItem from "./MoreItem";
 import SearchSideBar from "../search/SearchSideBar";
 import NotificationSideBar from "../notification/NotificationSideBar";
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { WebsocketContext } from "~/contexts/WebsocketContext";
 
 const AppMenu = ({ menuItemId, setMenuItemId }) => {
   const location = useLocation();
+  const socket = useContext(WebsocketContext);
+  const [newNotification, setNewNotification] = useState(false);
 
   useEffect(() => {
     if (location.pathname === "/message")
@@ -16,11 +19,33 @@ const AppMenu = ({ menuItemId, setMenuItemId }) => {
         current: "messages",
         previous: "messages",
       });
+    else if (location.pathname === "/")
+      setMenuItemId({
+        current: "home",
+        previous: "home",
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
+  useEffect(() => {
+    socket.on("connect");
+    socket.on("onNotification", () => {
+      setNewNotification(true);
+    });
+
+    return () => {
+      socket.off("connect");
+      socket.off("onNotification");
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleCloseSideBar = (id) => {
     setMenuItemId({ current: menuItemId.previous, previous: id });
+  };
+
+  const handleReadNotification = () => {
+    setNewNotification(false);
   };
 
   return (
@@ -33,6 +58,8 @@ const AppMenu = ({ menuItemId, setMenuItemId }) => {
             item={item}
             menuItemId={menuItemId}
             setMenuItemId={setMenuItemId}
+            newNotification={newNotification}
+            onClick={item.id === "notifications" && handleReadNotification}
           />
         ))}
       </div>

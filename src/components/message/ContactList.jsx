@@ -51,15 +51,16 @@ const ContactList = ({ setCurrChat }) => {
   }, [currentUser]);
 
   useEffect(() => {
-    if (!userId) {
-      setData([...contactList.filter((item) => item.message != null)]);
-    } else {
-      const user = contactList.find(item => item.user.id === userId)
-      console.log(user)
-      // setCurrChat(user ;
+    setData([...contactList.filter((item) => item.message != null)]);
+  }, [contactList]);
+
+  useEffect(()=>{
+    if (userId) {
+      const user = contactList.find((item) => item.user.id === userId);
+      setCurrChat(user);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [contactList, userId]);
+  },[userId,contactList])
 
   return (
     <div className="w-[360px] bg-[#F9F7FE] h-screen flex flex-col">
