@@ -35,16 +35,19 @@ const ContactList = ({ setCurrChat }) => {
   const [search, setSearch] = useState(false);
   const [contactList, setContactList] = useState([]);
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!currentUser) return;
     const handleGetListContact = async () => {
+      setLoading(true);
       await getListContact(currentUser.token)
         .then(({ data }) => {
           console.log(data);
           setContactList(data);
         })
         .catch((err) => console.log(err));
+      setLoading(false);
     };
 
     handleGetListContact();
@@ -54,13 +57,13 @@ const ContactList = ({ setCurrChat }) => {
     setData([...contactList.filter((item) => item.message != null)]);
   }, [contactList]);
 
-  useEffect(()=>{
+  useEffect(() => {
     if (userId) {
       const user = contactList.find((item) => item.user.id === userId);
       setCurrChat(user);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[userId,contactList])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId, contactList]);
 
   return (
     <div className="w-[360px] bg-[#F9F7FE] h-screen flex flex-col">
@@ -86,13 +89,17 @@ const ContactList = ({ setCurrChat }) => {
           ? searchResults.map((result, i) => (
               <SearchResultItem key={i} {...result} />
             ))
-          : data.map((c, i) => (
+          : !loading
+          ? data.map((c, i) => (
               <ContactItem
                 key={i}
                 maxWidth={200}
                 item={c}
                 onClick={() => setCurrChat(c)}
               />
+            ))
+          : Array.from({ length: 9 }).map((_, i) => (
+              <ContactItem key={i} loading />
             ))}
       </div>
     </div>
