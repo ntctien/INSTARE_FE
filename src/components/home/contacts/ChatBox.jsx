@@ -105,7 +105,7 @@ const ChatBox = ({ currChat }) => {
                   dayjs(message.createdAt).diff(
                     dayjs(messages[i - 1].createdAt),
                     "minute"
-                  ) > 10 ||
+                  ) >= 5 ||
                   messages[i - 1].senderId !== message.senderId
                 }
               />
