@@ -8,6 +8,8 @@ import SearchSideBar from "../search/SearchSideBar";
 import NotificationSideBar from "../notification/NotificationSideBar";
 import { WebsocketContext } from "~/contexts/WebsocketContext";
 import { AppMenuContext } from "~/contexts/AppMenuContext";
+import notificationAudio from "~/assets/audios/notification.mp3";
+import messageAudio from "~/assets/audios/message.mp3";
 
 const AppMenu = ({ menuItemId, setMenuItemId }) => {
   const location = useLocation();
@@ -39,6 +41,18 @@ const AppMenu = ({ menuItemId, setMenuItemId }) => {
       socket.off("onNotification");
     };
   }, [socket]);
+
+  useEffect(() => {
+    if (newNotification) {
+      new Audio(notificationAudio).play();
+    }
+  }, [newNotification]);
+
+  useEffect(() => {
+    if (newMessage) {
+      new Audio(messageAudio).play();
+    }
+  }, [newMessage]);
 
   const handleCloseSideBar = (id) => {
     setMenuItemId({ current: menuItemId.previous, previous: id });
