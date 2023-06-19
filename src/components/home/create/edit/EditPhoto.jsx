@@ -1,9 +1,12 @@
 import BackModalContainer from "~/components/modal/BackModalContainer";
 import { editFeatures } from "../../../../constants/createFeatures";
 
-const EditPhoto = ({ fileList, currentSlide,setCurrFeature }) => {
+const EditPhoto = ({ fileList, currentSlide, setCurrFeature }) => {
   return (
-    <BackModalContainer onBack={()=>setCurrFeature("create")}>
+    <BackModalContainer
+      onBack={() => setCurrFeature("create")}
+      onDone={() => setCurrFeature("create")}
+    >
       <div className="edit-feature">
         {/* Media */}
         <div className="current-media-container">
