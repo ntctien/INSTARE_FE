@@ -9,11 +9,15 @@ import dayjs from "dayjs";
 import getMessageDateString from "~/utils/getMessageDateString";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+import { AppMenuContext } from "~/contexts/AppMenuContext";
+import { useLocation } from "react-router-dom";
 
 const ChatBox = ({ currChat, setContactList, userList }) => {
   const { currentUser } = useSelector((state) => state.user);
   const msgContainerRef = useRef(null);
   const { socket, emit } = useContext(WebsocketContext);
+  const { setNewMessage } = useContext(AppMenuContext);
+  const location = useLocation();
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -36,6 +40,12 @@ const ChatBox = ({ currChat, setContactList, userList }) => {
     ]);
   };
 
+  const updateAppMenu = () => {
+    if (!location.pathname.includes("/message")) {
+      setNewMessage(true);
+    }
+  };
+
   useEffect(() => {
     if (!socket) return;
     socket.on("onMessage", (data) => {
@@ -43,6 +53,7 @@ const ChatBox = ({ currChat, setContactList, userList }) => {
         setMessages((prev) => [...prev, data]);
       }
       updateContactList(data);
+      updateAppMenu();
     });
 
     return () => {

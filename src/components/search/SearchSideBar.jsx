@@ -5,17 +5,21 @@ import SearchInput from "./SearchInput";
 import SearchResultItem from "./SearchResultItem";
 import WarningModal from "../modal/WarningModal";
 import SideBar from "../SideBar";
-import searchUser from "~/api/services/no-auth/searchUser";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import useSearchUser from "~/hooks/useSearchUser";
 
 const SearchSideBar = ({ onClose }) => {
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const {
+    value,
+    searchLoading,
+    searchResult,
+    handleChange,
+    handleClearSearch,
+  } = useSearchUser();
   const [warningOpen, setWarningOpen] = useState(false);
-  const [value, setValue] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [searchResult, setSearchResult] = useState([]);
   const [recents, setRecents] = useState([]);
 
   const saveRecent = (value) => {
@@ -55,32 +59,6 @@ const SearchSideBar = ({ onClose }) => {
       setRecents(recentSearch[currentUser.id]);
   }, [currentUser.id]);
 
-  // Debouncing
-  useEffect(() => {
-    if (value === "") return;
-    const getData = setTimeout(async () => {
-      await searchUser(value)
-        .then(({ data }) => setSearchResult([...data]))
-        .catch((err) => console.log(err));
-      setLoading(false);
-    }, 500);
-
-    return () => clearTimeout(getData);
-  }, [value]);
-
-  const handleChange = (e) => {
-    setValue(e.target.value);
-    if (e.target.value !== "") {
-      setLoading(true);
-    } else {
-      setLoading(false);
-    }
-  };
-
-  const handleClearSearch = () => {
-    setValue("");
-  };
-
   const handleSearchItemClick = (item) => {
     onClose();
     navigate(`/${item.username}`);
@@ -89,7 +67,8 @@ const SearchSideBar = ({ onClose }) => {
     setRecents(recents);
   };
 
-  const handleClearRecent = (recent) => {
+  const handleClearRecent = (e, recent) => {
+    e.stopPropagation();
     let temp = recents;
     temp = temp.filter((value) => {
       return value.id !== recent.id;
@@ -116,7 +95,7 @@ const SearchSideBar = ({ onClose }) => {
           />
         </div>
         <Divider className="mt-[14px] mb-0" />
-        {loading ? (
+        {searchLoading ? (
           // Spin
           <div className="w-full h-full center">
             <Spin indicator={<LoadingIcon />} className="custom-spin" />
@@ -159,7 +138,7 @@ const SearchSideBar = ({ onClose }) => {
                   key={i}
                   item={recent}
                   clearable
-                  handleClear={() => handleClearRecent(recent)}
+                  handleClear={(e) => handleClearRecent(e, recent)}
                   onClick={() => handleSearchItemClick(recent)}
                 />
               ))}

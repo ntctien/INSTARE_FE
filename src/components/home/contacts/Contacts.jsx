@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Divider } from "antd";
 import ContactItem from "./ContactItem";
 import Avatar from "../Avatar";
 import { ReactComponent as ArrowIcon } from "../../../assets/arrow-back.svg";
 import ChatBox from "./ChatBox";
 import useContactList from "~/hooks/useContactList";
+import { AppMenuContext } from "~/contexts/AppMenuContext";
 
 const Contacts = () => {
+  const { setNewMessage } = useContext(AppMenuContext);
   const { contactList, loading, userList, setContactList } = useContactList();
   const [currChat, setCurrChat] = useState(null);
 
@@ -19,6 +21,7 @@ const Contacts = () => {
           : item
       )
     );
+    setNewMessage(false);
   };
 
   return (
@@ -33,7 +36,7 @@ const Contacts = () => {
         {currChat ? (
           <>
             <button className="ml-[12px]" onClick={() => setCurrChat(null)}>
-              <ArrowIcon className="arrow-icon"/>
+              <ArrowIcon className="arrow-icon" />
             </button>
             <div className="w-[15px] h-[15px] bg-grey rounded-full font-bold text-10 text-white flex items-center justify-center ml-[3px]">
               1

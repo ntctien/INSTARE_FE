@@ -7,15 +7,16 @@ import MoreItem from "./MoreItem";
 import SearchSideBar from "../search/SearchSideBar";
 import NotificationSideBar from "../notification/NotificationSideBar";
 import { WebsocketContext } from "~/contexts/WebsocketContext";
+import { AppMenuContext } from "~/contexts/AppMenuContext";
 
 const AppMenu = ({ menuItemId, setMenuItemId }) => {
   const location = useLocation();
   const { socket } = useContext(WebsocketContext);
+  const { newMessage, setNewMessage } = useContext(AppMenuContext);
   const [newNotification, setNewNotification] = useState(false);
-  const [newMessage, setNewMessage] = useState(false);
 
   useEffect(() => {
-    if (location.pathname === "/message")
+    if (location.pathname.includes("/message"))
       setMenuItemId({
         current: "messages",
         previous: "messages",

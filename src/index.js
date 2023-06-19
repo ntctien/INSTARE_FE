@@ -12,6 +12,7 @@ import reportWebVitals from './reportWebVitals';
 import { ProgressProvider } from './contexts/ProgressContext';
 import { SplashProvider } from './contexts/SpashContext';
 import { WebsocketProvider } from './contexts/WebsocketContext';
+import { AppMenuProvider } from './contexts/AppMenuContext';
 
 const middleware = [thunk]
 const store = createStore(allReducers, applyMiddleware(...middleware));
@@ -23,9 +24,11 @@ root.render(
     <SplashProvider>
       <ProgressProvider>
         <WebsocketProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
+          <AppMenuProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </AppMenuProvider>
         </WebsocketProvider>
       </ProgressProvider>
     </SplashProvider>
