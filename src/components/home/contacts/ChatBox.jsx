@@ -10,7 +10,7 @@ import getMessageDateString from "~/utils/getMessageDateString";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 
-const ChatBox = ({ currChat }) => {
+const ChatBox = ({ currChat, setContactList, userList }) => {
   const { currentUser } = useSelector((state) => state.user);
   const msgContainerRef = useRef(null);
   const { socket, emit } = useContext(WebsocketContext);
@@ -18,20 +18,42 @@ const ChatBox = ({ currChat }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  const updateContactList = (result) => {
+    setContactList((prev) => [
+      {
+        ...userList.find((item) => item.user.id === result.senderId),
+        message: {
+          message: result.message,
+          createdAt: result.createdAt,
+          read: !currChat
+            ? false
+            : currChat.user.id === result.senderId
+            ? true
+            : false,
+        },
+      },
+      ...prev.filter((item) => item.user.id !== result.senderId),
+    ]);
+  };
+
   useEffect(() => {
     if (!socket) return;
     socket.on("onMessage", (data) => {
-      setMessages((prev) => [...prev, data]);
+      if (currChat && data.senderId === currChat.user.id) {
+        setMessages((prev) => [...prev, data]);
+      }
+      updateContactList(data);
     });
 
     return () => {
       socket.off("onMessage");
     };
-  }, [socket]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [socket, userList, currChat]);
 
   useEffect(() => {
     if (!currentUser) return;
-    if (!currChat.message) return;
+    if (!currChat?.message) return;
 
     const handleEnterConversation = async () => {
       setLoading(true);
@@ -54,20 +76,18 @@ const ChatBox = ({ currChat }) => {
 
   const handleSendMessage = () => {
     if (!message) return;
-    console.log(currChat.user.id);
     emit("message", {
       userId: currChat.user.id,
       message: message,
     });
     setMessage("");
-    setMessages((prev) => [
-      ...prev,
-      {
-        createdAt: Date(),
-        message: message,
-        senderId: currentUser.id,
-      },
-    ]);
+    const newMessage = {
+      createdAt: Date(),
+      message: message,
+      senderId: currentUser.id,
+    };
+    setMessages((prev) => [...prev, newMessage]);
+    updateContactList({ ...newMessage, senderId: currChat.user.id });
   };
 
   return (
@@ -89,7 +109,7 @@ const ChatBox = ({ currChat }) => {
               )}
               <Message
                 fromSelf={message.senderId === currentUser?.id}
-                ava={currChat.user.ava}
+                ava={currChat?.user.ava}
                 message={message}
                 sameMoment={
                   i !== messages.length - 1 &&

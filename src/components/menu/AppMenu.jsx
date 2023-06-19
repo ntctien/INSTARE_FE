@@ -12,6 +12,7 @@ const AppMenu = ({ menuItemId, setMenuItemId }) => {
   const location = useLocation();
   const { socket } = useContext(WebsocketContext);
   const [newNotification, setNewNotification] = useState(false);
+  const [newMessage, setNewMessage] = useState(false);
 
   useEffect(() => {
     if (location.pathname === "/message")
@@ -42,8 +43,17 @@ const AppMenu = ({ menuItemId, setMenuItemId }) => {
     setMenuItemId({ current: menuItemId.previous, previous: id });
   };
 
-  const handleReadNotification = () => {
-    setNewNotification(false);
+  const handleItemClick = (id) => {
+    switch (id) {
+      case "notifications":
+        setNewNotification(false);
+        break;
+      case "messages":
+        setNewMessage(false);
+        break;
+      default:
+        break;
+    }
   };
 
   return (
@@ -57,7 +67,8 @@ const AppMenu = ({ menuItemId, setMenuItemId }) => {
             menuItemId={menuItemId}
             setMenuItemId={setMenuItemId}
             newNotification={newNotification}
-            onClick={item.id === "notifications" && handleReadNotification}
+            newMessage={newMessage}
+            onClick={() => handleItemClick(item.id)}
           />
         ))}
       </div>

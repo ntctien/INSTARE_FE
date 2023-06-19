@@ -20,7 +20,7 @@ const ContactItem = ({ maxWidth, item, onClick, loading }) => {
           <h3
             className={loading && "loading-animation text-transparent w-[30%]"}
           >
-            {loading ? "loading" : item?.user.name ?? item?.user?.username}
+            {loading ? "loading" : item?.user?.name ?? item?.user?.username}
           </h3>
           <p
             style={{ maxWidth: !loading && maxWidth + "px" }}

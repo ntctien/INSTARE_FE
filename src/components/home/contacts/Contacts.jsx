@@ -2,21 +2,24 @@ import { useState } from "react";
 import { Divider } from "antd";
 import ContactItem from "./ContactItem";
 import Avatar from "../Avatar";
-import arrowIcon from "../../../assets/arrow-back.svg";
+import { ReactComponent as ArrowIcon } from "../../../assets/arrow-back.svg";
 import ChatBox from "./ChatBox";
-
-let contacts = [
-  {
-    name: "Phạm Thị Thu Trang",
-  },
-];
-
-for (let i = 0; i <= 10; i++) {
-  contacts = [...contacts,{name:'Nguyễn Trần Cẩm Tiên'}]
-}
+import useContactList from "~/hooks/useContactList";
 
 const Contacts = () => {
+  const { contactList, loading, userList, setContactList } = useContactList();
   const [currChat, setCurrChat] = useState(null);
+
+  const handleEnterChat = (contact) => {
+    setCurrChat(contact);
+    setContactList((prev) =>
+      prev.map((item) =>
+        item.user.id === contact.user.id
+          ? { ...item, message: { ...item.message, read: true } }
+          : item
+      )
+    );
+  };
 
   return (
     <div
@@ -30,28 +33,44 @@ const Contacts = () => {
         {currChat ? (
           <>
             <button className="ml-[12px]" onClick={() => setCurrChat(null)}>
-              <img src={arrowIcon} alt="Back" />
+              <ArrowIcon className="arrow-icon"/>
             </button>
             <div className="w-[15px] h-[15px] bg-grey rounded-full font-bold text-10 text-white flex items-center justify-center ml-[3px]">
               1
             </div>
-            <Avatar width={30} custom="ml-[10px]" />
-            <h2 className="font-bold text-13 ml-[7px]">{currChat}</h2>
+            <Avatar width={30} ava={currChat?.user.ava} custom="ml-[10px]" />
+            <h2 className="font-bold text-13 ml-[7px]">
+              {currChat?.user.name ?? currChat?.user.username}
+            </h2>
           </>
         ) : (
           <h2 className="font-bold text-20 ml-[23px] font-ubuntu">Contacts</h2>
         )}
       </div>
       <Divider className="my-0" />
-      {currChat ? (
-        <ChatBox />
-      ) : (
-        <div className="overflow-y-auto flex-1 pt-[8px]">
-          {contacts.map((c, i) => (
-            <ContactItem key={i} name={c.name} setCurrChat={setCurrChat} maxWidth={175}/>
-          ))}
-        </div>
-      )}
+      <div className="relative h-full flex flex-col flex-1 overflow-hidden">
+        <ChatBox
+          currChat={currChat}
+          setContactList={setContactList}
+          userList={userList}
+        />
+        {!currChat && (
+          <div className="overflow-y-auto flex-1 pt-[8px] absolute top-0 left-0 bg-white w-full h-full">
+            {loading
+              ? Array.from({ length: 9 }).map((_, i) => (
+                  <ContactItem key={i} loading />
+                ))
+              : contactList.map((c, i) => (
+                  <ContactItem
+                    key={i}
+                    maxWidth={175}
+                    item={c}
+                    onClick={() => handleEnterChat(c)}
+                  />
+                ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

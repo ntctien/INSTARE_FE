@@ -6,6 +6,7 @@ const AppMenuItem = ({
   setMenuItemId,
   onClick,
   newNotification,
+  newMessage,
 }) => {
   return (
     <Link
@@ -22,7 +23,8 @@ const AppMenuItem = ({
           src={menuItemId?.current === item.id ? item.selectedIcon : item.icon}
           alt="Icon"
         />
-        {item.id === "notifications" && newNotification && (
+        {((item.id === "notifications" && newNotification) ||
+          (item.id === "messages" && newMessage)) && (
           <div className="absolute top-0 right-0 w-[10px] aspect-square rounded-full bg-red" />
         )}
       </div>

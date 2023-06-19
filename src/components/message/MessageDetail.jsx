@@ -6,7 +6,7 @@ import infoIcon from "~/assets/info.svg";
 import ChatBox from "../home/contacts/ChatBox";
 import WarningModal from "../modal/WarningModal";
 
-const MessageDetail = ({ currChat }) => {
+const MessageDetail = ({ currChat, setContactList,userList }) => {
   const [warning, setWarning] = useState(null);
 
   const userOptions = [
@@ -57,14 +57,14 @@ const MessageDetail = ({ currChat }) => {
   ];
 
   return (
-    <div className="flex-1 flex flex-col">
+    <div className={`flex-1 flex flex-col ${!currChat && 'hidden'}`}>
       {/* User info */}
       <div className="bg-[#F9F7FE] w-full h-[70px] between-row pl-[25px] pr-[15px] border-b-1 border-black15">
         <div className="row gap-x-5">
-          <Avatar ava={currChat.user.ava}/>
+          <Avatar ava={currChat?.user.ava} />
           <div>
-            <h2 className="font-bold text-16">{currChat.user.name}</h2>
-            <h3 className="text-13 mt-[5px]">{currChat.user.username}</h3>
+            <h2 className="font-bold text-16">{currChat?.user.name}</h2>
+            <h3 className="text-13 mt-[5px]">{currChat?.user.username}</h3>
           </div>
         </div>
         <Dropdown arrow menu={{ items: userOptions }}>
@@ -74,7 +74,7 @@ const MessageDetail = ({ currChat }) => {
         </Dropdown>
       </div>
       {/* Chat */}
-      <ChatBox currChat={currChat}/>
+      <ChatBox currChat={currChat} setContactList={setContactList} userList={userList}/>
       {/* Warning modal */}
       <WarningModal
         open={warning != null}

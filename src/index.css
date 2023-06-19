@@ -104,6 +104,11 @@ body {
   animation-iteration-count: infinite;
 }
 
+/* Icons */
+.arrow-icon:hover path,.arrow-icon:hover line{
+  stroke: #BFB2F3;
+}
+
 /* Antd */
 
 .ant-checkbox .ant-checkbox-inner {

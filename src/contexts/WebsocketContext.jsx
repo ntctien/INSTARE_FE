@@ -6,7 +6,6 @@ const WebsocketContext = createContext();
 
 const WebsocketProvider = ({ children }) => {
   const { currentUser } = useSelector((state) => state.user);
-  const [newMessage, setNewMessage] = useState(null);
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
@@ -37,7 +36,7 @@ const WebsocketProvider = ({ children }) => {
   };
 
   return (
-    <WebsocketContext.Provider value={{ newMessage, emit, socket }}>
+    <WebsocketContext.Provider value={{ emit, socket }}>
       {children}
     </WebsocketContext.Provider>
   );
