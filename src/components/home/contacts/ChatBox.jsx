@@ -12,24 +12,22 @@ import { LoadingOutlined } from "@ant-design/icons";
 
 const ChatBox = ({ currChat }) => {
   const { currentUser } = useSelector((state) => state.user);
-  const socket = useContext(WebsocketContext);
   const msgContainerRef = useRef(null);
+  const { socket, emit } = useContext(WebsocketContext);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    socket.on("connect");
+    if (!socket) return;
     socket.on("onMessage", (data) => {
       setMessages((prev) => [...prev, data]);
     });
 
     return () => {
-      socket.off("connect");
       socket.off("onMessage");
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [socket]);
 
   useEffect(() => {
     if (!currentUser) return;
@@ -56,7 +54,8 @@ const ChatBox = ({ currChat }) => {
 
   const handleSendMessage = () => {
     if (!message) return;
-    socket.emit("message", {
+    console.log(currChat.user.id);
+    emit("message", {
       userId: currChat.user.id,
       message: message,
     });

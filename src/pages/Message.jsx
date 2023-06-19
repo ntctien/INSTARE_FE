@@ -8,7 +8,7 @@ const Message = () => {
   return (
     <div className="bg-[#F4F4FD] h-screen flex">
       {/* Contacts */}
-      <ContactList setCurrChat={setCurrChat} />
+      <ContactList currChat={currChat} setCurrChat={setCurrChat} />
       {/* Message detail */}
       {currChat && <MessageDetail currChat={currChat} />}
     </div>

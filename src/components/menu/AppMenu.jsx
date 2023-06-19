@@ -10,7 +10,7 @@ import { WebsocketContext } from "~/contexts/WebsocketContext";
 
 const AppMenu = ({ menuItemId, setMenuItemId }) => {
   const location = useLocation();
-  const socket = useContext(WebsocketContext);
+  const { socket } = useContext(WebsocketContext);
   const [newNotification, setNewNotification] = useState(false);
 
   useEffect(() => {
@@ -28,17 +28,15 @@ const AppMenu = ({ menuItemId, setMenuItemId }) => {
   }, [location.pathname]);
 
   useEffect(() => {
-    socket.on("connect");
+    if (!socket) return;
     socket.on("onNotification", () => {
       setNewNotification(true);
     });
 
     return () => {
-      socket.off("connect");
       socket.off("onNotification");
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [socket]);
 
   const handleCloseSideBar = (id) => {
     setMenuItemId({ current: menuItemId.previous, previous: id });
