@@ -9,6 +9,7 @@ const PostFeed = () => {
   const [modal, setModal] = useState(null);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [sharePostId, setSharePostId] = useState();
 
   useEffect(() => {
     const handleGetAllPosts = async () => {
@@ -44,12 +45,16 @@ const PostFeed = () => {
               key={i}
               post={post}
               loading={loading}
-              handleShare={() => setModal("share")}
+              handleShare={() => {
+                setSharePostId(post.id);
+                setModal("share");
+              }}
             />
           ))}
       <ShareModal
         open={modal === "share"}
         handleCancel={() => setModal(null)}
+        postId={sharePostId}
       />
     </div>
   );

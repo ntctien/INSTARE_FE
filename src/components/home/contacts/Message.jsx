@@ -26,13 +26,28 @@ const Message = ({ fromSelf, ava, message, sameMoment, topOfMoment }) => {
         color="rgba(0,0,0,0.25)"
       >
         <div
-          className={`px-[10px] py-[7px] rounded-lg border-1 border-pastel-purple-dark text-13 ${
+          className={`px-[10px] py-[7px] rounded-lg border-1 border-pastel-purple-dark text-13 break-all ${
             fromSelf
               ? "bg-pastel-purple-dark text-white"
               : "max-w-[72.5%] text-black"
           }`}
         >
-          {message.message}
+          {!(
+            message.message.includes("http://") ||
+            message.message.includes("https://")
+          ) ? (
+            <p>{message.message}</p>
+          ) : (
+            <a
+              style={{ display: "table-cell" }}
+              href={message.message}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline"
+            >
+              {message.message}
+            </a>
+          )}
         </div>
       </Tooltip>
     </div>

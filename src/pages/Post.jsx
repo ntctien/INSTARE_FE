@@ -15,11 +15,13 @@ import useComment from "~/hooks/useComment";
 import useLike from "~/hooks/useLike";
 import checkIfUserLikePost from "~/api/services/post/checkIfUserLikePost";
 import PostLikeWrapper from "~/components/home/post/PostLikeWrapper";
+import ShareModal from "~/components/home/post/ShareModal";
 
 const Post = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [data, setData] = useState();
   const [userLiked, setUserLiked] = useState(false);
+  const [modal, setModal] = useState(null);
   const navigate = useNavigate();
   const { postId } = useParams();
   const { currentUser } = useSelector((state) => state.user);
@@ -128,6 +130,9 @@ const Post = () => {
           likeCount={likes}
           onCommentClick={() => commentInputRef.current?.focus()}
           onLikeClick={() => handleLikeClick(postId)}
+          handleShare={() => {
+            setModal("share");
+          }}
           className={"p-[17px]"}
         />
         {/* Comment section */}
@@ -154,6 +159,11 @@ const Post = () => {
           <CommentInput inputRef={commentInputRef} {...commentInputProps} />
         </form>
       </div>
+      <ShareModal
+        open={modal === "share"}
+        handleCancel={() => setModal(null)}
+        postId={data?.id}
+      />
     </div>
   );
 };

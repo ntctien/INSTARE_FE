@@ -14,6 +14,7 @@ const useContactList = () => {
       setLoading(true);
       await getListContact(currentUser.token)
         .then(({ data }) => {
+          console.log(data)
           setUserList(data);
         })
         .catch((err) => console.log(err));
