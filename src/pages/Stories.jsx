@@ -22,15 +22,18 @@ const Stories = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [storyBoxes, setStoryBoxes] = useState([]);
 
-  const { stories, currIndex } = location.state;
+  const { stories, currUserId } = location.state;
 
   useEffect(() => {
     setStoryBoxes([...stories]);
   }, [stories]);
 
   useEffect(() => {
-    if (currIndex) slider.current?.slickGoTo(currIndex, true);
-  }, [currIndex]);
+    if (currUserId && stories.length > 0) {
+      const index  = stories.findIndex(item=>item.id===currUserId);
+      slider.current?.slickGoTo(index, true);
+    }
+  }, [currUserId, stories]);
 
   return (
     <div className="w-full h-full center stories">

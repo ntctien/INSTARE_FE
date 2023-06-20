@@ -9,13 +9,20 @@ const StoryItems = ({ stories, loading }) => {
     <StoryItem
       key={i}
       self={i === 0}
-      read={story?.read ? story.read : true}
+      read={story?.read != null ? story.read : true}
       containStories={story?.containStories}
       story={story}
       loading={loading}
       onClick={() => {
         if (!(i === 0 && !story?.containStories))
-          navigate("/stories", { state: { stories, currIndex: i } });
+          navigate("/stories", {
+            state: {
+              stories: stories.filter(
+                (item, i) => !(i === 0 && !item.containStories)
+              ),
+              currUserId: story?.id,
+            },
+          });
       }}
     />
   ));
