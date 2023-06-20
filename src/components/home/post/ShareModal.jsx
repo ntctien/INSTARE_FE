@@ -102,7 +102,15 @@ const ShareModal = ({ open, handleCancel, postId }) => {
                         : "bg-blue text-white hover:brightness-105"
                     } rounded-10 font-ubuntu font-medium text-16`}
                   >
-                    {!user.loading ? "Send" : <Spin size="small" />}
+                    {!user.loading ? (
+                      !sentList.find((item) => item === user.id) ? (
+                        "Send"
+                      ) : (
+                        "Sent"
+                      )
+                    ) : (
+                      <Spin size="small" />
+                    )}
                   </button>
                 }
               />

@@ -14,8 +14,15 @@ const useContactList = () => {
       setLoading(true);
       await getListContact(currentUser.token)
         .then(({ data }) => {
-          console.log(data)
-          setUserList(data);
+          setUserList([
+            ...data.map((item) =>
+              !item.message
+                ? item
+                : item.message.senderId === currentUser.id
+                ? { ...item, message: { ...item.message, read: true } }
+                : item
+            ),
+          ]);
         })
         .catch((err) => console.log(err));
       setLoading(false);
