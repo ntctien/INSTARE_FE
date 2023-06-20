@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Spin, message } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 import CloseModal from "../modal/CloseModal";
 import CountingTextArea from "../CountingTextArea";
 import ChangePhotoModal from "./ChangePhotoModal";
@@ -11,6 +12,7 @@ import { signIn } from "~/actions/auth";
 import convertImgUrlToFile from "~/utils/convertImgUrlToFile";
 import uploadAvaOnly from "~/api/services/user/uploadAvaOnly";
 import updateProfileWithAva from "~/api/services/user/updateProfileWithAva";
+import removeAva from "~/api/services/user/removeAva";
 
 const valuesObj = {
   username: usernameRule,
@@ -35,6 +37,7 @@ const EditProfileModal = ({ open, onCancel, fetchProfile }) => {
   const [loading, setLoading] = useState(false);
   const [imgUrl, setImgUrl] = useState(null);
   const [tempImgUrl, setTempImgUrl] = useState(null);
+  const [removeLoading, setRemoveLoading] = useState(false);
 
   useEffect(() => {
     setValues({
@@ -169,11 +172,29 @@ const EditProfileModal = ({ open, onCancel, fetchProfile }) => {
     return false;
   };
 
+  const handleRemoveProfilePhoto = async () => {
+    setRemoveLoading(true);
+    await removeAva(currentUser.token)
+      .then(({ data }) => {
+        console.log(data);
+        message.success("Profile photo removed successfully");
+        setImgUrl(null);
+        dispatch(
+          signIn({
+            ...currentUser,
+            ava: null,
+          })
+        );
+      })
+      .catch((err) => console.log(err));
+    setRemoveLoading(false);
+  };
+
   const handleSave = (e) => {
-    if (valuesChanged() && imgUrl !== currentUser.ava)
+    if (valuesChanged() && imgUrl !== currentUser.ava && imgUrl!=null)
       handleSubmit(e, handleUploadProfileWithAva);
     else if (valuesChanged()) handleSubmit(e, handleUpdateProfileOnly);
-    else if (imgUrl !== currentUser.ava) {
+    else if (imgUrl !== currentUser.ava && imgUrl!=null) {
       handleUploadAvaOnly();
     } else {
       onCancel();
@@ -209,8 +230,22 @@ const EditProfileModal = ({ open, onCancel, fetchProfile }) => {
                   >
                     Change profile photo
                   </button>
-                  <button className="edit-profile-btn border-1 border-red text-red hover:border-2">
-                    Remove profile photo
+                  <button
+                    onClick={handleRemoveProfilePhoto}
+                    className="edit-profile-btn border-1 border-red text-red hover:border-2"
+                  >
+                    {!removeLoading ? (
+                      <p>Remove profile photo</p>
+                    ) : (
+                      <Spin
+                        indicator={
+                          <LoadingOutlined
+                            style={{ fontSize: 24, color: "#F24E1E" }}
+                            spin
+                          />
+                        }
+                      />
+                    )}
                   </button>
                 </div>
               </div>
