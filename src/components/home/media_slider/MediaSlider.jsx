@@ -14,6 +14,7 @@ const MediaSlider = ({
   setCurrentSlide,
   dots,
   loading,
+  autoPlay,
 }) => {
   const slider = useRef(null);
 
@@ -58,7 +59,10 @@ const MediaSlider = ({
                       className="object-contain"
                     />
                   ) : (
-                    <Video src={item.url} play={i === currentSlide} />
+                    <Video
+                      src={item.url}
+                      play={autoPlay != null ? autoPlay : i === currentSlide}
+                    />
                   )}
                 </div>
               )

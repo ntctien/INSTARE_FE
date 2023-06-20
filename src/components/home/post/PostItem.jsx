@@ -47,6 +47,7 @@ const PostItem = ({ handleShare, post, loading }) => {
           setCurrentSlide={setCurrentSlide}
           dots
           loading={loading}
+          autoPlay={false}
         />
       </PostLikeWrapper>
       <div className="px-[20px] mt-[10px]">
