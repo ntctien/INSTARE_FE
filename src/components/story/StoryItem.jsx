@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { createIcon } from "~/assets/story_icons";
+import Avatar from "../home/Avatar";
 
 const StoryItem = ({
   onClick,
@@ -9,13 +10,17 @@ const StoryItem = ({
   read,
   self,
   containStories,
+  story,
+  loading,
 }) => {
   const navigate = useNavigate();
 
   return (
     <div
       onClick={onClick}
-      className={`flex flex-col items-center mt-[2px] cursor-pointer ${className}`}
+      className={`flex flex-col items-center mt-[2px] ${
+        self && !containStories ? "cursor-default" : "cursor-pointer"
+      } ${className}`}
     >
       <div
         style={{
@@ -30,13 +35,14 @@ const StoryItem = ({
         className="center aspect-square rounded-full"
       >
         <div className="relative">
-          <div
-            style={{
-              borderWidth: borderWidth ?? 3,
-              borderColor: containStories === false ? "#D9D9D9" : "#FFFFFF",
-            }}
-            className={`w-[100px] h-[100px] bg-grey rounded-full`}
-          ></div>
+          <Avatar
+            width={"100px"}
+            custom={`${borderWidth ?? "border-3"} ${
+              containStories === false ? "border-grey" : "border-white"
+            }`}
+            ava={story?.ava}
+            loading={loading}
+          />
           {self && (
             <button
               onClick={() => navigate("/stories/create")}
@@ -49,9 +55,9 @@ const StoryItem = ({
       </div>
       <p
         style={{ color: textColor }}
-        className="text-[16px] leading-[20px] mt-[8px]"
+        className={"text-[16px] leading-[20px] mt-[8px]"}
       >
-        {self ? "Your story" : "username"}
+        {self ? "Your story" : story?.username}
       </p>
     </div>
   );

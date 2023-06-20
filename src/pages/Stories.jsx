@@ -1,4 +1,5 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Slider from "react-slick";
 import LogoAndCloseButton from "~/components/story/LogoAndCloseButton";
 import Story from "~/components/story/Story";
@@ -15,28 +16,21 @@ const settings = {
   variableWidth: true,
 };
 
-const stories = [
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-  null,
-];
-
 const Stories = () => {
   const slider = useRef(null);
+  const location = useLocation();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [storyBoxes, setStoryBoxes] = useState([]);
+
+  const { stories, currIndex } = location.state;
+
+  useEffect(() => {
+    setStoryBoxes([...stories]);
+  }, [stories]);
+
+  useEffect(() => {
+    if (currIndex) slider.current?.slickGoTo(currIndex, true);
+  }, [currIndex]);
 
   return (
     <div className="w-full h-full center stories">
@@ -46,18 +40,27 @@ const Stories = () => {
         beforeChange={(current, next) => setCurrentSlide(next)}
         className="w-screen px-[calc(47/1440*100vw)]"
       >
-        {stories.map((story, i) =>
+        {storyBoxes.map((story, i) =>
           i === currentSlide ? (
-            <div className="mx-[calc(95/1440*100vw)]">
-              <Story index={i} currentSlide={currentSlide} slider={slider} storiesList={stories}/>
+            <div key={i} className="mx-[calc(95/1440*100vw)]">
+              <Story
+                index={i}
+                currentSlide={currentSlide}
+                slider={slider}
+                storiesList={storyBoxes}
+                userId={storyBoxes[i].id}
+                userInfo={storyBoxes[i]}
+                setStoryBoxes={setStoryBoxes}
+              />
             </div>
           ) : (
-            <div className="story-item">
+            <div key={i} className="story-item">
               <StoryItem
                 key={i}
-                textColor={'#FFFFFF'}
+                textColor={"#FFFFFF"}
                 borderWidth={4}
-                read
+                read={story.read}
+                story={story}
                 onClick={() => slider.current?.slickGoTo(i, true)}
               />
             </div>
