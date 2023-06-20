@@ -7,9 +7,9 @@ const InteractBar = ({
   handleShare,
   onCommentClick,
   liked,
-  onLikeClick
+  onLikeClick,
+  loading,
 }) => {
-
   return (
     <div className={className}>
       {/* Interact */}
@@ -25,9 +25,11 @@ const InteractBar = ({
         </button>
       </div>
       {/* Like count */}
-      <p className="font-semibold text-14 mt-[10px]">{`${likeCount ?? 0} like${
-        likeCount > 1 ? "s" : ""
-      }`}</p>
+      <p
+        className={`font-semibold text-14 mt-[10px] ${
+          loading && "loading-animation text-transparent w-[10%]"
+        }`}
+      >{`${likeCount ?? 0} like${likeCount > 1 ? "s" : ""}`}</p>
     </div>
   );
 };

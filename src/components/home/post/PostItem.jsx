@@ -11,13 +11,13 @@ import useComment from "~/hooks/useComment";
 import useLike from "~/hooks/useLike";
 import PostLikeWrapper from "./PostLikeWrapper";
 
-const PostItem = ({ handleShare, post }) => {
+const PostItem = ({ handleShare, post, loading }) => {
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const { commentInputProps, handleComment } = useComment();
   const { liked, likes, likeOpacity, handleLikeClick } = useLike(
-    post.liked,
-    post._count.likes
+    post?.liked,
+    post?._count.likes
   );
   const [currentSlide, setCurrentSlide] = useState(0);
   const [comments, setCommments] = useState([]);
@@ -33,6 +33,7 @@ const PostItem = ({ handleShare, post }) => {
         username={post?.user.username}
         time={post?.createdAt && getDateString(post.createdAt)}
         ava={post?.user.ava}
+        loading={loading}
         className={"p-[20px]"}
       />
       {/* Image or video */}
@@ -41,29 +42,37 @@ const PostItem = ({ handleShare, post }) => {
         handleLikeClick={() => handleLikeClick(post.id)}
       >
         <MediaSlider
-          mediaList={post.mediaList}
+          mediaList={post?.mediaList}
           currentSlide={currentSlide}
           setCurrentSlide={setCurrentSlide}
           dots
+          loading={loading}
         />
       </PostLikeWrapper>
       <div className="px-[20px] mt-[10px]">
         <InteractBar
           likeCount={likes}
+          loading={loading}
           handleShare={handleShare}
-          onCommentClick={() => navigate(`/post/${post.id}`)}
+          onCommentClick={() => navigate(`/post/${post?.id}`)}
           liked={liked}
-          onLikeClick={() => handleLikeClick(post.id)}
+          onLikeClick={() => handleLikeClick(post?.id)}
         />
         {/* Content */}
-        <p className="mt-[7px] text-14">
+        <p
+          className={`mt-[7px] text-14 ${
+            loading && "loading-animation text-transparent"
+          }`}
+        >
           <Link to={`/${post?.user.username}`}>
-            <span className="font-semibold">{post?.user.username}</span>
+            <span className="font-semibold">
+              {loading ? "loading" : post?.user.username}
+            </span>
           </Link>
-          {" " + post.caption}
+          {loading ? "loading" : " " + post?.caption}
         </p>
         {/* Comments */}
-        <Link to={`/post/${post.id}`}>
+        <Link to={`/post/${post?.id}`}>
           <p className="text-14 text-black50 mt-[7px] hover:brightness-125">
             View all comments
           </p>
@@ -78,7 +87,7 @@ const PostItem = ({ handleShare, post }) => {
           </p>
         ))}
         <Divider className="mt-[10px] mb-[6px]" />
-        <form onSubmit={(e) => handleComment(e, post.id, updateComments)}>
+        <form onSubmit={(e) => handleComment(e, post?.id, updateComments)}>
           <CommentInput {...commentInputProps} />
         </form>
       </div>

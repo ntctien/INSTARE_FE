@@ -8,9 +8,11 @@ const PostFeed = () => {
   const { currentUser } = useSelector((state) => state.user);
   const [modal, setModal] = useState(null);
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const handleGetAllPosts = async () => {
+      setLoading(true);
       await getAllPosts(currentUser.token)
         .then(({ data }) => {
           setData([
@@ -28,15 +30,23 @@ const PostFeed = () => {
           ]);
         })
         .catch((err) => console.log(err));
+      setLoading(false);
     };
     handleGetAllPosts();
   }, [currentUser.token]);
 
   return (
     <div className="mt-[33px] flex flex-col gap-y-[15px]">
-      {data.map((post, i) => (
-        <PostItem key={i} post={post} handleShare={() => setModal("share")} />
-      ))}
+      {loading
+        ? Array.from({ length: 5 }).map((_, i) => <PostItem key={i} loading />)
+        : data.map((post, i) => (
+            <PostItem
+              key={i}
+              post={post}
+              loading={loading}
+              handleShare={() => setModal("share")}
+            />
+          ))}
       <ShareModal
         open={modal === "share"}
         handleCancel={() => setModal(null)}

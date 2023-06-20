@@ -6,6 +6,7 @@ import { Spin } from "antd";
 import { useState } from "react";
 import createPost from "~/api/services/post/createPost";
 import { useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CreateNewPost = ({
   onCancel,
@@ -16,6 +17,8 @@ const CreateNewPost = ({
   setCurrFeature,
 }) => {
   const { currentUser } = useSelector((state) => state.user);
+  const location = useLocation();
+  const navigate = useNavigate();
   const [caption, setCaption] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -31,10 +34,12 @@ const CreateNewPost = ({
         return await convertImgUrlToFile(file.url, file.name);
       })
     );
+
     await createPost(currentUser.token, files, caption)
       .then(({ data }) => {
-        console.log(data);
         onCancel();
+        if (location.pathname !== "/") navigate("/");
+        else window.location.reload(false);
       })
       .catch((err) => console.log(err));
     setLoading(false);

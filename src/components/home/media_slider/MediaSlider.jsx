@@ -13,6 +13,7 @@ const MediaSlider = ({
   currentSlide,
   setCurrentSlide,
   dots,
+  loading,
 }) => {
   const slider = useRef(null);
 
@@ -32,32 +33,38 @@ const MediaSlider = ({
     <SliderContainer
       slider={slider}
       showPrev={currentSlide !== 0}
-      showNext={currentSlide !== mediaList.length - 1}
+      showNext={currentSlide !== mediaList?.length - 1}
       containerClassName="media-slider-container"
     >
       <Slider
-        className="bg-[#D9D9D933] media-slider"
+        className={`bg-[#D9D9D933] media-slider ${
+          loading && "loading-animation"
+        }`}
         dots={dots}
         arrows={false}
         ref={slider}
         beforeChange={(current, next) => setCurrentSlide(next)}
       >
-        {mediaList.map(
-          (item, i) =>
-            item.type != null &&
-            (item.type === "image" || item.type === "video") && (
-              <div key={i} className="media-container">
-                {item.type === "image" ? (
-                  <img
-                    src={item.url}
-                    alt="Post content"
-                    className="object-contain"
-                  />
-                ) : (
-                  <Video src={item.url} play={i === currentSlide} />
-                )}
-              </div>
-            )
+        {!loading ? (
+          mediaList?.map(
+            (item, i) =>
+              item.type != null &&
+              (item.type === "image" || item.type === "video") && (
+                <div key={i} className="media-container">
+                  {item.type === "image" ? (
+                    <img
+                      src={item.url}
+                      alt="Post content"
+                      className="object-contain"
+                    />
+                  ) : (
+                    <Video src={item.url} play={i === currentSlide} />
+                  )}
+                </div>
+              )
+          )
+        ) : (
+          <div className="h-[500px]" />
         )}
       </Slider>
       {editMode && (
