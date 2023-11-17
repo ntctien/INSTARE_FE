@@ -4,7 +4,8 @@ import {
     notificationsIcon,
     messagesIcon,
     createIcon,
-    moreIcon
+    moreIcon,
+    reportsIcon
 } from "../assets/app_menu_items/icons";
 import {
     homeSelectedIcon,
@@ -12,7 +13,8 @@ import {
     notificationsSelectedIcon,
     messagesSelectedIcon,
     createSelectedIcon,
-    moreSelectedIcon
+    moreSelectedIcon,
+    reportsSelectedIcon
 } from "../assets/app_menu_items/icons_selected";
 
 const menuItems = [
@@ -50,6 +52,13 @@ const menuItems = [
     },
 ];
 
+const reportsItem = {
+    id: 'reports',
+    name: 'Reports',
+    icon: reportsIcon,
+    selectedIcon: reportsSelectedIcon,
+}
+
 const moreItem = {
     id: 'more',
     name: "More",
@@ -57,4 +66,4 @@ const moreItem = {
     selectedIcon: moreSelectedIcon,
 }
 
-export { menuItems, moreItem };
+export { menuItems, moreItem, reportsItem };

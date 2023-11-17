@@ -3,6 +3,7 @@ import getMessageDateString from "~/utils/getMessageDateString";
 import Avatar from "../home/Avatar";
 
 const NotificationItem = ({ item, onClick, onUserClick, loading }) => {
+
   return (
     <div
       onClick={onClick}
@@ -11,7 +12,7 @@ const NotificationItem = ({ item, onClick, onUserClick, loading }) => {
       <div className="row gap-x-[18px] flex-1">
         <Avatar
           width={"50px"}
-          ava={item?.interacted.ava}
+          ava={item?.ava}
           onClick={onUserClick}
           loading={loading}
         />
@@ -24,7 +25,7 @@ const NotificationItem = ({ item, onClick, onUserClick, loading }) => {
             } ${item?.read && "text-black50"}`}
           >
             <span onClick={onUserClick} className="font-semibold">
-              {!loading ? item?.interacted.username : "loading"}
+              {!loading ? item?.username : "loading"}
             </span>{" "}
             {!loading ? item?.message : "loading"}
           </h4>
