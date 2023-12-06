@@ -45,7 +45,10 @@ const StoryItem = ({
           />
           {self && (
             <button
-              onClick={() => navigate("/stories/create")}
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate("/stories/create");
+              }}
               className="absolute right-0 -bottom-2 hover:brightness-105"
             >
               <img src={createIcon} alt="Create story" />

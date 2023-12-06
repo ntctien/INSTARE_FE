@@ -30,6 +30,7 @@ const PostItem = ({ handleShare, post, loading }) => {
     <div className="w-[800px] bg-[#D9D9D926] rounded-10 pb-[9px] post">
       {/* User */}
       <PostInfo
+        postId={post?.id}
         username={post?.user.username}
         time={post?.createdAt && getDateString(post.createdAt)}
         ava={post?.user.ava}

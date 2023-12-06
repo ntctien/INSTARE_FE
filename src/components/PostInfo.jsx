@@ -1,8 +1,36 @@
 import { Link } from "react-router-dom";
 import Avatar from "./home/Avatar";
 import { optionIcon } from "~/assets/post_icons";
+import { Dropdown } from "antd";
+import ReportModal from "./modal/ReportModal";
+import { useState } from "react";
 
-const PostInfo = ({ username, time, ava, className, loading }) => {
+const postOptions = [
+  {
+    key: "report",
+    label: <p className="px-2">Report this post</p>,
+    danger: true,
+  },
+];
+
+const PostInfo = ({ postId, username, time, ava, className, loading }) => {
+  const [modal, setModal] = useState();
+
+  const onOptionClick = ({ key }) => {
+    switch (key) {
+      case "report":
+        setModal("report");
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  const handleCancelModal = () => {
+    setModal(null);
+  };
+
   return (
     <div className={`row justify-between ${className}`}>
       <div className="row">
@@ -26,9 +54,24 @@ const PostInfo = ({ username, time, ava, className, loading }) => {
           {loading ? "loading" : time}
         </p>
       </div>
-      <button>
-        <img src={optionIcon} alt="Other options" />
-      </button>
+      <Dropdown
+        placement="top"
+        arrow
+        trigger={["click"]}
+        menu={{
+          items: postOptions,
+          onClick: onOptionClick,
+        }}
+      >
+        <button>
+          <img src={optionIcon} alt="Other options" />
+        </button>
+      </Dropdown>
+      <ReportModal
+        postId={postId}
+        open={modal === "report"}
+        onCancel={handleCancelModal}
+      />
     </div>
   );
 };

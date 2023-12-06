@@ -13,6 +13,7 @@ import {
   ResetPassword,
   SignIn,
   SignUp,
+  Report,
   Test,
 } from './pages';
 import StoryLayout from "./layouts/StoryLayout";
@@ -40,6 +41,7 @@ function App() {
           <Route element={<HomeLayout />} path="/">
             <Route element={<Home />} index />
             <Route element={<Profile />} path=":username" />
+            <Route element={<Report />} path="report" />
           </Route>
           <Route element={<Message />} path="message" />
           <Route element={<Message />} path="message/:userId" />

@@ -7,6 +7,7 @@ import Profile from "./Profile";
 import ResetPassword from "./ResetPassword";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
+import Report from "./Report";
 import Test from "./Test";
 
 export {
@@ -19,5 +20,6 @@ export {
   ResetPassword,
   SignIn,
   SignUp,
+  Report,
   Test,
 };
