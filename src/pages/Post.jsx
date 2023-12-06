@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { Divider, Skeleton } from "antd";
 import MediaSlider from "~/components/home/media_slider/MediaSlider";
 import PostInfo from "~/components/PostInfo";
@@ -9,69 +8,25 @@ import Avatar from "~/components/home/Avatar";
 import backIcon from "~/assets/back.svg";
 import logoIcon from "~/assets/logo.png";
 import CommentInput from "~/components/CommentInput";
-import viewPost from "~/api/services/no-auth/viewPost";
 import getDateString from "~/utils/getDateString";
 import useComment from "~/hooks/useComment";
 import useLike from "~/hooks/useLike";
-import checkIfUserLikePost from "~/api/services/post/checkIfUserLikePost";
 import PostLikeWrapper from "~/components/home/post/PostLikeWrapper";
 import ShareModal from "~/components/home/post/ShareModal";
+import usePost from "~/hooks/usePost";
 
 const Post = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [data, setData] = useState();
-  const [userLiked, setUserLiked] = useState(false);
-  const [modal, setModal] = useState(null);
-  const navigate = useNavigate();
   const { postId } = useParams();
-  const { currentUser } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const { post: data, userLiked, updateComments } = usePost(postId);
   const { commentInputProps, handleComment } = useComment();
   const { liked, likes, likeOpacity, handleLikeClick } = useLike(
     userLiked,
     data?._count.likes
   );
   const commentInputRef = useRef(null);
-
-  const handleCheckIfUserLikedPost = async (postId) => {
-    await checkIfUserLikePost(currentUser.token, postId)
-      .then(({ data }) => setUserLiked(data))
-      .catch((err) => console.log(err));
-  };
-
-  const handleViewPost = async (postId) => {
-    await viewPost(postId)
-      .then(({ data }) => {
-        setData({
-          ...data,
-          mediaList: data.mediaList.map((item) => {
-            return {
-              url: item,
-              type: item.includes("/video/") ? "video" : "image",
-            };
-          }),
-        });
-      })
-      .catch((err) => console.log(err));
-  };
-
-  useEffect(() => {
-    handleCheckIfUserLikedPost(postId);
-    handleViewPost(postId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [postId]);
-
-  const updateComments = (commentValue) => {
-    let temp = data;
-    temp.comments.push({
-      comment: commentValue,
-      user: {
-        ava: currentUser.ava,
-        id: currentUser.id,
-        username: currentUser.username,
-      },
-    });
-    setData(temp);
-  };
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [modal, setModal] = useState(null);
 
   return (
     <div

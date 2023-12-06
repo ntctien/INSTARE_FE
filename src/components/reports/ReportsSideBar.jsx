@@ -4,6 +4,7 @@ import SideBarDefaultFrame from "../SideBarDefaultFrame";
 import { useSelector } from "react-redux";
 import getPostReports from "~/api/services/report/getPostReports";
 import getUserReports from "~/api/services/report/getUserReports";
+import { useNavigate } from "react-router-dom";
 
 const tabs = [
   { key: "posts", title: "Posts" },
@@ -12,6 +13,7 @@ const tabs = [
 
 const ReportsSideBar = ({ onClose }) => {
   const { currentUser } = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState({ type: "post", items: [] });
 
@@ -45,12 +47,19 @@ const ReportsSideBar = ({ onClose }) => {
     setLoading(false);
   };
 
+  const handleItemClick = (item) => {
+    if (item.postId) {
+      navigate(`/report/post/${item.id}`);
+    }
+  }
+
   return (
     <SideBar onClose={onClose}>
       <SideBarDefaultFrame
         title={"Reports"}
         tabs={tabs}
         data={data.items.map((item) => ({
+          ...item,
           ava: item.reportedUser.ava,
           username: item.reportedUser.username,
           message: `'s ${data.type} was reported by ${item._count.reportReason} user(s)`,
@@ -60,6 +69,7 @@ const ReportsSideBar = ({ onClose }) => {
         loading={loading}
         handleTabChange={handleTabChange}
         onClose={onClose}
+        handleItemClick={handleItemClick}
       />
     </SideBar>
   );

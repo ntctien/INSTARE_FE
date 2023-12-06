@@ -26,6 +26,8 @@ const PostItem = ({ handleShare, post, loading }) => {
     setCommments((prev) => [...prev, commentValue]);
   };
 
+  console.log(post)
+
   return (
     <div className="w-[800px] bg-[#D9D9D926] rounded-10 pb-[9px] post">
       {/* User */}
@@ -71,7 +73,7 @@ const PostItem = ({ handleShare, post, loading }) => {
               {loading ? "loading" : post?.user.username}
             </span>
           </Link>
-          {loading ? "loading" : " " + post?.caption}
+          {loading ? "loading" : " " + (post?.caption || '')}
         </p>
         {/* Comments */}
         <Link to={`/post/${post?.id}`}>

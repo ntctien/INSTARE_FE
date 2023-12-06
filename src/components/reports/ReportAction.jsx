@@ -5,7 +5,7 @@ import WhiteTextButton from "../buttons/WhiteTextButton";
 
 const ReportAction = () => {
   return (
-    <Row className="h-12 justify-between font-ubuntu">
+    <Row className="h-12 justify-between font-ubuntu my-5">
       <h2 className="my-auto font-medium text-lg">This post needs to be reviewed</h2>
       <Row className="gap-x-4">
         <SecondaryButton

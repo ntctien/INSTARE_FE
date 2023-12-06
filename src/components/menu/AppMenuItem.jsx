@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const AppMenuItem = ({
   item,
@@ -8,6 +8,12 @@ const AppMenuItem = ({
   newNotification,
   newMessage,
 }) => {
+  const location = useLocation();
+
+  const isCurrentItem = location.pathname.includes("report")
+    ? item.id === "reports"
+    : menuItemId?.current === item.id;
+
   return (
     item && (
       <Link
@@ -20,12 +26,7 @@ const AppMenuItem = ({
         className="row gap-x-[26px] py-[15px] pl-[16px] rounded-full cursor-pointer hover:bg-[#96caf728]"
       >
         <div className="relative">
-          <img
-            src={
-              menuItemId?.current === item.id ? item.selectedIcon : item.icon
-            }
-            alt="Icon"
-          />
+          <img src={isCurrentItem ? item.selectedIcon : item.icon} alt="Icon" />
           {((item.id === "notifications" && newNotification) ||
             (item.id === "messages" && newMessage)) && (
             <div className="absolute top-0 right-0 w-[10px] aspect-square rounded-full bg-red" />
@@ -33,7 +34,7 @@ const AppMenuItem = ({
         </div>
         <h5
           className={`${
-            menuItemId?.current === item.id ? "font-medium" : "font-light"
+            isCurrentItem ? "font-medium" : "font-light"
           } text-[20px] leading-[23px]`}
         >
           {item.name}

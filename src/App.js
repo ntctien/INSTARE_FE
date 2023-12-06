@@ -23,6 +23,7 @@ import CreateStory from "./pages/CreateStory";
 import CreateTextStory from "./pages/CreateTextStory";
 import CreatePhotoVideoStory from "./pages/CreatePhotoVideoStory";
 import MainLayout from "./layouts/MainLayout";
+import ReportPost from "./pages/ReportPost";
 
 function App() {
   return (
@@ -41,7 +42,9 @@ function App() {
           <Route element={<HomeLayout />} path="/">
             <Route element={<Home />} index />
             <Route element={<Profile />} path=":username" />
-            <Route element={<Report />} path="report" />
+            <Route element={<Report />} path="report">
+              <Route element={<ReportPost />} path="post/:id" />
+            </Route>
           </Route>
           <Route element={<Message />} path="message" />
           <Route element={<Message />} path="message/:userId" />
