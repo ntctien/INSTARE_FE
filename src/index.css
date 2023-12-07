@@ -167,6 +167,10 @@ body {
   width: inherit;
 }
 
+.ant-row {
+  font-family: "Inter";
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
