@@ -26,8 +26,6 @@ const PostItem = ({ handleShare, post, loading }) => {
     setCommments((prev) => [...prev, commentValue]);
   };
 
-  console.log(post)
-
   return (
     <div className="w-[800px] bg-[#D9D9D926] rounded-10 pb-[9px] post">
       {/* User */}

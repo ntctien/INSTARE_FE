@@ -50,8 +50,10 @@ const ReportsSideBar = ({ onClose }) => {
   const handleItemClick = (item) => {
     if (item.postId) {
       navigate(`/report/post/${item.id}`);
+    } else {
+      navigate(`/report/user/${item.username}/${item.id}`)
     }
-  }
+  };
 
   return (
     <SideBar onClose={onClose}>

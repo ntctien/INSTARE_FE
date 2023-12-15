@@ -24,6 +24,7 @@ import CreateTextStory from "./pages/CreateTextStory";
 import CreatePhotoVideoStory from "./pages/CreatePhotoVideoStory";
 import MainLayout from "./layouts/MainLayout";
 import ReportPost from "./pages/ReportPost";
+import ReportProfile from "./pages/ReportProfile";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
             <Route element={<Profile />} path=":username" />
             <Route element={<Report />} path="report">
               <Route element={<ReportPost />} path="post/:id" />
+              <Route element={<ReportProfile />} path="user/:username/:id" />
             </Route>
           </Route>
           <Route element={<Message />} path="message" />

@@ -10,7 +10,7 @@ const Avatar = ({ width, custom, ava, onClick, loading, backgroundColor }) => {
         loading && "loading-animation"
       } ${custom}`}
     >
-      {ava && (
+      {(ava && !loading) && (
         <img
           src={ava}
           alt="Avatar"

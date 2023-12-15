@@ -23,8 +23,8 @@ const SideBarDefaultFrame = ({
 
   const handleUserClick = (e, item) => {
     e.stopPropagation();
-    handleRead?.();
-    navigate(`/${item.interacted.username}`);
+    handleRead?.(item.id);
+    item?.username && navigate(`/${item.username}`);
     onClose();
   };
 

@@ -1,13 +1,10 @@
-import React from "react";
+import DefaultButton from "./DefaultButton";
 
-const WhiteTextButton = ({ children, ...rest }) => {
+const WhiteTextButton = ({ children, loading, ...rest }) => {
   return (
-    <button
-      className="w-[140px] rounded-10 font-medium text-base text-white hover:brightness-105"
-      {...rest}
-    >
+    <DefaultButton loading={loading} className="text-white" {...rest}>
       {children}
-    </button>
+    </DefaultButton>
   );
 };
 
