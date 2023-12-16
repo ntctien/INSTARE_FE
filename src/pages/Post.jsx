@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Divider, Skeleton } from "antd";
 import MediaSlider from "~/components/home/media_slider/MediaSlider";
-import PostInfo from "~/components/PostInfo";
+import PostInfo from "~/components/home/post/PostInfo";
 import InteractBar from "~/components/InteractBar";
 import Avatar from "~/components/home/Avatar";
 import backIcon from "~/assets/back.svg";
@@ -20,7 +20,7 @@ const Post = () => {
   const navigate = useNavigate();
   const { post: data, userLiked, updateComments } = usePost(postId);
   const { commentInputProps, handleComment } = useComment();
-  const { liked, likes, likeOpacity, handleLikeClick } = useLike(
+  const { liked, likes, likeOpacity, handleReact } = useLike(
     userLiked,
     data?._count.likes
   );
@@ -42,7 +42,7 @@ const Post = () => {
         {data?.mediaList ? (
           <PostLikeWrapper
             likeOpacity={likeOpacity}
-            handleLikeClick={() => handleLikeClick(postId)}
+            handleReact={() => handleReact(postId)}
           >
             <MediaSlider
               mediaList={data.mediaList}
@@ -70,11 +70,7 @@ const Post = () => {
       <div className="flex-1 bg-[#F4F4FD] flex flex-col">
         {/* Content */}
         <div className="p-5">
-          <PostInfo
-            username={data?.user.username}
-            time={data?.createdAt && getDateString(data.createdAt)}
-            ava={data?.user.ava}
-          />
+          <PostInfo post={data} />
           <p className="ml-[68px] pr-[12%] text-14 w-[87%] h-[40vh]">
             {data?.caption}
           </p>
@@ -84,7 +80,7 @@ const Post = () => {
           liked={liked}
           likeCount={likes}
           onCommentClick={() => commentInputRef.current?.focus()}
-          onLikeClick={() => handleLikeClick(postId)}
+          onReact={() => handleReact(postId)}
           handleShare={() => {
             setModal("share");
           }}

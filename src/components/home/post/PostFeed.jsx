@@ -3,6 +3,7 @@ import PostItem from "./PostItem";
 import ShareModal from "./ShareModal";
 import { useSelector } from "react-redux";
 import getAllPosts from "~/api/services/post/getAllPosts";
+import deletePost from "~/api/services/post/deletePost";
 
 const PostFeed = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -36,6 +37,10 @@ const PostFeed = () => {
     handleGetAllPosts();
   }, [currentUser.token]);
 
+  const deletePostInFeed = async (postId) => {
+    setData((prev) => prev.filter((post) => post.id !== postId));
+  };
+
   return (
     <div className="mt-[33px] flex flex-col gap-y-[15px]">
       {loading
@@ -49,6 +54,7 @@ const PostFeed = () => {
                 setSharePostId(post.id);
                 setModal("share");
               }}
+              updatePostFeed={deletePostInFeed}
             />
           ))}
       <ShareModal

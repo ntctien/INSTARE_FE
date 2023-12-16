@@ -1,8 +1,8 @@
 import { HeartFilled } from "@ant-design/icons";
 
-const PostLikeWrapper = ({ children, likeOpacity, handleLikeClick }) => {
+const PostLikeWrapper = ({ children, likeOpacity, handleReact }) => {
   return (
-    <div onDoubleClick={handleLikeClick} className="relative">
+    <div onDoubleClick={handleReact} className="relative">
       {children}
       <HeartFilled
         style={{

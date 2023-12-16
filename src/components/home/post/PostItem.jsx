@@ -3,19 +3,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Divider } from "antd";
 import MediaSlider from "../media_slider/MediaSlider";
-import PostInfo from "~/components/PostInfo";
+import PostInfo from "~/components/home/post/PostInfo";
 import InteractBar from "~/components/InteractBar";
 import CommentInput from "~/components/CommentInput";
-import getDateString from "~/utils/getDateString";
 import useComment from "~/hooks/useComment";
 import useLike from "~/hooks/useLike";
 import PostLikeWrapper from "./PostLikeWrapper";
 
-const PostItem = ({ handleShare, post, loading }) => {
+const PostItem = ({ post, loading, handleShare, updatePostFeed }) => {
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const { commentInputProps, handleComment } = useComment();
-  const { liked, likes, likeOpacity, handleLikeClick } = useLike(
+  const { liked, likes, likeOpacity, handleReact } = useLike(
     post?.liked,
     post?._count.likes
   );
@@ -30,17 +29,15 @@ const PostItem = ({ handleShare, post, loading }) => {
     <div className="w-[800px] bg-[#D9D9D926] rounded-10 pb-[9px] post">
       {/* User */}
       <PostInfo
-        postId={post?.id}
-        username={post?.user.username}
-        time={post?.createdAt && getDateString(post.createdAt)}
-        ava={post?.user.ava}
+        post={post}
         loading={loading}
         className={"p-[20px]"}
+        updatePostFeed={updatePostFeed}
       />
       {/* Image or video */}
       <PostLikeWrapper
         likeOpacity={likeOpacity}
-        handleLikeClick={() => handleLikeClick(post.id)}
+        handleReact={() => handleReact(post.id, "LOVE")}
       >
         <MediaSlider
           mediaList={post?.mediaList}
@@ -58,7 +55,7 @@ const PostItem = ({ handleShare, post, loading }) => {
           handleShare={handleShare}
           onCommentClick={() => navigate(`/post/${post?.id}`)}
           liked={liked}
-          onLikeClick={() => handleLikeClick(post?.id)}
+          onReact={(react) => handleReact(post?.id, react)}
         />
         {/* Content */}
         <p
@@ -71,7 +68,7 @@ const PostItem = ({ handleShare, post, loading }) => {
               {loading ? "loading" : post?.user.username}
             </span>
           </Link>
-          {loading ? "loading" : " " + (post?.caption || '')}
+          {loading ? "loading" : " " + (post?.caption || "")}
         </p>
         {/* Comments */}
         <Link to={`/post/${post?.id}`}>

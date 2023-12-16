@@ -43,6 +43,11 @@ body {
   @apply m-0;
 }
 
+/* Text */
+.text-username {
+  @apply font-semibold text-14 cursor-pointer;
+}
+
 /* Buttons */
 .primary-btn {
   width: 100%;

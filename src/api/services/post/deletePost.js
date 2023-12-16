@@ -1,9 +1,9 @@
 import appApi from "~/api/base";
 
-const likePost = (token, id, react) => {
+const deletePost = (token, id) => {
     return new Promise((resolve, reject) => {
         appApi
-            .post(`/interact/likePost/${id}?react=${react}`, null, {
+            .delete(`/post/${id}`, {
                 headers: {
                     Authorization: "Bearer " + token,
                 },
@@ -13,4 +13,4 @@ const likePost = (token, id, react) => {
     })
 }
 
-export default likePost;
+export default deletePost;

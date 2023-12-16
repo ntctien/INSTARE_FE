@@ -14,12 +14,12 @@ const useLike = (originalLiked, originalLikes) => {
     if (originalLikes) setLikes(originalLikes);
   }, [originalLiked, originalLikes]);
 
-  const handleLikeClick = async (postId) => {
+  const handleReact = async (postId, react) => {
     if (!liked) {
       setLikeOpacity(65);
       setLiked(true);
       setLikes((prev) => prev + 1);
-      await likePost(currentUser.token, postId)
+      await likePost(currentUser.token, postId, react)
         .then(({ data }) => {})
         .catch((err) => console.log(err));
       setLikeOpacity(0);
@@ -31,7 +31,7 @@ const useLike = (originalLiked, originalLikes) => {
         .catch((err) => console.log(err));
     }
   };
-  return { liked, likeOpacity, handleLikeClick, likes };
+  return { liked, likeOpacity, handleReact, likes };
 };
 
 export default useLike;
