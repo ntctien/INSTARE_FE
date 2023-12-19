@@ -18,9 +18,10 @@ const CreatePostModal = ({ setMenuItemId, menuItemId }) => {
 
   return (
     <Modal
-      onCancel={handleCancel}
       open
       title={createFeatures.get(currFeature).title}
+      closeOnClickOut={false}
+      onCancel={handleCancel}
     >
       <Feature
         fileList={fileList}

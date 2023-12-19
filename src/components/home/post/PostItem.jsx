@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Divider } from "antd";
 import MediaSlider from "../media_slider/MediaSlider";
-import PostInfo from "~/components/home/post/PostInfo";
+import PostHeader from "~/components/home/post/PostHeader";
 import InteractBar from "~/components/InteractBar";
 import CommentInput from "~/components/CommentInput";
 import useComment from "~/hooks/useComment";
@@ -28,7 +28,7 @@ const PostItem = ({ post, loading, handleShare, updatePostFeed }) => {
   return (
     <div className="w-[800px] bg-[#D9D9D926] rounded-10 pb-[9px] post">
       {/* User */}
-      <PostInfo
+      <PostHeader
         post={post}
         loading={loading}
         className={"p-[20px]"}
