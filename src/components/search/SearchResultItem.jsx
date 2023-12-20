@@ -5,13 +5,16 @@ const SearchResultItem = ({
   item,
   clearable,
   suffix,
+  selected,
   onClick,
   handleClear,
 }) => {
   return (
     <div
       onClick={onClick}
-      className="between-row px-5 py-[10px] cursor-pointer hover:bg-pastel-purple"
+      className={`between-row px-5 py-[10px] cursor-pointer ${
+        !selected ? "hover:bg-pastel-purple" : "bg-pastel-purple"
+      }`}
     >
       <div className="row gap-x-[18px]">
         <Avatar ava={item?.ava} />

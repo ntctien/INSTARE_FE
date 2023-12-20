@@ -7,6 +7,8 @@ import { useState } from "react";
 import createPost from "~/api/services/post/createPost";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import PostInfo from "../post/PostInfo";
+import CreatePostAction from "./CreatePostAction";
 
 const CreateNewPost = ({
   onCancel,
@@ -21,6 +23,7 @@ const CreateNewPost = ({
   const navigate = useNavigate();
   const [caption, setCaption] = useState("");
   const [loading, setLoading] = useState(false);
+  const [tags, setTags] = useState([]);
 
   const handleDelete = (currentSlide) => {
     setFileList(fileList.filter((file, i) => i !== currentSlide));
@@ -49,6 +52,16 @@ const CreateNewPost = ({
     <CloseModalContainer onCancel={onCancel}>
       <Spin spinning={loading}>
         <div className="px-[20px] py-[14px] create-post">
+          {/* Preview */}
+          <h3 className="font-medium text-14">Preview</h3>
+          <div className="between-row my-[10px]">
+            <PostInfo
+              username={currentUser.username}
+              ava={currentUser.ava}
+              tags={tags.map((tag) => ({ user: tag }))}
+            />
+            <CreatePostAction tags={tags} setTags={setTags} />
+          </div>
           {/* Upload */}
           {fileList.length < 10 && (
             <MediaDragger fileList={fileList} setFileList={setFileList} />

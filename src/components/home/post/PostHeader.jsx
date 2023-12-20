@@ -6,7 +6,6 @@ import ReportModal from "../../modal/ReportModal";
 import WarningModal from "../../modal/WarningModal";
 import deletePost from "~/api/services/post/deletePost";
 import getDateString from "~/utils/getDateString";
-import TaggedUsersModal from "./TaggedUsersModal";
 import { optionIcon } from "~/assets/post_icons";
 import PostInfo from "./PostInfo";
 
@@ -75,7 +74,6 @@ const PostHeader = ({ post, loading, className, updatePostFeed }) => {
           tags={post?.tags}
           time={post?.createdAt && getDateString(post.createdAt)}
           loading={loading}
-          showTagList={() => setModal("tagged")}
         />
         <Dropdown
           placement={location.pathname.includes("post") ? "bottomRight" : "top"}
@@ -105,14 +103,6 @@ const PostHeader = ({ post, loading, className, updatePostFeed }) => {
         onPrimaryBtnClick={handleDeletePost}
         primaryBtnLabel={"Confirm"}
         secondaryBtnLabel={"Cancel"}
-      />
-      <TaggedUsersModal
-        users={post?.tags.map((tag) => ({
-          id: tag.user.id,
-          username: tag.user.username,
-        }))}
-        open={modal === "tagged"}
-        onCancel={handleCancelModal}
       />
     </>
   );
