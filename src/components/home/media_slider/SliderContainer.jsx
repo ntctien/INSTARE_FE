@@ -8,23 +8,25 @@ const SliderContainer = ({
   prevOnClick,
   nextOnClick,
   showPrev,
-  showNext
+  showNext,
 }) => {
   return (
     <div className={`relative ${containerClassName}`}>
       {children}
       {showPrev && (
         <PrevButton
-          onClick={() =>
-            prevOnClick != null ? prevOnClick() : slider?.current?.slickPrev()
-          }
+          onClick={(e) => {
+            e.stopPropagation();
+            prevOnClick != null ? prevOnClick() : slider?.current?.slickPrev();
+          }}
         />
       )}
       {showNext && (
         <NextButton
-          onClick={() =>
-            nextOnClick != null ? nextOnClick() : slider?.current?.slickNext()
-          }
+          onClick={(e) => {
+            e.stopPropagation();
+            nextOnClick != null ? nextOnClick() : slider?.current?.slickNext();
+          }}
         />
       )}
     </div>

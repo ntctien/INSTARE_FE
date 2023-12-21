@@ -7,14 +7,14 @@ import PostHeader from "~/components/home/post/PostHeader";
 import InteractBar from "~/components/InteractBar";
 import CommentInput from "~/components/CommentInput";
 import useComment from "~/hooks/useComment";
-import useLike from "~/hooks/useLike";
+import useReact from "~/hooks/useReact";
 import PostLikeWrapper from "./PostLikeWrapper";
 
 const PostItem = ({ post, loading, handleShare, updatePostFeed }) => {
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const { commentInputProps, handleComment } = useComment();
-  const { liked, likes, likeOpacity, handleReact } = useLike(
+  const { liked, likes, likeOpacity, handleReact } = useReact(
     post?.liked,
     post?._count.likes
   );
@@ -39,14 +39,16 @@ const PostItem = ({ post, loading, handleShare, updatePostFeed }) => {
         likeOpacity={likeOpacity}
         handleReact={() => handleReact(post.id, "LOVE")}
       >
-        <MediaSlider
-          mediaList={post?.mediaList}
-          currentSlide={currentSlide}
-          setCurrentSlide={setCurrentSlide}
-          dots
-          loading={loading}
-          autoPlay={false}
-        />
+        <div onClick={() => navigate(`/post/${post.id}`)}>
+          <MediaSlider
+            mediaList={post?.mediaList}
+            currentSlide={currentSlide}
+            setCurrentSlide={setCurrentSlide}
+            dots
+            loading={loading}
+            autoPlay={false}
+          />
+        </div>
       </PostLikeWrapper>
       <div className="px-[20px] mt-[10px]">
         <InteractBar

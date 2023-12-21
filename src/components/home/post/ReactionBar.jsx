@@ -1,47 +1,14 @@
 import { Tooltip } from "antd";
 import { useState } from "react";
-import {
-  loveIcon,
-  likeIcon,
-  laughIcon,
-  sadIcon,
-  angryIcon,
-} from "~/assets/react_icons";
-
-const reactions = [
-  {
-    value: "LOVE",
-    name: "Love",
-    icon: loveIcon,
-  },
-  {
-    value: "LIKE",
-    name: "Like",
-    icon: likeIcon,
-  },
-  {
-    value: "LAUGH",
-    name: "Laugh",
-    icon: laughIcon,
-  },
-  {
-    value: "SAD",
-    name: "Sad",
-    icon: sadIcon,
-  },
-  {
-    value: "ANGRY",
-    name: "Angry",
-    icon: angryIcon,
-  },
-];
+import reactions from "~/constants/reactions";
 
 const ReactionBar = ({ children, onReact }) => {
   const [open, setOpen] = useState(false);
-  
+
   return (
     <Tooltip
       color="#FFFFFF"
+      arrow={false}
       open={open}
       onOpenChange={setOpen}
       title={

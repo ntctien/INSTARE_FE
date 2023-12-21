@@ -8,9 +8,8 @@ import Avatar from "~/components/home/Avatar";
 import backIcon from "~/assets/back.svg";
 import logoIcon from "~/assets/logo.png";
 import CommentInput from "~/components/CommentInput";
-import getDateString from "~/utils/getDateString";
 import useComment from "~/hooks/useComment";
-import useLike from "~/hooks/useLike";
+import useReact from "~/hooks/useReact";
 import PostLikeWrapper from "~/components/home/post/PostLikeWrapper";
 import ShareModal from "~/components/home/post/ShareModal";
 import usePost from "~/hooks/usePost";
@@ -20,7 +19,7 @@ const Post = () => {
   const navigate = useNavigate();
   const { post: data, userLiked, updateComments } = usePost(postId);
   const { commentInputProps, handleComment } = useComment();
-  const { liked, likes, likeOpacity, handleReact } = useLike(
+  const { liked, likes, likeOpacity, handleReact } = useReact(
     userLiked,
     data?._count.likes
   );
@@ -71,7 +70,7 @@ const Post = () => {
         {/* Content */}
         <div className="p-5">
           <PostHeader post={data} />
-          <p className="ml-[68px] pr-[12%] text-14 w-[87%] h-[40vh]">
+          <p className="ml-[68px] pr-[12%] text-14 w-[87%] h-[40vh] mt-2">
             {data?.caption}
           </p>
         </div>
@@ -80,7 +79,7 @@ const Post = () => {
           liked={liked}
           likeCount={likes}
           onCommentClick={() => commentInputRef.current?.focus()}
-          onReact={() => handleReact(postId)}
+          onReact={(react) => handleReact(postId, react)}
           handleShare={() => {
             setModal("share");
           }}

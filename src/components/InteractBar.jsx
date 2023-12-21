@@ -1,6 +1,6 @@
 import { LikeIcon, CommentIcon, ShareIcon } from "./icons";
-import LikedIcon from "./icons/LikedIcon";
 import ReactionBar from "./home/post/ReactionBar";
+import { REACTION_MAP } from "~/constants/reactions";
 
 const InteractBar = ({
   likeCount,
@@ -16,8 +16,17 @@ const InteractBar = ({
       {/* Interact */}
       <div className="row gap-x-[15px] interact-bar">
         <ReactionBar onReact={onReact}>
-          <button onClick={() => onReact("LOVE")}>
-            {liked ? <LikedIcon /> : <LikeIcon />}
+          <button
+            onClick={liked ? () => onReact(liked) : () => onReact("LOVE")}
+          >
+            {liked ? (
+              <img
+                src={REACTION_MAP[liked].icon}
+                alt={REACTION_MAP[liked].name}
+              />
+            ) : (
+              <LikeIcon />
+            )}
           </button>
         </ReactionBar>
         <button onClick={onCommentClick}>
