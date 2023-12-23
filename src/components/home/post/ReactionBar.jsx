@@ -14,9 +14,8 @@ const ReactionBar = ({ children, onReact }) => {
       title={
         <div className="flex items-center gap-x-2">
           {reactions.map((react, i) => (
-            <Tooltip title={react.name} arrow={false}>
+            <Tooltip key={i} title={react.name} arrow={false}>
               <button
-                key={i}
                 className="hover:-translate-y-1 hover:scale-125 duration-150"
                 onClick={() => onReact(react.value)}
               >

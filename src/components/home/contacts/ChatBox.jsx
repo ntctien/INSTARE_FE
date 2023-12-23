@@ -155,17 +155,11 @@ const ChatBox = ({ currChat, setContactList, userList }) => {
         </div>
       )}
       {/* Chat input */}
-      <form
-        onKeyDown={(e) => {
-          if (e.code === "Enter") handleSendMessage();
-        }}
-        onSubmit={handleSendMessage}
-      >
-        <ChatInput
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-      </form>
+      <ChatInput
+        value={message}
+        onChange={setMessage}
+        sendMessage={handleSendMessage}
+      />
     </div>
   );
 };
