@@ -18,7 +18,10 @@ const Profile = () => {
 
   const handleViewUserProfile = async () => {
     await viewUserProfile(username)
-      .then(({ data }) => setData(data))
+      .then(({ data }) => {
+        setIsBanned(false);
+        setData(data);
+      })
       .catch((err) => {
         setIsBanned(true);
         setSplash(false);

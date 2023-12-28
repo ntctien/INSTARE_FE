@@ -13,7 +13,7 @@ const ReportModal = ({ userId, postId, onCancel, ...props }) => {
     setLoading(true);
     await report(currentUser.token, { userId, postId, reason });
     setLoading(false);
-    message.success("You have reported this post!");
+    message.success("You have reported this post/account!");
     onCancel();
   };
 
