@@ -180,6 +180,15 @@ body {
   font-family: "Inter";
 }
 
+.send-media-btn.ant-upload-wrapper .ant-upload {
+  @apply flex items-center
+}
+
+.ant-btn-default:not(:disabled):hover {
+  color: #BFB2F3;
+  border-color: #BFB2F3;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;

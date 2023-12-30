@@ -12,15 +12,16 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { AppMenuContext } from "~/contexts/AppMenuContext";
 import { useLocation } from "react-router-dom";
 
-const ChatBox = ({ currChat, setContactList, userList }) => {
+const ChatBox = ({ currChat, userList, setContactList }) => {
   const { currentUser } = useSelector((state) => state.user);
-  const msgContainerRef = useRef(null);
+  const msgContainerBottomRef = useRef(null);
   const { socket, emit } = useContext(WebsocketContext);
   const { setNewMessage } = useContext(AppMenuContext);
   const location = useLocation();
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [sendingQueue, setSendingQueue] = useState([]);
 
   const updateContactList = (result) => {
     setContactList((prev) => [
@@ -80,17 +81,12 @@ const ChatBox = ({ currChat, setContactList, userList }) => {
   }, [currChat, currentUser]);
 
   useEffect(() => {
-    const msgContainer = msgContainerRef.current;
-    if (!msgContainer) return;
-    msgContainer.scrollTop = msgContainer.scrollHeight;
-  }, [msgContainerRef, messages]);
+    msgContainerBottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [msgContainerBottomRef, messages]);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (!message) return;
-    emit("message", {
-      userId: currChat.user.id,
-      message: message,
-    });
+    const nextIndex = messages.length;
     setMessage("");
     const newMessage = {
       createdAt: Date(),
@@ -99,16 +95,19 @@ const ChatBox = ({ currChat, setContactList, userList }) => {
     };
     setMessages((prev) => [...prev, newMessage]);
     updateContactList({ ...newMessage, senderId: currChat.user.id });
+    setSendingQueue((prev) => [...prev, nextIndex]);
+    await emit("message", {
+      userId: currChat.user.id,
+      message: message,
+    });
+    setSendingQueue((prev) => prev.filter((index) => index !== nextIndex));
   };
 
   return (
     <div className="flex flex-col flex-1 overflow-hidden">
       {/* Messages */}
       {!loading ? (
-        <div
-          ref={msgContainerRef}
-          className="px-2 pb-[12px] flex flex-col overflow-y-auto flex-1"
-        >
+        <div className="px-2 pb-[12px] flex flex-col overflow-y-auto flex-1">
           {messages.map((message, i) => (
             <Fragment key={i}>
               {(i === 0 ||
@@ -138,9 +137,12 @@ const ChatBox = ({ currChat, setContactList, userList }) => {
                   ) >= 5 ||
                   messages[i - 1].senderId !== message.senderId
                 }
+                sent={i === messages.length - 1 && sendingQueue.length === 0}
+                sending={sendingQueue.includes(i)}
               />
             </Fragment>
           ))}
+          <div ref={msgContainerBottomRef} />
         </div>
       ) : (
         <div className="flex-1 center">
@@ -156,9 +158,13 @@ const ChatBox = ({ currChat, setContactList, userList }) => {
       )}
       {/* Chat input */}
       <ChatInput
+        userId={currChat?.user.id}
         value={message}
+        messages={messages}
         onChange={setMessage}
         sendMessage={handleSendMessage}
+        setMessages={setMessages}
+        setSendingQueue={setSendingQueue}
       />
     </div>
   );

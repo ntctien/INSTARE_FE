@@ -28,7 +28,13 @@ const ContactItem = ({ maxWidth, item, onClick, loading }) => {
               loading && "loading-animation text-transparent w-full"
             }`}
           >
-            {loading ? "loading" : item?.message?.message}
+            {loading
+              ? "loading"
+              : item?.message?.message?.includes(
+                  ".jpg" || ".jpeg" || ".png" || "blob"
+                )
+              ? "Sent an image"
+              : item?.message?.message}
           </p>
         </div>
         {!loading && (

@@ -1,26 +1,37 @@
-import { Input } from "antd";
-import plusIcon from "../../../assets/plus.svg";
-import { emojiIcon } from "~/assets/message_icons";
-import EmojiPicker from "emoji-picker-react";
 import { useState } from "react";
-import useClickOutside from "~/hooks/useClickOutside";
 import { useLocation } from "react-router-dom";
+import { Input } from "antd";
+import EmojiPicker from "emoji-picker-react";
+import useClickOutside from "~/hooks/useClickOutside";
+import { emojiIcon } from "~/assets/message_icons";
+import SendMediaButton from "./SendMediaButton";
 
 const { TextArea } = Input;
 
-const ChatInput = ({ value, onChange, sendMessage }) => {
+const ChatInput = ({
+  value,
+  messages,
+  onChange,
+  sendMessage,
+  userId,
+  setMessages,
+  setSendingQueue,
+}) => {
   const [pickingEmoji, setPickingEmoji] = useState(false);
   const { clickOutsideRef } = useClickOutside(() => setPickingEmoji(false));
   const location = useLocation();
 
-  const isInMessagePage = location.pathname.includes('message');
+  const isInMessagePage = location.pathname.includes("message");
 
   return (
-    <div className="row gap-x-[1.8%] px-[8px] py-[10px] min-h-[50px] bg-[#D9D9D926] border-t-1 border-[#00000026]">
-      <button className="w-[20px] h-[20px] bg-pastel-purple-dark rounded-full flex items-center justify-center">
-        <img src={plusIcon} alt="Plus" />
-      </button>
-      <div className="relative w-full">
+    <div className="row px-[8px] py-[10px] min-h-[50px] bg-[#D9D9D926] border-t-1 border-[#00000026]">
+      <SendMediaButton
+        userId={userId}
+        messages={messages}
+        setMessages={setMessages}
+        setSendingQueue={setSendingQueue}
+      />
+      <div className="relative w-full mx-1">
         <form
           onKeyDown={(e) => {
             if (e.code === "Enter") sendMessage();
