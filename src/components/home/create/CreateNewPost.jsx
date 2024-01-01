@@ -66,7 +66,7 @@ const CreateNewPost = ({
               username={currentUser.username}
               ava={currentUser.ava}
               tags={tags.map((tag) => ({ user: tag }))}
-              emotion={emotion}
+              emotionId={emotion?.unified}
             />
             <CreatePostAction setCurrFeature={setCurrFeature} />
           </div>

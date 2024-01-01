@@ -72,6 +72,7 @@ const PostHeader = ({ post, loading, className, updatePostFeed }) => {
           username={post?.user.username}
           ava={post?.user.ava}
           tags={post?.tags}
+          emotionId={post?.emotion}
           time={post?.createdAt && getDateString(post.createdAt)}
           loading={loading}
         />

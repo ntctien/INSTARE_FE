@@ -85,4 +85,9 @@ const emotions = [
     }
 ]
 
+export const EMOTION_MAP = emotions.reduce((result, item) => {
+    result[item.unified] = { ...item };
+    return result;
+}, {});
+
 export default emotions;

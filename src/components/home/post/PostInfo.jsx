@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import Avatar from "../Avatar";
 import TaggedUsersModal from "./TaggedUsersModal";
 import { Emoji } from "emoji-picker-react";
+import { EMOTION_MAP } from "~/constants/emotions";
 
-const PostInfo = ({ username, ava, tags, time, emotion, loading }) => {
+const PostInfo = ({ username, ava, tags, time, emotionId, loading }) => {
   const [viewTaggedUsers, setViewTaggedUsers] = useState(false);
 
   return (
@@ -59,15 +60,19 @@ const PostInfo = ({ username, ava, tags, time, emotion, loading }) => {
             )}
           </div>
           {/* Emotion */}
-          {emotion && (
+          {EMOTION_MAP[emotionId] && (
             <div
               className={`row gap-x-1 mt-1 emotion-item ${
                 loading && "loading-animation"
               }`}
             >
-              <Emoji emojiStyle="native" unified={emotion.unified} size={20} />
+              <Emoji
+                emojiStyle="native"
+                unified={EMOTION_MAP[emotionId].unified}
+                size={20}
+              />
               <p className={`text-14 ${loading && "text-transparent"}`}>
-                {"Feeling " + emotion.name}
+                {"Feeling " + EMOTION_MAP[emotionId].name}
               </p>
             </div>
           )}
