@@ -14,7 +14,7 @@ const PostItem = ({ post, loading, handleShare, updatePostFeed }) => {
   const { currentUser } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const { commentInputProps, handleComment } = useComment();
-  const { liked, likes, likeOpacity, handleReact } = useReact(
+  const { liked, likeCount, likeOpacity, handleReact } = useReact(
     post?.liked,
     post?._count.likes
   );
@@ -52,11 +52,12 @@ const PostItem = ({ post, loading, handleShare, updatePostFeed }) => {
       </PostLikeWrapper>
       <div className="px-[20px] mt-[10px]">
         <InteractBar
-          likeCount={likes}
+          likeCount={likeCount}
           loading={loading}
           handleShare={handleShare}
           onCommentClick={() => navigate(`/post/${post?.id}`)}
           liked={liked}
+          likes={post?.likes}
           onReact={(react) => handleReact(post?.id, react)}
         />
         {/* Content */}

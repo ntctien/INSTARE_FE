@@ -8,6 +8,7 @@ import ResetPassword from "./ResetPassword";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
 import Report from "./Report";
+import Stream from "./Stream";
 import Test from "./Test";
 
 export {
@@ -21,5 +22,6 @@ export {
   SignIn,
   SignUp,
   Report,
+  Stream,
   Test,
 };

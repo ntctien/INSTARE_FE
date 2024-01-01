@@ -10,6 +10,7 @@ const InteractBar = ({
   liked,
   onReact,
   loading,
+  likes,
 }) => {
   return (
     <div className={className}>
@@ -37,11 +38,27 @@ const InteractBar = ({
         </button>
       </div>
       {/* Like count */}
-      <p
-        className={`font-semibold text-14 mt-[10px] ${
-          loading && "loading-animation text-transparent w-[10%]"
-        }`}
-      >{`${likeCount ?? 0} like${likeCount > 1 ? "s" : ""}`}</p>
+      <div className="row gap-x-2 mt-[10px]">
+        {!!likes?.length && (
+          <div className="row gap-x-[2px]">
+            {Array.from(new Set(likes.map((reaction) => reaction.react)))?.map(
+              (reaction, i) => (
+                <img
+                  key={i}
+                  src={REACTION_MAP[reaction].icon}
+                  alt={REACTION_MAP[reaction].name}
+                  className="w-5"
+                />
+              )
+            )}
+          </div>
+        )}
+        <p
+          className={`font-semibold text-14 ${
+            loading && "loading-animation text-transparent w-[10%]"
+          }`}
+        >{`${likeCount ?? 0} like${likeCount > 1 ? "s" : ""}`}</p>
+      </div>
     </div>
   );
 };

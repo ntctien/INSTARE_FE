@@ -14,6 +14,7 @@ import {
   SignIn,
   SignUp,
   Report,
+  Stream,
   Test,
 } from './pages';
 import StoryLayout from "./layouts/StoryLayout";
@@ -60,6 +61,7 @@ function App() {
           </Route>
         </Route>
         <Route element={<Post />} path="post/:postId" />
+        <Route element={<Stream />} path="stream" />
         <Route element={<Test />} path="test" />
       </Route>
     </Routes >
