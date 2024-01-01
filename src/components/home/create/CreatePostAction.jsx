@@ -1,11 +1,7 @@
 import { Row, Tooltip } from "antd";
 import { layoutIcon, emotionIcon, tagIcon } from "~/assets/post_icons";
-import TagUsersModal from "./TagUsersModal";
-import { useState } from "react";
 
-const CreatePostAction = ({ tags, setTags, setCurrFeature }) => {
-  const [modal, setModal] = useState();
-
+const CreatePostAction = ({ setCurrFeature }) => {
   const actions = [
     {
       key: "layout",
@@ -22,36 +18,24 @@ const CreatePostAction = ({ tags, setTags, setCurrFeature }) => {
       key: "tag",
       name: "Tag",
       icon: tagIcon,
-      onClick: () => setModal("tag"),
+      onClick: () => setCurrFeature("tag"),
     },
   ];
 
-  const handleCancelModal = () => {
-    setModal(null);
-  };
-
   return (
-    <>
-      <Row className="gap-x-2">
-        {actions.map((action) => (
-          <Tooltip title={action.name} arrow={false}>
-            <button
-              key={action.key}
-              className="hover:brightness-110"
-              onClick={action.onClick}
-            >
-              <img src={action.icon} alt={action.key} />
-            </button>
-          </Tooltip>
-        ))}
-      </Row>
-      <TagUsersModal
-        open={modal === "tag"}
-        tags={tags}
-        setTags={setTags}
-        onCancel={handleCancelModal}
-      />
-    </>
+    <Row className="gap-x-2">
+      {actions.map((action) => (
+        <Tooltip title={action.name} arrow={false}>
+          <button
+            key={action.key}
+            className="hover:brightness-110"
+            onClick={action.onClick}
+          >
+            <img src={action.icon} alt={action.key} />
+          </button>
+        </Tooltip>
+      ))}
+    </Row>
   );
 };
 

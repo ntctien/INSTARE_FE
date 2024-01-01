@@ -16,6 +16,7 @@ const CreateNewPost = ({
   setFileList,
   currentSlide,
   emotion,
+  tags,
   setCurrentSlide,
   setCurrFeature,
 }) => {
@@ -24,7 +25,6 @@ const CreateNewPost = ({
   const navigate = useNavigate();
   const [caption, setCaption] = useState("");
   const [loading, setLoading] = useState(false);
-  const [tags, setTags] = useState([]);
 
   const handleDelete = (currentSlide) => {
     setFileList(fileList.filter((file, i) => i !== currentSlide));
@@ -39,7 +39,13 @@ const CreateNewPost = ({
       })
     );
 
-    await createPost(currentUser.token, files, caption)
+    await createPost(
+      currentUser.token,
+      files,
+      caption,
+      emotion.unified,
+      tags.map((tag) => tag.id)
+    )
       .then(({ data }) => {
         onCancel();
         if (location.pathname !== "/") navigate("/");
@@ -62,11 +68,7 @@ const CreateNewPost = ({
               tags={tags.map((tag) => ({ user: tag }))}
               emotion={emotion}
             />
-            <CreatePostAction
-              tags={tags}
-              setTags={setTags}
-              setCurrFeature={setCurrFeature}
-            />
+            <CreatePostAction setCurrFeature={setCurrFeature} />
           </div>
           {/* Upload */}
           {fileList.length < 10 && (
@@ -108,7 +110,7 @@ const CreateNewPost = ({
             maxLength={2200}
             value={caption}
             onChange={(e) => setCaption(e.target.value)}
-            className="resize-none w-full mt-[13px] bg-transparent focus:outline-none text-14 placeholder:text-black50 h-[100px]"
+            className="resize-none w-full mt-[13px] bg-transparent focus:outline-none text-14 placeholder:text-black50 h-[50px]"
           />
           {/* Post button */}
           {fileList.length > 0 && (

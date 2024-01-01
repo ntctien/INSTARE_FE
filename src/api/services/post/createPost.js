@@ -1,11 +1,13 @@
 import appApi from "~/api/base";
 
-const createPost = (token, files, caption) => {
+const createPost = (token, files, caption, emotion, tagUserIdList) => {
     let formData = new FormData();
     files.forEach(file => {
         formData.append("files", file);
     });
     formData.append("caption", caption);
+    formData.append("emotion", emotion);
+    formData.append("tagUserIdList", tagUserIdList);
     return new Promise((resolve, reject) => {
         appApi
             .post('/post/createPost', formData, {
