@@ -19,7 +19,7 @@ const Post = () => {
   const navigate = useNavigate();
   const { post: data, userLiked, updateComments } = usePost(postId);
   const { commentInputProps, handleComment } = useComment();
-  const { liked, likes, likeOpacity, handleReact } = useReact(
+  const { liked, likeCount, likeOpacity, handleReact } = useReact(
     userLiked,
     data?._count.likes
   );
@@ -77,7 +77,8 @@ const Post = () => {
         <Divider className="default-divider" />
         <InteractBar
           liked={liked}
-          likeCount={likes}
+          likeCount={likeCount}
+          likes={data?.likes}
           onCommentClick={() => commentInputRef.current?.focus()}
           onReact={(react) => handleReact(postId, react)}
           handleShare={() => {
