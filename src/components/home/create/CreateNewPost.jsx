@@ -44,7 +44,7 @@ const CreateNewPost = ({
       files,
       caption,
       emotion.unified,
-      tags.map((tag) => tag.id)
+      tags.map((tag) => tag.id).join(",")
     )
       .then(({ data }) => {
         onCancel();
