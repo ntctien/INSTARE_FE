@@ -189,6 +189,10 @@ body {
   border-color: #BFB2F3;
 }
 
+.emotion-item span {
+  @apply flex items-center justify-center
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;

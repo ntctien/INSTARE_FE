@@ -3,26 +3,28 @@ import { layoutIcon, emotionIcon, tagIcon } from "~/assets/post_icons";
 import TagUsersModal from "./TagUsersModal";
 import { useState } from "react";
 
-const actions = [
-  {
-    key: "layout",
-    name: 'Layout',
-    icon: layoutIcon,
-  },
-  {
-    key: "emotion",
-    name: 'Emotion',
-    icon: emotionIcon,
-  },
-  {
-    key: "tag",
-    name: 'Tag',
-    icon: tagIcon,
-  },
-];
-
-const CreatePostAction = ({ tags, setTags }) => {
+const CreatePostAction = ({ tags, setTags, setCurrFeature }) => {
   const [modal, setModal] = useState();
+
+  const actions = [
+    {
+      key: "layout",
+      name: "Layout",
+      icon: layoutIcon,
+    },
+    {
+      key: "emotion",
+      name: "Emotion",
+      icon: emotionIcon,
+      onClick: () => setCurrFeature("emotion"),
+    },
+    {
+      key: "tag",
+      name: "Tag",
+      icon: tagIcon,
+      onClick: () => setModal("tag"),
+    },
+  ];
 
   const handleCancelModal = () => {
     setModal(null);
@@ -36,7 +38,7 @@ const CreatePostAction = ({ tags, setTags }) => {
             <button
               key={action.key}
               className="hover:brightness-110"
-              onClick={() => setModal(action.key)}
+              onClick={action.onClick}
             >
               <img src={action.icon} alt={action.key} />
             </button>

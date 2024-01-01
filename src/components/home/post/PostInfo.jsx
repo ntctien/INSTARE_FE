@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Avatar from "../Avatar";
-import { loveIcon } from "~/assets/react_icons";
 import TaggedUsersModal from "./TaggedUsersModal";
+import { Emoji } from "emoji-picker-react";
 
-const PostInfo = ({ username, ava, tags, time, loading }) => {
+const PostInfo = ({ username, ava, tags, time, emotion, loading }) => {
   const [viewTaggedUsers, setViewTaggedUsers] = useState(false);
 
   return (
@@ -59,14 +59,18 @@ const PostInfo = ({ username, ava, tags, time, loading }) => {
             )}
           </div>
           {/* Emotion */}
-          <div className={`row gap-x-1 mt-1 ${loading && "loading-animation"}`}>
-            <div className="w-5 h-5">
-              {!loading && <img src={loveIcon} alt="Emotion" />}
+          {emotion && (
+            <div
+              className={`row gap-x-1 mt-1 emotion-item ${
+                loading && "loading-animation"
+              }`}
+            >
+              <Emoji emojiStyle="native" unified={emotion.unified} size={20} />
+              <p className={`text-14 ${loading && "text-transparent"}`}>
+                {"Feeling " + emotion.name}
+              </p>
             </div>
-            <p className={`text-14 ${loading && "text-transparent"}`}>
-              Feeling cute
-            </p>
-          </div>
+          )}
         </div>
       </div>
       <TaggedUsersModal

@@ -1,11 +1,14 @@
 import React from "react";
 import DefaultButton from "./DefaultButton";
 
-const SignatureButton = ({ children, width, className, ...rest }) => {
+const SignatureButton = ({ children, width, disabled, className, ...rest }) => {
   return (
     <DefaultButton
-      style={{ fontWeight: 500 }}
-      className={`primary-btn ${className}`}
+      disabled={disabled}
+      style={{ fontWeight: 500, background: disabled && "#777777" }}
+      className={`${
+        disabled && "cursor-not-allowed hover:brightness-100"
+      } primary-btn ${className}`}
       {...rest}
     >
       {children}

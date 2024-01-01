@@ -15,6 +15,7 @@ const CreateNewPost = ({
   fileList,
   setFileList,
   currentSlide,
+  emotion,
   setCurrentSlide,
   setCurrFeature,
 }) => {
@@ -59,8 +60,13 @@ const CreateNewPost = ({
               username={currentUser.username}
               ava={currentUser.ava}
               tags={tags.map((tag) => ({ user: tag }))}
+              emotion={emotion}
             />
-            <CreatePostAction tags={tags} setTags={setTags} />
+            <CreatePostAction
+              tags={tags}
+              setTags={setTags}
+              setCurrFeature={setCurrFeature}
+            />
           </div>
           {/* Upload */}
           {fileList.length < 10 && (

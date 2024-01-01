@@ -1,4 +1,4 @@
-import { CreateNewPost, EditPhoto, Crop, Adjustment, Filter, AddText } from '../components/home/create';
+import { CreateNewPost, EditPhoto, Crop, Adjustment, Filter, AddText, Emotion } from '../components/home/create';
 import {
     cropIcon,
     adjustIcon,
@@ -35,6 +35,7 @@ const editFeatures = [
 
 const createFeatures = new Map([
     ["create", { component: CreateNewPost, title: "Create new post" }],
+    ["emotion", { component: Emotion, title: "Emotion" }],
     ["edit", { component: EditPhoto, title: "Edit photo" }],
     ...editFeatures.map(feature => [`${feature.id}`, feature])
 ]);
