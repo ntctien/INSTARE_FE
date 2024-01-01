@@ -4,8 +4,8 @@ import { editFeatures } from "../../../../constants/createFeatures";
 const EditPhoto = ({ fileList, currentSlide, setCurrFeature }) => {
   return (
     <BackModalContainer
-      onBack={() => setCurrFeature("create")}
-      onDone={() => setCurrFeature("create")}
+      onBack={() => setCurrFeature("edit-media")}
+      onDone={() => setCurrFeature("edit-media")}
     >
       <div className="edit-feature">
         {/* Media */}

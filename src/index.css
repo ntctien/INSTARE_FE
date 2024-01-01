@@ -113,6 +113,10 @@ body {
   animation-iteration-count: infinite;
 }
 
+.post-layout {
+  @apply bg-post-layout w-full h-full rounded-10;
+}
+
 /* Icons */
 .arrow-icon:hover path,.arrow-icon:hover line{
   stroke: #BFB2F3;

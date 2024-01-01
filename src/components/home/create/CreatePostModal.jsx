@@ -8,6 +8,7 @@ const CreatePostModal = ({ setMenuItemId, menuItemId }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [emotion, setEmotion] = useState();
   const [tags, setTags] = useState([]);
+  const [layout, setLayout] = useState(1);
 
   const Feature = createFeatures.get(currFeature).component;
 
@@ -36,6 +37,8 @@ const CreatePostModal = ({ setMenuItemId, menuItemId }) => {
         setEmotion={setEmotion}
         tags={tags}
         setTags={setTags}
+        layout={layout}
+        setLayout={setLayout}
       />
     </Modal>
   );

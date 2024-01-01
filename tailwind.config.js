@@ -16,6 +16,7 @@ module.exports = {
         'red': '#F24E1E',
         'modal-bg': '#F0F6FD',
         'story': '#38444E',
+        'post-layout': '#EBF0F5',
         'hover': 'rgba(0,0,0,0.05)',
         'black15': 'rgba(0, 0, 0, 0.15)',
         'black50': 'rgba(0, 0, 0, 0.5)',

@@ -1,13 +1,47 @@
 import { Row, Tooltip } from "antd";
-import { layoutIcon, emotionIcon, tagIcon } from "~/assets/post_icons";
+import {
+  layout0Icon,
+  layout1Icon,
+  layout2Icon,
+  layout3Icon,
+  layout4Icon,
+  emotionIcon,
+  tagIcon,
+} from "~/assets/post_icons";
 
-const CreatePostAction = ({ setCurrFeature }) => {
+const CreatePostAction = ({
+  fileList,
+  layout,
+  setCurrFeature,
+  onChangeLayout,
+}) => {
+  const getLayoutIcon = () => {
+    switch (layout) {
+      case 1:
+        return layout0Icon;
+      case 2:
+        return layout1Icon;
+      case 3:
+        return layout2Icon;
+      case 4:
+        return layout3Icon;
+      case 5:
+        return layout4Icon;
+      default:
+        return layout0Icon;
+    }
+  };
   const actions = [
-    {
-      key: "layout",
-      name: "Layout",
-      icon: layoutIcon,
-    },
+    ...(fileList.length >= 4
+      ? [
+          {
+            key: "layout",
+            name: "Layout",
+            icon: getLayoutIcon(),
+            onClick: onChangeLayout,
+          },
+        ]
+      : []),
     {
       key: "emotion",
       name: "Emotion",

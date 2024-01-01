@@ -9,6 +9,12 @@ import CommentInput from "~/components/CommentInput";
 import useComment from "~/hooks/useComment";
 import useReact from "~/hooks/useReact";
 import PostLikeWrapper from "./PostLikeWrapper";
+import {
+  Layout1,
+  Layout2,
+  Layout3,
+  Layout4,
+} from "~/components/home/post_layouts";
 
 const PostItem = ({ post, loading, handleShare, updatePostFeed }) => {
   const { currentUser } = useSelector((state) => state.user);
@@ -25,6 +31,41 @@ const PostItem = ({ post, loading, handleShare, updatePostFeed }) => {
     setCommments((prev) => [...prev, commentValue]);
   };
 
+  const getLayout = () => {
+    switch (post?.layout) {
+      case 1:
+        return (
+          <MediaSlider
+            mediaList={post?.mediaList}
+            currentSlide={currentSlide}
+            setCurrentSlide={setCurrentSlide}
+            dots
+            loading={loading}
+            autoPlay={false}
+          />
+        );
+      case 2:
+        return <Layout1 fileList={post?.mediaList} />;
+      case 3:
+        return <Layout2 fileList={post?.mediaList} />;
+      case 4:
+        return <Layout3 fileList={post?.mediaList} />;
+      case 5:
+        return <Layout4 fileList={post?.mediaList} />;
+      default:
+        return (
+          <MediaSlider
+            mediaList={post?.mediaList}
+            currentSlide={currentSlide}
+            setCurrentSlide={setCurrentSlide}
+            dots
+            loading={loading}
+            autoPlay={false}
+          />
+        );
+    }
+  };
+
   return (
     <div className="w-[800px] bg-[#D9D9D926] rounded-10 pb-[9px] post">
       {/* User */}
@@ -39,15 +80,11 @@ const PostItem = ({ post, loading, handleShare, updatePostFeed }) => {
         likeOpacity={likeOpacity}
         handleReact={() => handleReact(post.id, "LOVE")}
       >
-        <div onClick={() => navigate(`/post/${post.id}`)}>
-          <MediaSlider
-            mediaList={post?.mediaList}
-            currentSlide={currentSlide}
-            setCurrentSlide={setCurrentSlide}
-            dots
-            loading={loading}
-            autoPlay={false}
-          />
+        <div
+          className="w-full aspect-[4/3] cursor-pointer"
+          onClick={() => navigate(`/post/${post.id}`)}
+        >
+          {getLayout()}
         </div>
       </PostLikeWrapper>
       <div className="px-[20px] mt-[10px]">
