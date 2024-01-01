@@ -58,7 +58,7 @@ const CreateNewPost = ({
   return (
     <CloseModalContainer onCancel={onCancel}>
       <Spin spinning={loading}>
-        <div className="px-[20px] py-[14px] create-post">
+        <div className="w-[550px] px-[20px] py-[14px] create-post">
           {/* Preview */}
           <h3 className="font-medium text-14">Preview</h3>
           <div className="between-row my-[10px]">
@@ -72,24 +72,30 @@ const CreateNewPost = ({
           </div>
           {/* Upload */}
           {fileList.length < 10 && (
-            <MediaDragger fileList={fileList} setFileList={setFileList} />
+            <div
+              className={fileList.length < 1 && "flex flex-col items-center"}
+            >
+              <MediaDragger fileList={fileList} setFileList={setFileList} />
+            </div>
           )}
           {fileList.length > 0 && fileList.length < 10 && (
             <div className="w-full h-[10px]" />
           )}
           {/* Media slider */}
           {fileList.length > 0 && (
-            <MediaSlider
-              mediaList={fileList.map((file) => {
-                return { url: file?.url, type: file?.type?.split("/")[0] };
-              })}
-              editMode
-              handleDelete={handleDelete}
-              setCurrFeature={setCurrFeature}
-              currentSlide={currentSlide}
-              setCurrentSlide={setCurrentSlide}
-              dots
-            />
+            <div className="h-[46vh] aspect-[4/3] mx-auto">
+              <MediaSlider
+                mediaList={fileList.map((file) => {
+                  return { url: file?.url, type: file?.type?.split("/")[0] };
+                })}
+                editMode
+                handleDelete={handleDelete}
+                setCurrFeature={setCurrFeature}
+                currentSlide={currentSlide}
+                setCurrentSlide={setCurrentSlide}
+                dots
+              />
+            </div>
           )}
           {/* User info */}
           <div className="row gap-x-[7px] mt-[13px]">
