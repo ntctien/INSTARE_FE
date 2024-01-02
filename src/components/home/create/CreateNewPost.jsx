@@ -10,10 +10,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import PostInfo from "../post/PostInfo";
 import CreatePostAction from "./CreatePostAction";
 import {
-  Layout1,
-  Layout2,
-  Layout3,
-  Layout4,
+  PostLayout2,
+  PostLayout3,
+  PostLayout4,
+  PostLayout5,
 } from "~/components/home/post_layouts";
 import editIcon from "~/assets/edit.svg";
 
@@ -70,14 +70,16 @@ const CreateNewPost = ({
     setLoading(false);
   };
 
+  const mediaList = fileList.map((file) => {
+    return { url: file?.url, type: file?.type?.split("/")[0] };
+  });
+
   const getLayout = () => {
     switch (layout) {
       case 1:
         return (
           <MediaSlider
-            mediaList={fileList.map((file) => {
-              return { url: file?.url, type: file?.type?.split("/")[0] };
-            })}
+            mediaList={mediaList}
             handleDelete={handleDelete}
             setCurrFeature={setCurrFeature}
             currentSlide={currentSlide}
@@ -86,13 +88,13 @@ const CreateNewPost = ({
           />
         );
       case 2:
-        return <Layout1 fileList={fileList} />;
+        return <PostLayout2 mediaList={mediaList} />;
       case 3:
-        return <Layout2 fileList={fileList} />;
+        return <PostLayout3 mediaList={mediaList} />;
       case 4:
-        return <Layout3 fileList={fileList} />;
+        return <PostLayout4 mediaList={mediaList} />;
       case 5:
-        return <Layout4 fileList={fileList} />;
+        return <PostLayout5 mediaList={mediaList} />;
       default:
         break;
     }

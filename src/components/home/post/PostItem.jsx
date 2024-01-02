@@ -10,10 +10,10 @@ import useComment from "~/hooks/useComment";
 import useReact from "~/hooks/useReact";
 import PostLikeWrapper from "./PostLikeWrapper";
 import {
-  Layout1,
-  Layout2,
-  Layout3,
-  Layout4,
+  PostLayout2,
+  PostLayout3,
+  PostLayout4,
+  PostLayout5,
 } from "~/components/home/post_layouts";
 
 const PostItem = ({ post, loading, handleShare, updatePostFeed }) => {
@@ -45,13 +45,13 @@ const PostItem = ({ post, loading, handleShare, updatePostFeed }) => {
           />
         );
       case 2:
-        return <Layout1 fileList={post?.mediaList} />;
+        return <PostLayout2 mediaList={post?.mediaList} />;
       case 3:
-        return <Layout2 fileList={post?.mediaList} />;
+        return <PostLayout3 mediaList={post?.mediaList} />;
       case 4:
-        return <Layout3 fileList={post?.mediaList} />;
+        return <PostLayout4 mediaList={post?.mediaList} />;
       case 5:
-        return <Layout4 fileList={post?.mediaList} />;
+        return <PostLayout5 mediaList={post?.mediaList} />;
       default:
         return (
           <MediaSlider

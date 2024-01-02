@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 
-const Video = ({ src, play }) => {
+const Video = ({ src, play, controls = true, className }) => {
   const vidRef = useRef(null);
   useEffect(() => {
     if (play) {
@@ -14,7 +14,11 @@ const Video = ({ src, play }) => {
     }
   }, [play]);
   return (
-    <video controls ref={vidRef} className="object-contain">
+    <video
+      controls={controls}
+      ref={vidRef}
+      className={className || "object-contain"}
+    >
       <source src={src} type="video/mp4" />
     </video>
   );

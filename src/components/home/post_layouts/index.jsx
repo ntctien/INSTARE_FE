@@ -1,6 +1,6 @@
-import Layout1 from "./Layout1";
-import Layout2 from "./Layout2";
-import Layout3 from "./Layout3";
-import Layout4 from "./Layout4";
+import PostLayout2 from "./PostLayout2";
+import PostLayout3 from "./PostLayout3";
+import PostLayout4 from "./PostLayout4";
+import PostLayout5 from "./PostLayout5";
 
-export { Layout1, Layout2, Layout3, Layout4 };
+export { PostLayout2, PostLayout3, PostLayout4, PostLayout5 };
