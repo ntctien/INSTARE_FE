@@ -14,8 +14,10 @@ import {
   SignIn,
   SignUp,
   Report,
+  CreateLiveStream,
   Stream,
   Test,
+  Live,
 } from './pages';
 import StoryLayout from "./layouts/StoryLayout";
 import Stories from "./pages/Stories";
@@ -61,6 +63,14 @@ function App() {
           </Route>
         </Route>
         <Route element={<Post />} path="post/:postId" />
+        <Route path="live">
+          <Route element={<StoryLayout />}>
+            <Route element={<CreateStoryLayout />}>
+              <Route element={<CreateLiveStream/>} path="create"/>
+            </Route>
+          </Route>
+          <Route element={<Live/>} path=":username"/>
+        </Route>
         <Route element={<Stream />} path="stream" />
         <Route element={<Test />} path="test" />
       </Route>

@@ -64,7 +64,7 @@ const CreateTextStory = () => {
             <textarea
               onChange={(e) => setContent(e.target.value)}
               placeholder="Type your content here..."
-              className="h-[27.7vh] focus:outline-none px-[15px] py-5 placeholder:text-white placeholder:opacity-50 resize-none"
+              className="create-textarea h-[27.7vh]"
             />
             <SelectFont
               value={style.fontFamily}

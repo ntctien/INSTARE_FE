@@ -59,11 +59,11 @@ const SignUp = () => {
   return (
     <>
       {/* Left Side */}
-      <div className="pl-[10.8%] pr-[17%] col-center">
+      <div className="pl-[10.8%] pr-[17%] col-justify-center">
         <Spin spinning={loading}>
           <form
             onSubmit={(e) => handleSubmit(e, onSubmitValid)}
-            className="col-center"
+            className="col-justify-center"
           >
             <h1 className="auth-title">Create an account</h1>
             <AuthInput

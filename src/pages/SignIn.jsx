@@ -103,9 +103,9 @@ const SignIn = () => {
         btnWidth={140}
       />
       {/* Right Side */}
-      <div className="pl-[16%] pr-[18%] col-center">
+      <div className="pl-[16%] pr-[18%] col-justify-center">
         <Spin spinning={loading}>
-          <form onSubmit={handleSubmit} className="col-center">
+          <form onSubmit={handleSubmit} className="col-justify-center">
             <h1 className="auth-title">Sign In</h1>
             <AuthInput
               name={"username"}
