@@ -1,7 +1,7 @@
 import { message } from "antd";
 import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useBeforeUnload, useNavigate, useParams } from "react-router-dom";
 import srsApis from "~/api/srs/srs";
 import NavigateButton from "~/components/buttons/NavigateButton";
 import PostContainer from "~/components/home/post/PostContainer";
@@ -13,6 +13,8 @@ import { SRSWebsocketContext } from "~/contexts/SRSWebsocketContext";
 import useComment from "~/hooks/useComment";
 import useFlyingReactions from "~/hooks/useFlyingReactions";
 import getClientId from "~/utils/getClientId";
+import { viewIcon } from "~/assets/live_icons";
+import useTimeCounter from "~/hooks/useTimeCounter";
 
 const Live = () => {
   const { username } = useParams();
@@ -23,8 +25,10 @@ const Live = () => {
   const [modal, setModal] = useState();
   const [loading, setLoading] = useState(false);
   const [comments, setComments] = useState([]);
+  const [viewCount, setViewCount] = useState();
   const { reacts, containerRef, FlyingReaction, startAnimation } =
     useFlyingReactions();
+  const { time } = useTimeCounter(roomData?.createdAt);
 
   useEffect(() => {
     const getRoom = async () => {
@@ -51,6 +55,18 @@ const Live = () => {
 
   useEffect(() => {
     if (!srsSocket || !roomData) return;
+
+    srsSocket.on("userConnected", (data) => {
+      if (data.roomId === roomData.id) {
+        setViewCount(data.viewers);
+      }
+    });
+
+    srsSocket.on("userDisconnected", (data) => {
+      if (data.roomId === roomData.id) {
+        setViewCount(data.viewers);
+      }
+    });
 
     srsSocket.on("onReact", (data) => {
       if (data.roomId === roomData.id) {
@@ -80,6 +96,24 @@ const Live = () => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [srsSocket, roomData]);
+
+  useBeforeUnload(() => {
+    leaveLive();
+  });
+
+  useEffect(() => {
+    if (!roomData) return;
+
+    return () => {
+      leaveLive();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [roomData]);
+
+  const leaveLive = async () => {
+    if (!roomData || !currentUser) return;
+    await srsApis.onStop(currentUser.token, { liveRoomId: roomData.id });
+  };
 
   const handleEndLive = async () => {
     setLoading(true);
@@ -124,7 +158,18 @@ const Live = () => {
         {username === currentUser?.username && (
           <EndLiveButton onClick={() => setModal("end")} />
         )}
-        <NavigateButton path={"/"} />
+        <NavigateButton
+          path={"/"}
+          suffix={
+            <>
+              <div className="live-tag ml-3">LIVE {time}</div>
+              <div className="row gap-x-1 bg-[#00000033] rounded-5 p-1 ml-[10px]">
+                <img src={viewIcon} alt="Views" />
+                <p className="font-medium text-white text-16">{viewCount}</p>
+              </div>
+            </>
+          }
+        />
         <WarningModal
           title={"Do you want to end live?"}
           subtitle={"The record won’t be save"}

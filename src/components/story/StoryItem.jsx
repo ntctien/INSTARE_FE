@@ -65,13 +65,7 @@ const StoryItem = ({
         {self ? "Your story" : story?.username}
       </p>
       {/* Live */}
-      {isLive && (
-        <div
-          className={`absolute -top-[3px] w-[50px] h-[25px] bg-red rounded-5 font-bold text-white text-16 center`}
-        >
-          LIVE
-        </div>
-      )}
+      {isLive && <div className="live-tag absolute -top-[3px]">LIVE</div>}
     </div>
   );
 };

@@ -33,6 +33,15 @@ const onPlay = async (token, { liveRoomId, clientId }) => {
     })
 }
 
+const onStop = async (token, { liveRoomId }) => {
+    return await srsApi.post('/srs/onStop', null, {
+        params: { liveRoomId },
+        headers: {
+            Authorization: "Bearer " + token,
+        },
+    })
+}
+
 const getLiveRoomByUsername = async (token, username) => {
     return await srsApi.get(`/live-room/user/${username}`, {
         headers: {
@@ -41,6 +50,6 @@ const getLiveRoomByUsername = async (token, username) => {
     })
 }
 
-const srsApis = { getApiV1Clients, onPublish, onUnpublish, onPlay, getLiveRoomByUsername };
+const srsApis = { getApiV1Clients, onPublish, onUnpublish, onPlay, onStop, getLiveRoomByUsername };
 
 export default srsApis;
