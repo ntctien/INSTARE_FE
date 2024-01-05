@@ -28,7 +28,7 @@ const Live = () => {
   const [viewCount, setViewCount] = useState();
   const { reacts, containerRef, FlyingReaction, startAnimation } =
     useFlyingReactions();
-  const { time } = useTimeCounter(roomData?.createdAt);
+  const { time } = useTimeCounter(roomData?.updatedAt);
 
   useEffect(() => {
     const getRoom = async () => {
@@ -165,7 +165,9 @@ const Live = () => {
               <div className="live-tag ml-3">LIVE {time}</div>
               <div className="row gap-x-1 bg-[#00000033] rounded-5 p-1 ml-[10px]">
                 <img src={viewIcon} alt="Views" />
-                <p className="font-medium text-white text-16">{viewCount}</p>
+                <p className="font-medium text-white text-16">
+                  {viewCount || 0}
+                </p>
               </div>
             </>
           }
@@ -188,6 +190,7 @@ const Live = () => {
         postHeaderData={{
           user: {
             username,
+            ava: roomData?.user.ava,
           },
         }}
         interactBarProps={{
