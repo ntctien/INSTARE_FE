@@ -9,41 +9,45 @@ import { useSelector } from "react-redux";
 import { Spin, message } from "antd";
 import PreviewLiveStream from "~/components/live/create/PreviewLiveStream";
 import srsApis from "~/api/srs/srs";
+import getClientId from "~/utils/getClientId";
+import { useNavigate } from "react-router-dom";
 
 const CreateLiveStream = () => {
   const { currentUser } = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const [roomData, setRoomData] = useState();
   const [isCreatingRoom, setIsCreatingRoom] = useState(true);
   const [videoSource, setVideoSource] = useState("obs");
+  const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const createLiveRoom = async () => {
       const { data } = await liveRoomApis.createLiveRoom(currentUser.token);
-      setRoomData(data.updateName);
+      setRoomData(data.liveRoom);
       setIsCreatingRoom(false);
     };
 
     if (currentUser) createLiveRoom();
   }, [currentUser]);
 
-  const getClients = async () => {
-    const { data } = await srsApis.getApiV1Clients(currentUser.token);
-    const { id } = data.clients.reduce(
-      (min, current) => (current.alive < min.alive ? current : min),
-      data.clients[0]
-    );
-    return id;
-  };
-
   const onPublish = async (clientId) => {
-    await srsApis.onPublish(currentUser.token, {
-      liveRoomId: roomData?.id,
-      clientId,
-    });
+    setLoading(true);
+    try {
+      await srsApis.onPublish(currentUser.token, {
+        liveRoomId: roomData?.id,
+        clientId,
+        name,
+      });
+      navigate(`/live/${currentUser.username}`);
+    } catch {
+      message.error("Some errors have occured");
+    } finally {
+    }
   };
 
   const onStartStreaming = async () => {
-    const clientId = await getClients();
+    const clientId = await getClientId(currentUser.token);
     await onPublish(clientId);
   };
 
@@ -53,10 +57,13 @@ const CreateLiveStream = () => {
         <MenuBar
           primaryBtnLabel={"Start streaming"}
           secondaryBtnLabel={"Back"}
+          primaryBtnLoading={loading}
           onPrimaryBtnClick={onStartStreaming}
         >
           <div className="create-text-menu px-5 h-full mt-[50px]">
             <textarea
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               placeholder="What is your livestream about?"
               className="create-textarea h-[20vh]"
             />
@@ -76,6 +83,7 @@ const CreateLiveStream = () => {
           <h2>Stream key:</h2>
           <div className="flex-1 relative">
             <input
+              readOnly
               disabled
               value={roomData?.id}
               className="w-full bg-story h-16 rounded-10 p-4 text-20 cursor-text"

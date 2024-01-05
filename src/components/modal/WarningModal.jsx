@@ -8,7 +8,7 @@ const WarningModal = ({
   secondaryBtnLabel,
   primaryBtnLabel,
   open,
-  loading,
+  loading = false,
   onCancel,
   onPrimaryBtnClick,
   onSecondaryBtnClick,

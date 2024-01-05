@@ -14,7 +14,7 @@ import NavigateButton from "~/components/buttons/NavigateButton";
 const Post = () => {
   const { postId } = useParams();
   const { post: data, userLiked, updateComments } = usePost(postId);
-  const { handleComment } = useComment();
+  const { commentInputProps, handleComment } = useComment();
   const { liked, likeCount, likeOpacity, handleReact } = useReact(
     userLiked,
     data?._count.likes
@@ -59,9 +59,9 @@ const Post = () => {
           handleShare: () => {
             setModal("share");
           },
-          className: "p-[17px]",
         }}
         comments={data?.comments.toReversed()}
+        commentInputProps={commentInputProps}
         handleComment={(e) => handleComment(e, postId, updateComments)}
       />
       <ShareModal

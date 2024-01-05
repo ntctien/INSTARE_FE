@@ -25,7 +25,7 @@ const MenuLayout = () => {
       <div className="flex-1">
         <Outlet />
       </div>
-      {menuItemId.current === "create" && (
+      {menuItemId.current === "post" && (
         <CreatePostModal
           menuItemId={menuItemId}
           setMenuItemId={setMenuItemId}

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import comment from "~/api/services/interact/comment";
 
-const useComment = () => {
+const useComment = (sendComment) => {
   const { currentUser } = useSelector((state) => state.user);
   const [commentValue, setCommentValue] = useState("");
   const [commentLoading, setCommentLoading] = useState(false);
@@ -10,12 +10,10 @@ const useComment = () => {
   const handleComment = async (e, postId, updateComments) => {
     e.preventDefault();
     setCommentLoading(true);
-    await comment(currentUser.token, postId, commentValue)
-      .then(() => {
-        updateComments(commentValue);
-        setCommentValue("");
-      })
-      .catch((err) => console.log(err));
+    if (sendComment) await sendComment(commentValue);
+    else await comment(currentUser.token, postId, commentValue);
+    updateComments?.(commentValue);
+    setCommentValue("");
     setCommentLoading(false);
   };
 

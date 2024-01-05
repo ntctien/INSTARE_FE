@@ -12,6 +12,8 @@ const AppMenuItem = ({
 
   const isCurrentItem = location.pathname.includes("report")
     ? item.id === "reports"
+    : menuItemId?.current === "post"
+    ? item.id === "create"
     : menuItemId?.current === item.id;
 
   return (

@@ -53,11 +53,13 @@ const InteractBar = ({
             )}
           </div>
         )}
-        <p
-          className={`font-semibold text-14 ${
-            loading && "loading-animation text-transparent w-[10%]"
-          }`}
-        >{`${likeCount ?? 0} like${likeCount > 1 ? "s" : ""}`}</p>
+        {likeCount != null && (
+          <p
+            className={`font-semibold text-14 ${
+              loading && "loading-animation text-transparent w-[10%]"
+            }`}
+          >{`${likeCount} like${likeCount > 1 ? "s" : ""}`}</p>
+        )}
       </div>
     </div>
   );

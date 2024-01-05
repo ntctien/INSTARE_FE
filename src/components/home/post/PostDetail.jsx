@@ -5,16 +5,15 @@ import InteractBar from "~/components/InteractBar";
 import { Link } from "react-router-dom";
 import Avatar from "../Avatar";
 import CommentInput from "~/components/CommentInput";
-import useComment from "~/hooks/useComment";
 
 const PostDetail = ({
   postHeaderData,
   caption,
   interactBarProps,
   comments,
+  commentInputProps,
   handleComment,
 }) => {
-  const { commentInputProps } = useComment();
   const commentInputRef = useRef(null);
 
   return (
@@ -29,6 +28,7 @@ const PostDetail = ({
       <Divider className="default-divider" />
       <InteractBar
         {...interactBarProps}
+        className={"p-[17px]"}
         onCommentClick={() => commentInputRef.current?.focus()}
       />
       {/* Comment section */}

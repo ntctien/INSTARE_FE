@@ -66,4 +66,27 @@ const moreItem = {
     selectedIcon: moreSelectedIcon,
 }
 
-export { menuItems, moreItem, reportsItem };
+const createItems = [
+    {
+        id: "post",
+        name: "Create post",
+        icon: createIcon,
+        selectedIcon: createSelectedIcon,
+    },
+    {
+        id: "story",
+        name: "Create story",
+        icon: createIcon,
+        selectedIcon: createSelectedIcon,
+        link: '/stories/create'
+    },
+    {
+        id: "live",
+        name: "Create live",
+        icon: createIcon,
+        selectedIcon: createSelectedIcon,
+        link: '/live/create'
+    },
+];
+
+export { menuItems, moreItem, reportsItem, createItems };

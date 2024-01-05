@@ -103,7 +103,7 @@ const CreateNewPost = ({
   return (
     <CloseModalContainer onCancel={onCancel}>
       <Spin spinning={loading}>
-        <div className="w-[550px] px-[20px] py-[14px] create-post">
+        <div className="min-w-[550px] px-[20px] py-[14px] create-post">
           {/* Preview */}
           <h3 className="font-medium text-14">Preview</h3>
           <div className="between-row my-[10px]">
