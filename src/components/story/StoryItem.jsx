@@ -12,25 +12,27 @@ const StoryItem = ({
   containStories,
   story,
   loading,
+  isLive,
 }) => {
   const navigate = useNavigate();
 
   return (
     <div
       onClick={onClick}
-      className={`flex flex-col items-center mt-[2px] ${
+      className={`flex flex-col items-center mt-[2px] relative ${
         self && !containStories ? "cursor-default" : "cursor-pointer"
       } ${className}`}
     >
       <div
         style={{
           width: 100 + (borderWidth ?? 3) * 2 + "px",
-          background:
-            containStories === false
-              ? "transparent"
-              : read
-              ? "#D9D9D9"
-              : "linear-gradient(130.24deg, #96CAF7 13.1%, #BFB2F3 85.6%)",
+          background: isLive
+            ? "#F24E1E"
+            : containStories === false
+            ? "transparent"
+            : read
+            ? "#D9D9D9"
+            : "linear-gradient(130.24deg, #96CAF7 13.1%, #BFB2F3 85.6%)",
         }}
         className="center aspect-square rounded-full"
       >
@@ -62,6 +64,14 @@ const StoryItem = ({
       >
         {self ? "Your story" : story?.username}
       </p>
+      {/* Live */}
+      {isLive && (
+        <div
+          className={`absolute -top-[3px] w-[50px] h-[25px] bg-red rounded-5 font-bold text-white text-16 center`}
+        >
+          LIVE
+        </div>
+      )}
     </div>
   );
 };

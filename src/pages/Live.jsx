@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import srsApis from "~/api/srs/srs";
+import NavigateButton from "~/components/buttons/NavigateButton";
 import PostContainer from "~/components/home/post/PostContainer";
 import PostDetail from "~/components/home/post/PostDetail";
 import EndLiveButton from "~/components/live/EndLiveButton";
@@ -77,7 +78,7 @@ const Live = () => {
       srsSocket.off("onReact");
       srsSocket.off("onComment");
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [srsSocket, roomData]);
 
   const handleEndLive = async () => {
@@ -120,7 +121,10 @@ const Live = () => {
           streamUrl={roomData?.flvUrl}
           className={"w-full h-full object-contain"}
         />
-        <EndLiveButton onClick={() => setModal("end")} />
+        {username === currentUser?.username && (
+          <EndLiveButton onClick={() => setModal("end")} />
+        )}
+        <NavigateButton path={"/"} />
         <WarningModal
           title={"Do you want to end live?"}
           subtitle={"The record won’t be save"}
