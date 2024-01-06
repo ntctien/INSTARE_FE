@@ -15,6 +15,7 @@ import useFlyingReactions from "~/hooks/useFlyingReactions";
 import getClientId from "~/utils/getClientId";
 import { viewIcon } from "~/assets/live_icons";
 import useTimeCounter from "~/hooks/useTimeCounter";
+import Redirect from "~/components/live/Redirect";
 
 const Live = () => {
   const { username } = useParams();
@@ -26,6 +27,7 @@ const Live = () => {
   const [loading, setLoading] = useState(false);
   const [comments, setComments] = useState([]);
   const [viewCount, setViewCount] = useState();
+  const [liveEnded, setLiveEnded] = useState(false);
   const { reacts, containerRef, FlyingReaction, startAnimation } =
     useFlyingReactions();
   const { time } = useTimeCounter(roomData?.updatedAt);
@@ -87,6 +89,12 @@ const Live = () => {
             },
           },
         ]);
+      }
+    });
+
+    srsSocket.on("liveEnd", (data) => {
+      if (data.roomId === roomData.id) {
+        setLiveEnded(true);
       }
     });
 
@@ -201,6 +209,7 @@ const Live = () => {
         commentInputProps={commentInputProps}
         handleComment={handleComment}
       />
+      {liveEnded && <Redirect />}
     </PostContainer>
   );
 };
