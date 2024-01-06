@@ -14,7 +14,7 @@ import { useLocation } from "react-router-dom";
 
 const ChatBox = ({ currChat, userList, setContactList }) => {
   const { currentUser } = useSelector((state) => state.user);
-  const msgContainerBottomRef = useRef(null);
+  const msgContainerRef = useRef(null);
   const { socket, emit } = useContext(WebsocketContext);
   const { setNewMessage } = useContext(AppMenuContext);
   const location = useLocation();
@@ -81,8 +81,14 @@ const ChatBox = ({ currChat, userList, setContactList }) => {
   }, [currChat, currentUser]);
 
   useEffect(() => {
-    msgContainerBottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [msgContainerBottomRef, messages]);
+    scrollToBottom();
+  }, [messages]);
+
+  const scrollToBottom = () => {
+    if (msgContainerRef.current) {
+      msgContainerRef.current.scrollTop = msgContainerRef.current.scrollHeight;
+    }
+  };
 
   const handleSendMessage = async () => {
     if (!message) return;
@@ -107,7 +113,10 @@ const ChatBox = ({ currChat, userList, setContactList }) => {
     <div className="flex flex-col flex-1 overflow-hidden">
       {/* Messages */}
       {!loading ? (
-        <div className="px-2 pb-[12px] flex flex-col overflow-y-auto flex-1">
+        <div
+          ref={msgContainerRef}
+          className="px-2 pb-[12px] flex flex-col overflow-y-auto flex-1"
+        >
           {messages.map((message, i) => (
             <Fragment key={i}>
               {(i === 0 ||
@@ -139,10 +148,11 @@ const ChatBox = ({ currChat, userList, setContactList }) => {
                 }
                 sent={i === messages.length - 1 && sendingQueue.length === 0}
                 sending={sendingQueue.includes(i)}
+                scrollToBottom={scrollToBottom}
               />
             </Fragment>
           ))}
-          <div ref={msgContainerBottomRef} />
+          {/* <div ref={msgContainerBottomRef} /> */}
         </div>
       ) : (
         <div className="flex-1 center">

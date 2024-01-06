@@ -11,6 +11,7 @@ const Message = ({
   topOfMoment,
   sent,
   sending,
+  scrollToBottom,
 }) => {
   return (
     <>
@@ -45,7 +46,12 @@ const Message = ({
               <p>{message.message}</p>
             ) : message.message.includes(".jpg" || ".jpeg" || ".png") ||
               message.message.includes("blob") ? (
-              <img src={message.message} alt="Message" className="w-[200px]" />
+              <img
+                src={message.message}
+                alt="Message"
+                className="w-[200px]"
+                onLoad={scrollToBottom}
+              />
             ) : (
               <a
                 style={{ display: "table-cell" }}
