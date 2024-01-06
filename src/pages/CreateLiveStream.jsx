@@ -105,7 +105,11 @@ const CreateLiveStream = () => {
           </div>
         </div>
         {/* Preview */}
-        <PreviewLiveStream streamUrl={roomData?.flvUrl} />
+        <PreviewLiveStream
+          streamUrl={roomData?.flvUrl}
+          pushUrl={roomData?.pushUrl}
+          videoSource={videoSource}
+        />
       </ContentWrapper>
     </>
   );
