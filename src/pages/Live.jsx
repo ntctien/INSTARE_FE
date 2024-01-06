@@ -28,6 +28,7 @@ const Live = () => {
   const [comments, setComments] = useState([]);
   const [viewCount, setViewCount] = useState();
   const [liveEnded, setLiveEnded] = useState(false);
+  const [userJoin, setUserJoin] = useState();
   const { reacts, containerRef, FlyingReaction, startAnimation } =
     useFlyingReactions();
   const { time } = useTimeCounter(roomData?.updatedAt);
@@ -61,6 +62,7 @@ const Live = () => {
     srsSocket.on("userConnected", (data) => {
       if (data.roomId === roomData.id) {
         setViewCount(data.viewers);
+        setUserJoin(data.username);
       }
     });
 
@@ -207,6 +209,21 @@ const Live = () => {
         caption={roomData?.name}
         comments={comments}
         commentInputProps={commentInputProps}
+        commentsPrefix={
+          userJoin && (
+            <div
+              style={{
+                background:
+                  "linear-gradient(91.17deg, #96CAF726 0%, #BFB2F326 100%)",
+              }}
+              className="p-5 mb-[17px]"
+            >
+              User <span className="font-bold">@{userJoin}</span> has joined the
+              live
+            </div>
+          )
+        }
+        commentAutoScrollBottom
         handleComment={handleComment}
       />
       {liveEnded && <Redirect />}

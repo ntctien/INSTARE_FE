@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import PostHeader from "./PostHeader";
 import { Divider } from "antd";
 import InteractBar from "~/components/InteractBar";
@@ -12,16 +12,26 @@ const PostDetail = ({
   interactBarProps,
   comments,
   commentInputProps,
+  commentsPrefix,
+  commentAutoScrollBottom,
   handleComment,
 }) => {
   const commentInputRef = useRef(null);
+  const commentContainerRef = useRef(null);
+
+  useEffect(() => {
+    if (commentAutoScrollBottom && commentContainerRef.current) {
+      commentContainerRef.current.scrollTop =
+        commentContainerRef.current.scrollHeight;
+    }
+  }, [commentAutoScrollBottom, comments]);
 
   return (
     <div className="flex-1 bg-[#F4F4FD] flex flex-col">
       {/* Content */}
       <div className="p-5">
         <PostHeader post={postHeaderData} />
-        <p className="ml-[68px] pr-[12%] text-14 w-[87%] h-[40vh] mt-2">
+        <p className="ml-[68px] pr-[12%] text-14 w-[87%] h-[30vh] mt-2">
           {caption}
         </p>
       </div>
@@ -31,8 +41,12 @@ const PostDetail = ({
         className={"p-[17px]"}
         onCommentClick={() => commentInputRef.current?.focus()}
       />
+      {commentsPrefix}
       {/* Comment section */}
-      <div className="flex flex-col flex-1 gap-y-5 px-[17px] overflow-y-auto">
+      <div
+        ref={commentContainerRef}
+        className="flex flex-col flex-1 gap-y-5 px-[17px] pb-[17px] overflow-y-auto"
+      >
         {comments?.map((comment, i) => (
           <div key={i} className="row gap-x-[18px]">
             <Link to={`/${comment.user.username}`}>
