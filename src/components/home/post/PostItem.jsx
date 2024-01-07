@@ -67,7 +67,7 @@ const PostItem = ({ post, loading, handleShare, updatePostFeed }) => {
   };
 
   return (
-    <div className="w-[800px] bg-[#D9D9D926] rounded-10 pb-[9px] post">
+    <div className="w-[800px] bg-[#D9D9D926] rounded-10 pb-[9px] post mx-auto">
       {/* User */}
       <PostHeader
         post={post}

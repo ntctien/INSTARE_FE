@@ -19,6 +19,7 @@ const AppMenu = ({ menuItemId, setMenuItemId }) => {
   const { newMessage, setNewMessage } = useContext(AppMenuContext);
   const { currentUser } = useSelector((state) => state.user);
   const [newNotification, setNewNotification] = useState(false);
+  const [newReport, setNewReport] = useState(false);
   const [expandingCreate, setExpandingCreate] = useState(false);
 
   let SideBar = null;
@@ -39,20 +40,26 @@ const AppMenu = ({ menuItemId, setMenuItemId }) => {
 
   useEffect(() => {
     if (!socket) return;
+
     socket.on("onNotification", () => {
       setNewNotification(true);
     });
 
+    socket.on("onReport", () => {
+      setNewReport(true);
+    });
+
     return () => {
       socket.off("onNotification");
+      socket.off("onReport");
     };
   }, [socket]);
 
   useEffect(() => {
-    if (newNotification) {
+    if (newNotification || newReport) {
       new Audio(notificationAudio).play();
     }
-  }, [newNotification]);
+  }, [newNotification, newReport]);
 
   useEffect(() => {
     if (newMessage) {
@@ -71,6 +78,9 @@ const AppMenu = ({ menuItemId, setMenuItemId }) => {
         break;
       case "messages":
         setNewMessage(false);
+        break;
+      case "reports":
+        setNewReport(false);
         break;
       default:
         break;
@@ -129,6 +139,7 @@ const AppMenu = ({ menuItemId, setMenuItemId }) => {
                 setMenuItemId={setMenuItemId}
                 newNotification={newNotification}
                 newMessage={newMessage}
+                newReport={newReport}
                 onClick={() => handleItemClick(item.id)}
               />
               {item.id === "create" && expandingCreate && (

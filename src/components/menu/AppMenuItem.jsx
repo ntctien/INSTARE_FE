@@ -7,6 +7,7 @@ const AppMenuItem = ({
   onClick,
   newNotification,
   newMessage,
+  newReport,
 }) => {
   const location = useLocation();
 
@@ -30,6 +31,7 @@ const AppMenuItem = ({
         <div className="relative">
           <img src={isCurrentItem ? item.selectedIcon : item.icon} alt="Icon" />
           {((item.id === "notifications" && newNotification) ||
+            (item.id === "reports" && newReport) ||
             (item.id === "messages" && newMessage)) && (
             <div className="absolute top-0 right-0 w-[10px] aspect-square rounded-full bg-red" />
           )}
