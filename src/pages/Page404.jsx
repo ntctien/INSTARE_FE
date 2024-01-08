@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import ghostIcon from "~/assets/ghost.svg";
 import SignatureButton from "~/components/buttons/SignatureButton";
 
 const Page404 = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="col-items-center">
       <img src={ghostIcon} alt="Ghost" />
@@ -12,7 +15,10 @@ const Page404 = () => {
         The page you are looking for might have been removed, had its name
         changed, or is temporarily inaccessible.
       </p>
-      <SignatureButton className={"mt-4 max-w-[230px]"}>
+      <SignatureButton
+        className={"mt-4 max-w-[230px]"}
+        onClick={() => navigate("/")}
+      >
         Return home
       </SignatureButton>
     </div>

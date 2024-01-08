@@ -29,18 +29,22 @@ const Report = () => {
     setLoading(true);
     await getReport(currentUser.token, id)
       .then(({ data }) => {
-        setData(data.post ? {
-          ...data,
-          post: {
-            ...data.post,
-            mediaList: data.post.mediaList.map((item) => {
-              return {
-                url: item,
-                type: item.includes("/video/") ? "video" : "image",
-              };
-            }),
-          },
-        } : data);
+        setData(
+          data.post
+            ? {
+                ...data,
+                post: {
+                  ...data.post,
+                  mediaList: data.post.mediaList.map((item) => {
+                    return {
+                      url: item,
+                      type: item.includes("/video/") ? "video" : "image",
+                    };
+                  }),
+                },
+              }
+            : data
+        );
       })
       .catch((err) => console.log(err));
     setLoading(false);
@@ -62,8 +66,8 @@ const Report = () => {
         loading={loading}
         rejecting={rejecting}
         onView={() => setModal("view")}
-        onMarkViolated={
-          data?.report.postId ? () => setModal("delete") : () => {}
+        onMarkViolated={() =>
+          setModal(data?.report.postId ? "delete" : "ban-profile")
         }
         onReject={rejectReport}
         onViewResult={() => setModal("result")}
