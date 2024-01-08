@@ -42,10 +42,13 @@ const Message = ({
                 : "max-w-[72.5%] text-black"
             }`}
           >
-            {!message.message.includes("http://" || "https://") ? (
+            {!["http://", "https://"].some((value) =>
+              message.message.includes(value)
+            ) ? (
               <p>{message.message}</p>
-            ) : message.message.includes(".jpg" || ".jpeg" || ".png") ||
-              message.message.includes("blob") ? (
+            ) : [".jpg", ".jpeg", ".png", "blob"].some((type) =>
+                message.message.includes(type)
+              ) ? (
               <img
                 src={message.message}
                 alt="Message"

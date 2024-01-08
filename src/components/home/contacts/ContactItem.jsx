@@ -30,8 +30,8 @@ const ContactItem = ({ maxWidth, item, onClick, loading }) => {
           >
             {loading
               ? "loading"
-              : item?.message?.message?.includes(
-                  ".jpg" || ".jpeg" || ".png" || "blob"
+              : [".jpg", ".jpeg", ".png", "blob"].some((type) =>
+                  item?.message?.message?.includes(type)
                 )
               ? "Sent an image"
               : item?.message?.message}
